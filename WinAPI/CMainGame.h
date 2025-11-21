@@ -1,4 +1,5 @@
 #pragma once
+#include "Define.h"
 class CMainGame
 {
 public:
@@ -11,5 +12,11 @@ public:
 	void Render();
 	void Release();
 
+private:
+	HDC			m_hDC;
+
+	int			m_iFps;
+	DWORD		m_dwLastTime;
+	TCHAR		m_szFPS[128];
 };
 

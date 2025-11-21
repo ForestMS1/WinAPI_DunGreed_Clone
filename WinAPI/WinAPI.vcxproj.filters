@@ -49,6 +49,15 @@
     <Filter Include="Design\AbstractFactory">
       <UniqueIdentifier>{7fc3c014-d93a-406d-9dd3-432ad6b22973}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\EditScene">
+      <UniqueIdentifier>{adab74ca-4312-4dfd-bd8c-918ad53b6cc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Line">
+      <UniqueIdentifier>{477119e1-7116-4fb0-a74b-36259916de79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\LineMgr">
+      <UniqueIdentifier>{36bcde49-22fe-454b-8aa9-b3e255d4b1be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -102,6 +111,15 @@
     <ClInclude Include="CMyPng.h">
       <Filter>Manager\ResourceMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CEdit.h">
+      <Filter>Scene\EditScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CLine.h">
+      <Filter>Object\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="CLineMgr.h">
+      <Filter>Manager\LineMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -142,6 +160,15 @@
     </ClCompile>
     <ClCompile Include="CMyPng.cpp">
       <Filter>Manager\ResourceMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CEdit.cpp">
+      <Filter>Scene\EditScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CLine.cpp">
+      <Filter>Object\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="CLineMgr.cpp">
+      <Filter>Manager\LineMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

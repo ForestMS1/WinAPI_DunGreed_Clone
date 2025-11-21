@@ -6,6 +6,8 @@
 #include "CLogo.h"
 #include "CPlayer.h"
 #include "CResourceMgr.h"
+#include "CLineMgr.h"
+#include "CEdit.h"
 
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
@@ -28,22 +30,22 @@ void CMainGame::Initialize()
 
 	//¾À µî·Ï
 	CSceneMgr::Get_Instance()->CreateScene(L"Logo", new CLogo);
-
+	CSceneMgr::Get_Instance()->CreateScene(L"Edit", new CEdit);
 
 
 	// ÃÖÃÊ·Î ³ª¿Ã ¾À
-	CSceneMgr::Get_Instance()->ChangeScene(L"Logo");
+	CSceneMgr::Get_Instance()->ChangeScene(L"Edit");
 	
 }
 
 void CMainGame::Update()
 {
-	CObjMgr::Get_Instance()->Update();
+	CSceneMgr::Get_Instance()->Update();
 }
 
 void CMainGame::Late_Update()
 {
-	CObjMgr::Get_Instance()->Late_Update();
+	CSceneMgr::Get_Instance()->Late_Update();
 }
 
 void CMainGame::Render()
@@ -78,6 +80,7 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
+	CLineMgr::Destroy_Instance();
 	CResourceMgr::Destroy_Instance();
 	CSceneMgr::Destroy_Instance();
 	CObjMgr::Destroy_Instance();

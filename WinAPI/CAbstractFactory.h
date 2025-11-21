@@ -1,14 +1,15 @@
 #pragma once
 #include "CObj.h"
+template<typename T>
 class CAbstractFactory
 {
-	template<typename T>
-	static T* Create(float fX, float fY)
+public:
+	static CObj* Create(float fX, float fY)
 	{
 		CObj* pObj = new T;
-		pObj.Set_Pos(fX, fY);
+		pObj->Set_Pos(fX, fY);
 		pObj->Initialize();
-		return ;
+		return pObj;
 	}
 
 };

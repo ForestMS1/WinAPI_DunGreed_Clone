@@ -17,7 +17,7 @@ void CPlayer::Initialize()
 	m_tInfo.fCX = 60.f;
 	m_tInfo.fCY = 60.f;
 
-	CResourceMgr::Get_Instance()->Insert_Image(L"../Resource/maja2.bmp", L"Player");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resource/maja2.bmp", L"Player");
 }
 
 int CPlayer::Update()
@@ -34,7 +34,7 @@ void CPlayer::Late_Update()
 void CPlayer::Render(HDC hDC)
 {
 	HDC hMemDC = CreateCompatibleDC(hDC);
-	hMemDC = CResourceMgr::Get_Instance()->Find_Image(L"Player");
+	hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Player");
 
 	GdiTransparentBlt(hDC,			// 복사 받을 DC
 		m_tRect.left,				// 복사 받을 공간의 LEFT	

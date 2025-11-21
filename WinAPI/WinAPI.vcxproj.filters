@@ -40,6 +40,15 @@
     <Filter Include="Manager\ResourceMgr">
       <UniqueIdentifier>{5b4ba85c-a7fb-4167-a29d-fbba55ff350b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\KeyMgr">
+      <UniqueIdentifier>{130e6e2b-9d21-4555-944c-760f8f5b29af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Design">
+      <UniqueIdentifier>{4706ad8c-5b87-4dee-8675-d5e5d68e66cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Design\AbstractFactory">
+      <UniqueIdentifier>{7fc3c014-d93a-406d-9dd3-432ad6b22973}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -87,6 +96,12 @@
     <ClInclude Include="CMyBit.h">
       <Filter>Manager\ResourceMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CAbstractFactory.h">
+      <Filter>Design\AbstractFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="CMyPng.h">
+      <Filter>Manager\ResourceMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -120,6 +135,12 @@
       <Filter>Manager\ResourceMgr</Filter>
     </ClCompile>
     <ClCompile Include="CMyBit.cpp">
+      <Filter>Manager\ResourceMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CAbstractFactory.cpp">
+      <Filter>Design\AbstractFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="CMyPng.cpp">
       <Filter>Manager\ResourceMgr</Filter>
     </ClCompile>
   </ItemGroup>

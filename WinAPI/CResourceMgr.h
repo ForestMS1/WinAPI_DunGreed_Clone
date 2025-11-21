@@ -1,18 +1,22 @@
 #pragma once
 #include "Define.h"
 #include "CMyBit.h"
+#include "CMyPng.h"
 class CResourceMgr
 {
 	SINGLE(CResourceMgr)
 
 public:
-	HDC Find_Image(wstring ImgKey);
-	void Insert_Image(wstring FilePath, wstring ImgKey);
+	HDC Find_Bmp(wstring ImgKey);
+	Image* Find_Png(wstring ImgKey);
+	void Insert_Bmp(wstring FilePath, wstring ImgKey);
+	void Insert_Png(wstring FilePath, wstring ImgKey);
 	void Release();
 
 
 private:
 	map<wstring, CMyBit*> m_mapBit;
+	map<wstring, CMyPng*> m_mapImg;
 
 };
 

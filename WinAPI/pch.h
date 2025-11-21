@@ -14,7 +14,11 @@
 #include <map>
 #include <algorithm>
 #include <string>
+#include <objidl.h>   // IStream 정의
+#include <gdiplus.h>
 
+#pragma comment(lib, "Gdiplus.lib")
+using namespace Gdiplus;
 using namespace std;
 
 

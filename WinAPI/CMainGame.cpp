@@ -61,6 +61,8 @@ void CMainGame::Render()
 		m_dwLastTime = GetTickCount();
 	}
 
+	Graphics graphics(m_hBackDC);
+
 	CSceneMgr::Get_Instance()->Render(m_hBackDC);
 
 	BitBlt(m_hDC,				// 복사 받을 DC

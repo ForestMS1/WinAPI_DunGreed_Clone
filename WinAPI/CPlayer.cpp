@@ -17,7 +17,7 @@ void CPlayer::Initialize()
 	m_tInfo.fCX = 60.f;
 	m_tInfo.fCY = 60.f;
 
-	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resource/maja2.bmp", L"Player");
+	CResourceMgr::Get_Instance()->Insert_Png(L"../Resource/hero.png", L"Player");
 }
 
 int CPlayer::Update()
@@ -33,20 +33,25 @@ void CPlayer::Late_Update()
 
 void CPlayer::Render(HDC hDC)
 {
-	HDC hMemDC = CreateCompatibleDC(hDC);
-	hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Player");
+	//HDC hMemDC = CreateCompatibleDC(hDC);
+	//hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Player");
 
-	GdiTransparentBlt(hDC,			// 복사 받을 DC
-		m_tRect.left,				// 복사 받을 공간의 LEFT	
-		m_tRect.top,				// 복사 받을 공간의 TOP
-		(int)m_tInfo.fCX,			// 복사 받을 공간의 가로 
-		(int)m_tInfo.fCY,			// 복사 받을 공간의 세로 
-		hMemDC,				// 복사 할 DC
-		0,					// 복사할 이미지의 LEFT, TOP
-		0,
-		(INT)m_tInfo.fCX,		// 복사할 이미지의 가로, 세로
-		(INT)m_tInfo.fCY,
-		RGB(255, 255, 255));	// 제거할 색상
+	Image* pImg = CResourceMgr::Get_Instance()->Find_Png(L"Player");
+
+	if (pImg == nullptr)
+		int a = 10;
+
+	int frameWidth = 112;
+	int frameHeight = 96;
+	int frameIdx = 0;
+
+	int SrcX = frameWidth * frameIdx;
+	int SrcY = 0;
+
+	Rect rc((int)m_tInfo.fX, (int)m_tInfo.fY, frameWidth, frameHeight);
+	Graphics grp(hDC);
+
+	grp.DrawImage(pImg, rc, SrcX, SrcY, frameWidth, frameHeight, UnitPixel);
 }
 
 void CPlayer::Release()

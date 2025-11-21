@@ -15,8 +15,10 @@ CLogo::~CLogo()
 
 void CLogo::Initialize()
 {
+	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, new CPlayer);
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resource/Logo/Logo.bmp", L"Logo");
 	CResourceMgr::Get_Instance()->Insert_Png(L"../Resource/fireball_33x36_strip6.png", L"fireball");
+	CObjMgr::Get_Instance()->Initialize();
 }
 
 void CLogo::Update()
@@ -43,8 +45,6 @@ void CLogo::Render(HDC hDC)
 
 	Rect rc( 200, 200, frameWidth, frameHeight );
 
-	Graphics graphics(hDC);
-
 	GdiTransparentBlt(hDC,			// 복사 받을 DC
 		0,				// 복사 받을 공간의 LEFT	
 		0,				// 복사 받을 공간의 TOP
@@ -56,7 +56,8 @@ void CLogo::Render(HDC hDC)
 		WINCX,		// 복사할 이미지의 가로, 세로
 		WINCY,
 		RGB(0, 0, 0));	// 제거할 색상
-	graphics.DrawImage(pImg, rc, SrcX, SrcY, frameWidth, frameHeight, UnitPixel);
+	Graphics grp(hDC);
+	grp.DrawImage(pImg, rc, SrcX, SrcY, frameWidth, frameHeight, UnitPixel);
 
 
 	//BitBlt(hDC,				// 복사 받을 DC
@@ -68,7 +69,7 @@ void CLogo::Render(HDC hDC)
 	//	0,						// 복사할 이미지의 LEFT, TOP
 	//	0,
 	//	SRCCOPY);				// 그대로 복사
-	//CObjMgr::Get_Instance()->Render(hDC);
+	CObjMgr::Get_Instance()->Render(hDC);
 }
 
 void CLogo::Release()

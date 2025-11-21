@@ -20,11 +20,18 @@ CMainGame::~CMainGame()
 void CMainGame::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
+	m_hBackDC = CreateCompatibleDC(m_hDC);
+	m_hBitMap = CreateCompatibleBitmap(m_hDC, WINCX, WINCY);
+	HBITMAP hBit = (HBITMAP)SelectObject(m_hBackDC, m_hBitMap);
+	DeleteObject(hBit);
+
 
 	//씬 등록
 	CSceneMgr::Get_Instance()->CreateScene(L"Logo", new CLogo);
 
 
+
+	// 최초로 나올 씬
 	CSceneMgr::Get_Instance()->ChangeScene(L"Logo");
 	
 }
@@ -54,15 +61,17 @@ void CMainGame::Render()
 		m_dwLastTime = GetTickCount();
 	}
 
-	CObjMgr::Get_Instance()->Render(m_hDC);
+	CSceneMgr::Get_Instance()->Render(m_hBackDC);
 
-	//m_hBackDC = CreateCompatibleDC(m_hDC);
-	//
-	//HBITMAP hBit = (HBITMAP)SelectObject(m_hBackDC, m_hBitMap);
-
-	//DeleteObject(hBit);
-
-	//BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_hBackDC, 0, 0, 0);
+	BitBlt(m_hDC,				// 복사 받을 DC
+		0,						// 복사 받을 공간의 LEFT	
+		0,						// 복사 받을 공간의 TOP
+		WINCX,					// 복사 받을 공간의 가로 
+		WINCY,					// 복사 받을 공간의 세로 
+		m_hBackDC,				// 복사 할 DC
+		0,						// 복사할 이미지의 LEFT, TOP
+		0,
+		SRCCOPY);				// 그대로 복사
 }
 
 void CMainGame::Release()

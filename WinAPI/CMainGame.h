@@ -14,6 +14,8 @@ public:
 
 private:
 	HDC			m_hDC;
+	HDC			m_hBackDC;
+	HBITMAP		m_hBitMap;
 
 	int			m_iFps;
 	DWORD		m_dwLastTime;

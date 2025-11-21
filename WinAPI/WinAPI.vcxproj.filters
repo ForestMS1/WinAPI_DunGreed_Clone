@@ -19,6 +19,24 @@
     <Filter Include="Object">
       <UniqueIdentifier>{2c2d0b9a-ebc1-4248-af24-1a40bc133dd3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{f5d6e52e-a400-4b4b-99b3-3e0b9a35674a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{a0365df8-2048-4b74-9f06-b634677ca34c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\ObjMgr">
+      <UniqueIdentifier>{ff081f27-ed42-4744-9dd0-64f2e6cc2309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SceneMgr">
+      <UniqueIdentifier>{81ec0661-b79e-4f77-bc5e-c07389c12bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{8444c5b9-81a7-415a-bb1d-dc4ce916f840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\LogoScene">
+      <UniqueIdentifier>{9387caa7-cc9c-4ffd-baca-387958a6d74b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -45,6 +63,21 @@
     <ClInclude Include="CObj.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjMgr.h">
+      <Filter>Manager\ObjMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneMgr.h">
+      <Filter>Manager\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CLogo.h">
+      <Filter>Scene\LogoScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -58,6 +91,21 @@
     </ClCompile>
     <ClCompile Include="CObj.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjMgr.cpp">
+      <Filter>Manager\ObjMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneMgr.cpp">
+      <Filter>Manager\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CLogo.cpp">
+      <Filter>Scene\LogoScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

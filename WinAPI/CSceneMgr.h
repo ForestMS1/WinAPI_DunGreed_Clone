@@ -19,7 +19,7 @@ public:
 
 
 private:
-	map<wstring, CScene*>	m_mpScene;
+	map<wstring, CScene*>	m_mapScene;
 	CScene*					m_pCurCScene;
 
 };

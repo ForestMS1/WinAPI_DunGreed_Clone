@@ -15,6 +15,7 @@ CLogo::~CLogo()
 void CLogo::Initialize()
 {
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, new CPlayer);
+
 	CObjMgr::Get_Instance()->Initialize();
 }
 

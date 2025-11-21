@@ -37,6 +37,9 @@
     <Filter Include="Scene\LogoScene">
       <UniqueIdentifier>{9387caa7-cc9c-4ffd-baca-387958a6d74b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\ResourceMgr">
+      <UniqueIdentifier>{5b4ba85c-a7fb-4167-a29d-fbba55ff350b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -78,6 +81,12 @@
     <ClInclude Include="CLogo.h">
       <Filter>Scene\LogoScene</Filter>
     </ClInclude>
+    <ClInclude Include="CResourceMgr.h">
+      <Filter>Manager\ResourceMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMyBit.h">
+      <Filter>Manager\ResourceMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -106,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="CLogo.cpp">
       <Filter>Scene\LogoScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CResourceMgr.cpp">
+      <Filter>Manager\ResourceMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMyBit.cpp">
+      <Filter>Manager\ResourceMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

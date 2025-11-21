@@ -34,27 +34,27 @@ void CSceneMgr::Render(HDC hDC)
 
 void CSceneMgr::Release()
 {
-	map<wstring, CScene*>::iterator iter = m_mpScene.begin();
+	map<wstring, CScene*>::iterator iter = m_mapScene.begin();
 
-	for (; iter != m_mpScene.end(); ++iter)
+	for (; iter != m_mapScene.end(); ++iter)
 	{
 		Safe_Delete(iter->second);
 	}
-	m_mpScene.clear();
+	m_mapScene.clear();
 }
 
 void CSceneMgr::CreateScene(wstring sceneName, CScene* pScene)
 {
-	if (pScene != nullptr && (m_mpScene.find(sceneName) == m_mpScene.end()))
+	if (pScene != nullptr && (m_mapScene.find(sceneName) == m_mapScene.end()))
 	{
-		m_mpScene.insert({sceneName, pScene});
+		m_mapScene.insert({sceneName, pScene});
 	}
 }
 
 void CSceneMgr::ChangeScene(wstring sceneName)
 {
-	map<wstring, CScene*>::iterator iter = m_mpScene.find(sceneName);
-	if (iter != m_mpScene.end())
+	map<wstring, CScene*>::iterator iter = m_mapScene.find(sceneName);
+	if (iter != m_mapScene.end())
 	{
 		m_pCurCScene = iter->second;
 		m_pCurCScene->Initialize();

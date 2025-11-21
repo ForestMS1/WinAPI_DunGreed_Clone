@@ -30,6 +30,8 @@ public:								\
 private:							\
 	T();							\
 	~T();							\
+	T& operator=(T&) = delete;		\
+	T(const T& rhs)	 = delete;		\
 	static T* m_pInstance;			
 
 enum OBJ_LAYER{ OBJ_PLAYER, OBJ_MONSTER, OBJ_ITEM, OBJ_END };

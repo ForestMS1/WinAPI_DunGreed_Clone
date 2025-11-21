@@ -5,6 +5,7 @@
 #include "CSceneMgr.h"
 #include "CLogo.h"
 #include "CPlayer.h"
+#include "CResourceMgr.h"
 
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
@@ -66,6 +67,7 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
+	CResourceMgr::Destroy_Instance();
 	CSceneMgr::Destroy_Instance();
 	CObjMgr::Destroy_Instance();
 	ReleaseDC(g_hWnd, m_hDC);

@@ -120,6 +120,9 @@
     <ClInclude Include="CLineMgr.h">
       <Filter>Manager\LineMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>Manager\KeyMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -169,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="CLineMgr.cpp">
       <Filter>Manager\LineMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>Manager\KeyMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

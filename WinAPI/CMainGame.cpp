@@ -8,6 +8,7 @@
 #include "CResourceMgr.h"
 #include "CLineMgr.h"
 #include "CEdit.h"
+#include "CKeyMgr.h"
 
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
@@ -29,23 +30,24 @@ void CMainGame::Initialize()
 
 
 	//씬 등록
-	CSceneMgr::Get_Instance()->CreateScene(L"Logo", new CLogo);
-	CSceneMgr::Get_Instance()->CreateScene(L"Edit", new CEdit);
+	GET(CSceneMgr)->CreateScene(L"Logo", new CLogo);
+	GET(CSceneMgr)->CreateScene(L"Edit", new CEdit);
 
 
 	// 최초로 나올 씬
-	CSceneMgr::Get_Instance()->ChangeScene(L"Edit");
+	GET(CSceneMgr)->ChangeScene(L"Edit");
 	
 }
 
 void CMainGame::Update()
 {
-	CSceneMgr::Get_Instance()->Update();
+	GET(CSceneMgr)->Update();
 }
 
 void CMainGame::Late_Update()
 {
-	CSceneMgr::Get_Instance()->Late_Update();
+	GET(CSceneMgr)->Late_Update();
+	GET(CKeyMgr)->Update();
 }
 
 void CMainGame::Render()
@@ -65,7 +67,7 @@ void CMainGame::Render()
 
 	Graphics graphics(m_hBackDC);
 
-	CSceneMgr::Get_Instance()->Render(m_hBackDC);
+	GET(CSceneMgr)->Render(m_hBackDC);
 
 	BitBlt(m_hDC,				// 복사 받을 DC
 		0,						// 복사 받을 공간의 LEFT	
@@ -80,6 +82,7 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
+	CKeyMgr::Destroy_Instance();
 	CLineMgr::Destroy_Instance();
 	CResourceMgr::Destroy_Instance();
 	CSceneMgr::Destroy_Instance();

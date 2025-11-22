@@ -8,7 +8,7 @@
 
 #define	OBJ_NOEVENT 0
 #define	OBJ_DEAD    1
-
+#define VK_MAX		0xff
 #define	SINGLE(T)					\
 public:								\
 	static T* Get_Instance()		\
@@ -33,6 +33,8 @@ private:							\
 	T& operator=(T&) = delete;		\
 	T(const T& rhs)	 = delete;		\
 	static T* m_pInstance;			
+
+#define GET(T)	T::Get_Instance()
 
 enum OBJ_LAYER{ OBJ_PLAYER, OBJ_MONSTER, OBJ_ITEM, OBJ_END };
 

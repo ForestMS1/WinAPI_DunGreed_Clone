@@ -23,7 +23,13 @@ public:
 
 
 protected:
+	// 좌표, 크기 관련
 	INFO		m_tInfo;
 	RECT		m_tRect;
+
+
+	// 수치 관련
+	float		m_fSpeed;
+
 };
 

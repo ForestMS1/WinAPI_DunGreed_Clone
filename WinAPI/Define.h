@@ -44,6 +44,16 @@ typedef struct tagInfo
 	float fCX, fCY; // 가로 세로 길이
 }INFO;
 
+typedef struct tagFrame
+{
+	int		iStart;
+	int		iEnd;
+	int		iMotion;
+	DWORD	dwSpeed;
+	DWORD	dwTime;
+
+}FRAME;
+
 template<typename T>
 void Safe_Delete(T& p)
 {

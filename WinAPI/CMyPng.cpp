@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "CMyPng.h"
 
-CMyPng::CMyPng()
+CMyPng::CMyPng() : m_Img(nullptr)
 {
 }
 
 CMyPng::~CMyPng()
 {
+	Safe_Delete(m_Img);
 }
 
 

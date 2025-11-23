@@ -3,6 +3,8 @@
 class CPlayer : public CObj
 {
 public:
+	enum STATE {IDLE, WALK, JUMP, FLY, ATTACK, HIT, DEAD, END};
+public:
 	CPlayer();
 	virtual~CPlayer();
 public:
@@ -14,8 +16,12 @@ public:
 
 private:
 	void Key_Input();
+	void Motion_Change();
 
 private:
-
+	STATE				m_ePreState;
+	STATE				m_eCurState;
+	Image*				m_pImg;
+	bool				m_bIsFlipped;
 };
 

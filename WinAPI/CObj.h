@@ -20,6 +20,7 @@ public:
 	void Set_Pos(float _fX, float _fY)									{ m_tInfo.fX = _fX; m_tInfo.fY = _fY; }
 
 	void Update_Rect();
+	void Move_Frame();
 
 
 protected:
@@ -30,6 +31,10 @@ protected:
 
 	// 수치 관련
 	float		m_fSpeed;
+
+	// 애니메이션
+	FRAME		m_tFrame;
+	wstring		m_wsFrameKey;
 
 };
 

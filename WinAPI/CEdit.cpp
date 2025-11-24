@@ -20,14 +20,14 @@ CEdit::~CEdit()
 
 void CEdit::Initialize()
 {
-	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resource/Logo/Logo.bmp", L"Logo");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Town/Cloud.bmp", L"Cloud");
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(100.f, 100.f));
 	CObjMgr::Get_Instance()->Initialize();
 	CLineMgr::Get_Instance()->Initialize();
 
 	// Camera 지정
 	GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
-	//GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
+	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 }
 
 void CEdit::Update()
@@ -76,17 +76,20 @@ void CEdit::Late_Update()
 void CEdit::Render(HDC hDC)
 {
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
-	HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Logo");
+	HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud");
 
-	BitBlt(hDC,
+	GdiTransparentBlt(
+		hDC,
 		-(int)GET(CCamera)->GetDiff().fX,				// 복사 받을 공간의 LEFT	
 		-(int)GET(CCamera)->GetDiff().fY,				// 복사 받을 공간의 TOP
-		WINCX,			// 복사 받을 공간의 가로 
-		WINCY,			// 복사 받을 공간의 세로 
-		hMemDC,				// 복사 할 DC
+		WINCX,											// 복사 받을 공간의 가로 
+		WINCY,											// 복사 받을 공간의 세로 
+		hMemDC,											// 복사 할 DC
 		0,
 		0,
-		SRCCOPY
+		960,
+		540,
+		RGB(255, 0, 255)
 	);
 
 	if (m_bIsDrawing)

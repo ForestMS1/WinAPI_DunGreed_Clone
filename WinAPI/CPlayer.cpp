@@ -15,9 +15,9 @@ void CPlayer::Initialize()
 {
 	m_fSpeed = 4.f;
 
-	m_tInfo.fX = 100.f;
-	m_tInfo.fY = 100.f;
-	m_tInfo.fCX = 60.f;
+	m_tInfo.fX = 400.f;
+	m_tInfo.fY = 400.f;
+	m_tInfo.fCX = 78.f;
 	m_tInfo.fCY = 60.f;
 
 	m_tFrame.iStart = 0;
@@ -30,7 +30,13 @@ void CPlayer::Initialize()
 
 	m_eCurState = IDLE;
 
-	CResourceMgr::Get_Instance()->Insert_Png(L"../Resource/hero.png", L"Player");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerIdle.bmp", L"PlayerIdle");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerJump.bmp", L"PlayerJump");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerRun.bmp", L"PlayerRun");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerDashR.bmp", L"PlayerDashR");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerDashL.bmp", L"PlayerDashL");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/RunEffectR.bmp", L"RunEffectR");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/RunEffectL.bmp", L"RunEffectL");
 }
 
 int CPlayer::Update()
@@ -51,47 +57,27 @@ void CPlayer::Late_Update()
 
 void CPlayer::Render(HDC hDC)
 {
-	Image* pImage = GET(CResourceMgr)->Find_Png(m_wsFrameKey);
+	HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(m_wsFrameKey);
 
-	int frameWidth = 112;
-	int frameHeight = 96;
+	int frameWidth = 78;
+	int frameHeight = 60;
 
 	int SrcX = frameWidth * m_tFrame.iStart;
 	int SrcY = frameHeight * m_tFrame.iMotion;
 
-	Graphics grp(hDC);
-	
-	// 렌더링용 좌표 가져옴
-	Vec2 vPos = Vec2(m_tInfo.fX, m_tInfo.fY);
-	vPos = GET(CCamera)->GetRenderPos(vPos);
-	RECT rRect = GET(CCamera)->GetRenderRect(m_tInfo);
 
-	// 반전 상태에 따라 그리기 설정
-	int destWidth = frameWidth;
-	int destX = rRect.left;
-
-	if (m_bIsFlipped) // 왼쪽을 볼 때 (반전 상태)
-	{
-		// 대상 너비를 음수로 설정하여 좌우 반전
-		destWidth = -frameWidth;
-		// X 좌표는 캐릭터 위치에서 프레임 너비만큼 더해줘야 올바른 위치에 그려짐
-		destX = rRect.left + frameWidth - 10;
-	}
-	// 오른쪽을 볼 때는 destWidth와 destX가 기본값 (양수 너비)
-
-	Rectangle(hDC, rRect.left, rRect.top, rRect.right, rRect.bottom);
-
-	// DrawImage 오버로드 함수 사용 (원본 픽셀을 대상 영역에 복사)
-	grp.DrawImage(
-		pImage,
-		Rect(destX-20, rRect.top-20, destWidth, frameHeight), // 대상 영역 (X, Y, Width, Height)
-		SrcX,                                                // 원본 시작 X
-		SrcY,                                                // 원본 시작 Y
-		frameWidth,                                          // 원본 너비
-		frameHeight,                                         // 원본 높이
-		UnitPixel,                                           // 단위
-		nullptr,                                             // ImageAttributes (NULL)
-		nullptr                                              // GdiplusNativeWindow (NULL)
+	GdiTransparentBlt(
+		hDC,
+		(int)(m_tInfo.fX - GET(CCamera)->GetDiff().fX),				// 복사 받을 공간의 LEFT	
+		(int)(m_tInfo.fY - GET(CCamera)->GetDiff().fY),				// 복사 받을 공간의 TOP
+		m_tInfo.fCX,												// 복사 받을 공간의 가로 
+		m_tInfo.fCY,												// 복사 받을 공간의 세로 
+		hMemDC,														// 복사 할 DC
+		SrcX,															// 원본이미지 left
+		SrcY,															// 원본이미지 top
+		frameWidth,														// 원본이미지 가로
+		frameHeight,														// 원본이미지 세로
+		RGB(255, 0, 255)
 	);
 
 }
@@ -144,18 +130,24 @@ void CPlayer::Motion_Change()
 		{
 		case IDLE:
 			m_tFrame.iStart = 0;
-			m_tFrame.iEnd = 2;
+			m_tFrame.iEnd = 4;
 			m_tFrame.iMotion = 0;
+			if(m_bIsFlipped)
+				m_tFrame.iMotion = 1;
 			m_tFrame.dwSpeed = 200;
 			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"PlayerIdle";
 			break;
 
 		case WALK:
 			m_tFrame.iStart = 0;
-			m_tFrame.iEnd = 11;
-			m_tFrame.iMotion = 1;
-			m_tFrame.dwSpeed = 100;
+			m_tFrame.iEnd = 7;
+			m_tFrame.iMotion = 0;
+			if (m_bIsFlipped)
+				m_tFrame.iMotion = 1;
+			m_tFrame.dwSpeed = 50;
 			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"PlayerRun";
 			break;
 
 		//case ATTACK:

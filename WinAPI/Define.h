@@ -1,6 +1,8 @@
 #pragma once
-#define WINCX 800
-#define WINCY 600
+#define WINCX 1280
+#define WINCY 720
+//1920 //1080
+//1280 //720
 
 #define PURE = 0
 

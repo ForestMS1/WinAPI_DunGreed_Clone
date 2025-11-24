@@ -12,6 +12,7 @@ public:
 	void Release();
 
 	void AddObject(OBJ_LAYER eLayer, CObj* pObj);
+	list<CObj*> GetObjLayer(OBJ_LAYER eLayer) const { return m_ObjLayer[eLayer]; }
 	void DeleteLayerObj(OBJ_LAYER eLayer);
 
 private:

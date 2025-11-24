@@ -35,6 +35,7 @@ private:							\
 	static T* m_pInstance;			
 
 #define GET(T)	T::Get_Instance()
+#define DT		CTimeMgr::Get_Instance()->GetDeltaTime()
 
 enum OBJ_LAYER{ OBJ_PLAYER, OBJ_MONSTER, OBJ_ITEM, OBJ_END };
 
@@ -53,6 +54,79 @@ typedef struct tagFrame
 	DWORD	dwTime;
 
 }FRAME;
+
+typedef struct Vec2
+{
+	float fX;
+	float fY;
+
+	Vec2(float _fX = 0, float _fY = 0)	{ fX = _fX; fY = _fY; }
+	Vec2(POINT pt)						{ fX = (float)pt.x; fY = (float)pt.y; }
+
+	Vec2 operator- (const Vec2& rhs)
+	{
+		return Vec2(fX - rhs.fX, fY - rhs.fY);
+	}
+	Vec2 operator- (const POINT& rhs)
+	{
+		return Vec2(fX - (float)rhs.x, fY - (float)rhs.y);
+	}
+	Vec2 operator+ (const Vec2& rhs)
+	{
+		return Vec2(fX + rhs.fX, fY + rhs.fY);
+	}
+	Vec2 operator+ (const POINT& rhs)
+	{
+		return Vec2(fX + (float)rhs.x, fY + (float)rhs.y);
+	}
+	Vec2& operator=(const Vec2& rhs)
+	{
+		fX = rhs.fX;
+		fY = rhs.fY;
+		return *this;
+	}
+	Vec2& operator+=(const Vec2& rhs)
+	{
+		fX += rhs.fX;
+		fY += rhs.fY;
+		return *this;
+	}
+	Vec2& operator=(const POINT& rhs)
+	{
+		fX = (float)rhs.x;
+		fY = (float)rhs.y;
+		return *this;
+	}
+	Vec2& operator+=(const POINT& rhs)
+	{
+		fX += (float)rhs.x;
+		fY += (float)rhs.y;
+		return *this;
+	}
+	Vec2 operator*(float scalar) const
+	{
+		return Vec2(fX * scalar, fY * scalar);
+	}
+	Vec2 operator*(int scalar) const
+	{
+		return Vec2(fX * (float)scalar, fY * (float)scalar);
+	}
+public:
+	Vec2 Normalize()
+	{
+		float fDiagonal = sqrtf(fX * fX + fY * fY);
+		if (fDiagonal == 0.f)
+			return Vec2(0.f, 0.f);
+
+		float x = fX / fDiagonal;
+		float y = fY / fDiagonal;
+		return Vec2(x, y);
+	}
+	float Length()
+	{
+		return sqrtf(fX * fX + fY * fY);
+	}
+}Vec2;
 
 template<typename T>
 void Safe_Delete(T& p)

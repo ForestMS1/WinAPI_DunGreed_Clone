@@ -2,7 +2,7 @@
 #include "CPlayer.h"
 #include "CResourceMgr.h"
 #include "CKeyMgr.h"
-
+#include "CCamera.h"
 CPlayer::CPlayer()
 {
 }
@@ -61,23 +61,30 @@ void CPlayer::Render(HDC hDC)
 
 	Graphics grp(hDC);
 	
+	// 렌더링용 좌표 가져옴
+	Vec2 vPos = Vec2(m_tInfo.fX, m_tInfo.fY);
+	vPos = GET(CCamera)->GetRenderPos(vPos);
+	RECT rRect = GET(CCamera)->GetRenderRect(m_tInfo);
+
 	// 반전 상태에 따라 그리기 설정
 	int destWidth = frameWidth;
-	int destX = (int)m_tInfo.fX;
+	int destX = rRect.left;
 
 	if (m_bIsFlipped) // 왼쪽을 볼 때 (반전 상태)
 	{
 		// 대상 너비를 음수로 설정하여 좌우 반전
 		destWidth = -frameWidth;
 		// X 좌표는 캐릭터 위치에서 프레임 너비만큼 더해줘야 올바른 위치에 그려짐
-		destX = (int)m_tInfo.fX + frameWidth;
+		destX = rRect.left + frameWidth - 10;
 	}
 	// 오른쪽을 볼 때는 destWidth와 destX가 기본값 (양수 너비)
+
+	Rectangle(hDC, rRect.left, rRect.top, rRect.right, rRect.bottom);
 
 	// DrawImage 오버로드 함수 사용 (원본 픽셀을 대상 영역에 복사)
 	grp.DrawImage(
 		pImage,
-		Rect(destX, (int)m_tInfo.fY, destWidth, frameHeight), // 대상 영역 (X, Y, Width, Height)
+		Rect(destX-20, rRect.top-20, destWidth, frameHeight), // 대상 영역 (X, Y, Width, Height)
 		SrcX,                                                // 원본 시작 X
 		SrcY,                                                // 원본 시작 Y
 		frameWidth,                                          // 원본 너비
@@ -86,6 +93,7 @@ void CPlayer::Render(HDC hDC)
 		nullptr,                                             // ImageAttributes (NULL)
 		nullptr                                              // GdiplusNativeWindow (NULL)
 	);
+
 }
 
 void CPlayer::Release()

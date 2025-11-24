@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CLine.h"
-
+#include "CCamera.h"
 CLine::CLine()
 {
 	ZeroMemory(&m_ptLeft, sizeof(m_ptLeft));
@@ -34,8 +34,11 @@ void CLine::Late_Update()
 
 void CLine::Render(HDC hDC)
 {
-	MoveToEx(hDC, m_ptLeft.x, m_ptLeft.y, nullptr);
-	LineTo(hDC, m_ptRight.x, m_ptRight.y);
+	Vec2 vStart = GET(CCamera)->GetRenderPos(Vec2(m_ptLeft.x, m_ptLeft.y));
+	Vec2 vEnd = GET(CCamera)->GetRenderPos(Vec2(m_ptRight.x, m_ptRight.y));
+
+	MoveToEx(hDC, vStart.fX, vStart.fY, nullptr);
+	LineTo(hDC, vEnd.fX, vEnd.fY);
 }
 
 void CLine::Release()

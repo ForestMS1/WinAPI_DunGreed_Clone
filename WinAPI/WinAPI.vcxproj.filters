@@ -58,6 +58,12 @@
     <Filter Include="Manager\LineMgr">
       <UniqueIdentifier>{36bcde49-22fe-454b-8aa9-b3e255d4b1be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\Camera">
+      <UniqueIdentifier>{e546ecbb-786b-495e-b016-df10af9e5321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\TimeMgr">
+      <UniqueIdentifier>{179bbc79-c16c-49aa-a782-b011cddd0e31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -123,6 +129,12 @@
     <ClInclude Include="CKeyMgr.h">
       <Filter>Manager\KeyMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>Manager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>Manager\TimeMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -175,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="CKeyMgr.cpp">
       <Filter>Manager\KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>Manager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>Manager\TimeMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

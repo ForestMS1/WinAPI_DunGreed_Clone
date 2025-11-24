@@ -9,6 +9,8 @@
 #include "CLineMgr.h"
 #include "CEdit.h"
 #include "CKeyMgr.h"
+#include "CCamera.h"
+#include "CTimeMgr.h"
 
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
@@ -22,6 +24,7 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize()
 {
+	GET(CTimeMgr)->Initialize();
 	m_hDC = GetDC(g_hWnd);
 	m_hBackDC = CreateCompatibleDC(m_hDC);
 	m_hBitMap = CreateCompatibleBitmap(m_hDC, WINCX, WINCY);
@@ -41,6 +44,7 @@ void CMainGame::Initialize()
 
 void CMainGame::Update()
 {
+	GET(CTimeMgr)->Update();
 	GET(CSceneMgr)->Update();
 }
 
@@ -54,15 +58,16 @@ void CMainGame::Render()
 {
 	++m_iFps;
 
-	if (m_dwLastTime + 1000 < GetTickCount())
+	DWORD curTime = GetTickCount();
+	if (m_dwLastTime + 1000 < curTime)
 	{
-		swprintf_s(m_szFPS, L"FPS : %d", m_iFps);
-
+		swprintf_s(m_szFPS, L"FPS : %d, DT : %f", m_iFps, DT);
 		m_iFps = 0;
+
 
 		SetWindowText(g_hWnd, m_szFPS);
 
-		m_dwLastTime = GetTickCount();
+		m_dwLastTime = curTime;
 	}
 
 	Graphics graphics(m_hBackDC);
@@ -82,10 +87,12 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
+	CCamera::Destroy_Instance();
 	CKeyMgr::Destroy_Instance();
 	CLineMgr::Destroy_Instance();
 	CResourceMgr::Destroy_Instance();
 	CSceneMgr::Destroy_Instance();
 	CObjMgr::Destroy_Instance();
+	CTimeMgr::Destroy_Instance();
 	ReleaseDC(g_hWnd, m_hDC);
 }

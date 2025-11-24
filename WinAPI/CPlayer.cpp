@@ -22,7 +22,7 @@ void CPlayer::Initialize()
 
 	m_tFrame.iStart = 0;
 	m_tFrame.iEnd = 2;
-	m_tFrame.iMotion = 0;
+	m_tFrame.iRow = 0;
 	m_tFrame.dwSpeed = 200;
 	m_tFrame.dwTime = GetTickCount();
 
@@ -63,7 +63,7 @@ void CPlayer::Render(HDC hDC)
 	int frameHeight = 60;
 
 	int SrcX = frameWidth * m_tFrame.iStart;
-	int SrcY = frameHeight * m_tFrame.iMotion;
+	int SrcY = frameHeight * m_tFrame.iRow;
 
 
 	GdiTransparentBlt(
@@ -131,9 +131,9 @@ void CPlayer::Motion_Change()
 		case IDLE:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 4;
-			m_tFrame.iMotion = 0;
+			m_tFrame.iRow = 0;
 			if(m_bIsFlipped)
-				m_tFrame.iMotion = 1;
+				m_tFrame.iRow = 1;
 			m_tFrame.dwSpeed = 200;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerIdle";
@@ -142,9 +142,9 @@ void CPlayer::Motion_Change()
 		case WALK:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 7;
-			m_tFrame.iMotion = 0;
+			m_tFrame.iRow = 0;
 			if (m_bIsFlipped)
-				m_tFrame.iMotion = 1;
+				m_tFrame.iRow = 1;
 			m_tFrame.dwSpeed = 50;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerRun";
@@ -153,7 +153,7 @@ void CPlayer::Motion_Change()
 		//case ATTACK:
 		//	m_tFrame.iStart = 0;
 		//	m_tFrame.iEnd = 5;
-		//	m_tFrame.iMotion = 2;
+		//	m_tFrame.iRow = 2;
 		//	m_tFrame.dwSpeed = 200;
 		//	m_tFrame.dwTime = GetTickCount();
 		//	break;
@@ -161,7 +161,7 @@ void CPlayer::Motion_Change()
 		//case HIT:
 		//	m_tFrame.iStart = 0;
 		//	m_tFrame.iEnd = 1;
-		//	m_tFrame.iMotion = 3;
+		//	m_tFrame.iRow = 3;
 		//	m_tFrame.dwSpeed = 200;
 		//	m_tFrame.dwTime = GetTickCount();
 		//	break;
@@ -169,7 +169,7 @@ void CPlayer::Motion_Change()
 		//case DEAD:
 		//	m_tFrame.iStart = 0;
 		//	m_tFrame.iEnd = 3;
-		//	m_tFrame.iMotion = 4;
+		//	m_tFrame.iRow = 4;
 		//	m_tFrame.dwSpeed = 200;
 		//	m_tFrame.dwTime = GetTickCount();
 		//	break;

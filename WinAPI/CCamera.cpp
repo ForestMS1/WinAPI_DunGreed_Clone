@@ -5,7 +5,7 @@
 
 CCamera* CCamera::m_pInstance = nullptr;
 
-CCamera::CCamera() : m_pTarget(nullptr), m_fTime(1.f),
+CCamera::CCamera() : m_pTarget(nullptr), m_fTime(0.5f),
 m_fSpeed(0.f), m_fAccTime(0.f)
 {
 

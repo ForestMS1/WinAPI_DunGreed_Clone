@@ -11,6 +11,7 @@
 #include "CKeyMgr.h"
 #include "CCamera.h"
 #include "CTimeMgr.h"
+#include "CToolScene.h"
 
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
@@ -35,10 +36,11 @@ void CMainGame::Initialize()
 	//¾À µî·Ï
 	GET(CSceneMgr)->CreateScene(L"Logo", new CLogo);
 	GET(CSceneMgr)->CreateScene(L"Edit", new CEdit);
+	GET(CSceneMgr)->CreateScene(L"Tool", new CToolScene);
 
 
 	// ÃÖÃÊ·Î ³ª¿Ã ¾À
-	GET(CSceneMgr)->ChangeScene(L"Edit");
+	GET(CSceneMgr)->ChangeScene(L"Tool");
 	
 }
 

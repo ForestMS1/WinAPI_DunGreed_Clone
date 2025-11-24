@@ -14,7 +14,7 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 private:
-    POINT       m_ptMouse;
+    //POINT       m_ptMouse;
     POINT       m_ptLeft;
     POINT       m_ptRight;
     bool        m_bIsDrawing;

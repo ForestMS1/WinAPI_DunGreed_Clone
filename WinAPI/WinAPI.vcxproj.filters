@@ -64,6 +64,12 @@
     <Filter Include="Manager\TimeMgr">
       <UniqueIdentifier>{179bbc79-c16c-49aa-a782-b011cddd0e31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\ToolScene">
+      <UniqueIdentifier>{cebb0cb4-1b99-4d43-b76a-28b7de02bd75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Tile">
+      <UniqueIdentifier>{052204bd-50c9-4a7d-80cd-9294ed7ca8eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -135,6 +141,12 @@
     <ClInclude Include="CTimeMgr.h">
       <Filter>Manager\TimeMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CToolScene.h">
+      <Filter>Scene\ToolScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -193,6 +205,12 @@
     </ClCompile>
     <ClCompile Include="CTimeMgr.cpp">
       <Filter>Manager\TimeMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CToolScene.cpp">
+      <Filter>Scene\ToolScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

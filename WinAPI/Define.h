@@ -38,8 +38,9 @@ private:							\
 
 #define GET(T)	T::Get_Instance()
 #define DT		CTimeMgr::Get_Instance()->GetDeltaTime()
+#define TILESIZE 32
 
-enum OBJ_LAYER{ OBJ_PLAYER, OBJ_MONSTER, OBJ_ITEM, OBJ_END };
+enum OBJ_LAYER{ OBJ_PLAYER, OBJ_MONSTER, OBJ_ITEM, OBJ_TILE, OBJ_END };
 
 typedef struct tagInfo
 {
@@ -51,7 +52,7 @@ typedef struct tagFrame
 {
 	int		iStart;
 	int		iEnd;
-	int		iMotion;
+	int		iRow;
 	DWORD	dwSpeed;
 	DWORD	dwTime;
 

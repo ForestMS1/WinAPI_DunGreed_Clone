@@ -19,15 +19,7 @@ void CToolScene::Initialize()
 {
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/MapTool/MapTile.bmp", L"MapTile");
 
-	for (int i = 0; i < 5; ++i)
-	{
-		for (int j = 0; j < 5; ++j)
-		{
-			CTile* pTile = new CTile;
-			pTile->Set_Pos((float)(j * TILESIZE), (float)(i * TILESIZE));
-			GET(CObjMgr)->AddObject(OBJ_TILE, pTile);
-		}
-	}
+	CreateTile(10, 10);
 	GET(CObjMgr)->Initialize();
 	GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
 }

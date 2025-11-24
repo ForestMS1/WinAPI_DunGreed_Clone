@@ -15,6 +15,7 @@ void CTile::Initialize()
 {
 	m_tInfo.fCX = TILESIZE;
 	m_tInfo.fCY = TILESIZE;
+	m_wsFrameKey = L"MapTile";
 }
 
 int CTile::Update()
@@ -28,7 +29,7 @@ void CTile::Late_Update()
 
 void CTile::Render(HDC hDC)
 {
-	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
+	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
 
 	Vec2 vRenderPos = GET(CCamera)->GetRenderPos(Get_Pos());
 

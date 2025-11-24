@@ -13,6 +13,9 @@ public:
 	virtual void Render(HDC hDC)						PURE;
 	virtual void Release()								PURE;
 
+public :
+	void CreateTile(UINT _iXCount, UINT _iYCount);
+
 protected:
 	POINT			m_ptMouse;
 };

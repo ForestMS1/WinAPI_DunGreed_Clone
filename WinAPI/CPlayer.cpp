@@ -3,7 +3,7 @@
 #include "CResourceMgr.h"
 #include "CKeyMgr.h"
 
-CPlayer::CPlayer() : m_bIsFlipped(true), m_pImg(nullptr)
+CPlayer::CPlayer()
 {
 }
 CPlayer::~CPlayer()
@@ -51,7 +51,7 @@ void CPlayer::Late_Update()
 
 void CPlayer::Render(HDC hDC)
 {
-	m_pImg = GET(CResourceMgr)->Find_Png(m_wsFrameKey);
+	Image* pImage = GET(CResourceMgr)->Find_Png(m_wsFrameKey);
 
 	int frameWidth = 112;
 	int frameHeight = 96;
@@ -65,7 +65,7 @@ void CPlayer::Render(HDC hDC)
 	int destWidth = frameWidth;
 	int destX = (int)m_tInfo.fX;
 
-	if (!m_bIsFlipped) // 왼쪽을 볼 때 (반전 상태)
+	if (m_bIsFlipped) // 왼쪽을 볼 때 (반전 상태)
 	{
 		// 대상 너비를 음수로 설정하여 좌우 반전
 		destWidth = -frameWidth;
@@ -76,7 +76,7 @@ void CPlayer::Render(HDC hDC)
 
 	// DrawImage 오버로드 함수 사용 (원본 픽셀을 대상 영역에 복사)
 	grp.DrawImage(
-		m_pImg,
+		pImage,
 		Rect(destX, (int)m_tInfo.fY, destWidth, frameHeight), // 대상 영역 (X, Y, Width, Height)
 		SrcX,                                                // 원본 시작 X
 		SrcY,                                                // 원본 시작 Y
@@ -94,33 +94,37 @@ void CPlayer::Release()
 
 void CPlayer::Key_Input()
 {
-	if (GET(CKeyMgr)->Key_Down(VK_LEFT) && m_bIsFlipped)
-	{
-		m_bIsFlipped = false;
-	}
-	if (GET(CKeyMgr)->Key_Down(VK_RIGHT) && !m_bIsFlipped)
+	if (GET(CKeyMgr)->Key_Down(VK_LEFT) && !m_bIsFlipped)
 	{
 		m_bIsFlipped = true;
 	}
-	if (GET(CKeyMgr)->Key_Pressing(VK_LEFT))
+	else if (GET(CKeyMgr)->Key_Down(VK_RIGHT) && m_bIsFlipped)
+	{
+		m_bIsFlipped = false;
+	}
+	else if (GET(CKeyMgr)->Key_Pressing(VK_LEFT))
 	{
 		m_tInfo.fX -= m_fSpeed;
 		m_eCurState = WALK;
 	}
-	if (GET(CKeyMgr)->Key_Pressing(VK_RIGHT))
+	else if (GET(CKeyMgr)->Key_Pressing(VK_RIGHT))
 	{
 		m_tInfo.fX += m_fSpeed;
 		m_eCurState = WALK;
 	}
-	if (GET(CKeyMgr)->Key_Pressing(VK_UP))
+	else if (GET(CKeyMgr)->Key_Pressing(VK_UP))
 	{
 		m_tInfo.fY -= m_fSpeed;
 		m_eCurState = WALK;
 	}
-	if (GET(CKeyMgr)->Key_Pressing(VK_DOWN))
+	else if (GET(CKeyMgr)->Key_Pressing(VK_DOWN))
 	{
 		m_tInfo.fY += m_fSpeed;
 		m_eCurState = WALK;
+	}
+	else
+	{
+		m_eCurState = IDLE;
 	}
 }
 

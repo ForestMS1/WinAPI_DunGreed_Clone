@@ -34,7 +34,8 @@ protected:
 
 	// 애니메이션
 	FRAME		m_tFrame;
-	wstring		m_wsFrameKey;
+	wstring		m_wsFrameKey;	
+	bool		m_bIsFlipped; // 좌 우 반전
 
 };
 

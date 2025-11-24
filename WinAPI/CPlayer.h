@@ -21,7 +21,5 @@ private:
 private:
 	STATE				m_ePreState;
 	STATE				m_eCurState;
-	Image*				m_pImg;
-	bool				m_bIsFlipped;
 };
 

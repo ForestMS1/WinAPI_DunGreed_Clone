@@ -21,6 +21,14 @@ HDC CResourceMgr::Find_Bmp(wstring ImgKey)
     return nullptr;
 }
 
+HBITMAP CResourceMgr::Get_Bmp(wstring ImgKey)
+{
+    if (m_mapBit.find(ImgKey) != m_mapBit.end())
+        return m_mapBit[ImgKey]->Get_Bit();
+
+    return nullptr;
+}
+
 Image* CResourceMgr::Find_Png(wstring ImgKey)
 {
     if (m_mapImg.find(ImgKey) != m_mapImg.end())
@@ -48,6 +56,38 @@ void CResourceMgr::Insert_Png(wstring FilePath, wstring ImgKey)
     pPng->Load_Image(FilePath);
 
     m_mapImg.insert({ ImgKey, pPng });
+}
+
+HBITMAP CResourceMgr::FlipBitmapHorizontal(HBITMAP src)
+{
+    BITMAP bm;
+    GetObject(src, sizeof(bm), &bm);
+
+    HDC hdc = GetDC(NULL);
+    HDC srcDC = CreateCompatibleDC(hdc);
+    HDC dstDC = CreateCompatibleDC(hdc);
+
+    SelectObject(srcDC, src);
+
+    HBITMAP dstBmp = CreateCompatibleBitmap(hdc, bm.bmWidth, bm.bmHeight);
+    HBITMAP oldDst = (HBITMAP)SelectObject(dstDC, dstBmp);
+
+    StretchBlt(
+        dstDC,
+        0, 0,
+        bm.bmWidth, bm.bmHeight,
+        srcDC,
+        bm.bmWidth - 1, 0,
+        -bm.bmWidth, bm.bmHeight,
+        SRCCOPY
+    );
+
+    SelectObject(dstDC, oldDst);
+    DeleteDC(srcDC);
+    DeleteDC(dstDC);
+    ReleaseDC(NULL, hdc);
+
+    return dstBmp; // ÁÂ¿ì¹ÝÀüµÈ ºñÆ®¸Ê
 }
 
 void CResourceMgr::Release()

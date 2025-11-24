@@ -8,6 +8,7 @@ public:
 
 public:
 	HDC		Get_MemDC() const { return m_hMemDC; }
+	HBITMAP	Get_Bit()	const { return m_hBit; }
 	void	Load_Bmp(wstring FilePath);
 	void	Release();
 

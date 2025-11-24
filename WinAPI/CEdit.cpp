@@ -27,7 +27,7 @@ void CEdit::Initialize()
 
 	// Camera ÁöÁ¤
 	GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
-	//GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
+	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 }
 
 void CEdit::Update()

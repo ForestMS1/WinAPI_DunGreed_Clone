@@ -11,6 +11,8 @@ public:
 	Image* Find_Png(wstring ImgKey);
 	void Insert_Bmp(wstring FilePath, wstring ImgKey);
 	void Insert_Png(wstring FilePath, wstring ImgKey);
+	HBITMAP	FlipBitmapHorizontal(HBITMAP src);
+	HBITMAP Get_Bmp(wstring ImgKey);
 	void Release();
 
 

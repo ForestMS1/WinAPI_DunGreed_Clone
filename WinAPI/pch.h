@@ -16,6 +16,8 @@
 #include <string>
 #include <objidl.h>   // IStream 정의
 #include <gdiplus.h>
+#include <wincodec.h>
+#include <atlbase.h> // CComPtr 사용을 위해 포함 (COM 객체 관리를 쉽게 함)
 
 #pragma comment(lib, "Gdiplus.lib")
 using namespace Gdiplus;

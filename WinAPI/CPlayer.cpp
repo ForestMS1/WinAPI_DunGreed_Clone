@@ -3,6 +3,7 @@
 #include "CResourceMgr.h"
 #include "CKeyMgr.h"
 #include "CCamera.h"
+#include "CTimeMgr.h"
 CPlayer::CPlayer()
 {
 }
@@ -13,7 +14,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_fSpeed = 4.f;
+	m_fSpeed = 10.f;
 
 	m_tInfo.fX = 100.f;
 	m_tInfo.fY = 100.f;
@@ -30,7 +31,8 @@ void CPlayer::Initialize()
 
 	m_eCurState = IDLE;
 
-	CResourceMgr::Get_Instance()->Insert_Png(L"../Resource/hero.png", L"Player");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resource/hero.bmp", L"Player");
+	//CResourceMgr::Get_Instance()->Insert_Png(L"../Resource/hero.png", L"Player");
 }
 
 int CPlayer::Update()
@@ -70,29 +72,48 @@ void CPlayer::Render(HDC hDC)
 	int destWidth = frameWidth;
 	int destX = rRect.left;
 
+	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"Player");
+	HBITMAP hBmp = GET(CResourceMgr)->Get_Bmp(L"Player");
+
+	HBITMAP renderBmp = hBmp;
+
 	if (m_bIsFlipped) // 왼쪽을 볼 때 (반전 상태)
 	{
-		// 대상 너비를 음수로 설정하여 좌우 반전
-		destWidth = -frameWidth;
-		// X 좌표는 캐릭터 위치에서 프레임 너비만큼 더해줘야 올바른 위치에 그려짐
-		destX = rRect.left + frameWidth - 10;
+		renderBmp = GET(CResourceMgr)->FlipBitmapHorizontal(hBmp);
 	}
 	// 오른쪽을 볼 때는 destWidth와 destX가 기본값 (양수 너비)
 
 	Rectangle(hDC, rRect.left, rRect.top, rRect.right, rRect.bottom);
 
-	// DrawImage 오버로드 함수 사용 (원본 픽셀을 대상 영역에 복사)
-	grp.DrawImage(
-		pImage,
-		Rect(destX-20, rRect.top-20, destWidth, frameHeight), // 대상 영역 (X, Y, Width, Height)
-		SrcX,                                                // 원본 시작 X
-		SrcY,                                                // 원본 시작 Y
-		frameWidth,                                          // 원본 너비
-		frameHeight,                                         // 원본 높이
-		UnitPixel,                                           // 단위
-		nullptr,                                             // ImageAttributes (NULL)
-		nullptr                                              // GdiplusNativeWindow (NULL)
+	HBITMAP old = (HBITMAP)SelectObject(hMemDC, renderBmp);
+
+	GdiTransparentBlt(
+		hDC,
+		(int)vPos.fX,
+		(int)vPos.fY,
+		frameWidth,
+		frameHeight,
+		hMemDC,
+		SrcX,
+		SrcY,
+		frameWidth,
+		frameHeight,
+		RGB(255, 255, 255)
 	);
+
+	//GdiTransparentBlt(
+	//	hDC,
+	//	(int)vPos.fX,				// 복사 받을 공간의 LEFT	
+	//	(int)vPos.fY,				// 복사 받을 공간의 TOP
+	//	frameWidth,		// 복사 받을 공간의 가로 
+	//	frameHeight,			// 복사 받을 공간의 세로 
+	//	hMemDC,				// 복사 할 DC
+	//	SrcX,
+	//	SrcY,
+	//	frameWidth,
+	//	frameHeight,
+	//	RGB(255, 255, 255)
+	//);
 
 }
 

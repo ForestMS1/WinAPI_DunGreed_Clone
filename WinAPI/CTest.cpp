@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "CEdit.h"
+#include "CTest.h"
 #include "CLineMgr.h"
 #include "CObjMgr.h"
 #include "CAbstractFactory.h"
@@ -7,18 +7,18 @@
 #include "CCamera.h"
 #include "CResourceMgr.h"
 #include "CKeyMgr.h"
-CEdit::CEdit() : m_bIsDrawing(false)
+CTest::CTest() : m_bIsDrawing(false)
 {
 	ZeroMemory(&m_ptMouse, sizeof(m_ptMouse));
 	ZeroMemory(&m_ptLeft, sizeof(m_ptLeft));
 	ZeroMemory(&m_ptRight, sizeof(m_ptRight));
 }
 
-CEdit::~CEdit()
+CTest::~CTest()
 {
 }
 
-void CEdit::Initialize()
+void CTest::Initialize()
 {
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Town/Cloud.bmp", L"Cloud");
 	//CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/")
@@ -31,7 +31,7 @@ void CEdit::Initialize()
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 }
 
-void CEdit::Update()
+void CTest::Update()
 {
 	GetCursorPos(&m_ptMouse);
 	ScreenToClient(g_hWnd, &m_ptMouse);
@@ -68,13 +68,13 @@ void CEdit::Update()
 	GET(CCamera)->Update();
 }
 
-void CEdit::Late_Update()
+void CTest::Late_Update()
 {
 	CObjMgr::Get_Instance()->Late_Update();
 	CLineMgr::Get_Instance()->Late_Update();
 }
 
-void CEdit::Render(HDC hDC)
+void CTest::Render(HDC hDC)
 {
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
 	HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud");
@@ -106,6 +106,6 @@ void CEdit::Render(HDC hDC)
 	CLineMgr::Get_Instance()->Render(hDC);
 }
 
-void CEdit::Release()
+void CTest::Release()
 {
 }

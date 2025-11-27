@@ -137,7 +137,7 @@
   <ItemGroup>
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CCamera.h" />
-    <ClInclude Include="CEdit.h" />
+    <ClInclude Include="CTest.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CLine.h" />
     <ClInclude Include="CLineMgr.h" />
@@ -168,7 +168,7 @@
   <ItemGroup>
     <ClCompile Include="CAbstractFactory.cpp" />
     <ClCompile Include="CCamera.cpp" />
-    <ClCompile Include="CEdit.cpp" />
+    <ClCompile Include="CTest.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CLine.cpp" />
     <ClCompile Include="CLineMgr.cpp" />

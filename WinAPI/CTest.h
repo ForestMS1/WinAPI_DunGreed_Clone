@@ -1,11 +1,11 @@
 #pragma once
 #include "CScene.h"
-class CEdit :
+class CTest :
     public CScene
 {
 public:
-    CEdit();
-    virtual ~CEdit();
+    CTest();
+    virtual ~CTest();
 public:
     // CScene을(를) 통해 상속됨
     void Initialize() override;

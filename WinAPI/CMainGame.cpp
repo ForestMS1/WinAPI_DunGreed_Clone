@@ -7,7 +7,7 @@
 #include "CPlayer.h"
 #include "CResourceMgr.h"
 #include "CLineMgr.h"
-#include "CEdit.h"
+#include "CTest.h"
 #include "CKeyMgr.h"
 #include "CCamera.h"
 #include "CTimeMgr.h"
@@ -36,11 +36,11 @@ void CMainGame::Initialize()
 
 	//¾À µî·Ï
 	GET(CSceneMgr)->CreateScene(L"Logo", new CLogo);
-	GET(CSceneMgr)->CreateScene(L"Edit", new CEdit);
+	GET(CSceneMgr)->CreateScene(L"Test", new CTest);
 	GET(CSceneMgr)->CreateScene(L"TileEdit", new CTileEditScene);
 
 	// ÃÖÃÊ·Î ³ª¿Ã ¾À
-	GET(CSceneMgr)->ChangeScene(L"TileEdit");
+	GET(CSceneMgr)->ChangeScene(L"Test");
 	
 }
 

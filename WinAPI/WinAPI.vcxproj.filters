@@ -73,6 +73,15 @@
     <Filter Include="Manager\TileMgr\Tile">
       <UniqueIdentifier>{aa6993e7-2f45-48a2-b705-fbba0ad85ebd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\UIMgr">
+      <UniqueIdentifier>{d97feaaf-0633-4465-8785-dc17d1a89051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\UIMgr\UI">
+      <UniqueIdentifier>{d40af099-d004-49e3-8f8e-a19ab1a136c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\UIMgr\UI\MapTileUI">
+      <UniqueIdentifier>{705d343b-8e2d-4642-90e4-988acc808af0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -153,6 +162,15 @@
     <ClInclude Include="CTileEditScene.h">
       <Filter>Scene\TileEditScene</Filter>
     </ClInclude>
+    <ClInclude Include="CUIMgr.h">
+      <Filter>Manager\UIMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI.h">
+      <Filter>Manager\UIMgr\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CMapTileUI.h">
+      <Filter>Manager\UIMgr\UI\MapTileUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -220,6 +238,15 @@
     </ClCompile>
     <ClCompile Include="CTileEditScene.cpp">
       <Filter>Scene\TileEditScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMgr.cpp">
+      <Filter>Manager\UIMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI.cpp">
+      <Filter>Manager\UIMgr\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CMapTileUI.cpp">
+      <Filter>Manager\UIMgr\UI\MapTileUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

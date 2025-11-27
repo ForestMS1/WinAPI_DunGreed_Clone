@@ -6,6 +6,7 @@
 #include "CTileMgr.h"
 #include "CCamera.h"
 #include "CKeyMgr.h"
+#include "CUIMgr.h"
 
 CTileEditScene::CTileEditScene()
 {
@@ -21,6 +22,7 @@ void CTileEditScene::Initialize()
 {
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/MapTool/MapTile.bmp", L"MapTile");
 	GET(CTileMgr)->Initialize();
+	GET(CUIMgr)->Initialize();
 
 	// Camera 지정
 	GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
@@ -31,6 +33,7 @@ void CTileEditScene::Update()
 	Key_Input();
 
 	GET(CTileMgr)->Update();
+	GET(CUIMgr)->Update();
 	GET(CCamera)->Update();
 }
 
@@ -44,6 +47,7 @@ void CTileEditScene::Render(HDC hDC)
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
 	
 	GET(CTileMgr)->Render(hDC);
+	GET(CUIMgr)->Render(hDC);
 }
 
 void CTileEditScene::Release()
@@ -58,8 +62,10 @@ void CTileEditScene::Key_Input()
 		GetCursorPos(&pt);
 		ScreenToClient(g_hWnd, &pt);
 
-		pt.x += GET(CCamera)->Get_ScrollX();
-		pt.y += GET(CCamera)->Get_ScrollY();
+		//pt.x += GET(CCamera)->Get_ScrollX();
+		//pt.y += GET(CCamera)->Get_ScrollY();
+		pt.x = (int)GET(CCamera)->GetRealPos(pt).fX;
+		pt.y = (int)GET(CCamera)->GetRealPos(pt).fY;
 
 		// TODO : MapTile 이미지 에서 클릭한 타일인덱스를 아래 Picking_Tile에 넘겨주면 됨.....
 		GET(CTileMgr)->Picking_Tile(pt, 1, 0, 0);

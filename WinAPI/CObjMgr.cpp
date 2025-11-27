@@ -10,6 +10,7 @@ CObjMgr::CObjMgr()
 
 CObjMgr::~CObjMgr()
 {
+	Release();
 }
 
 void CObjMgr::Initialize()

@@ -11,7 +11,10 @@ public:
 	void Render(HDC hDC);
 	void Release();
 
+public:
+	CUI* Get_UI(wstring UIKey);
+
 private:
-	vector<CUI*> m_vecUI;
+	unordered_map<wstring, CUI*> m_umapUI;
 };
 

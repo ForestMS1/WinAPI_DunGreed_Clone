@@ -7,8 +7,9 @@
 #include "CCamera.h"
 #include "CKeyMgr.h"
 #include "CUIMgr.h"
+#include "CMapTileUI.h"
 
-CTileEditScene::CTileEditScene() : m_iDrawIDX(0), m_iDrawIDY(0), m_iOption(0)
+CTileEditScene::CTileEditScene() : m_iDrawIDX(0), m_iDrawIDY(0), m_iOption(1)
 {
 
 }
@@ -20,9 +21,8 @@ CTileEditScene::~CTileEditScene()
 
 void CTileEditScene::Initialize()
 {
-	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/MapTool/MapTile.bmp", L"MapTile");
 	GET(CTileMgr)->Initialize();
-	//GET(CUIMgr)->Initialize();
+	GET(CUIMgr)->Initialize();
 
 	// Camera 지정
 	GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
@@ -35,13 +35,16 @@ void CTileEditScene::Update()
 
 	Key_Input();
 	GET(CTileMgr)->Update();
-	//GET(CUIMgr)->Update();
+	GET(CUIMgr)->Update();
 	GET(CCamera)->Update();
+
+	dynamic_cast<CMapTileUI*>(GET(CUIMgr)->Get_UI(L"MapTileUI"))->Set_TileIdx(m_iDrawIDX, m_iDrawIDY);
 }
 
 void CTileEditScene::Late_Update()
 {
 	GET(CTileMgr)->Late_Update();
+	GET(CUIMgr)->Late_Update();
 }
 
 void CTileEditScene::Render(HDC hDC)
@@ -49,7 +52,7 @@ void CTileEditScene::Render(HDC hDC)
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
 
 	GET(CTileMgr)->Render(hDC);
-	//GET(CUIMgr)->Render(hDC);
+	GET(CUIMgr)->Render(hDC);
 
 #pragma region 마우스커서에_현재_선택된_타일_그리기
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
@@ -83,37 +86,52 @@ void CTileEditScene::Release()
 
 void CTileEditScene::Key_Input()
 {
+#pragma region 마우스_왼오_클릭_칠하기_지우기
 	if (GET(CKeyMgr)->Key_Pressing(VK_LBUTTON))
 	{
 		POINT	pt;
 		GetCursorPos(&pt);
 		ScreenToClient(g_hWnd, &pt);
 
-		//pt.x += GET(CCamera)->Get_ScrollX();
-		//pt.y += GET(CCamera)->Get_ScrollY();
 		pt.x = (int)GET(CCamera)->GetRealPos(pt).fX;
 		pt.y = (int)GET(CCamera)->GetRealPos(pt).fY;
 
 		// TODO : MapTile 이미지 에서 클릭한 타일인덱스를 아래 Picking_Tile에 넘겨주면 됨.....
 		GET(CTileMgr)->Picking_Tile(pt, m_iDrawIDX, m_iDrawIDY, m_iOption);
 	}
-	if (GET(CKeyMgr)->Key_Pressing('W'))
+	if (GET(CKeyMgr)->Key_Pressing(VK_RBUTTON))
+	{
+		POINT	pt;
+		GetCursorPos(&pt);
+		ScreenToClient(g_hWnd, &pt);
+
+		pt.x = (int)GET(CCamera)->GetRealPos(pt).fX;
+		pt.y = (int)GET(CCamera)->GetRealPos(pt).fY;
+
+		// TODO : MapTile 이미지 에서 클릭한 타일인덱스를 아래 Picking_Tile에 넘겨주면 됨.....
+		GET(CTileMgr)->Picking_Tile(pt, m_iDrawIDX, m_iDrawIDY, 0);
+	}
+#pragma endregion
+
+#pragma region 키입력_카메라이동
+	if (GET(CKeyMgr)->Key_Pressing(VK_UP))
 	{
 		GET(CCamera)->Set_ScrollY(-5.f);
 	}
-	if (GET(CKeyMgr)->Key_Pressing('A'))
+	if (GET(CKeyMgr)->Key_Pressing(VK_LEFT))
 	{
 		GET(CCamera)->Set_ScrollX(-5.f);
 	}
-	if (GET(CKeyMgr)->Key_Pressing('S'))
+	if (GET(CKeyMgr)->Key_Pressing(VK_DOWN))
 	{
 		GET(CCamera)->Set_ScrollY(5.f);
 	}
-	if (GET(CKeyMgr)->Key_Pressing('D'))
+	if (GET(CKeyMgr)->Key_Pressing(VK_RIGHT))
 	{
 		GET(CCamera)->Set_ScrollX(5.f);
 	}
-
+#pragma endregion
+#pragma region Q_W저장불러오기
 	if (GET(CKeyMgr)->Key_Pressing('Q'))
 	{
 		GET(CTileMgr)->Save_Tile();
@@ -122,33 +140,53 @@ void CTileEditScene::Key_Input()
 	{
 		GET(CTileMgr)->Load_Tile();
 	}
+#pragma endregion
 
-	if (GET(CKeyMgr)->Key_Down('2'))
-	{
-		m_iDrawIDY++;
-		if (m_iDrawIDY > 31 && m_iDrawIDX < 31)
-		{
-			m_iDrawIDY = 0;
-			m_iDrawIDX++;
-		}
-		else if (m_iDrawIDY > 31)
-		{
-			m_iDrawIDY = 31;
-		}
-	}
-
-	if (GET(CKeyMgr)->Key_Down('1'))
+#pragma region 선택타일바꾸기
+	if (GET(CKeyMgr)->Key_Down('W'))
 	{
 		m_iDrawIDY--;
-		if (m_iDrawIDY < 0 && m_iDrawIDX > 0)
-		{
-			m_iDrawIDY = 31;
-			m_iDrawIDX--;
-		}
-		else if (m_iDrawIDY < 0)
+		if (m_iDrawIDY < 0)
 		{
 			m_iDrawIDY = 0;
 		}
 	}
+	if (GET(CKeyMgr)->Key_Down('A'))
+	{
+		m_iDrawIDX--;
+		if (m_iDrawIDX < 0)
+		{
+			m_iDrawIDX = 0;
+		}
+	}
+	if (GET(CKeyMgr)->Key_Down('S'))
+	{
+		//아래거선택
+		m_iDrawIDY++;
+		if (m_iDrawIDY > 31)
+		{
+			m_iDrawIDY = 31;
+		}
+	}
+	if (GET(CKeyMgr)->Key_Down('D'))
+	{
+		m_iDrawIDX++;
+		if (m_iDrawIDX > 31)
+		{
+			m_iDrawIDX = 31;
+		}
+	}
+#pragma endregion
 
+	if (GET(CKeyMgr)->Key_Down(VK_SPACE))
+	{
+		CUI* pUI = GET(CUIMgr)->Get_UI(L"MapTileUI");
+		if (pUI)
+		{
+			if (pUI->IsOpen())
+				pUI->Close();
+			else
+				pUI->Open();
+		}
+	}
 }

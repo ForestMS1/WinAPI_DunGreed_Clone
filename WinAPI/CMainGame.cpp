@@ -40,7 +40,7 @@ void CMainGame::Initialize()
 	GET(CSceneMgr)->CreateScene(L"TileEdit", new CTileEditScene);
 
 	// 최초로 나올 씬
-	GET(CSceneMgr)->ChangeScene(L"TileEdit");
+	GET(CSceneMgr)->ChangeScene(L"Test");
 	
 }
 

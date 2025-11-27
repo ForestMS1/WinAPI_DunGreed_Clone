@@ -3,7 +3,7 @@
 #include "CCamera.h"
 #include "CResourceMgr.h"
 
-CMapTileUI::CMapTileUI()
+CMapTileUI::CMapTileUI() : m_iCurTileX(0), m_iCurTileY(0)
 {
 }
 
@@ -14,9 +14,9 @@ CMapTileUI::~CMapTileUI()
 void CMapTileUI::Initialize()
 {
 	m_tInfo.fX = WINCX - 150.f;
-	m_tInfo.fY = WINCY >> 1;
+	m_tInfo.fY = 200.f;
 	m_tInfo.fCX = 300.f;
-	m_tInfo.fCY = WINCY;
+	m_tInfo.fCY = 400.f;
 }
 
 void CMapTileUI::Update()
@@ -25,15 +25,25 @@ void CMapTileUI::Update()
 
 	Vec2 pos = Vec2(m_tInfo.fX, m_tInfo.fY);
 
-	//m_tInfo.fX = GET(CCamera)->GetRenderPos(Vec2(pos.fX, pos.fY)).fX;
-	//m_tInfo.fY = GET(CCamera)->GetRenderPos(Vec2(pos.fX, pos.fY)).fY;
-
 	__super::Update_Rect();
+	
 	return ;
 }
 
 void CMapTileUI::Late_Update()
 {
+	//float xRatio = m_tInfo.fCX / WINCX;
+	//float yRatio = m_tInfo.fCY / WINCY;
+
+	//m_CurTileInfo.fCX = TILECX * xRatio;
+	//m_CurTileInfo.fCY = TILECY * yRatio;
+	//m_CurTileInfo.fX = m_tInfo.fX + m_CurTileInfo.fCX * 0.5f + m_iCurTileX * m_CurTileInfo.fCX;
+	//m_CurTileInfo.fY = m_tInfo.fY + m_CurTileInfo.fCY * 0.5f + m_iCurTileY * m_CurTileInfo.fCY;
+
+	//m_CurTileRect.left = m_tRect.left - m_CurTileInfo.fCX * 0.5f;
+	//m_CurTileRect.top = m_tRect.top - m_CurTileInfo.fCY * 0.5f;
+	//m_CurTileRect.right = m_tRect.left + m_CurTileInfo.fCX * 0.5f;
+	//m_CurTileRect.top = m_tRect.top + m_CurTileInfo.fCY * 0.5f;
 }
 
 void CMapTileUI::Render(HDC hDC)
@@ -60,6 +70,7 @@ void CMapTileUI::Render(HDC hDC)
 		frameHeight,												// 원본이미지 세로
 		RGB(255, 0, 255)
 	);
+	//Rectangle(hDC, m_CurTileRect.left, m_CurTileRect.top, m_CurTileRect.right, m_CurTileRect.bottom);
 }
 
 void CMapTileUI::Release()

@@ -31,6 +31,8 @@ void CTile::Late_Update()
 
 void CTile::Render(HDC hDC)
 {
+	if (m_iOption == 0) return;
+
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
 
 	int frameWidth = BMPTILECX;

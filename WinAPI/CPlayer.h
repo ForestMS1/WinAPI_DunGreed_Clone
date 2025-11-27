@@ -21,5 +21,12 @@ private:
 private:
 	STATE				m_ePreState;
 	STATE				m_eCurState;
+
+	//점프 속력
+	float				m_v0;
+	float				m_ft;
+	float				m_fAcct;
+	bool				m_bJump;
+	
 };
 

@@ -5,7 +5,7 @@
 #include "CCamera.h"
 #include "CCollisionMgr.h"
 #include "CTileMgr.h"
-CPlayer::CPlayer()
+CPlayer::CPlayer() : m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false)
 {
 }
 CPlayer::~CPlayer()
@@ -43,6 +43,20 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
+	if(!m_bJump)
+		m_tInfo.fY += GRAVITY;
+
+	if (m_bJump && m_ft < m_fAcct)
+	{
+		m_ft += 0.05;
+		m_tInfo.fY -= m_v0 * m_ft - (GRAVITY * 0.5f) * m_ft * m_ft;
+	}
+	else
+	{
+		m_ft = 0.f;
+		m_bJump = false;
+	}
+
 	Key_Input();
 
 	Update_Rect();
@@ -125,6 +139,13 @@ void CPlayer::Key_Input()
 	else
 	{
 		m_eCurState = IDLE;
+	}
+
+	if (GET(CKeyMgr)->Key_Pressing(VK_SPACE))
+	{
+		m_v0 = 10.f;
+		m_bJump = true;
+		m_eCurState = JUMP;
 	}
 }
 

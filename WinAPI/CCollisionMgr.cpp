@@ -79,12 +79,12 @@ void CCollisionMgr::Collision_RectTile(CObj* pPlayer, vector<CObj*>& _Src)
 				// 상 충돌
 				if (pPlayer->Get_Info()->fY < Src->Get_Info()->fY)
 				{
-					pPlayer->Set_PosY(-fHeight);
+					pPlayer->Set_PosY(-fHeight-GRAVITY);
 				}
 				// 하 충돌
 				else
 				{
-					pPlayer->Set_PosY(fHeight);
+					pPlayer->Set_PosY(fHeight+GRAVITY);
 				}
 			}
 

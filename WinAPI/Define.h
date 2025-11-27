@@ -10,6 +10,7 @@
 #define PURE = 0
 
 #define PI 3.14592f
+#define GRAVITY 9.8f
 
 #define TILECX 32		// 실제 게임의 타일 사이즈
 #define TILECY 32

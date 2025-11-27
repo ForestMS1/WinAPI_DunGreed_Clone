@@ -8,6 +8,7 @@
 #include "CKeyMgr.h"
 #include "CUIMgr.h"
 #include "CMapTileUI.h"
+#include "CTileBtn.h"
 
 CTileEditScene::CTileEditScene() : m_iDrawIDX(0), m_iDrawIDY(0), m_iOption(1)
 {

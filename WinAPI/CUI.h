@@ -1,6 +1,6 @@
 #pragma once
 #include "Define.h"
-class CUI
+class CUI abstract
 {
 public:
 	CUI();
@@ -23,6 +23,16 @@ public:
 	bool IsOpen() const { return m_bIsOpen; }
 	void Open() { m_bIsOpen = true; }
 	void Close() { m_bIsOpen = false; }
+	void SetParentUI(CUI* pParentUI) { m_pParentUI = pParentUI; }
+	CUI* GetParentUI() const { return m_pParentUI; }
+	void AddChildUI(CUI* pChildUI) 
+	{
+		if (pChildUI) 
+		{
+			m_vecChildUI.push_back(pChildUI);
+			pChildUI->SetParentUI(this);
+		}
+	}
 
 	void Update_Rect();
 	void Move_Frame();
@@ -41,5 +51,9 @@ protected:
 
 	// UI 활성화 여부
 	bool m_bIsOpen;
+
+	// 부모, 자식 UI
+	CUI*		m_pParentUI;
+	vector<CUI*>	m_vecChildUI;
 };
 

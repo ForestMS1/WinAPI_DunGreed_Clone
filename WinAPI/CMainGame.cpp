@@ -13,6 +13,7 @@
 #include "CTimeMgr.h"
 #include "CTileEditScene.h"
 #include "CTileMgr.h"
+#include "CUIMgr.h"
 
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
@@ -89,6 +90,7 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
+	CUIMgr::Destroy_Instance();
 	CTileMgr::Destroy_Instance();
 	CCamera::Destroy_Instance();
 	CKeyMgr::Destroy_Instance();

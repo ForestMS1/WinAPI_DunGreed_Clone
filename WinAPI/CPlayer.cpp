@@ -3,6 +3,8 @@
 #include "CResourceMgr.h"
 #include "CKeyMgr.h"
 #include "CCamera.h"
+#include "CCollisionMgr.h"
+#include "CTileMgr.h"
 CPlayer::CPlayer()
 {
 }
@@ -17,7 +19,7 @@ void CPlayer::Initialize()
 
 	m_tInfo.fX = 400.f;
 	m_tInfo.fY = 400.f;
-	m_tInfo.fCX = 78.f;
+	m_tInfo.fCX = 45.f;
 	m_tInfo.fCY = 60.f;
 
 	m_tFrame.iStart = 0;
@@ -53,6 +55,7 @@ int CPlayer::Update()
 void CPlayer::Late_Update()
 {
 	Motion_Change();
+	CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
 }
 
 void CPlayer::Render(HDC hDC)
@@ -65,13 +68,17 @@ void CPlayer::Render(HDC hDC)
 	int SrcX = frameWidth * m_tFrame.iStart;
 	int SrcY = frameHeight * m_tFrame.iMotion;
 
-
+	Rectangle(hDC,
+		m_tRect.left - GET(CCamera)->Get_ScrollX(),
+		m_tRect.top - GET(CCamera)->Get_ScrollY(),
+		m_tRect.right - GET(CCamera)->Get_ScrollX(),
+		m_tRect.bottom - GET(CCamera)->Get_ScrollY());
 	GdiTransparentBlt(
 		hDC,
-		(int)(m_tInfo.fX - GET(CCamera)->GetDiff().fX),				// 복사 받을 공간의 LEFT	
-		(int)(m_tInfo.fY - GET(CCamera)->GetDiff().fY),				// 복사 받을 공간의 TOP
-		m_tInfo.fCX,												// 복사 받을 공간의 가로 
-		m_tInfo.fCY,												// 복사 받을 공간의 세로 
+		(int)(m_tRect.left - GET(CCamera)->GetDiff().fX - 15),				// 복사 받을 공간의 LEFT	
+		(int)(m_tRect.top - GET(CCamera)->GetDiff().fY),				// 복사 받을 공간의 TOP
+		frameWidth,												// 복사 받을 공간의 가로 
+		frameHeight,												// 복사 받을 공간의 세로 
 		hMemDC,														// 복사 할 DC
 		SrcX,															// 원본이미지 left
 		SrcY,															// 원본이미지 top
@@ -79,7 +86,6 @@ void CPlayer::Render(HDC hDC)
 		frameHeight,														// 원본이미지 세로
 		RGB(255, 0, 255)
 	);
-
 }
 
 void CPlayer::Release()

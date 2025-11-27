@@ -16,9 +16,11 @@ public:
 public:
 	INFO* Get_Info() 													{ return &m_tInfo; }
 	void Set_Info(float _fX, float _fY, float _fCX, float _fCY)			{ m_tInfo.fX = _fX; m_tInfo.fY = _fY; m_tInfo.fCX = _fCX; m_tInfo.fCY = _fCY;}
-	RECT Get_Rect() const												{ return m_tRect; }
+	RECT* Get_Rect() 													{ return &m_tRect; }
 	Vec2 Get_Pos() const												{ return Vec2(m_tInfo.fX, m_tInfo.fY); }
 	void Set_Pos(float _fX, float _fY)									{ m_tInfo.fX = _fX; m_tInfo.fY = _fY; }
+	void Set_PosY(float _fY)											{ m_tInfo.fY += _fY; }
+	void Set_PosX(float _fX)											{ m_tInfo.fX += _fX; }
 	void Set_Scale(float _fCX, float _fCY)								{ m_tInfo.fCX = _fCX;  m_tInfo.fCY = _fCY; }
 	bool IsDead() const													{ return m_bIsDead; }
 	void SetDead()														{ m_bIsDead = true; }

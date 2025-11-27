@@ -49,9 +49,6 @@
     <Filter Include="Design\AbstractFactory">
       <UniqueIdentifier>{7fc3c014-d93a-406d-9dd3-432ad6b22973}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\EditScene">
-      <UniqueIdentifier>{adab74ca-4312-4dfd-bd8c-918ad53b6cc8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager\LineMgr">
       <UniqueIdentifier>{36bcde49-22fe-454b-8aa9-b3e255d4b1be}</UniqueIdentifier>
     </Filter>
@@ -81,6 +78,15 @@
     </Filter>
     <Filter Include="Manager\UIMgr\UI\MapTileUI">
       <UniqueIdentifier>{705d343b-8e2d-4642-90e4-988acc808af0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\TestScene">
+      <UniqueIdentifier>{adab74ca-4312-4dfd-bd8c-918ad53b6cc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\UIMgr\UI\MapTileUI\TileBtn">
+      <UniqueIdentifier>{7556dba7-af67-42df-a3a6-19ad6f6ab127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\CollisionMgr">
+      <UniqueIdentifier>{714d3927-5f63-4f92-8808-13515844d917}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,9 +141,6 @@
     <ClInclude Include="CMyPng.h">
       <Filter>Manager\ResourceMgr</Filter>
     </ClInclude>
-    <ClInclude Include="CEdit.h">
-      <Filter>Scene\EditScene</Filter>
-    </ClInclude>
     <ClInclude Include="CLine.h">
       <Filter>Manager\LineMgr\Line</Filter>
     </ClInclude>
@@ -170,6 +173,15 @@
     </ClInclude>
     <ClInclude Include="CMapTileUI.h">
       <Filter>Manager\UIMgr\UI\MapTileUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CTest.h">
+      <Filter>Scene\TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CTileBtn.h">
+      <Filter>Manager\UIMgr\UI\MapTileUI\TileBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionMgr.h">
+      <Filter>Manager\CollisionMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +224,6 @@
     <ClCompile Include="CMyPng.cpp">
       <Filter>Manager\ResourceMgr</Filter>
     </ClCompile>
-    <ClCompile Include="CEdit.cpp">
-      <Filter>Scene\EditScene</Filter>
-    </ClCompile>
     <ClCompile Include="CLine.cpp">
       <Filter>Manager\LineMgr\Line</Filter>
     </ClCompile>
@@ -247,6 +256,15 @@
     </ClCompile>
     <ClCompile Include="CMapTileUI.cpp">
       <Filter>Manager\UIMgr\UI\MapTileUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CTest.cpp">
+      <Filter>Scene\TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CTileBtn.cpp">
+      <Filter>Manager\UIMgr\UI\MapTileUI\TileBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp">
+      <Filter>Manager\CollisionMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

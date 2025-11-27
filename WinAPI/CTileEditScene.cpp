@@ -80,4 +80,13 @@ void CTileEditScene::Key_Input()
 	{
 		GET(CCamera)->Set_ScrollX(5.f);
 	}
+
+	if (GET(CKeyMgr)->Key_Pressing('Q'))
+	{
+		GET(CTileMgr)->Save_Tile();
+	}
+	if (GET(CKeyMgr)->Key_Pressing('R'))
+	{
+		GET(CTileMgr)->Load_Tile();
+	}
 }

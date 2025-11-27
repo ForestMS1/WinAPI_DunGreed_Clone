@@ -67,6 +67,12 @@ typedef struct tagFrame
 
 }FRAME;
 
+typedef struct tagTileInfo
+{
+	int iDrawIDX;
+	int iDrawIDY;
+}TILEINFO;
+
 typedef struct Vec2
 {
 	float fX;

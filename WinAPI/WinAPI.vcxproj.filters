@@ -61,17 +61,17 @@
     <Filter Include="Manager\TimeMgr">
       <UniqueIdentifier>{179bbc79-c16c-49aa-a782-b011cddd0e31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\TIleMgr">
-      <UniqueIdentifier>{988a151b-578d-4432-a0f3-a512d9ee1d8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\TIleMgr\Tile">
-      <UniqueIdentifier>{aa6993e7-2f45-48a2-b705-fbba0ad85ebd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager\LineMgr\Line">
       <UniqueIdentifier>{477119e1-7116-4fb0-a74b-36259916de79}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scene\TileEditScene">
       <UniqueIdentifier>{806b84fd-f215-4c98-b7bb-7290ba05c888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\TileMgr">
+      <UniqueIdentifier>{988a151b-578d-4432-a0f3-a512d9ee1d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\TileMgr\Tile">
+      <UniqueIdentifier>{aa6993e7-2f45-48a2-b705-fbba0ad85ebd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -145,10 +145,10 @@
       <Filter>Manager\TimeMgr</Filter>
     </ClInclude>
     <ClInclude Include="CTile.h">
-      <Filter>Manager\TIleMgr\Tile</Filter>
+      <Filter>Manager\TileMgr\Tile</Filter>
     </ClInclude>
     <ClInclude Include="CTileMgr.h">
-      <Filter>Manager\TIleMgr</Filter>
+      <Filter>Manager\TileMgr</Filter>
     </ClInclude>
     <ClInclude Include="CTileEditScene.h">
       <Filter>Scene\TileEditScene</Filter>
@@ -213,10 +213,10 @@
       <Filter>Manager\TimeMgr</Filter>
     </ClCompile>
     <ClCompile Include="CTile.cpp">
-      <Filter>Manager\TIleMgr\Tile</Filter>
+      <Filter>Manager\TileMgr\Tile</Filter>
     </ClCompile>
     <ClCompile Include="CTileMgr.cpp">
-      <Filter>Manager\TIleMgr</Filter>
+      <Filter>Manager\TileMgr</Filter>
     </ClCompile>
     <ClCompile Include="CTileEditScene.cpp">
       <Filter>Scene\TileEditScene</Filter>

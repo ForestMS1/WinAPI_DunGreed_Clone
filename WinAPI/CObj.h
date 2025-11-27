@@ -14,7 +14,7 @@ public:
 	virtual void Release()								PURE;
 
 public:
-	INFO Get_Info() const												{ return m_tInfo; }
+	INFO* Get_Info() 													{ return &m_tInfo; }
 	void Set_Info(float _fX, float _fY, float _fCX, float _fCY)			{ m_tInfo.fX = _fX; m_tInfo.fY = _fY; m_tInfo.fCX = _fCX; m_tInfo.fCY = _fCY;}
 	RECT Get_Rect() const												{ return m_tRect; }
 	Vec2 Get_Pos() const												{ return Vec2(m_tInfo.fX, m_tInfo.fY); }

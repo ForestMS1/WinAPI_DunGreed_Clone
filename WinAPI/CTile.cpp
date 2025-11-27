@@ -3,8 +3,9 @@
 #include "CResourceMgr.h"
 #include "CCamera.h"
 
-CTile::CTile() : m_iDrawIDX(0), m_iDrawIDY(0), m_iOption(0)
+CTile::CTile() : m_iOption(0)
 {
+	ZeroMemory(&m_tTileInfo, sizeof(TILEINFO));
 }
 
 CTile::~CTile()
@@ -35,8 +36,8 @@ void CTile::Render(HDC hDC)
 	int frameWidth = BMPTILECX;
 	int frameHeight = BMPTILECX;
 
-	int SrcX = frameWidth * m_iDrawIDX;
-	int SrcY = frameHeight * m_iDrawIDY;
+	int SrcX = frameWidth * m_tTileInfo.iDrawIDX;
+	int SrcY = frameHeight * m_tTileInfo.iDrawIDY;
 
 
 	GdiTransparentBlt(

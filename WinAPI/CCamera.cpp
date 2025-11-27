@@ -67,5 +67,28 @@ void CCamera::CalDiff()
 	Vec2 vCenter = Vec2(WINCX >> 1, WINCY >> 1);
 
 	m_vDiff = m_vCurLookAt - vCenter;
+
+	//Scroll Lock
+	if (m_vDiff.fX < 0)
+	{
+		m_vDiff.fX = 0;
+		m_vLookAt.fX = vCenter.fX;
+	}
+	if (m_vDiff.fY < 0)
+	{
+		m_vDiff.fY = 0;
+		m_vLookAt.fY = vCenter.fY;
+	}
+	if (1920 - WINCX < m_vDiff.fX)
+	{
+		m_vDiff.fX = 1920 - WINCX;
+		m_vLookAt.fX = 1920 - (WINCX >> 1);
+	}
+	if (1280 - WINCY < m_vDiff.fY)
+	{
+		m_vDiff.fY = 1280 - WINCY;
+		m_vLookAt.fY = 1280 - (WINCY >> 1);
+	}
+
 	m_vPrevLookAt = m_vCurLookAt;
 }

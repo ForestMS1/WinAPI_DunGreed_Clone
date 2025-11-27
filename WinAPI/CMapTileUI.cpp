@@ -13,10 +13,10 @@ CMapTileUI::~CMapTileUI()
 
 void CMapTileUI::Initialize()
 {
-	m_tInfo.fX = WINCX - 300.f;
-	m_tInfo.fY = WINCY - 400.f;
+	m_tInfo.fX = WINCX - 150.f;
+	m_tInfo.fY = WINCY >> 1;
 	m_tInfo.fCX = 300.f;
-	m_tInfo.fCY = 400.f;
+	m_tInfo.fCY = WINCY;
 }
 
 void CMapTileUI::Update()
@@ -49,8 +49,8 @@ void CMapTileUI::Render(HDC hDC)
 
 	GdiTransparentBlt(
 		hDC,
-		(int)(m_tRect.left - GET(CCamera)->GetDiff().fX),				// 복사 받을 공간의 LEFT	
-		(int)(m_tRect.top - GET(CCamera)->GetDiff().fY),				// 복사 받을 공간의 TOP
+		(int)(m_tRect.left),				// 복사 받을 공간의 LEFT	
+		(int)(m_tRect.top),				// 복사 받을 공간의 TOP
 		m_tInfo.fCX,												// 복사 받을 공간의 가로 
 		m_tInfo.fCY,												// 복사 받을 공간의 세로 
 		hMemDC,														// 복사 할 DC

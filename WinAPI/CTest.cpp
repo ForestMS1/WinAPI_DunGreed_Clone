@@ -36,31 +36,21 @@ void CTest::Update()
 	GetCursorPos(&m_ptMouse);
 	ScreenToClient(g_hWnd, &m_ptMouse);
 
+	Vec2 pos = GET(CCamera)->GetRealPos(m_ptMouse);
 
-	//m_ptMouse.x = (int)GET(CCamera)->GetRealPos(m_ptMouse).fX;
-	//m_ptMouse.y = (int)GET(CCamera)->GetRealPos(m_ptMouse).fY;
-
-	// 키 매니저
-	//if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
-	if(GET(CKeyMgr)->Key_Down(VK_LBUTTON))
+	if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
-		//m_ptLeft.x = m_ptMouse.x;
-		//m_ptLeft.y = m_ptMouse.y;
-		//m_bIsDrawing = true;
-		Vec2 vLookAt = GET(CCamera)->GetRealPos(m_ptMouse);
-		GET(CCamera)->SetLookAt(vLookAt);
+		m_bIsDrawing = true;
+		m_ptLeft.x = (int)pos.fX;
+		m_ptLeft.y = (int)pos.fY;
 	}
-	else if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
+	else if (GET(CKeyMgr)->Key_Down(VK_RBUTTON))
 	{
-		//m_ptRight.x = m_ptMouse.x;
-		//m_ptRight.y = m_ptMouse.y;
-		//CLineMgr::Get_Instance()->Add_Line(new CLine(m_ptLeft, m_ptRight));
-		//m_ptLeft.x = m_ptMouse.x;
-		//m_ptLeft.y = m_ptMouse.y;
-		//m_bIsDrawing = false;
+		m_bIsDrawing = false;
+		m_ptRight.x = (int)pos.fX;
+		m_ptRight.y = (int)pos.fY;
+		GET(CLineMgr)->Add_Line(new CLine(m_ptLeft, m_ptRight));
 	}
-
-
 
 
 	GET(CObjMgr)->Update();
@@ -95,10 +85,9 @@ void CTest::Render(HDC hDC)
 
 	if (m_bIsDrawing)
 	{
-		MoveToEx(hDC, m_ptLeft.x - (int)GET(CCamera)->GetDiff().fX, m_ptLeft.y - (int)GET(CCamera)->GetDiff().fY, nullptr);
-		LineTo(hDC, m_ptMouse.x - (int)GET(CCamera)->GetDiff().fX, m_ptMouse.y - (int)GET(CCamera)->GetDiff().fY);
-		//MoveToEx(hDC, (int)vMouseRenderPos.fX, (int)vMouseRenderPos.fY, nullptr);
-		//LineTo(hDC, (int)vMouseRenderPos.fX, (int)vMouseRenderPos.fY);
+		Vec2 st = GET(CCamera)->GetRenderPos(Vec2(m_ptLeft.x, m_ptLeft.y));
+		MoveToEx(hDC, (int)st.fX, (int)st.fY, nullptr);
+		LineTo(hDC, m_ptMouse.x, m_ptMouse.y);
 	}
 
 

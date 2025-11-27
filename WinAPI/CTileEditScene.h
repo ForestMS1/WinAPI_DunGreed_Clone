@@ -16,5 +16,11 @@ public:
 private:
 	void Key_Input();
 
+private:
+	int m_iDrawIDX;
+	int m_iDrawIDY;
+	int m_iOption;
+
+	POINT m_ptMouse;
 };
 

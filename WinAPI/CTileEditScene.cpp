@@ -8,7 +8,7 @@
 #include "CKeyMgr.h"
 #include "CUIMgr.h"
 
-CTileEditScene::CTileEditScene()
+CTileEditScene::CTileEditScene() : m_iDrawIDX(0), m_iDrawIDY(0), m_iOption(0)
 {
 
 }
@@ -22,7 +22,7 @@ void CTileEditScene::Initialize()
 {
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/MapTool/MapTile.bmp", L"MapTile");
 	GET(CTileMgr)->Initialize();
-	GET(CUIMgr)->Initialize();
+	//GET(CUIMgr)->Initialize();
 
 	// Camera 지정
 	GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
@@ -30,10 +30,12 @@ void CTileEditScene::Initialize()
 
 void CTileEditScene::Update()
 {
-	Key_Input();
+	GetCursorPos(&m_ptMouse);
+	ScreenToClient(g_hWnd, &m_ptMouse);
 
+	Key_Input();
 	GET(CTileMgr)->Update();
-	GET(CUIMgr)->Update();
+	//GET(CUIMgr)->Update();
 	GET(CCamera)->Update();
 }
 
@@ -45,9 +47,34 @@ void CTileEditScene::Late_Update()
 void CTileEditScene::Render(HDC hDC)
 {
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
-	
+
 	GET(CTileMgr)->Render(hDC);
-	GET(CUIMgr)->Render(hDC);
+	//GET(CUIMgr)->Render(hDC);
+
+#pragma region 마우스커서에_현재_선택된_타일_그리기
+	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
+
+	int frameWidth = BMPTILECX;
+	int frameHeight = BMPTILECX;
+
+	int SrcX = frameWidth * m_iDrawIDX;
+	int SrcY = frameHeight * m_iDrawIDY;
+
+
+	GdiTransparentBlt(
+		hDC,
+		m_ptMouse.x - TILECX/2,				// 복사 받을 공간의 LEFT	
+		m_ptMouse.y - TILECX/2,				// 복사 받을 공간의 TOP
+		TILECX,												// 복사 받을 공간의 가로 
+		TILECY,												// 복사 받을 공간의 세로 
+		hMemDC,														// 복사 할 DC
+		SrcX,														// 원본이미지 left
+		SrcY,														// 원본이미지 top
+		frameWidth,													// 원본이미지 가로
+		frameHeight,												// 원본이미지 세로
+		RGB(255, 0, 255)
+	);
+#pragma endregion
 }
 
 void CTileEditScene::Release()
@@ -68,7 +95,7 @@ void CTileEditScene::Key_Input()
 		pt.y = (int)GET(CCamera)->GetRealPos(pt).fY;
 
 		// TODO : MapTile 이미지 에서 클릭한 타일인덱스를 아래 Picking_Tile에 넘겨주면 됨.....
-		GET(CTileMgr)->Picking_Tile(pt, 1, 0, 0);
+		GET(CTileMgr)->Picking_Tile(pt, m_iDrawIDX, m_iDrawIDY, m_iOption);
 	}
 	if (GET(CKeyMgr)->Key_Pressing('W'))
 	{
@@ -95,4 +122,33 @@ void CTileEditScene::Key_Input()
 	{
 		GET(CTileMgr)->Load_Tile();
 	}
+
+	if (GET(CKeyMgr)->Key_Down('2'))
+	{
+		m_iDrawIDY++;
+		if (m_iDrawIDY > 31 && m_iDrawIDX < 31)
+		{
+			m_iDrawIDY = 0;
+			m_iDrawIDX++;
+		}
+		else if (m_iDrawIDY > 31)
+		{
+			m_iDrawIDY = 31;
+		}
+	}
+
+	if (GET(CKeyMgr)->Key_Down('1'))
+	{
+		m_iDrawIDY--;
+		if (m_iDrawIDY < 0 && m_iDrawIDX > 0)
+		{
+			m_iDrawIDY = 31;
+			m_iDrawIDX--;
+		}
+		else if (m_iDrawIDY < 0)
+		{
+			m_iDrawIDY = 0;
+		}
+	}
+
 }

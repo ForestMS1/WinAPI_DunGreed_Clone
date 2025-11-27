@@ -41,6 +41,10 @@ public:
 		rRect.bottom = rp.fY + tInfo.fCY / 2;
 		return rRect;
 	}
+	float Get_ScrollX() const { return m_vDiff.fX; }
+	float Get_ScrollY() const { return m_vDiff.fY; }
+	void Set_ScrollX(float fX) { m_vLookAt.fX += fX; }
+	void Set_ScrollY(float fY) { m_vLookAt.fY += fY; }
 
 	Vec2 GetDiff() const { return m_vDiff; }
 

@@ -14,6 +14,7 @@
 #include <map>
 #include <algorithm>
 #include <string>
+#include <vector>
 #include <objidl.h>   // IStream 정의
 #include <gdiplus.h>
 

@@ -11,6 +11,8 @@
 #include "CKeyMgr.h"
 #include "CCamera.h"
 #include "CTimeMgr.h"
+#include "CTileEditScene.h"
+#include "CTileMgr.h"
 
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
@@ -35,10 +37,10 @@ void CMainGame::Initialize()
 	//¾À µî·Ï
 	GET(CSceneMgr)->CreateScene(L"Logo", new CLogo);
 	GET(CSceneMgr)->CreateScene(L"Edit", new CEdit);
-
+	GET(CSceneMgr)->CreateScene(L"TileEdit", new CTileEditScene);
 
 	// ÃÖÃÊ·Î ³ª¿Ã ¾À
-	GET(CSceneMgr)->ChangeScene(L"Edit");
+	GET(CSceneMgr)->ChangeScene(L"TileEdit");
 	
 }
 
@@ -87,6 +89,7 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
+	CTileMgr::Destroy_Instance();
 	CCamera::Destroy_Instance();
 	CKeyMgr::Destroy_Instance();
 	CLineMgr::Destroy_Instance();

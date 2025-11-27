@@ -21,6 +21,7 @@ CEdit::~CEdit()
 void CEdit::Initialize()
 {
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Town/Cloud.bmp", L"Cloud");
+	//CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/")
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(100.f, 100.f));
 	CObjMgr::Get_Instance()->Initialize();
 	CLineMgr::Get_Instance()->Initialize();

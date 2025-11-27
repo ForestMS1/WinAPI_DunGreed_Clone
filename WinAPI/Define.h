@@ -1,12 +1,22 @@
 #pragma once
-#define WINCX 1280
-#define WINCY 720
+#define WINCX 800
+#define WINCY 640
 //1920 //1080
 //1280 //720
+//720  //480
+//800  //600
+//800  //640
 
 #define PURE = 0
 
 #define PI 3.14592f
+
+#define TILECX 32		// 실제 게임의 타일 사이즈
+#define TILECY 32
+#define BMPTILECX 16	// BMP 사진 파일의 타일 사이즈
+#define BMPTILECY 16 
+#define TILEX 300
+#define TILEY 300
 
 #define	OBJ_NOEVENT 0
 #define	OBJ_DEAD    1

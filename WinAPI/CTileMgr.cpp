@@ -64,7 +64,6 @@ void CTileMgr::Render(HDC hDC)
 
 			if (0 > iIndex || (size_t)iIndex >= m_vecTile.size())
 				continue;
-
 			m_vecTile[iIndex]->Render(hDC);
 		}
 	}
@@ -180,6 +179,7 @@ void CTileMgr::Load_Tile()
 		dynamic_cast<CTile*>(pTile)->Set_Option(iOption);
 
 		m_vecTile.push_back(pTile);
+		pTile->Initialize();
 	}
 
 	CloseHandle(hFile);

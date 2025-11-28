@@ -54,7 +54,7 @@ void CTest::Update()
 	//	GET(CLineMgr)->Add_Line(new CLine(m_ptLeft, m_ptRight));
 	//}
 
-
+	Key_Input();
 	GET(CObjMgr)->Update();
 	GET(CLineMgr)->Update();
 	GET(CCamera)->Update();
@@ -102,4 +102,12 @@ void CTest::Render(HDC hDC)
 
 void CTest::Release()
 {
+}
+
+void CTest::Key_Input()
+{
+	if (GET(CKeyMgr)->Key_Down(VK_TAB))
+	{
+		g_bDebugMod = !g_bDebugMod;
+	}
 }

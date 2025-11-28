@@ -5,6 +5,7 @@
 #include "CCamera.h"
 #include "CCollisionMgr.h"
 #include "CTileMgr.h"
+#include "CLineMgr.h"
 CPlayer::CPlayer() : m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false)
 {
 }
@@ -60,7 +61,8 @@ void CPlayer::Late_Update()
 	Motion_Change();
 
 	CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
-
+	float fOnLine(0.f), fDist(0.f);
+	GET(CLineMgr)->Collision_Line(this, &fOnLine);
 }
 
 void CPlayer::Render(HDC hDC)

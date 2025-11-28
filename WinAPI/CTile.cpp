@@ -2,6 +2,7 @@
 #include "CTile.h"
 #include "CResourceMgr.h"
 #include "CCamera.h"
+#include "CLineMgr.h"
 
 CTile::CTile() : m_iOption(ERASE)
 {
@@ -17,6 +18,45 @@ void CTile::Initialize()
 {
 	m_tInfo.fCX = TILECX;
 	m_tInfo.fCY = TILECY;
+	__super::Update_Rect();
+	POINT ptLeft, ptRight;
+	ptLeft.x = m_tRect.left;
+	ptRight.x = m_tRect.right;
+	switch (m_iOption)
+	{
+	case BLOCKED_UPHILL:
+		ptLeft.y = m_tRect.bottom;
+		ptRight.y = m_tRect.top;
+		m_pLine = new CLine(ptLeft, ptRight);
+		GET(CLineMgr)->Add_Line(dynamic_cast<CLine*>(m_pLine));
+		break;
+	case BLOCKED_DOWNHILL:
+		ptLeft.y = m_tRect.top;
+		ptRight.y = m_tRect.bottom;
+		m_pLine = new CLine(ptLeft, ptRight);
+		GET(CLineMgr)->Add_Line(dynamic_cast<CLine*>(m_pLine));
+		break;
+	case SPACIOUS:
+		ptLeft.y = m_tRect.top;
+		ptRight.y = m_tRect.top;
+		m_pLine = new CLine(ptLeft, ptRight);
+		GET(CLineMgr)->Add_Line(dynamic_cast<CLine*>(m_pLine));
+		break;
+	case SPACIOUS_UPHILL:
+		ptLeft.y = m_tRect.bottom;
+		ptRight.y = m_tRect.top;
+		m_pLine = new CLine(ptLeft, ptRight);
+		GET(CLineMgr)->Add_Line(dynamic_cast<CLine*>(m_pLine));
+		break;
+	case SPACIOUS_DOWNHILL:
+		ptLeft.y = m_tRect.top;
+		ptRight.y = m_tRect.bottom;
+		m_pLine = new CLine(ptLeft, ptRight);
+		GET(CLineMgr)->Add_Line(dynamic_cast<CLine*>(m_pLine));
+		break;
+	default:
+		break;
+	}
 }
 
 int CTile::Update()
@@ -58,7 +98,7 @@ void CTile::Render(HDC hDC)
 	}
 
 
-	if (g_bDebugMod)
+	if (g_bDebugMod && m_iOption != BACKGROUND)
 	{
 		hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOption");
 
@@ -69,7 +109,7 @@ void CTile::Render(HDC hDC)
 			TILECX,												// 복사 받을 공간의 가로 
 			TILECY,												// 복사 받을 공간의 세로 
 			hMemDC,														// 복사 할 DC
-			m_iOption * TILECX / 2,														// 원본이미지 left
+			m_iOption * BMPTILECX,														// 원본이미지 left
 			0,														// 원본이미지 top
 			16,													// 원본이미지 가로
 			16,												// 원본이미지 세로
@@ -82,4 +122,5 @@ void CTile::Render(HDC hDC)
 
 void CTile::Release()
 {
+
 }

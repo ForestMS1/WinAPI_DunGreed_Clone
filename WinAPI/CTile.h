@@ -22,5 +22,6 @@ private:
 	//int m_iDrawIDY;
 	TILEINFO m_tTileInfo;
 	int m_iOption;
+	CObj* m_pLine;
 };
 

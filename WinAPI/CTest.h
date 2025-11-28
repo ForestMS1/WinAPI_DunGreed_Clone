@@ -13,6 +13,8 @@ public:
     void Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
+
+    void Key_Input();
 private:
     POINT       m_ptMouse;
     POINT       m_ptLeft;

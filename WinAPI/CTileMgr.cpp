@@ -18,6 +18,7 @@ CTileMgr::~CTileMgr()
 void CTileMgr::Initialize()
 {
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/MapTool/MapTile.bmp", L"MapTile");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/MapTool/Object.bmp", L"MapTileOption");
 	for (int i = 0; i < TILEY; ++i)
 	{
 		for (int j = 0; j < TILEX; ++j)

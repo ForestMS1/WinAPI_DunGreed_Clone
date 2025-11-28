@@ -13,24 +13,23 @@ CUI::~CUI()
 
 }
 
-
-void CUI::Update_Rect()
+void CUI::Initialize()
 {
-	m_tRect.left = m_tInfo.fX - m_tInfo.fCX / 2;
-	m_tRect.right = m_tInfo.fX + m_tInfo.fCX / 2;
-	m_tRect.top = m_tInfo.fY - m_tInfo.fCY / 2;
-	m_tRect.bottom = m_tInfo.fY + m_tInfo.fCY / 2;
 }
 
-void CUI::Move_Frame()
+int CUI::Update()
 {
-	if (m_tFrame.dwSpeed + m_tFrame.dwTime < GetTickCount())
-	{
-		++m_tFrame.iStart;
-		m_tFrame.dwTime = GetTickCount();
+	return 0;
+}
 
+void CUI::Late_Update()
+{
+}
 
-		if (m_tFrame.iStart > m_tFrame.iEnd)
-			m_tFrame.iStart = 0;
-	}
+void CUI::Render(HDC hDC)
+{
+}
+
+void CUI::Release()
+{
 }

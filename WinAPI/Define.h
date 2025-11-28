@@ -159,3 +159,4 @@ void Safe_Delete(T& p)
 
 
 extern HWND g_hWnd;
+extern bool g_bDebugMod;

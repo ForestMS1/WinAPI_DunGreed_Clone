@@ -138,6 +138,7 @@
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCollisionMgr.h" />
+    <ClInclude Include="CMouse.h" />
     <ClInclude Include="CTest.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CLine.h" />
@@ -161,7 +162,6 @@
     <ClInclude Include="CTileMgr.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="CUI.h" />
-    <ClInclude Include="CUIMgr.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
@@ -173,6 +173,7 @@
     <ClCompile Include="CAbstractFactory.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
+    <ClCompile Include="CMouse.cpp" />
     <ClCompile Include="CTest.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CLine.cpp" />
@@ -196,7 +197,6 @@
     <ClCompile Include="CTileMgr.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="CUI.cpp" />
-    <ClCompile Include="CUIMgr.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

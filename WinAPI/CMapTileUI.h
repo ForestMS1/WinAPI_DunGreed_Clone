@@ -9,7 +9,7 @@ public:
 	// CUI을(를) 통해 상속됨
 	void Initialize() override;
 
-	void Update() override;
+	int Update() override;
 
 	void Late_Update() override;
 
@@ -18,14 +18,10 @@ public:
 	void Release() override;
 
 public:
-	void Set_TileIdx(int iX, int iY) { m_iCurTileX = iX; m_iCurTileY = iY; }
+	
 private:
 	void Key_Input();
 private:
-	INFO m_CurTileInfo;
-	RECT m_CurTileRect;
-	int	 m_iCurTileX;
-	int	 m_iCurTileY;
 
 	int  m_iScrollX;
 };

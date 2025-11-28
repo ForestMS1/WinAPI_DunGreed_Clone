@@ -125,6 +125,22 @@ bool CCollisionMgr::Check_Rect(CObj* pDst, CObj* pSrc, float* pX, float* pY)
 	return false;
 }
 
+bool CCollisionMgr::Check_Ground(CObj* pDst, vector<CObj*>& vecSrc)
+{
+	float fHeight(0.f), fRadiusY(0.f);
+	for (auto& pTile : vecSrc)
+	{
+		fHeight = fabsf(pDst->Get_Info()->fY - pTile->Get_Info()->fY);
+		fRadiusY = (pDst->Get_Info()->fCY + pTile->Get_Info()->fCY) * 0.5f;
+		if (fRadiusY >= fHeight)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool CCollisionMgr::Check_Circle(CObj* pDst, CObj* pSrc)
 {
 	float	fRadius = (pDst->Get_Info()->fCX + pSrc->Get_Info()->fCX) * 0.5f;

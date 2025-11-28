@@ -13,8 +13,7 @@
 #include "CTimeMgr.h"
 #include "CTileEditScene.h"
 #include "CTileMgr.h"
-#include "CUIMgr.h"
-
+#include "CMouse.h"
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
 	ZeroMemory(&m_szFPS, sizeof(m_szFPS));
@@ -41,7 +40,7 @@ void CMainGame::Initialize()
 	GET(CSceneMgr)->CreateScene(L"TileEdit", new CTileEditScene);
 
 	// 최초로 나올 씬
-	GET(CSceneMgr)->ChangeScene(L"Test");
+	GET(CSceneMgr)->ChangeScene(L"TileEdit");
 	
 }
 
@@ -90,7 +89,7 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
-	CUIMgr::Destroy_Instance();
+	CMouse::Destroy_Instance();
 	CTileMgr::Destroy_Instance();
 	CCamera::Destroy_Instance();
 	CKeyMgr::Destroy_Instance();

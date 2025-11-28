@@ -1,6 +1,7 @@
 #pragma once
 #include "CScene.h"
 #include "Define.h"
+#include "CUI.h"
 class CTileEditScene : public CScene
 {
 public:
@@ -22,5 +23,6 @@ private:
 	int m_iOption;
 
 	POINT m_ptMouse;
+	CUI* m_pUI;
 };
 

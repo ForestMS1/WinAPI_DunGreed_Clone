@@ -4,8 +4,7 @@
 #include "CResourceMgr.h"
 #include "CTileBtn.h"
 #include "CKeyMgr.h"
-CMapTileUI::CMapTileUI() : m_iCurTileX(0), m_iCurTileY(0)
-,m_iScrollX(0)
+CMapTileUI::CMapTileUI() : m_iScrollX(0)
 {
 }
 
@@ -18,16 +17,23 @@ void CMapTileUI::Initialize()
 {
 	//m_tInfo.fX = WINCX - 150.f;
 	//m_tInfo.fY = 200.f;
+	//m_tInfo.fCX = 300.f;
+	//m_tInfo.fCY = 400.f;
+
 	m_tInfo.fX = WINCX>>1;
 	m_tInfo.fY = WINCY>>1;
-	m_tInfo.fCX = 512.f;
-	m_tInfo.fCY = 512.f;
+	m_tInfo.fCX = 512;
+	m_tInfo.fCY = 512;
+
+	__super::Update_Rect();
 
 	for (int i = 0; i < 32; ++i)
 	{
 		for (int j = 0; j < 32; ++j)
 		{
-			AddChildUI(new CTileBtn);
+			float fX = m_tRect.left + (BMPTILECX * j) + (BMPTILECX >> 1);
+			float fY = m_tRect.top + (BMPTILECY * i) + (BMPTILECY >> 1);
+			AddChildUI(new CTileBtn(fX, fY));
 		}
 	}
 
@@ -37,13 +43,11 @@ void CMapTileUI::Initialize()
 	}
 }
 
-void CMapTileUI::Update()
+int CMapTileUI::Update()
 {
-	if (!m_bIsOpen) return;
+	if (!m_bIsOpen) return 0;
 
 	Vec2 pos = Vec2(m_tInfo.fX, m_tInfo.fY);
-
-	__super::Update_Rect();
 
 	Key_Input();
 
@@ -52,25 +56,13 @@ void CMapTileUI::Update()
 	{
 		pChildUI->Update();
 	}
+	__super::Update_Rect();
 	
-	return ;
+	return 0;
 }
 
 void CMapTileUI::Late_Update()
 {
-	//float xRatio = m_tInfo.fCX / WINCX;
-	//float yRatio = m_tInfo.fCY / WINCY;
-
-	//m_CurTileInfo.fCX = TILECX * xRatio;
-	//m_CurTileInfo.fCY = TILECY * yRatio;
-	//m_CurTileInfo.fX = m_tInfo.fX + m_CurTileInfo.fCX * 0.5f + m_iCurTileX * m_CurTileInfo.fCX;
-	//m_CurTileInfo.fY = m_tInfo.fY + m_CurTileInfo.fCY * 0.5f + m_iCurTileY * m_CurTileInfo.fCY;
-
-	//m_CurTileRect.left = m_tRect.left - m_CurTileInfo.fCX * 0.5f;
-	//m_CurTileRect.top = m_tRect.top - m_CurTileInfo.fCY * 0.5f;
-	//m_CurTileRect.right = m_tRect.left + m_CurTileInfo.fCX * 0.5f;
-	//m_CurTileRect.top = m_tRect.top + m_CurTileInfo.fCY * 0.5f;
-
 	for (auto& pChildUI : m_vecChildUI)
 	{
 		pChildUI->Late_Update();
@@ -90,19 +82,20 @@ void CMapTileUI::Render(HDC hDC)
 	int SrcX = 0 + m_iScrollX;
 
 
-	GdiTransparentBlt(
-		hDC,
-		(int)(m_tRect.left),				// 복사 받을 공간의 LEFT	
-		(int)(m_tRect.top),				// 복사 받을 공간의 TOP
-		m_tInfo.fCX,													// 복사 받을 공간의 가로 
-		m_tInfo.fCY,												// 복사 받을 공간의 세로 
-		hMemDC,														// 복사 할 DC
-		SrcX,											// 원본이미지 left
-		0,														// 원본이미지 top
-		frameWidth,								// 원본이미지 가로
-		frameHeight,											// 원본이미지 세로
-		RGB(255, 0, 255)
-	);
+	Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+	//GdiTransparentBlt(
+	//	hDC,
+	//	(int)(m_tRect.left),									// 복사 받을 공간의 LEFT	
+	//	(int)(m_tRect.top),										// 복사 받을 공간의 TOP
+	//	m_tInfo.fCX,											// 복사 받을 공간의 가로 
+	//	m_tInfo.fCY,											// 복사 받을 공간의 세로 
+	//	hMemDC,													// 복사 할 DC
+	//	SrcX,													// 원본이미지 left
+	//	0,														// 원본이미지 top
+	//	frameWidth,												// 원본이미지 가로
+	//	frameHeight,											// 원본이미지 세로
+	//	RGB(255, 0, 255)
+	//);
 
 	for (auto& pChildUI : m_vecChildUI)
 	{

@@ -15,7 +15,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_fSpeed = 4.f;
+	m_fSpeed = 7.f;
 
 	m_tInfo.fX = 400.f;
 	m_tInfo.fY = 400.f;
@@ -39,25 +39,14 @@ void CPlayer::Initialize()
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerDashL.bmp", L"PlayerDashL");
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/RunEffectR.bmp", L"RunEffectR");
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/RunEffectL.bmp", L"RunEffectL");
+	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerDie.bmp", L"PlayerDie");
 }
 
 int CPlayer::Update()
 {
-	if(!m_bJump)
-		m_tInfo.fY += GRAVITY;
-
-	if (m_bJump && m_ft < m_fAcct)
-	{
-		m_ft += 0.05;
-		m_tInfo.fY -= m_v0 * m_ft - (GRAVITY * 0.5f) * m_ft * m_ft;
-	}
-	else
-	{
-		m_ft = 0.f;
-		m_bJump = false;
-	}
-
 	Key_Input();
+
+	Jump();
 
 	Update_Rect();
 
@@ -69,18 +58,17 @@ int CPlayer::Update()
 void CPlayer::Late_Update()
 {
 	Motion_Change();
+
 	CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
+
 }
 
 void CPlayer::Render(HDC hDC)
 {
 	HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(m_wsFrameKey);
 
-	int frameWidth = 78;
-	int frameHeight = 60;
-
-	int SrcX = frameWidth * m_tFrame.iStart;
-	int SrcY = frameHeight * m_tFrame.iMotion;
+	int SrcX = m_iFrameWidth * m_tFrame.iStart;
+	int SrcY = m_iFrameHeight * m_tFrame.iMotion;
 
 	Rectangle(hDC,
 		m_tRect.left - GET(CCamera)->Get_ScrollX(),
@@ -89,15 +77,15 @@ void CPlayer::Render(HDC hDC)
 		m_tRect.bottom - GET(CCamera)->Get_ScrollY());
 	GdiTransparentBlt(
 		hDC,
-		(int)(m_tRect.left - GET(CCamera)->GetDiff().fX - 15),				// 복사 받을 공간의 LEFT	
-		(int)(m_tRect.top - GET(CCamera)->GetDiff().fY),				// 복사 받을 공간의 TOP
-		frameWidth,												// 복사 받을 공간의 가로 
-		frameHeight,												// 복사 받을 공간의 세로 
+		(int)(m_tRect.left - GET(CCamera)->Get_ScrollX() - 15),				// 복사 받을 공간의 LEFT	
+		(int)(m_tRect.top - GET(CCamera)->Get_ScrollY()),				// 복사 받을 공간의 TOP
+		m_iFrameWidth,												// 복사 받을 공간의 가로 
+		m_iFrameHeight,												// 복사 받을 공간의 세로 
 		hMemDC,														// 복사 할 DC
 		SrcX,															// 원본이미지 left
 		SrcY,															// 원본이미지 top
-		frameWidth,														// 원본이미지 가로
-		frameHeight,														// 원본이미지 세로
+		m_iFrameWidth,														// 원본이미지 가로
+		m_iFrameHeight,														// 원본이미지 세로
 		RGB(255, 0, 255)
 	);
 }
@@ -126,16 +114,6 @@ void CPlayer::Key_Input()
 		m_tInfo.fX += m_fSpeed;
 		m_eCurState = WALK;
 	}
-	else if (GET(CKeyMgr)->Key_Pressing(VK_UP))
-	{
-		m_tInfo.fY -= m_fSpeed;
-		m_eCurState = WALK;
-	}
-	else if (GET(CKeyMgr)->Key_Pressing(VK_DOWN))
-	{
-		m_tInfo.fY += m_fSpeed;
-		m_eCurState = WALK;
-	}
 	else
 	{
 		m_eCurState = IDLE;
@@ -143,7 +121,7 @@ void CPlayer::Key_Input()
 
 	if (GET(CKeyMgr)->Key_Pressing(VK_SPACE))
 	{
-		m_v0 = 10.f;
+		m_v0 = 20.f;
 		m_bJump = true;
 		m_eCurState = JUMP;
 	}
@@ -164,6 +142,8 @@ void CPlayer::Motion_Change()
 			m_tFrame.dwSpeed = 200;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerIdle";
+			m_iFrameWidth = 78;
+			m_iFrameHeight = 60;
 			break;
 
 		case WALK:
@@ -175,15 +155,21 @@ void CPlayer::Motion_Change()
 			m_tFrame.dwSpeed = 50;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerRun";
+			m_iFrameWidth = 78;
+			m_iFrameHeight = 60;
 			break;
-
-		//case ATTACK:
-		//	m_tFrame.iStart = 0;
-		//	m_tFrame.iEnd = 5;
-		//	m_tFrame.iMotion = 2;
-		//	m_tFrame.dwSpeed = 200;
-		//	m_tFrame.dwTime = GetTickCount();
-		//	break;
+		case JUMP:
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 0;
+			m_tFrame.iMotion = 0;
+			if(m_bIsFlipped)
+				m_tFrame.iMotion = 1;
+			m_tFrame.dwSpeed = 50;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"PlayerJump";
+			m_iFrameWidth = 75;
+			m_iFrameHeight = 60;
+			break;
 
 		//case HIT:
 		//	m_tFrame.iStart = 0;
@@ -193,13 +179,16 @@ void CPlayer::Motion_Change()
 		//	m_tFrame.dwTime = GetTickCount();
 		//	break;
 
-		//case DEAD:
-		//	m_tFrame.iStart = 0;
-		//	m_tFrame.iEnd = 3;
-		//	m_tFrame.iMotion = 4;
-		//	m_tFrame.dwSpeed = 200;
-		//	m_tFrame.dwTime = GetTickCount();
-		//	break;
+		case DEAD:
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 0;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 200;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"PlayerDie";
+			m_iFrameWidth = 78;
+			m_iFrameHeight = 60;
+			break;
 		default:
 			break;
 		}
@@ -207,4 +196,22 @@ void CPlayer::Motion_Change()
 		m_ePreState = m_eCurState;
 	}
 
+}
+
+void CPlayer::Jump()
+{
+	if (!m_bJump)
+		m_tInfo.fY += GRAVITY;
+
+	if (m_bJump && m_ft < m_fAcct)
+	{
+		m_ft += 0.2f;
+		m_tInfo.fY -= m_v0 - (7 * 0.5f) * m_ft * m_ft;
+		m_eCurState = JUMP;
+	}
+	else
+	{
+		m_ft = 0.f;
+		m_bJump = false;
+	}
 }

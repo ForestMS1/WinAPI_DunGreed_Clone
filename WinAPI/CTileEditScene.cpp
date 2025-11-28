@@ -141,16 +141,14 @@ void CTileEditScene::Render(HDC hDC)
 	//	RGB(255, 0, 255)
 	//);
 
-	wstring text = L"Option : " + to_wstring(m_iOption);
+	wstring text = L"Tile_Option : " + to_wstring(m_iOption);
 	TextOut(hDC, 10, 0, text.c_str(), text.length());
 	text = L"Camera_Move : WASD";
 	TextOut(hDC, 10, 20, text.c_str(), text.length());
 	text = L"Save : Q, Load : R";
 	TextOut(hDC, 10, 40, text.c_str(), text.length());
-	text = L"Option++ : X, Option-- : Z";
-	TextOut(hDC, 10, 60, text.c_str(), text.length());
 	text = L"Tile_Clear: C";
-	TextOut(hDC, 10, 80, text.c_str(), text.length());
+	TextOut(hDC, 10, 60, text.c_str(), text.length());
 	m_pTileSelectUI->Render(hDC);
 	m_pTileOptionSelectUI->Render(hDC);
 
@@ -165,8 +163,9 @@ void CTileEditScene::Release()
 
 void CTileEditScene::Key_Input()
 {
-#pragma region 마우스_왼오_클릭_칠하기_지우기
-	if (GET(CKeyMgr)->Key_Pressing(VK_LBUTTON) && !m_pTileSelectUI->IsOpen())
+#pragma region 마우스_왼오_클릭_칠하기
+	if (GET(CKeyMgr)->Key_Pressing(VK_LBUTTON) && !m_pTileSelectUI->IsOpen()
+		&& !dynamic_cast<CMapTileOptionUI*>(m_pTileOptionSelectUI)->IsMouseOn())
 	{
 		POINT	pt;
 		GetCursorPos(&pt);
@@ -175,9 +174,10 @@ void CTileEditScene::Key_Input()
 		pt.x = (int)GET(CCamera)->GetRealPos(pt).fX;
 		pt.y = (int)GET(CCamera)->GetRealPos(pt).fY;
 
-		// TODO : MapTile 이미지 에서 클릭한 타일인덱스를 아래 Picking_Tile에 넘겨주면 됨.....
+		
 		GET(CTileMgr)->Picking_Tile(pt, m_iDrawIDX, m_iDrawIDY, m_iOption);
 	}
+	// 오른쪽 클릭은 옵션만 지정
 	if (GET(CKeyMgr)->Key_Pressing(VK_RBUTTON))
 	{
 		POINT	pt;
@@ -187,8 +187,8 @@ void CTileEditScene::Key_Input()
 		pt.x = (int)GET(CCamera)->GetRealPos(pt).fX;
 		pt.y = (int)GET(CCamera)->GetRealPos(pt).fY;
 
-		// TODO : MapTile 이미지 에서 클릭한 타일인덱스를 아래 Picking_Tile에 넘겨주면 됨.....
-		GET(CTileMgr)->Picking_Tile(pt, m_iDrawIDX, m_iDrawIDY, 0);
+
+		GET(CTileMgr)->Picking_Tile(pt, m_iOption);
 	}
 #pragma endregion
 

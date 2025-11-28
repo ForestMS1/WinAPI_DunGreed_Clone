@@ -3,7 +3,7 @@
 #include "CResourceMgr.h"
 #include "CCamera.h"
 
-CTile::CTile() : m_iOption(0)
+CTile::CTile() : m_iOption(ERASE)
 {
 	ZeroMemory(&m_tTileInfo, sizeof(TILEINFO));
 }
@@ -31,6 +31,7 @@ void CTile::Late_Update()
 
 void CTile::Render(HDC hDC)
 {
+	//if (m_iOption == ERASE) return;
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
 
 	int frameWidth = BMPTILECX;
@@ -39,7 +40,7 @@ void CTile::Render(HDC hDC)
 	int SrcX = frameWidth * m_tTileInfo.iDrawIDX;
 	int SrcY = frameHeight * m_tTileInfo.iDrawIDY;
 
-	if (m_iOption != 0)
+	if (m_iOption != ERASE)
 	{
 		GdiTransparentBlt(
 			hDC,
@@ -74,7 +75,7 @@ void CTile::Render(HDC hDC)
 			16,												// 원본이미지 세로
 			RGB(255, 0, 255)
 		);
-		if (m_iOption == 0)
+		if (m_iOption == ERASE)
 			Rectangle(hDC, m_tRect.left - GET(CCamera)->GetDiff().fX, m_tRect.top - GET(CCamera)->GetDiff().fY, m_tRect.right - GET(CCamera)->GetDiff().fX, m_tRect.bottom - GET(CCamera)->GetDiff().fY);
 	}
 }

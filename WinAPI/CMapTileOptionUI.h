@@ -19,11 +19,11 @@ public:
 	void Release() override;
 
 public:
-
+	bool IsMouseOn() { return m_bMouseOn; }
 private:
 	void Key_Input();
 private:
-
+	bool m_bMouseOn;
 	int  m_iScrollX;
 };
 

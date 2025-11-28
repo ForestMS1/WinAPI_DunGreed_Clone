@@ -3,7 +3,7 @@
 #include "CTileOptionBtn.h"
 #include "CResourceMgr.h"
 
-CMapTileOptionUI::CMapTileOptionUI() : m_iScrollX(0)
+CMapTileOptionUI::CMapTileOptionUI() : m_iScrollX(0), m_bMouseOn(false)
 {
 }
 
@@ -43,6 +43,15 @@ int CMapTileOptionUI::Update()
 	}
 	__super::Update_Rect();
 
+	POINT pt;
+	GetCursorPos(&pt);
+	ScreenToClient(g_hWnd, &pt);
+
+	if (PtInRect(&m_tRect, pt))
+		m_bMouseOn = true;
+	else
+		m_bMouseOn = false;
+	
 	return 0;
 }
 

@@ -93,6 +93,19 @@ void CTileMgr::Picking_Tile(POINT ptMouse, int iDrawIDX, int iDrawIDY, int iOpti
 	dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_Option(iOption);
 }
 
+void CTileMgr::Picking_Tile(POINT ptMouse, int iOption)
+{
+	int	x = ptMouse.x / TILECX;
+	int	y = ptMouse.y / TILECY;
+
+	int iIndex = y * TILEX + x;
+
+	if (0 > iIndex || (size_t)iIndex >= m_vecTile.size())
+		return;
+
+	dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_Option(iOption);
+}
+
 
 void CTileMgr::Save_Tile()
 {

@@ -16,7 +16,7 @@
 #define TILECY 32
 #define BMPTILECX 16	// BMP 사진 파일의 타일 사이즈
 #define BMPTILECY 16 
-#define TILEX 300
+#define TILEX 300		// 게임에 깔 전체 타일 개수
 #define TILEY 300
 
 #define	OBJ_NOEVENT 0

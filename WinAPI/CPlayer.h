@@ -28,6 +28,8 @@ private:
 	float				m_ft;	 // 흐르는 시간
 	float				m_fAcct; // 점프 누적 시간
 	bool				m_bJump; // 플레이어가 의도적으로 점프키를 눌러 점프했고 점프 중인 상태인가?
+	// 하단점프
+	bool				m_bBottomJump;
 
 
 	// 애니메이션 잘라올 사이즈

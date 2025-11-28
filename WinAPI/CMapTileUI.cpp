@@ -47,8 +47,6 @@ int CMapTileUI::Update()
 {
 	if (!m_bIsOpen) return 0;
 
-	Vec2 pos = Vec2(m_tInfo.fX, m_tInfo.fY);
-
 	Key_Input();
 
 

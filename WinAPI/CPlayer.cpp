@@ -6,7 +6,7 @@
 #include "CCollisionMgr.h"
 #include "CTileMgr.h"
 #include "CLineMgr.h"
-CPlayer::CPlayer() : m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false)
+CPlayer::CPlayer() : m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false)
 {
 }
 CPlayer::~CPlayer()
@@ -76,7 +76,8 @@ void CPlayer::Late_Update()
 
 	CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
 	float fOnLine(0.f), fDist(0.f);
-	GET(CLineMgr)->Collision_Line(this, &fOnLine);
+	if(!m_bBottomJump)
+		GET(CLineMgr)->Collision_Line(this, &fOnLine);
 }
 
 void CPlayer::Render(HDC hDC)
@@ -131,12 +132,29 @@ void CPlayer::Key_Input()
 		m_eCurState = IDLE;
 	}
 
-	if (GET(CKeyMgr)->Key_Pressing(VK_SPACE))
+	if (GET(CKeyMgr)->Key_Pressing(VK_DOWN))
 	{
-		m_v0 = 20.f;
-		m_bJump = true;
-		m_eCurState = JUMP;
+		if (GET(CKeyMgr)->Key_Pressing(VK_SPACE))
+		{
+			m_bBottomJump = true;
+			m_eCurState = JUMP;
+		}
 	}
+	else
+	{
+		if (GET(CKeyMgr)->Key_Pressing(VK_SPACE))
+		{
+			m_v0 = 20.f;
+			m_bJump = true;
+			m_eCurState = JUMP;
+		}
+	}
+
+	if (GET(CKeyMgr)->Key_Up(VK_SPACE))
+	{
+		m_bBottomJump = false;
+	}
+
 }
 
 void CPlayer::Motion_Change()

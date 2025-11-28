@@ -134,14 +134,12 @@ void CTileEditScene::Render(HDC hDC)
 
 	wstring text = L"Option : " + to_wstring(m_iOption);
 	TextOut(hDC, 10, 0, text.c_str(), text.length());
-	text = L"Camera_Move : UP LEFT DOWN RIGHT";
+	text = L"Camera_Move : WASD";
 	TextOut(hDC, 10, 20, text.c_str(), text.length());
 	text = L"Save : Q, Load : R";
 	TextOut(hDC, 10, 40, text.c_str(), text.length());
 	text = L"Option++ : X, Option-- : Z";
 	TextOut(hDC, 10, 60, text.c_str(), text.length());
-	text = L"Tile_Select : WASD";
-	TextOut(hDC, 10, 80, text.c_str(), text.length());
 	m_pUI->Render(hDC);
 
 #pragma endregion
@@ -182,19 +180,19 @@ void CTileEditScene::Key_Input()
 #pragma endregion
 
 #pragma region 키입력_카메라이동
-	if (GET(CKeyMgr)->Key_Pressing(VK_UP))
+	if (GET(CKeyMgr)->Key_Pressing('W'))
 	{
 		GET(CCamera)->Set_ScrollY(-5.f);
 	}
-	if (GET(CKeyMgr)->Key_Pressing(VK_LEFT))
+	if (GET(CKeyMgr)->Key_Pressing('A'))
 	{
 		GET(CCamera)->Set_ScrollX(-5.f);
 	}
-	if (GET(CKeyMgr)->Key_Pressing(VK_DOWN))
+	if (GET(CKeyMgr)->Key_Pressing('S'))
 	{
 		GET(CCamera)->Set_ScrollY(5.f);
 	}
-	if (GET(CKeyMgr)->Key_Pressing(VK_RIGHT))
+	if (GET(CKeyMgr)->Key_Pressing('D'))
 	{
 		GET(CCamera)->Set_ScrollX(5.f);
 	}
@@ -207,42 +205,6 @@ void CTileEditScene::Key_Input()
 	if (GET(CKeyMgr)->Key_Pressing('R'))
 	{
 		GET(CTileMgr)->Load_Tile();
-	}
-#pragma endregion
-
-#pragma region 선택타일바꾸기
-	if (GET(CKeyMgr)->Key_Down('W'))
-	{
-		m_iDrawIDY--;
-		if (m_iDrawIDY < 0)
-		{
-			m_iDrawIDY = 0;
-		}
-	}
-	if (GET(CKeyMgr)->Key_Down('A'))
-	{
-		m_iDrawIDX--;
-		if (m_iDrawIDX < 0)
-		{
-			m_iDrawIDX = 0;
-		}
-	}
-	if (GET(CKeyMgr)->Key_Down('S'))
-	{
-		//아래거선택
-		m_iDrawIDY++;
-		if (m_iDrawIDY > 31)
-		{
-			m_iDrawIDY = 31;
-		}
-	}
-	if (GET(CKeyMgr)->Key_Down('D'))
-	{
-		m_iDrawIDX++;
-		if (m_iDrawIDX > 31)
-		{
-			m_iDrawIDX = 31;
-		}
 	}
 #pragma endregion
 
@@ -273,12 +235,6 @@ void CTileEditScene::Key_Input()
 	if (GET(CKeyMgr)->Key_Down(VK_TAB))
 	{
 		g_bDebugMod = !g_bDebugMod;
-	}
-
-	if (GET(CKeyMgr)->Key_Down(VK_F5))
-	{
-		m_iDrawIDX = GET(CMouse)->Get_DrawIDX();
-		m_iDrawIDY = GET(CMouse)->Get_DrawIDY();
 	}
 
 }

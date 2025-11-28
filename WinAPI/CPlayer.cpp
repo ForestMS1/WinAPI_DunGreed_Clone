@@ -45,6 +45,20 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
+	if (!m_bJump)
+		m_tInfo.fY += GRAVITY;
+
+	POINT pt;
+	GetCursorPos(&pt);
+	ScreenToClient(g_hWnd, &pt);
+	Vec2 pos = GET(CCamera)->GetRealPos(Vec2((int)pt.x, (int)pt.y));
+	if (pos.fX < m_tInfo.fX)
+		m_tFrame.iMotion = 1;
+	else
+		m_tFrame.iMotion = 0;
+
+
+
 	Key_Input();
 
 	Jump();
@@ -101,15 +115,8 @@ void CPlayer::Release()
 
 void CPlayer::Key_Input()
 {
-	if (GET(CKeyMgr)->Key_Down(VK_LEFT) && !m_bIsFlipped)
-	{
-		m_bIsFlipped = true;
-	}
-	else if (GET(CKeyMgr)->Key_Down(VK_RIGHT) && m_bIsFlipped)
-	{
-		m_bIsFlipped = false;
-	}
-	else if (GET(CKeyMgr)->Key_Pressing(VK_LEFT))
+
+	if (GET(CKeyMgr)->Key_Pressing(VK_LEFT))
 	{
 		m_tInfo.fX -= m_fSpeed;
 		m_eCurState = WALK;
@@ -141,10 +148,11 @@ void CPlayer::Motion_Change()
 		case IDLE:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 4;
-			m_tFrame.iMotion = 0;
-			if(m_bIsFlipped)
-				m_tFrame.iMotion = 1;
-			m_tFrame.dwSpeed = 200;
+			//if(!m_bIsFlipped)
+			//	m_tFrame.iMotion = 0;
+			//else
+			//	m_tFrame.iMotion = 1;
+			m_tFrame.dwSpeed = 100;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerIdle";
 			m_iFrameWidth = 78;
@@ -154,9 +162,10 @@ void CPlayer::Motion_Change()
 		case WALK:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 7;
-			m_tFrame.iMotion = 0;
-			if (m_bIsFlipped)
-				m_tFrame.iMotion = 1;
+			//if (!m_bIsFlipped)
+			//	m_tFrame.iMotion = 0;
+			//else
+			//	m_tFrame.iMotion = 1;
 			m_tFrame.dwSpeed = 50;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerRun";
@@ -166,24 +175,16 @@ void CPlayer::Motion_Change()
 		case JUMP:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 0;
-			m_tFrame.iMotion = 0;
-			if(m_bIsFlipped)
-				m_tFrame.iMotion = 1;
+			//if(!m_bIsFlipped)
+			//	m_tFrame.iMotion = 0;
+			//else
+			//	m_tFrame.iMotion = 1;
 			m_tFrame.dwSpeed = 50;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerJump";
 			m_iFrameWidth = 75;
 			m_iFrameHeight = 60;
 			break;
-
-		//case HIT:
-		//	m_tFrame.iStart = 0;
-		//	m_tFrame.iEnd = 1;
-		//	m_tFrame.iMotion = 3;
-		//	m_tFrame.dwSpeed = 200;
-		//	m_tFrame.dwTime = GetTickCount();
-		//	break;
-
 		case DEAD:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 0;
@@ -205,9 +206,6 @@ void CPlayer::Motion_Change()
 
 void CPlayer::Jump()
 {
-	if (!m_bJump)
-		m_tInfo.fY += GRAVITY;
-
 	if (m_bJump && m_ft < m_fAcct)
 	{
 		m_ft += 0.2f;

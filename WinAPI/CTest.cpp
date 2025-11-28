@@ -91,7 +91,7 @@ void CTest::Render(HDC hDC)
 
 	GET(CTileMgr)->Render(hDC);
 	GET(CObjMgr)->Render(hDC);
-	GET(CLineMgr)->Render(hDC);
+	//GET(CLineMgr)->Render(hDC); //굳이 그릴필요 없음
 }
 
 void CTest::Release()

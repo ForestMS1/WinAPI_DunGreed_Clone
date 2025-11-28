@@ -31,8 +31,6 @@ void CTile::Late_Update()
 
 void CTile::Render(HDC hDC)
 {
-	if (m_iOption == 0) return;
-
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
 
 	int frameWidth = BMPTILECX;
@@ -41,20 +39,23 @@ void CTile::Render(HDC hDC)
 	int SrcX = frameWidth * m_tTileInfo.iDrawIDX;
 	int SrcY = frameHeight * m_tTileInfo.iDrawIDY;
 
+	if (m_iOption != 0)
+	{
+		GdiTransparentBlt(
+			hDC,
+			(int)(m_tRect.left - GET(CCamera)->GetDiff().fX),				// 복사 받을 공간의 LEFT	
+			(int)(m_tRect.top - GET(CCamera)->GetDiff().fY),				// 복사 받을 공간의 TOP
+			TILECX,												// 복사 받을 공간의 가로 
+			TILECY,												// 복사 받을 공간의 세로 
+			hMemDC,														// 복사 할 DC
+			SrcX,														// 원본이미지 left
+			SrcY,														// 원본이미지 top
+			frameWidth,													// 원본이미지 가로
+			frameHeight,												// 원본이미지 세로
+			RGB(255, 0, 255)
+		);
+	}
 
-	GdiTransparentBlt(
-		hDC,
-		(int)(m_tRect.left	- GET(CCamera)->GetDiff().fX),				// 복사 받을 공간의 LEFT	
-		(int)(m_tRect.top	- GET(CCamera)->GetDiff().fY),				// 복사 받을 공간의 TOP
-		TILECX,												// 복사 받을 공간의 가로 
-		TILECY,												// 복사 받을 공간의 세로 
-		hMemDC,														// 복사 할 DC
-		SrcX,														// 원본이미지 left
-		SrcY,														// 원본이미지 top
-		frameWidth,													// 원본이미지 가로
-		frameHeight,												// 원본이미지 세로
-		RGB(255, 0, 255)
-	);
 
 	if (g_bDebugMod)
 	{
@@ -73,6 +74,8 @@ void CTile::Render(HDC hDC)
 			16,												// 원본이미지 세로
 			RGB(255, 0, 255)
 		);
+		if (m_iOption == 0)
+			Rectangle(hDC, m_tRect.left - GET(CCamera)->GetDiff().fX, m_tRect.top - GET(CCamera)->GetDiff().fY, m_tRect.right - GET(CCamera)->GetDiff().fX, m_tRect.bottom - GET(CCamera)->GetDiff().fY);
 	}
 }
 

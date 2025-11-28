@@ -91,6 +91,9 @@
     <Filter Include="Manager\Mouse">
       <UniqueIdentifier>{8ddf9a61-8e56-436b-966c-6a4546e85708}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\UIMgr\UI\MapTileUI\TileOptionBtn">
+      <UniqueIdentifier>{6dec7ac1-7ec9-46db-9a3d-f8e38be44db5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -186,6 +189,12 @@
     <ClInclude Include="CMouse.h">
       <Filter>Manager\Mouse</Filter>
     </ClInclude>
+    <ClInclude Include="CTileOptionBtn.h">
+      <Filter>Manager\UIMgr\UI\MapTileUI\TileOptionBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="CMapTileOptionUI.h">
+      <Filter>Manager\UIMgr\UI\MapTileUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -268,6 +277,12 @@
     </ClCompile>
     <ClCompile Include="CMouse.cpp">
       <Filter>Manager\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="CTileOptionBtn.cpp">
+      <Filter>Manager\UIMgr\UI\MapTileUI\TileOptionBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="CMapTileOptionUI.cpp">
+      <Filter>Manager\UIMgr\UI\MapTileUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

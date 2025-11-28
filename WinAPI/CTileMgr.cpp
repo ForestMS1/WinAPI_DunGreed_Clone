@@ -172,3 +172,11 @@ void CTileMgr::Load_Tile()
 	CloseHandle(hFile);
 	MessageBox(g_hWnd, _T("Load ¿Ï·á"), L"Success", MB_OK);
 }
+
+void CTileMgr::Clear_Tile()
+{
+	for (auto& pTile : m_vecTile)
+	{
+		dynamic_cast<CTile*>(pTile)->Set_Option(ERASE);
+	}
+}

@@ -79,15 +79,16 @@ void CCamera::CalDiff()
 		m_vDiff.fY = 0;
 		m_vLookAt.fY = vCenter.fY;
 	}
-	if (1920 - WINCX < m_vDiff.fX)
+	//if (1920 - WINCX < m_vDiff.fX)
+	if (TILEX * TILECX - WINCX < m_vDiff.fX)
 	{
-		m_vDiff.fX = 1920 - WINCX;
-		m_vLookAt.fX = 1920 - (WINCX >> 1);
+		m_vDiff.fX = TILEX * TILECX - WINCX;
+		m_vLookAt.fX = TILEX * TILECX - (WINCX >> 1);
 	}
-	if (1280 - WINCY < m_vDiff.fY)
+	if (TILEY * TILECY - WINCY < m_vDiff.fY)
 	{
-		m_vDiff.fY = 1280 - WINCY;
-		m_vLookAt.fY = 1280 - (WINCY >> 1);
+		m_vDiff.fY = TILEY * TILECY - WINCY;
+		m_vLookAt.fY = TILEY * TILECY - (WINCY >> 1);
 	}
 
 	m_vPrevLookAt = m_vCurLookAt;

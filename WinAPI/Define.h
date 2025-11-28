@@ -52,6 +52,8 @@ private:							\
 
 enum OBJ_LAYER{ OBJ_PLAYER, OBJ_MONSTER, OBJ_ITEM, OBJ_END };
 
+enum TILE_OPTION{ ERASE, BLOCKED, BLOCKED_UPHILL, BLOCKED_DOWNHILL, SPACIOUS, SPACIOUS_UPHILL, SPACIOUS_DOWNHILL, END };
+
 typedef struct tagInfo
 {
 	float fX, fY; // Áß½ÉÁÂÇ¥

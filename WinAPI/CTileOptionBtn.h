@@ -1,11 +1,11 @@
 #pragma once
 #include "CUI.h"
-class CTileBtn :
+class CTileOptionBtn :
     public CUI
 {
 public:
-    CTileBtn(float fX, float fY);
-    ~CTileBtn();
+    CTileOptionBtn(float fX, float fY);
+    ~CTileOptionBtn();
 public:
     // CUI을(를) 통해 상속됨
     void Initialize() override;
@@ -14,8 +14,7 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 private:
-    int	 m_iCurTileX;
-    int	 m_iCurTileY;
+    int	 m_iOption;
     bool m_bMouseOn;
 };
 

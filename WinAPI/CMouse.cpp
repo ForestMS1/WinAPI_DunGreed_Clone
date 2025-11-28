@@ -3,7 +3,7 @@
 
 CMouse* CMouse::m_pInstance = nullptr;
 
-CMouse::CMouse()
+CMouse::CMouse() : m_iOption(0)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 	ZeroMemory(&m_tRect, sizeof(RECT));

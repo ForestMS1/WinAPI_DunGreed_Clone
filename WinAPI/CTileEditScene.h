@@ -23,6 +23,7 @@ private:
 	int m_iOption;
 
 	POINT m_ptMouse;
-	CUI* m_pUI;
+	CUI* m_pTileSelectUI;
+	CUI* m_pTileOptionSelectUI;
 };
 

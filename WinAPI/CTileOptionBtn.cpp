@@ -1,53 +1,50 @@
 #include "pch.h"
-#include "CTileBtn.h"
+#include "CTileOptionBtn.h"
 #include "CResourceMgr.h"
 #include "CCamera.h"
 #include "CKeyMgr.h"
 #include "CMouse.h"
-CTileBtn::CTileBtn(float fX, float fY) : m_iCurTileX(0), m_iCurTileY(0)
-, m_bMouseOn(false)
+CTileOptionBtn::CTileOptionBtn(float fX, float fY) : m_iOption(0), m_bMouseOn(false)
 {
 	m_tInfo.fX = fX;
 	m_tInfo.fY = fY;
-	m_tInfo.fCX = BMPTILECX;
-	m_tInfo.fCY = BMPTILECX;
+	m_tInfo.fCX = TILECX;
+	m_tInfo.fCY = TILECX;
 }
 
-CTileBtn::~CTileBtn()
+CTileOptionBtn::~CTileOptionBtn()
 {
 	Release();
 }
 
-void CTileBtn::Initialize()
-{
-}
-
-int CTileBtn::Update()
+void CTileOptionBtn::Initialize()
 {
 	__super::Update_Rect();
-	m_iCurTileX = (m_tRect.left - m_pParentUI->Get_Rect()->left) / BMPTILECX;
-	m_iCurTileY = (m_tRect.top - m_pParentUI->Get_Rect()->top) / BMPTILECY;
+
+	m_iOption = (m_tRect.left - (m_pParentUI->Get_Rect()->left)) / TILECX;
+}
+
+int CTileOptionBtn::Update()
+{
+	__super::Update_Rect();
 
 	return 0;
 }
 
-void CTileBtn::Late_Update()
+void CTileOptionBtn::Late_Update()
 {
 	POINT pt;
 	GetCursorPos(&pt);
 	ScreenToClient(g_hWnd, &pt);
 
-	//Vec2 realPos = GET(CCamera)->GetRealPos(Vec2(pt.x, pt.y));
 
 	if (PtInRect(&m_tRect, pt))
 	{
 		m_bMouseOn = true;
-		if (GET(CKeyMgr)->Key_Down(VK_LBUTTON) && m_pParentUI->IsOpen())
+		if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 		{
-			//TODO : 이미지 값을 넘겨준다.
-			m_iCurTileX = (m_tRect.left - (m_pParentUI->Get_Rect()->left)) / BMPTILECX;
-			m_iCurTileY = (m_tRect.top - (m_pParentUI->Get_Rect()->top)) / BMPTILECY;
-			GET(CMouse)->Set_DrawID(m_iCurTileX, m_iCurTileY);
+			//TODO : 옵션 값을 넘겨준다.
+			GET(CMouse)->Set_Option(m_iOption);
 		}
 	}
 	else
@@ -55,11 +52,9 @@ void CTileBtn::Late_Update()
 
 }
 
-void CTileBtn::Render(HDC hDC)
+void CTileOptionBtn::Render(HDC hDC)
 {
-	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
-	int SrcX = (m_tRect.left - (m_pParentUI->Get_Rect()->left));
-	int SrcY = (m_tRect.top - (m_pParentUI->Get_Rect()->top));
+	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOption");
 	//GET(CCamera)
 
 	GdiTransparentBlt(
@@ -69,8 +64,8 @@ void CTileBtn::Render(HDC hDC)
 		m_tInfo.fCX,											// 복사 받을 공간의 가로 
 		m_tInfo.fCY,											// 복사 받을 공간의 세로 
 		hMemDC,											// 복사 할 DC
-		SrcX,											// 원본이미지 left
-		SrcY,											// 원본이미지 top
+		m_iOption * BMPTILECX,											// 원본이미지 left
+		0,											// 원본이미지 top
 		BMPTILECX,											// 원본이미지 가로
 		BMPTILECX,											// 원본이미지 세로
 		RGB(255, 0, 255)
@@ -88,8 +83,9 @@ void CTileBtn::Render(HDC hDC)
 		hPen = (HPEN)SelectObject(hDC, hPen);
 		DeleteObject(hPen);
 	}
+	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
-void CTileBtn::Release()
+void CTileOptionBtn::Release()
 {
 }

@@ -72,11 +72,14 @@ void CPlayer::Render(HDC hDC)
 	int SrcX = m_iFrameWidth * m_tFrame.iStart;
 	int SrcY = m_iFrameHeight * m_tFrame.iMotion;
 
-	Rectangle(hDC,
-		m_tRect.left - GET(CCamera)->Get_ScrollX(),
-		m_tRect.top - GET(CCamera)->Get_ScrollY(),
-		m_tRect.right - GET(CCamera)->Get_ScrollX(),
-		m_tRect.bottom - GET(CCamera)->Get_ScrollY());
+	if (g_bDebugMod)
+	{
+		Rectangle(hDC,
+			m_tRect.left - GET(CCamera)->Get_ScrollX(),
+			m_tRect.top - GET(CCamera)->Get_ScrollY(),
+			m_tRect.right - GET(CCamera)->Get_ScrollX(),
+			m_tRect.bottom - GET(CCamera)->Get_ScrollY());
+	}
 	GdiTransparentBlt(
 		hDC,
 		(int)(m_tRect.left - GET(CCamera)->Get_ScrollX() - 15),				// 복사 받을 공간의 LEFT	

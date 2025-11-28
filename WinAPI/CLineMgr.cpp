@@ -88,7 +88,7 @@ void CLineMgr::Collision_Line(CObj* pPlayer, float* pY)
 
 			if (*pY + fFantaStickMagicNumber > bottom && *pY - fFantaStickMagicNumber < bottom)
 			{
-				float offset = pPlayer->Get_Info()->fCY * 0.5f;
+				float offset = pPlayer->Get_Info()->fCY * 0.5f + 8.f;
 				pPlayer->Set_Pos(fX, *pY - offset);
 			}
 		}

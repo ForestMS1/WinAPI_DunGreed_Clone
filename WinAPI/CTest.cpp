@@ -22,6 +22,8 @@ CTest::~CTest()
 void CTest::Initialize()
 {
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/Cloud.bmp", L"Cloud");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownBG_Day.bmp", L"TownBG_Day");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownLayer_Day.bmp", L"TownLayer_Day");
 	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(100.f, 100.f));
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
@@ -72,7 +74,6 @@ void CTest::Render(HDC hDC)
 {
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
 	HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud");
-
 	//TODO : 배경 무한 움직임
 	GdiTransparentBlt(
 		hDC,
@@ -87,13 +88,6 @@ void CTest::Render(HDC hDC)
 		540,
 		RGB(255, 0, 255)
 	);
-
-	//if (m_bIsDrawing)
-	//{
-	//	Vec2 st = GET(CCamera)->GetRenderPos(Vec2(m_ptLeft.x, m_ptLeft.y));
-	//	MoveToEx(hDC, (int)st.fX, (int)st.fY, nullptr);
-	//	LineTo(hDC, m_ptMouse.x, m_ptMouse.y);
-	//}
 
 	GET(CTileMgr)->Render(hDC);
 	GET(CObjMgr)->Render(hDC);

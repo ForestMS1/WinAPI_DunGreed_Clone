@@ -15,12 +15,14 @@ public:
 	int Get_DrawIDX() const { return m_iDrawIDX; }
 	int Get_DrawIDY() const { return m_iDrawIDY; }
 	int Get_Option() const { return m_iOption; }
+	POINT Get_Point() const { return m_ptInfo; }
 
 private:
 	INFO m_tInfo;
 	RECT m_tRect;
 	POINT m_ptInfo;
 
+	// 타일에디터에서 값을 넘겨주기 위한 변수
 	int m_iDrawIDX;
 	int m_iDrawIDY;
 	int m_iOption;

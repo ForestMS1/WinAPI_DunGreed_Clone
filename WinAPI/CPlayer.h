@@ -18,6 +18,7 @@ private:
 	void Key_Input();
 	void Motion_Change();
 	void Jump();
+	void ToMouse();
 
 private:
 	STATE				m_ePreState;

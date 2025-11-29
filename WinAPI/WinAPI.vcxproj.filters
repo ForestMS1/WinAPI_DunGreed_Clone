@@ -94,6 +94,9 @@
     <Filter Include="Object\UI\MapTileUI\TileOptionBtn">
       <UniqueIdentifier>{6dec7ac1-7ec9-46db-9a3d-f8e38be44db5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Player\PlayerEffect">
+      <UniqueIdentifier>{9da2fbe2-e285-424f-a4cf-f2ad47afa91f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -195,6 +198,9 @@
     <ClInclude Include="CMapTileOptionUI.h">
       <Filter>Object\UI\MapTileUI</Filter>
     </ClInclude>
+    <ClInclude Include="CRunEffect.h">
+      <Filter>Object\Player\PlayerEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -283,6 +289,9 @@
     </ClCompile>
     <ClCompile Include="CMapTileOptionUI.cpp">
       <Filter>Object\UI\MapTileUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CRunEffect.cpp">
+      <Filter>Object\Player\PlayerEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

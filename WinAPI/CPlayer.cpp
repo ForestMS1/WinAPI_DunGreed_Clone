@@ -48,16 +48,7 @@ int CPlayer::Update()
 	if (!m_bJump)
 		m_tInfo.fY += GRAVITY;
 
-	POINT pt;
-	GetCursorPos(&pt);
-	ScreenToClient(g_hWnd, &pt);
-	Vec2 pos = GET(CCamera)->GetRealPos(Vec2((int)pt.x, (int)pt.y));
-	if (pos.fX < m_tInfo.fX)
-		m_tFrame.iMotion = 1;
-	else
-		m_tFrame.iMotion = 0;
-
-
+	ToMouse();
 
 	Key_Input();
 
@@ -97,15 +88,15 @@ void CPlayer::Render(HDC hDC)
 	}
 	GdiTransparentBlt(
 		hDC,
-		(int)(m_tRect.left - GET(CCamera)->Get_ScrollX() - 15),				// 복사 받을 공간의 LEFT	
+		(int)(m_tRect.left - GET(CCamera)->Get_ScrollX() - 15),			// 복사 받을 공간의 LEFT	
 		(int)(m_tRect.top - GET(CCamera)->Get_ScrollY()),				// 복사 받을 공간의 TOP
-		m_iFrameWidth,												// 복사 받을 공간의 가로 
-		m_iFrameHeight,												// 복사 받을 공간의 세로 
-		hMemDC,														// 복사 할 DC
+		m_iFrameWidth,													// 복사 받을 공간의 가로 
+		m_iFrameHeight,													// 복사 받을 공간의 세로 
+		hMemDC,															// 복사 할 DC
 		SrcX,															// 원본이미지 left
 		SrcY,															// 원본이미지 top
-		m_iFrameWidth,														// 원본이미지 가로
-		m_iFrameHeight,														// 원본이미지 세로
+		m_iFrameWidth,													// 원본이미지 가로
+		m_iFrameHeight,													// 원본이미지 세로
 		RGB(255, 0, 255)
 	);
 }
@@ -134,7 +125,7 @@ void CPlayer::Key_Input()
 
 	if (GET(CKeyMgr)->Key_Pressing(VK_DOWN))
 	{
-		if (GET(CKeyMgr)->Key_Pressing(VK_SPACE))
+		if (GET(CKeyMgr)->Key_Down(VK_SPACE))
 		{
 			m_bBottomJump = true;
 			m_eCurState = JUMP;
@@ -147,6 +138,7 @@ void CPlayer::Key_Input()
 			m_v0 = 20.f;
 			m_bJump = true;
 			m_eCurState = JUMP;
+			
 		}
 	}
 
@@ -235,4 +227,18 @@ void CPlayer::Jump()
 		m_ft = 0.f;
 		m_bJump = false;
 	}
+}
+
+void CPlayer::ToMouse()
+{
+	POINT pt;
+	GetCursorPos(&pt);
+	ScreenToClient(g_hWnd, &pt);
+	Vec2 pos = GET(CCamera)->GetRealPos(Vec2((int)pt.x, (int)pt.y));
+	if (pos.fX < m_tInfo.fX)
+		m_tFrame.iMotion = 1;
+	else
+		m_tFrame.iMotion = 0;
+
+	//TODO : 마우스 방향으로 무기회전
 }

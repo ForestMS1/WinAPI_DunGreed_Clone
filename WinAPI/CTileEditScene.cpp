@@ -117,8 +117,8 @@ void CTileEditScene::Render(HDC hDC)
 			TILECX,												// 복사 받을 공간의 가로 
 			TILECY,												// 복사 받을 공간의 세로 
 			hMemDC,														// 복사 할 DC
-			m_iOption * TILECX / 2,														// 원본이미지 left
-			0,														// 원본이미지 top
+			m_iOption * BMPTILECX,								// 원본이미지 left
+			0,													// 원본이미지 top
 			16,													// 원본이미지 가로
 			16,												// 원본이미지 세로
 			RGB(255, 0, 255)

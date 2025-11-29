@@ -58,7 +58,6 @@ void CTest::Update()
 
 	Key_Input();
 	GET(CObjMgr)->Update();
-	GET(CLineMgr)->Update();
 	GET(CCamera)->Update();
 	GET(CTileMgr)->Update();
 }
@@ -66,7 +65,6 @@ void CTest::Update()
 void CTest::Late_Update()
 {
 	GET(CObjMgr)->Late_Update();
-	GET(CLineMgr)->Late_Update();
 	GET(CTileMgr)->Late_Update();
 }
 

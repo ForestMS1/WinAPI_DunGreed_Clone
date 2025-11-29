@@ -140,6 +140,7 @@
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CMapTileOptionUI.h" />
     <ClInclude Include="CMouse.h" />
+    <ClInclude Include="CRunEffect.h" />
     <ClInclude Include="CTest.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CLine.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CMapTileOptionUI.cpp" />
     <ClCompile Include="CMouse.cpp" />
+    <ClCompile Include="CRunEffect.cpp" />
     <ClCompile Include="CTest.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CLine.cpp" />

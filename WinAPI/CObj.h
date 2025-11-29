@@ -24,6 +24,7 @@ public:
 	void Set_Scale(float _fCX, float _fCY)								{ m_tInfo.fCX = _fCX;  m_tInfo.fCY = _fCY; }
 	bool IsDead() const													{ return m_bIsDead; }
 	void SetDead()														{ m_bIsDead = true; }
+	bool IsFlipped() const 												{ return m_bIsFlipped; }
 
 	void Update_Rect();
 	void Move_Frame();

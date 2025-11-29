@@ -12,12 +12,12 @@
 #define PI 3.14592f
 #define GRAVITY 9.8f
 
-#define TILECX 32		// 실제 게임의 타일 사이즈
-#define TILECY 32
+#define TILECX 64		// 실제 게임의 타일 사이즈
+#define TILECY 64
 #define BMPTILECX 16	// BMP 사진 파일의 타일 사이즈
 #define BMPTILECY 16 
-#define TILEX 300		// 게임에 깔 전체 타일 개수
-#define TILEY 300
+#define TILEX 100		// 게임에 깔 전체 타일 개수
+#define TILEY 100
 
 #define	OBJ_NOEVENT 0
 #define	OBJ_DEAD    1

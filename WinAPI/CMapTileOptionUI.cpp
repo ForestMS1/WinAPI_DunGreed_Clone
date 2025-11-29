@@ -14,8 +14,8 @@ CMapTileOptionUI::~CMapTileOptionUI()
 
 void CMapTileOptionUI::Initialize()
 {
-	m_tInfo.fX = 128;
-	m_tInfo.fY = WINCY - 16;
+	m_tInfo.fX = TILECX * 4;
+	m_tInfo.fY = WINCY - TILECY*0.5;
 	m_tInfo.fCX = TILECX * 8;
 	m_tInfo.fCY = TILECY;
 

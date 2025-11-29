@@ -22,7 +22,6 @@ void CMouse::Update()
 {
 	GetCursorPos(&m_ptInfo);
 	ScreenToClient(g_hWnd, &m_ptInfo);
-
 	//Update_Rect();
 }
 void CMouse::Late_Update()

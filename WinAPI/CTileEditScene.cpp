@@ -24,6 +24,7 @@ CTileEditScene::~CTileEditScene()
 void CTileEditScene::Initialize()
 {
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownTinyVersion.bmp", L"Town");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Background/SubBG.bmp", L"SubBG");
 	GET(CTileMgr)->Initialize();
 
 	// Camera 지정
@@ -63,25 +64,24 @@ void CTileEditScene::Render(HDC hDC)
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
 
 #pragma region 마우스커서에_현재_선택된_타일_그리기
-	//HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"Town");
-	//GdiTransparentBlt(
-	//	hDC,
-	//	-(int)GET(CCamera)->Get_ScrollX(),				// 복사 받을 공간의 LEFT	
-	//	-(int)GET(CCamera)->Get_ScrollY(),				// 복사 받을 공간의 TOP
-	//	4200,												// 복사 받을 공간의 가로 
-	//	1200,												// 복사 받을 공간의 세로 
-	//	hTownDC,														// 복사 할 DC
-	//	0,														// 원본이미지 left
-	//	0,														// 원본이미지 top
-	//	4200,													// 원본이미지 가로
-	//	1200,												// 원본이미지 세로
-	//	RGB(255, 0, 255)
-	//);
+	HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"SubBG");
+	GdiTransparentBlt(
+		hDC,
+		0,
+		0,
+		WINCX,
+		WINCY,
+		hTownDC,
+		0,
+		0,
+		320,
+		180,
+		0);
 
 	GET(CTileMgr)->Render(hDC);
 
 
-	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
+	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOld");
 
 	int frameWidth = BMPTILECX;
 	int frameHeight = BMPTILECX;
@@ -112,15 +112,15 @@ void CTileEditScene::Render(HDC hDC)
 		// 마우스에 옵션값 사각형 이미지 띄우기
 		GdiTransparentBlt(
 			hDC,
-			m_ptMouse.x - TILECX / 2,				// 복사 받을 공간의 LEFT	
-			m_ptMouse.y - TILECY / 2,				// 복사 받을 공간의 TOP
+			m_ptMouse.x - TILECX / 2,							// 복사 받을 공간의 LEFT	
+			m_ptMouse.y - TILECY / 2,							// 복사 받을 공간의 TOP
 			TILECX,												// 복사 받을 공간의 가로 
 			TILECY,												// 복사 받을 공간의 세로 
-			hMemDC,														// 복사 할 DC
+			hMemDC,												// 복사 할 DC
 			m_iOption * BMPTILECX,								// 원본이미지 left
 			0,													// 원본이미지 top
 			16,													// 원본이미지 가로
-			16,												// 원본이미지 세로
+			16,													// 원본이미지 세로
 			RGB(255, 0, 255)
 		);
 	}

@@ -18,6 +18,7 @@ CTileMgr::~CTileMgr()
 void CTileMgr::Initialize()
 {
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/MapTool/MapTile.bmp", L"MapTile");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/MapTool/MapTile_old.bmp", L"MapTileOld");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/MapTool/Object.bmp", L"MapTileOption");
 	for (int i = 0; i < TILEY; ++i)
 	{
@@ -53,8 +54,8 @@ void CTileMgr::Render(HDC hDC)
 	int	iCullX = abs((int)CCamera::Get_Instance()->Get_ScrollX() / TILECX);
 	int	iCullY = abs((int)CCamera::Get_Instance()->Get_ScrollY() / TILECY);
 
-	int iMaxX = iCullX + WINCX / TILECX + 2;
-	int iMaxY = iCullY + WINCY / TILECY + 2;
+	int iMaxX = iCullX + WINCX / TILECX +2;
+	int iMaxY = iCullY + WINCY / TILECY +2;
 
 	for (int i = iCullY; i < iMaxY; ++i)
 	{

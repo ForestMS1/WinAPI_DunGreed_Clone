@@ -86,6 +86,34 @@ void CTest::Render(HDC hDC)
 		540,
 		RGB(255, 0, 255)
 	);
+	hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownBG_Day");
+	GdiTransparentBlt(
+		hDC,
+		0,												// 복사 받을 공간의 LEFT	
+		0,												// 복사 받을 공간의 TOP
+		WINCX,											// 복사 받을 공간의 가로 
+		WINCY,											// 복사 받을 공간의 세로 
+		hMemDC,											// 복사 할 DC
+		0,
+		0,
+		320,
+		142,
+		RGB(255, 0, 255)
+	);
+	hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownLayer_Day");
+	GdiTransparentBlt(
+		hDC,
+		0,												// 복사 받을 공간의 LEFT	
+		0,												// 복사 받을 공간의 TOP
+		WINCX,											// 복사 받을 공간의 가로 
+		WINCY,											// 복사 받을 공간의 세로 
+		hMemDC,											// 복사 할 DC
+		0,
+		0,
+		320,
+		95,
+		RGB(255, 0, 255)
+	);
 
 	GET(CTileMgr)->Render(hDC);
 	GET(CObjMgr)->Render(hDC);

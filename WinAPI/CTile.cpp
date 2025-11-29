@@ -72,7 +72,7 @@ void CTile::Late_Update()
 void CTile::Render(HDC hDC)
 {
 	//if (m_iOption == ERASE) return;
-	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
+	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOld");
 
 	int frameWidth = BMPTILECX;
 	int frameHeight = BMPTILECX;
@@ -98,7 +98,7 @@ void CTile::Render(HDC hDC)
 	}
 
 
-	if (g_bDebugMod && m_iOption != BACKGROUND)
+	if (g_bDebugMod)
 	{
 		hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOption");
 

@@ -93,11 +93,18 @@ void CPlayer::Late_Update()
 	Motion_Change();
 
 	float fOnLine(0.f), fDist(0.f);
-	if(!m_bBottomJump)
-		m_bIsGround = GET(CLineMgr)->Collision_Line(this, &fOnLine);
-	if(!m_bIsGround)
-		m_bIsGround = CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
+	bool IsOnLine(false), IsOnTile(false);
 
+	//하향 점프 버튼이 눌렸을때 순간적으로 선 충돌을 잠시 끈다
+	if(!m_bBottomJump)
+		IsOnLine = GET(CLineMgr)->Collision_Line(this, &fOnLine);
+
+	IsOnTile = CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
+
+	if (IsOnTile || IsOnLine)
+		m_bIsGround = true;
+	else
+		m_bIsGround = false;
 
 	for (auto& pOwned : m_vecOwned)
 	{

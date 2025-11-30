@@ -96,8 +96,6 @@ bool CLineMgr::Collision_Line(CObj* pPlayer, float* pY)
 		}
 	}
 
-
-
-	return false;
-	
+	if(pTarget == nullptr)
+		return false;
 }

@@ -19,10 +19,6 @@ protected:
 
 	float			m_fOffsetX;
 	float			m_fOffsetY;
-	
-	// 애니메이션
-	float			m_iFrameWidth;
-	float			m_iFrameHeight;
 
 	// 마우스 따라다닐 각도
 	float			m_fAngle;

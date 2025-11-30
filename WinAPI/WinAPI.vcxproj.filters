@@ -94,13 +94,16 @@
     <Filter Include="Object\UI\MapTileUI\TileOptionBtn">
       <UniqueIdentifier>{6dec7ac1-7ec9-46db-9a3d-f8e38be44db5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Player\PlayerEffect">
+    <Filter Include="Object\Player\Owned">
+      <UniqueIdentifier>{e0eb827f-33ce-478b-afe1-3c111a35f66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player\Owned\PlayerEffect">
       <UniqueIdentifier>{9da2fbe2-e285-424f-a4cf-f2ad47afa91f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Weapon">
+    <Filter Include="Object\Player\Owned\Weapon">
       <UniqueIdentifier>{b9324e07-a2f9-4e28-b02a-da822058fec7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Weapon\CosmosSword">
+    <Filter Include="Object\Player\Owned\Weapon\CosmosSword">
       <UniqueIdentifier>{7dfa6be8-d5e9-4342-add4-c35076c2374f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -205,13 +208,13 @@
       <Filter>Object\UI\MapTileUI</Filter>
     </ClInclude>
     <ClInclude Include="CRunEffect.h">
-      <Filter>Object\Player\PlayerEffect</Filter>
+      <Filter>Object\Player\Owned\PlayerEffect</Filter>
     </ClInclude>
     <ClInclude Include="CWeapon.h">
-      <Filter>Object\Weapon</Filter>
+      <Filter>Object\Player\Owned\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="CCosmosSword.h">
-      <Filter>Object\Weapon\CosmosSword</Filter>
+      <Filter>Object\Player\Owned\Weapon\CosmosSword</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -303,13 +306,13 @@
       <Filter>Object\UI\MapTileUI</Filter>
     </ClCompile>
     <ClCompile Include="CRunEffect.cpp">
-      <Filter>Object\Player\PlayerEffect</Filter>
+      <Filter>Object\Player\Owned\PlayerEffect</Filter>
     </ClCompile>
     <ClCompile Include="CWeapon.cpp">
-      <Filter>Object\Weapon</Filter>
+      <Filter>Object\Player\Owned\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="CCosmosSword.cpp">
-      <Filter>Object\Weapon\CosmosSword</Filter>
+      <Filter>Object\Player\Owned\Weapon\CosmosSword</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -23,26 +23,11 @@ void CCamera::Update()
 		if (m_pTarget->IsDead())
 			m_pTarget = nullptr;
 		else
+		{
 			m_vLookAt = m_pTarget->Get_Pos();
+		}
 	}
-
-	//if (GET(CKeyMgr)->Key_Pressing('D'))
-	//{
-	//	m_vLookAt.fX += 5.f;
-	//}
-	//if (GET(CKeyMgr)->Key_Pressing('A'))
-	//{
-	//	m_vLookAt.fX -= 5.f;
-	//}
-	//if (GET(CKeyMgr)->Key_Pressing('W'))
-	//{
-	//	m_vLookAt.fY -= 5.f;
-	//}
-	//if (GET(CKeyMgr)->Key_Pressing('S'))
-	//{
-	//	m_vLookAt.fY += 5.f;
-	//}
-
+	
 
 	// 화면 중앙좌표와 카메라 LookAt 좌표간의 차이값 계산
 	CalDiff();

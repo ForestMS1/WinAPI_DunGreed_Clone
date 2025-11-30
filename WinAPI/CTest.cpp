@@ -32,7 +32,8 @@ void CTest::Initialize()
 	GET(CTileMgr)->Load_Tile();
 
 	// Camera ÁöÁ¤
-	GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
+	GET(CCamera)->Initialize();
+	//GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 }
 

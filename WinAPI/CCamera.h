@@ -51,7 +51,7 @@ public:
 
 public:
 	void Update();
-
+	void Initialize();
 private:
 	void CalDiff();
 };

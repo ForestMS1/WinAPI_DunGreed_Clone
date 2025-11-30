@@ -15,7 +15,11 @@ CCamera::~CCamera()
 {
 
 }
-
+void CCamera::Initialize()
+{
+	m_vLookAt.fX = WINCX >> 1;
+	m_vLookAt.fY = WINCY >> 1;
+}
 void CCamera::Update()
 {
 	if (m_pTarget)

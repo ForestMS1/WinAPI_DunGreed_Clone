@@ -203,6 +203,12 @@ void CPlayer::Key_Input()
 		m_bBottomJump = false;
 	}
 
+	if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
+	{
+		Dash();
+	}
+
+
 }
 
 void CPlayer::Motion_Change()
@@ -291,4 +297,8 @@ bool CPlayer::ToMouse()
 	}
 
 	//TODO : 마우스 방향으로 무기회전
+}
+
+void CPlayer::Dash()
+{
 }

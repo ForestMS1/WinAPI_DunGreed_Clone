@@ -24,6 +24,7 @@ private:
 	void Motion_Change();
 	void Jump();
 	bool ToMouse();
+	void Dash();
 
 private:
 	CWeapon*			m_pWeapon;

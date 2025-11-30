@@ -27,7 +27,7 @@ void CRunEffect::Initialize()
 
 	m_tFrame.iStart = 0;
 	m_tFrame.iEnd = 4;
-	m_tFrame.dwSpeed = 100;
+	m_tFrame.dwSpeed = 50;
 	m_tFrame.iMotion = 0;
 	m_tFrame.dwTime = GetTickCount();
 }

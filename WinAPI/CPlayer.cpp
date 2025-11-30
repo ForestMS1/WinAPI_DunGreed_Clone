@@ -207,10 +207,6 @@ void CPlayer::Motion_Change()
 		case IDLE:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 4;
-			//if(!m_bIsFlipped)
-			//	m_tFrame.iMotion = 0;
-			//else
-			//	m_tFrame.iMotion = 1;
 			m_tFrame.dwSpeed = 100;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerIdle";
@@ -221,10 +217,6 @@ void CPlayer::Motion_Change()
 		case WALK:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 7;
-			//if (!m_bIsFlipped)
-			//	m_tFrame.iMotion = 0;
-			//else
-			//	m_tFrame.iMotion = 1;
 			m_tFrame.dwSpeed = 50;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerRun";
@@ -234,10 +226,6 @@ void CPlayer::Motion_Change()
 		case JUMP:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 0;
-			//if(!m_bIsFlipped)
-			//	m_tFrame.iMotion = 0;
-			//else
-			//	m_tFrame.iMotion = 1;
 			m_tFrame.dwSpeed = 50;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"PlayerJump";
@@ -270,7 +258,6 @@ void CPlayer::Jump()
 		m_ft += 0.2f;
 		m_tInfo.fY -= m_v0 - (7 * 0.5f) * m_ft * m_ft;
 		m_eCurState = JUMP;
-		//m_bIsGround = false;
 	}
 	else
 	{

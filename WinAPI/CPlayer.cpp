@@ -270,7 +270,7 @@ void CPlayer::Jump()
 		m_ft += 0.2f;
 		m_tInfo.fY -= m_v0 - (7 * 0.5f) * m_ft * m_ft;
 		m_eCurState = JUMP;
-		m_bIsGround = false;
+		//m_bIsGround = false;
 	}
 	else
 	{

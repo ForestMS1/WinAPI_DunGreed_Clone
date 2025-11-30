@@ -50,8 +50,14 @@ int CRunEffect::Update()
 			m_tFrame.iMotion = 0;
 		}
 		Move_Frame();
-		__super::Update_Rect();
 	}
+	else
+	{
+		// 잔상 방지 (맵 밖으로 보내버림)
+		m_tInfo.fX = -m_tInfo.fCX;
+		m_tInfo.fY = -m_tInfo.fCY;
+	}
+	__super::Update_Rect();
     return 0;
 }
 

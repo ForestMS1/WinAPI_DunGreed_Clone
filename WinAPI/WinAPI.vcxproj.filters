@@ -97,6 +97,12 @@
     <Filter Include="Object\Player\PlayerEffect">
       <UniqueIdentifier>{9da2fbe2-e285-424f-a4cf-f2ad47afa91f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Weapon">
+      <UniqueIdentifier>{b9324e07-a2f9-4e28-b02a-da822058fec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Weapon\CosmosSword">
+      <UniqueIdentifier>{7dfa6be8-d5e9-4342-add4-c35076c2374f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -201,6 +207,12 @@
     <ClInclude Include="CRunEffect.h">
       <Filter>Object\Player\PlayerEffect</Filter>
     </ClInclude>
+    <ClInclude Include="CWeapon.h">
+      <Filter>Object\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="CCosmosSword.h">
+      <Filter>Object\Weapon\CosmosSword</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -292,6 +304,12 @@
     </ClCompile>
     <ClCompile Include="CRunEffect.cpp">
       <Filter>Object\Player\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="CWeapon.cpp">
+      <Filter>Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="CCosmosSword.cpp">
+      <Filter>Object\Weapon\CosmosSword</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

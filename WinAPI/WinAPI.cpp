@@ -191,6 +191,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+    break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;

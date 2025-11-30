@@ -41,19 +41,27 @@ void CMainGame::Initialize()
 
 	// 최초로 나올 씬
 	GET(CSceneMgr)->ChangeScene(L"Test");
+
+	GET(CMouse)->Initialize();
 	
 }
 
 void CMainGame::Update()
 {
 	GET(CTimeMgr)->Update();
+	GET(CMouse)->Update();
 	GET(CSceneMgr)->Update();
+	GET(CObjMgr)->Update();
+	GET(CCamera)->Update();
+	GET(CTileMgr)->Update();
 }
 
 void CMainGame::Late_Update()
 {
 	GET(CSceneMgr)->Late_Update();
 	GET(CKeyMgr)->Update();
+	GET(CObjMgr)->Late_Update();
+	GET(CTileMgr)->Late_Update();
 }
 
 void CMainGame::Render()
@@ -72,9 +80,8 @@ void CMainGame::Render()
 		m_dwLastTime = curTime;
 	}
 
-	Graphics graphics(m_hBackDC);
-
 	GET(CSceneMgr)->Render(m_hBackDC);
+	GET(CMouse)->Render(m_hBackDC);
 
 	BitBlt(m_hDC,				// 복사 받을 DC
 		0,						// 복사 받을 공간의 LEFT	

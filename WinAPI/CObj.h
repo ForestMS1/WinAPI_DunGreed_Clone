@@ -43,6 +43,8 @@ protected:
 	FRAME		m_tFrame;
 	wstring		m_wsFrameKey;	
 	bool		m_bIsFlipped; // 좌 우 반전
+	float			m_iFrameWidth;
+	float			m_iFrameHeight;
 
 
 	// 생사 여부

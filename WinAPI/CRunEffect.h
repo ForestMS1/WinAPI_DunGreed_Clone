@@ -6,6 +6,7 @@ class CRunEffect :
 {
 public:
     CRunEffect();
+    CRunEffect(CObj* pOwner);
     ~CRunEffect();
     // CObj을(를) 통해 상속됨
     void Initialize() override;

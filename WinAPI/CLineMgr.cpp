@@ -63,10 +63,10 @@ void CLineMgr::Add_Line(CLine* pLine)
 		m_LineList.push_back(pLine);
 }
 
-void CLineMgr::Collision_Line(CObj* pPlayer, float* pY)
+bool CLineMgr::Collision_Line(CObj* pPlayer, float* pY)
 {
 	if (m_LineList.empty())
-		return;
+		return false;
 	float fFantaStickMagicNumber = 18.f; // 미친 간격
 	float fX = pPlayer->Get_Info()->fX;
 	float fY = pPlayer->Get_Info()->fY;
@@ -90,11 +90,14 @@ void CLineMgr::Collision_Line(CObj* pPlayer, float* pY)
 			{
 				float offset = pPlayer->Get_Info()->fCY * 0.5f + 8.f;
 				pPlayer->Set_Pos(fX, *pY - offset);
+				pTarget = pLine;
+				return true;
 			}
 		}
 	}
 
 
-	pPlayer->Set_PosY(-minDist);
+
+	return false;
 	
 }

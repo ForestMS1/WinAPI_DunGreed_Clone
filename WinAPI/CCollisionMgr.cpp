@@ -65,7 +65,8 @@ void CCollisionMgr::Collision_RectEx(list<CObj*> _Dst, list<CObj*> _Src)
 	}
 }
 
-void CCollisionMgr::Collision_RectTile(CObj* pPlayer, vector<CObj*>& _Src)
+// 플레이어가 땅에 닿으면 true, 다른충돌은 false 리턴
+bool CCollisionMgr::Collision_RectTile(CObj* pPlayer, vector<CObj*>& _Src)
 {
 	float	fWidth(0.f), fHeight(0.f);
 
@@ -80,6 +81,7 @@ void CCollisionMgr::Collision_RectTile(CObj* pPlayer, vector<CObj*>& _Src)
 				if (pPlayer->Get_Info()->fY < Src->Get_Info()->fY)
 				{
 					pPlayer->Set_PosY(-fHeight-GRAVITY);
+					return true;
 				}
 				// 하 충돌
 				else
@@ -104,6 +106,7 @@ void CCollisionMgr::Collision_RectTile(CObj* pPlayer, vector<CObj*>& _Src)
 			}
 		}
 	}
+	return false;
 }
 
 bool CCollisionMgr::Check_Rect(CObj* pDst, CObj* pSrc, float* pX, float* pY)

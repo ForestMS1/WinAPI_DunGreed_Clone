@@ -13,7 +13,7 @@ public:
 public:
 	list<CLine*>&	Get_Line() { return m_LineList; }
 	void			Add_Line(CLine* pLine);
-	void			Collision_Line(CObj* pPlayer, float* pY);
+	bool			Collision_Line(CObj* pPlayer, float* pY);
 private:
 	list<CLine*> m_LineList;
 };

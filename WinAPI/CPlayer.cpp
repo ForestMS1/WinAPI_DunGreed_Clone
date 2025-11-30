@@ -6,12 +6,16 @@
 #include "CCollisionMgr.h"
 #include "CTileMgr.h"
 #include "CLineMgr.h"
+#include "CCosmosSword.h"
 CPlayer::CPlayer() : m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false)
+, m_bIsGround(false)
 {
+	m_pWeapon = nullptr;
+	m_pRunEffect = nullptr;
 }
 CPlayer::~CPlayer()
 {
-
+	Release();
 }
 
 void CPlayer::Initialize()
@@ -41,6 +45,22 @@ void CPlayer::Initialize()
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/RunEffectR.bmp", L"RunEffectR");
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/RunEffectL.bmp", L"RunEffectL");
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerDie.bmp", L"PlayerDie");
+
+	//무기
+	m_pWeapon = new CCosmosSword(this);
+	//이펙트
+	m_pRunEffect = new CRunEffect(this);
+
+	m_vecOwned.push_back(m_pWeapon);
+	m_vecOwned.push_back(m_pRunEffect);
+
+	for (auto& pOwned : m_vecOwned)
+	{
+		if (pOwned)
+		{
+			pOwned->Initialize();
+		}
+	}
 }
 
 int CPlayer::Update()
@@ -48,7 +68,7 @@ int CPlayer::Update()
 	if (!m_bJump)
 		m_tInfo.fY += GRAVITY;
 
-	ToMouse();
+	m_bIsFlipped = ToMouse();
 
 	Key_Input();
 
@@ -58,6 +78,13 @@ int CPlayer::Update()
 
 	Move_Frame();
 
+	for (auto& pOwned : m_vecOwned)
+	{
+		if (pOwned)
+		{
+			pOwned->Update();
+		}
+	}
 	return OBJ_NOEVENT;
 }
 
@@ -65,10 +92,20 @@ void CPlayer::Late_Update()
 {
 	Motion_Change();
 
-	CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
 	float fOnLine(0.f), fDist(0.f);
 	if(!m_bBottomJump)
-		GET(CLineMgr)->Collision_Line(this, &fOnLine);
+		m_bIsGround = GET(CLineMgr)->Collision_Line(this, &fOnLine);
+	if(!m_bIsGround)
+		m_bIsGround = CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
+
+
+	for (auto& pOwned : m_vecOwned)
+	{
+		if (pOwned)
+		{
+			pOwned->Late_Update();
+		}
+	}
 }
 
 void CPlayer::Render(HDC hDC)
@@ -99,21 +136,33 @@ void CPlayer::Render(HDC hDC)
 		m_iFrameHeight,													// 원본이미지 세로
 		RGB(255, 0, 255)
 	);
+
+	for (auto& pOwned : m_vecOwned)
+	{
+		if (pOwned)
+		{
+			pOwned->Render(hDC);
+		}
+	}
 }
 
 void CPlayer::Release()
 {
+	for (auto& pOwned : m_vecOwned)
+	{
+		Safe_Delete(pOwned);
+	}
 }
 
 void CPlayer::Key_Input()
 {
 
-	if (GET(CKeyMgr)->Key_Pressing(VK_LEFT))
+	if (GET(CKeyMgr)->Key_Pressing('A'))
 	{
 		m_tInfo.fX -= m_fSpeed;
 		m_eCurState = WALK;
 	}
-	else if (GET(CKeyMgr)->Key_Pressing(VK_RIGHT))
+	else if (GET(CKeyMgr)->Key_Pressing('D'))
 	{
 		m_tInfo.fX += m_fSpeed;
 		m_eCurState = WALK;
@@ -123,7 +172,7 @@ void CPlayer::Key_Input()
 		m_eCurState = IDLE;
 	}
 
-	if (GET(CKeyMgr)->Key_Pressing(VK_DOWN))
+	if (GET(CKeyMgr)->Key_Pressing('S'))
 	{
 		if (GET(CKeyMgr)->Key_Down(VK_SPACE))
 		{
@@ -221,6 +270,7 @@ void CPlayer::Jump()
 		m_ft += 0.2f;
 		m_tInfo.fY -= m_v0 - (7 * 0.5f) * m_ft * m_ft;
 		m_eCurState = JUMP;
+		m_bIsGround = false;
 	}
 	else
 	{
@@ -229,16 +279,22 @@ void CPlayer::Jump()
 	}
 }
 
-void CPlayer::ToMouse()
+bool CPlayer::ToMouse()
 {
 	POINT pt;
 	GetCursorPos(&pt);
 	ScreenToClient(g_hWnd, &pt);
 	Vec2 pos = GET(CCamera)->GetRealPos(Vec2((int)pt.x, (int)pt.y));
 	if (pos.fX < m_tInfo.fX)
+	{
 		m_tFrame.iMotion = 1;
+		return true;
+	}
 	else
+	{
 		m_tFrame.iMotion = 0;
+		return false;
+	}
 
 	//TODO : 마우스 방향으로 무기회전
 }

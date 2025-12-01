@@ -65,6 +65,12 @@ private:
 	bool				m_bDash;
 	Vec2				m_vDashDir;
 
+	// 공격
+	bool				m_bAttack;
+	float				m_fAttackAcct;
+	float				m_fAttackt;
+
+
 
 	// 애니메이션 잘라올 사이즈
 	int m_iFrameWidth;

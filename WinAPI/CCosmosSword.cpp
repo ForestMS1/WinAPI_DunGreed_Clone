@@ -2,19 +2,27 @@
 #include "CCosmosSword.h"
 #include "CResourceMgr.h"
 #include "CCamera.h"
+#include "CPlayer.h"
+#include "CSwingFX.h"
 
 CCosmosSword::CCosmosSword(CObj* pOwner)
 {
     m_pOwner = pOwner;
+    m_pSwingFX = nullptr;
 }
 CCosmosSword::~CCosmosSword()
 {
-
+    Safe_Delete(m_pSwingFX);
 }
 
 void CCosmosSword::Initialize()
 {
     __super::Initialize();
+    if (m_pSwingFX == nullptr)
+    {
+        m_pSwingFX = new CSwingFX(this);
+        m_pSwingFX->Initialize();
+    }
     GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Weapon/CosmosSwordNoAnim.png", L"CosmosSword");
     m_fOffsetX = m_pOwner->Get_Info()->fCX * 0.5f;
     m_fOffsetY = m_pOwner->Get_Info()->fCY * 0.5f;
@@ -36,18 +44,56 @@ void CCosmosSword::Initialize()
 int CCosmosSword::Update()
 {
     CWeapon::Update();
+    if (m_pSwingFX != nullptr)
+    {
+        m_pSwingFX->Update();
+    }
 	return 0;
 }
 
 void CCosmosSword::Late_Update()
 {
     CWeapon::Late_Update();
+
+    if (dynamic_cast<CPlayer*>(m_pOwner)->Get_State() == CPlayer::ATTACK)
+    {
+        if (!m_pOwner->IsFlipped())
+        {
+            m_tAttackRect =
+            {
+                m_tRect.right,
+                m_tRect.top,
+                m_tRect.right + 60,
+                m_tRect.bottom
+            };
+            
+        }
+        else
+        {
+            m_tAttackRect =
+            {
+                m_tRect.left - 60,
+                m_tRect.top,
+                m_tRect.left,
+                m_tRect.bottom
+            };
+        }
+    }
+    if (m_pSwingFX != nullptr)
+    {
+        m_pSwingFX->Late_Update();
+    }
 }
 
 void CCosmosSword::Render(HDC hDC)
 {
     CWeapon::Render(hDC);
-
+    //Rectangle(
+    //    hDC, 
+    //    m_tAttackRect.left- GET(CCamera)->Get_ScrollX(),
+    //    m_tAttackRect.top - GET(CCamera)->Get_ScrollY(),
+    //    m_tAttackRect.right - GET(CCamera)->Get_ScrollX(), 
+    //    m_tAttackRect.bottom - GET(CCamera)->Get_ScrollY());
     //HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"CosmosSword");
 
     int SrcX = m_iFrameWidth * m_tFrame.iStart;
@@ -66,9 +112,6 @@ void CCosmosSword::Render(HDC hDC)
     //    m_iFrameHeight,
     //    RGB(255, 0, 255)
     //);
-
-
-
     //1. 회전 시킬 사진을 비트맵으로 불러들인다..
     Bitmap* _bmp = (Bitmap*)GET(CResourceMgr)->Find_Png(L"CosmosSword");
 
@@ -87,6 +130,7 @@ void CCosmosSword::Render(HDC hDC)
     //     ㄴ radian이 아닌 degree 값.
     //   ㄴ PointF는 회전의 중심축이다.
     Matrix _matrix;
+    
 
     _matrix.RotateAt(90 - (m_fAngle * 180 / PI), PointF((float)(_tempBmp.GetWidth()/2), (float)(_tempBmp.GetHeight()/2)));
 
@@ -116,6 +160,10 @@ void CCosmosSword::Render(HDC hDC)
         );
     }
 
+    if (m_pSwingFX != nullptr)
+    {
+        m_pSwingFX->Render(hDC);
+    }
 }
 
 void CCosmosSword::Release()

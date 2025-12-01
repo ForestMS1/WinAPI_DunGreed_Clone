@@ -7,6 +7,7 @@
 CWeapon::CWeapon()
 {
     m_pOwner = nullptr;
+    ZeroMemory(&m_tAttackRect, sizeof(RECT));
 }
 
 CWeapon::CWeapon(CObj* pOwner) : m_fOffsetX(0.f), m_fOffsetY(0.f) , m_fAngle(0.f)
@@ -47,9 +48,6 @@ int CWeapon::Update()
 
 
     __super::Update_Rect();
-
-
-
 
 
     Move_Frame();

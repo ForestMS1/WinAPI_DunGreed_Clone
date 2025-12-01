@@ -8,9 +8,10 @@
 #include "CLineMgr.h"
 #include "CCosmosSword.h"
 #include "CMouse.h"
-CPlayer::CPlayer() : m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false)
-, m_bIsGround(false), m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false)
-,m_IsOnBlock(false)
+CPlayer::CPlayer() : 
+	m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false), m_bIsGround(false), 
+	m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false), m_IsOnBlock(false),
+	m_bAttack(false), m_fAttackAcct(0.2f), m_fAttackt(0.f)
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
@@ -79,6 +80,7 @@ int CPlayer::Update()
 
 	Jump();
 	Dash();
+	Attack();
 
 	Update_Rect();
 
@@ -229,7 +231,10 @@ void CPlayer::Key_Input()
 		m_bDash = true;
 		m_vDashDir = GET(CCamera)->GetRealPos(GET(CMouse)->Get_Point());
 	}
-
+	if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
+	{
+		m_bAttack = true;
+	}
 }
 
 void CPlayer::Motion_Change()
@@ -277,6 +282,13 @@ void CPlayer::Motion_Change()
 			m_iFrameHeight = 60;
 			break;
 		default:
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 4;
+			m_tFrame.dwSpeed = 100;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"PlayerIdle";
+			m_iFrameWidth = 78;
+			m_iFrameHeight = 60;
 			break;
 		}
 
@@ -337,7 +349,16 @@ void CPlayer::Dash()
 
 void CPlayer::Attack()
 {
-
+	if (m_bAttack && m_fAttackt < m_fAttackAcct)
+	{
+		m_fAttackt += 0.01f;
+		m_eCurState = ATTACK;
+	}
+	else
+	{
+		m_fAttackt = 0.f;
+		m_bAttack = false;
+	}
 }
 
 bool CPlayer::ToMouse()

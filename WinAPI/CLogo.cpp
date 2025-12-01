@@ -68,8 +68,8 @@ void CLogo::Render(HDC hDC)
 	HDC hLogoDC = GET(CResourceMgr)->Find_Bmp(L"Logo");
 	GdiTransparentBlt(
 		hDC,
-		165,
-		112,
+		(WINCX >> 1) - 234,
+		(WINCY >> 1) - 225,
 		468,
 		225,
 		hLogoDC,

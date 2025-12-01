@@ -66,8 +66,8 @@ void CMouse::Render(HDC hDC)
 
 		GdiTransparentBlt(
 			hDC,
-			m_tRect.left,
-			m_tRect.top,
+			m_tInfo.fX,
+			m_tInfo.fY,
 			m_tInfo.fCX,
 			m_tInfo.fCY,
 			hBasicDC,

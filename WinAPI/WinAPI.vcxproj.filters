@@ -67,9 +67,6 @@
     <Filter Include="Manager\TileMgr\Tile">
       <UniqueIdentifier>{aa6993e7-2f45-48a2-b705-fbba0ad85ebd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\UIMgr">
-      <UniqueIdentifier>{d97feaaf-0633-4465-8785-dc17d1a89051}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene\TestScene">
       <UniqueIdentifier>{adab74ca-4312-4dfd-bd8c-918ad53b6cc8}</UniqueIdentifier>
     </Filter>
@@ -135,6 +132,15 @@
     </Filter>
     <Filter Include="Object\UI\PlayerUI\PlayerDashBar">
       <UniqueIdentifier>{ca53fdf4-f992-4d51-8627-33492bbf7a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\LogoSceneUI">
+      <UniqueIdentifier>{336d2e8d-340a-4ad7-9885-feb15413385e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\LogoSceneUI\GoTileEditBtn">
+      <UniqueIdentifier>{5814ce29-9da5-43de-a95f-fbcf67ef6285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\LogoSceneUI\GameStartBtn">
+      <UniqueIdentifier>{3864b755-5ffa-491c-a6ce-5f24d3e2f575}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +270,12 @@
     <ClInclude Include="CPlayerDashBar.h">
       <Filter>Object\UI\PlayerUI\PlayerDashBar</Filter>
     </ClInclude>
+    <ClInclude Include="CGoTileEditBtn.h">
+      <Filter>Object\UI\LogoSceneUI\GoTileEditBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameStartBtn.h">
+      <Filter>Object\UI\LogoSceneUI\GameStartBtn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -379,6 +391,12 @@
     </ClCompile>
     <ClCompile Include="CPlayerDashBar.cpp">
       <Filter>Object\UI\PlayerUI\PlayerDashBar</Filter>
+    </ClCompile>
+    <ClCompile Include="CGoTileEditBtn.cpp">
+      <Filter>Object\UI\LogoSceneUI\GoTileEditBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameStartBtn.cpp">
+      <Filter>Object\UI\LogoSceneUI\GameStartBtn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

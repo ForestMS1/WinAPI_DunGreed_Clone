@@ -58,7 +58,7 @@ void CSceneMgr::ChangeScene(wstring sceneName)
 	map<wstring, CScene*>::iterator iter = m_mapScene.find(sceneName);
 	if (iter != m_mapScene.end())
 	{
-		Safe_Delete(m_pCurCScene);
+		//Safe_Delete(m_pCurCScene);
 		m_pCurCScene = iter->second;
 		m_pCurCScene->Initialize();
 	}

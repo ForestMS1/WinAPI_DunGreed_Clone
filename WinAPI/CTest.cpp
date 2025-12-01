@@ -50,35 +50,35 @@ void CTest::Late_Update()
 void CTest::Render(HDC hDC)
 {
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
-	HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud");
-	//TODO : 배경 무한 움직임
-	StretchBlt(
-		hDC,
-		0,
-		0,
-		WINCX,
-		WINCY,
-		hMemDC,
-		0,
-		0,
-		960,
-		540,
-		SRCCOPY
-	);
-	hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownBG_Day");
-	GdiTransparentBlt(
-		hDC,
-		0,												// 복사 받을 공간의 LEFT	
-		0,												// 복사 받을 공간의 TOP
-		WINCX,											// 복사 받을 공간의 가로 
-		WINCY,											// 복사 받을 공간의 세로 
-		hMemDC,											// 복사 할 DC
-		0,
-		0,
-		320,
-		142,
-		RGB(255, 0, 255)
-	);
+	//HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud");
+	////TODO : 배경 무한 움직임
+	//StretchBlt(
+	//	hDC,
+	//	0,
+	//	0,
+	//	WINCX,
+	//	WINCY,
+	//	hMemDC,
+	//	0,
+	//	0,
+	//	960,
+	//	540,
+	//	SRCCOPY
+	//);
+	//hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownBG_Day");
+	//GdiTransparentBlt(
+	//	hDC,
+	//	0,												// 복사 받을 공간의 LEFT	
+	//	0,												// 복사 받을 공간의 TOP
+	//	WINCX,											// 복사 받을 공간의 가로 
+	//	WINCY,											// 복사 받을 공간의 세로 
+	//	hMemDC,											// 복사 할 DC
+	//	0,
+	//	0,
+	//	320,
+	//	142,
+	//	RGB(255, 0, 255)
+	//);
 	//hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownLayer_Day");
 	//GdiTransparentBlt(
 	//	hDC,

@@ -2,9 +2,11 @@
 #include "CLogo.h"
 #include "CObjMgr.h"
 #include "CPlayer.h"
+#include "CGoTileEditBtn.h"
+#include "CGameStartBtn.h"
 #include "CResourceMgr.h"
 
-CLogo::CLogo()
+CLogo::CLogo() : m_pGoTileBtn(nullptr)
 {
 }
 
@@ -20,6 +22,16 @@ void CLogo::Initialize()
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BackGround/Sky.bmp", L"Sky");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BackGround/Cloud2.bmp", L"Cloud2");
 
+	if (m_pGoTileBtn == nullptr)
+	{
+		m_pGoTileBtn = new CGoTileEditBtn;
+		m_pGoTileBtn->Initialize();
+	}
+	if (m_pGameStartBtn == nullptr)
+	{
+		m_pGameStartBtn = new CGameStartBtn;
+		m_pGameStartBtn->Initialize();
+	}
 }
 
 void CLogo::Update()
@@ -30,6 +42,10 @@ void CLogo::Update()
 void CLogo::Late_Update()
 {
 	CObjMgr::Get_Instance()->Late_Update();
+	if (m_pGoTileBtn != nullptr)
+		m_pGoTileBtn->Late_Update();
+	if (m_pGameStartBtn != nullptr)
+		m_pGameStartBtn->Late_Update();
 }
 
 void CLogo::Render(HDC hDC)
@@ -48,9 +64,31 @@ void CLogo::Render(HDC hDC)
 		WINCY,
 		RGB(0, 0, 0)
 	);
+
+	HDC hLogoDC = GET(CResourceMgr)->Find_Bmp(L"Logo");
+	GdiTransparentBlt(
+		hDC,
+		165,
+		112,
+		468,
+		225,
+		hLogoDC,
+		0,
+		0,
+		468,
+		225,
+		RGB(255, 0, 255)
+	);
+
+	if (m_pGoTileBtn != nullptr)
+		m_pGoTileBtn->Render(hDC);
+	if (m_pGameStartBtn != nullptr)
+		m_pGameStartBtn->Render(hDC);
 }
 
 void CLogo::Release()
 {
 	CObjMgr::Get_Instance()->DeleteLayerObj(OBJ_PLAYER);
+	Safe_Delete(m_pGoTileBtn);
+	Safe_Delete(m_pGameStartBtn);
 }

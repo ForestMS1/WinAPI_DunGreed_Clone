@@ -64,19 +64,19 @@ void CTileEditScene::Render(HDC hDC)
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
 
 #pragma region 마우스커서에_현재_선택된_타일_그리기
-	HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"SubBG");
-	GdiTransparentBlt(
-		hDC,
-		0,
-		0,
-		WINCX,
-		WINCY,
-		hTownDC,
-		0,
-		0,
-		320,
-		180,
-		0);
+	//HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"SubBG");
+	//GdiTransparentBlt(
+	//	hDC,
+	//	0,
+	//	0,
+	//	WINCX,
+	//	WINCY,
+	//	hTownDC,
+	//	0,
+	//	0,
+	//	320,
+	//	180,
+	//	0);
 
 	GET(CTileMgr)->Render(hDC);
 

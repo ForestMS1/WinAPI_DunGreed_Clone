@@ -1,5 +1,6 @@
 #pragma once
 #include "CScene.h"
+#include "CUI.h"
 class CLogo :
     public CScene
 {
@@ -13,5 +14,9 @@ public:
     void Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
+
+private:
+    CUI* m_pGoTileBtn;
+    CUI* m_pGameStartBtn;
 };
 

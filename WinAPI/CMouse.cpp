@@ -52,6 +52,15 @@ void CMouse::Late_Update()
 		cout << "마우스 렌더 위치 : " << renderPos.fX << "\t" << renderPos.fY << endl;
 	}
 #endif // _DEBUG
+
+	m_tInfo.fCX = 50.f;
+	m_tInfo.fCY = 50.f;
+
+	if (GET(CSceneMgr)->GetCurScene()->GetName().compare(L"Logo"))
+	{
+		m_tInfo.fCX = 27.f;
+		m_tInfo.fCY = 33.f;
+	}
 }
 void CMouse::Render(HDC hDC)
 {

@@ -140,6 +140,8 @@
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CCosmosSword.h" />
     <ClInclude Include="CEquipedUI.h" />
+    <ClInclude Include="CGameStartBtn.h" />
+    <ClInclude Include="CGoTileEditBtn.h" />
     <ClInclude Include="CMapTileOptionUI.h" />
     <ClInclude Include="CMouse.h" />
     <ClInclude Include="CPlayerDashBar.h" />
@@ -186,6 +188,8 @@
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CCosmosSword.cpp" />
     <ClCompile Include="CEquipedUI.cpp" />
+    <ClCompile Include="CGameStartBtn.cpp" />
+    <ClCompile Include="CGoTileEditBtn.cpp" />
     <ClCompile Include="CMapTileOptionUI.cpp" />
     <ClCompile Include="CMouse.cpp" />
     <ClCompile Include="CPlayerDashBar.cpp" />

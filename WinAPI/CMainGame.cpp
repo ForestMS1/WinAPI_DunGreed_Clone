@@ -36,14 +36,14 @@ void CMainGame::Initialize()
 
 	//¾À µî·Ï
 	CScene* pScene = new CLogo;
-	pScene->SetName(L"Logo");
-	GET(CSceneMgr)->CreateScene(L"Logo", new CLogo);
+	pScene->SetSceneID(SCENE_LOGO);
+	GET(CSceneMgr)->CreateScene(L"Logo", pScene);
 	pScene = new CTest;
-	pScene->SetName(L"Test");
-	GET(CSceneMgr)->CreateScene(L"Test", new CTest);
+	pScene->SetSceneID(SCENE_TEST);
+	GET(CSceneMgr)->CreateScene(L"Test", pScene);
 	pScene = new CTileEditScene;
-	pScene->SetName(L"TileEdit");
-	GET(CSceneMgr)->CreateScene(L"TileEdit", new CTileEditScene);
+	pScene->SetSceneID(SCENE_MAPTOOL);
+	GET(CSceneMgr)->CreateScene(L"TileEdit", pScene);
 
 	// ÃÖÃÊ·Î ³ª¿Ã ¾À
 	GET(CSceneMgr)->ChangeScene(L"Logo");

@@ -13,10 +13,10 @@ public:
 	virtual void Render(HDC hDC)						PURE;
 	virtual void Release()								PURE;
 
-	void SetName(wstring name) { m_wsName = name; }
-	wstring GetName() const { return m_wsName; }
+	void SetSceneID(SCENEID Id) { SCENEID = Id; }
+	SCENEID GetSceneID() const { return SCENEID; }
 
 protected:
-	wstring m_wsName;
+	SCENEID	 SCENEID;
 };
 

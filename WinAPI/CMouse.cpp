@@ -19,11 +19,7 @@ void CMouse::Initialize()
 {
 	m_tInfo.fCX = 50.f;
 	m_tInfo.fCY = 50.f;
-	if (GET(CSceneMgr)->GetCurScene()->GetName().compare(L"Logo"))
-	{
-		m_tInfo.fCX = 27.f;
-		m_tInfo.fCY = 33.f;
-	}
+
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Cursor/BasicCursor.bmp", L"BasicCursor");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Cursor/ShootingCursor.bmp", L"ShootingCursor");
 	ShowCursor(false);
@@ -56,7 +52,7 @@ void CMouse::Late_Update()
 	m_tInfo.fCX = 50.f;
 	m_tInfo.fCY = 50.f;
 
-	if (GET(CSceneMgr)->GetCurScene()->GetName().compare(L"Logo"))
+	if (GET(CSceneMgr)->GetCurSceneID() == SCENE_LOGO || GET(CSceneMgr)->GetCurSceneID() == SCENE_MAPTOOL)
 	{
 		m_tInfo.fCX = 27.f;
 		m_tInfo.fCY = 33.f;
@@ -64,7 +60,7 @@ void CMouse::Late_Update()
 }
 void CMouse::Render(HDC hDC)
 {
-	if (GET(CSceneMgr)->GetCurScene()->GetName().compare(L"Logo"))
+	if (GET(CSceneMgr)->GetCurSceneID() == SCENE_LOGO || GET(CSceneMgr)->GetCurSceneID() == SCENE_MAPTOOL)
 	{
 		HDC hBasicDC = GET(CResourceMgr)->Find_Bmp(L"BasicCursor");
 

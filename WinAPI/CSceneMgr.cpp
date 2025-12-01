@@ -31,7 +31,6 @@ void CSceneMgr::Late_Update()
 void CSceneMgr::Render(HDC hDC)
 {
 	m_pCurCScene->Render(hDC);
-	GET(CMouse)->Render(hDC);
 }
 
 void CSceneMgr::Release()

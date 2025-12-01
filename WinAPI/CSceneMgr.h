@@ -16,7 +16,7 @@ public:
 
 	void CreateScene(wstring sceneName, CScene* pScene);
 	void ChangeScene(wstring sceneName);
-	CScene* GetCurScene() const { return m_pCurCScene; }
+	SCENEID GetCurSceneID() const { return m_pCurCScene->GetSceneID(); }
 
 private:
 	map<wstring, CScene*>	m_mapScene;

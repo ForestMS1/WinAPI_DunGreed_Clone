@@ -19,6 +19,12 @@ void CMouse::Initialize()
 {
 	m_tInfo.fCX = 50.f;
 	m_tInfo.fCY = 50.f;
+	if (GET(CSceneMgr)->GetCurScene()->GetName().compare(L"Logo"))
+	{
+		m_tInfo.fCX = 27.f;
+		m_tInfo.fCY = 33.f;
+	}
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Cursor/BasicCursor.bmp", L"BasicCursor");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Cursor/ShootingCursor.bmp", L"ShootingCursor");
 	ShowCursor(false);
 }
@@ -49,21 +55,42 @@ void CMouse::Late_Update()
 }
 void CMouse::Render(HDC hDC)
 {
-	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"ShootingCursor");
+	if (GET(CSceneMgr)->GetCurScene()->GetName().compare(L"Logo"))
+	{
+		HDC hBasicDC = GET(CResourceMgr)->Find_Bmp(L"BasicCursor");
 
-	GdiTransparentBlt(
-		hDC,
-		m_tRect.left,
-		m_tRect.top,
-		m_tInfo.fCX,
-		m_tInfo.fCY,
-		hMemDC,
-		0,
-		0,
-		63,
-		63,
-		RGB(255, 0, 255)
-	);
+		GdiTransparentBlt(
+			hDC,
+			m_tRect.left,
+			m_tRect.top,
+			m_tInfo.fCX,
+			m_tInfo.fCY,
+			hBasicDC,
+			0,
+			0,
+			27,
+			33,
+			RGB(255, 0, 255)
+		);
+	}
+	else
+	{
+		HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"ShootingCursor");
+
+		GdiTransparentBlt(
+			hDC,
+			m_tRect.left,
+			m_tRect.top,
+			m_tInfo.fCX,
+			m_tInfo.fCY,
+			hMemDC,
+			0,
+			0,
+			63,
+			63,
+			RGB(255, 0, 255)
+		);
+	}
 }
 void CMouse::Release()
 {

@@ -2,6 +2,7 @@
 #include "CObj.h"
 #include "CWeapon.h"
 #include "CRunEffect.h"
+#include "CUI.h"
 class CPlayer : public CObj
 {
 public:
@@ -69,6 +70,9 @@ private:
 	bool				m_bAttack;
 	float				m_fAttackAcct;
 	float				m_fAttackt;
+
+	//UI (최상위부모UI)
+	CUI*				m_pUI;
 
 
 

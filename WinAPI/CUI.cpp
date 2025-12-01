@@ -34,3 +34,17 @@ void CUI::Render(HDC hDC)
 void CUI::Release()
 {
 }
+
+void CUI::Move_Frame()
+{
+    // Move_Frame이 안먹어서 직접Move_Frame();
+    if (m_tFrame.dwSpeed + m_tFrame.dwTime < GetTickCount())
+    {
+        ++m_tFrame.iStart;
+        m_tFrame.dwTime = GetTickCount();
+    
+    
+        if (m_tFrame.iStart > m_tFrame.iEnd)
+            m_tFrame.iStart = 0;
+    }
+}

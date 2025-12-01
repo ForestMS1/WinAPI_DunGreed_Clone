@@ -121,6 +121,21 @@
     <Filter Include="Object\UI\PlayerUI">
       <UniqueIdentifier>{7c835421-92e4-46ba-a34e-3f8a0cfd7b5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\UI\PlayerUI\PlayerHpBar">
+      <UniqueIdentifier>{5d1b0504-5672-4cca-bdde-f33a80a5eaad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\PlayerUI\EquipedUI">
+      <UniqueIdentifier>{a4b5e6e8-6a5f-4e14-b496-213d45cb3b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\PlayerUI\FoodUI">
+      <UniqueIdentifier>{3603effd-bb89-459c-b946-6229ae5fc5dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\PlayerUI\GoldUI">
+      <UniqueIdentifier>{8b28fdcc-1cf6-4121-937c-01c6309a7478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\PlayerUI\PlayerDashBar">
+      <UniqueIdentifier>{ca53fdf4-f992-4d51-8627-33492bbf7a16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -240,6 +255,15 @@
     <ClInclude Include="CPlayerUI.h">
       <Filter>Object\UI\PlayerUI</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayerHpBar.h">
+      <Filter>Object\UI\PlayerUI\PlayerHpBar</Filter>
+    </ClInclude>
+    <ClInclude Include="CEquipedUI.h">
+      <Filter>Object\UI\PlayerUI\EquipedUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerDashBar.h">
+      <Filter>Object\UI\PlayerUI\PlayerDashBar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -346,6 +370,15 @@
     </ClCompile>
     <ClCompile Include="CPlayerUI.cpp">
       <Filter>Object\UI\PlayerUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerHpBar.cpp">
+      <Filter>Object\UI\PlayerUI\PlayerHpBar</Filter>
+    </ClCompile>
+    <ClCompile Include="CEquipedUI.cpp">
+      <Filter>Object\UI\PlayerUI\EquipedUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerDashBar.cpp">
+      <Filter>Object\UI\PlayerUI\PlayerDashBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -38,6 +38,7 @@ public:
 			pChildUI->SetParentUI(this);
 		}
 	}
+	void Move_Frame();
 
 
 protected:

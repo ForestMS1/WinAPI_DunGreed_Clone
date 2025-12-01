@@ -8,6 +8,7 @@
 #include "CLineMgr.h"
 #include "CCosmosSword.h"
 #include "CMouse.h"
+#include "CPlayerUI.h"
 CPlayer::CPlayer() : 
 	m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false), m_bIsGround(false), 
 	m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false), m_IsOnBlock(false),
@@ -15,6 +16,7 @@ CPlayer::CPlayer() :
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
+	m_pUI = nullptr;
 }
 CPlayer::~CPlayer()
 {
@@ -24,6 +26,8 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	m_fSpeed = 7.f;
+	m_fMaxHp = 100.f;
+	m_fCurHp = 70.f;
 
 	m_tInfo.fX = 400.f;
 	m_tInfo.fY = 400.f;
@@ -52,12 +56,17 @@ void CPlayer::Initialize()
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerDie.bmp", L"PlayerDie");
 
 	//¹«±â
-	m_pWeapon = new CCosmosSword(this);
+	if (m_pWeapon == nullptr)
+	{
+		m_pWeapon = new CCosmosSword(this);
+		m_vecOwned.push_back(m_pWeapon);
+	}
 	//ÀÌÆåÆ®
-	m_pRunEffect = new CRunEffect(this);
-
-	m_vecOwned.push_back(m_pWeapon);
-	m_vecOwned.push_back(m_pRunEffect);
+	if (m_pRunEffect == nullptr)
+	{
+		m_pRunEffect = new CRunEffect(this);
+		m_vecOwned.push_back(m_pRunEffect);
+	}
 
 	for (auto& pOwned : m_vecOwned)
 	{
@@ -65,6 +74,13 @@ void CPlayer::Initialize()
 		{
 			pOwned->Initialize();
 		}
+	}
+
+	//UI
+	if (m_pUI == nullptr)
+	{
+		m_pUI = new CPlayerUI(this);
+		m_pUI->Initialize();
 	}
 }
 
@@ -92,6 +108,10 @@ int CPlayer::Update()
 		{
 			pOwned->Update();
 		}
+	}
+	if (m_pUI != nullptr)
+	{
+		m_pUI->Update();
 	}
 	return OBJ_NOEVENT;
 }
@@ -136,6 +156,11 @@ void CPlayer::Late_Update()
 #endif // _DEBUG
 
 	Motion_Change();
+
+	if (m_pUI != nullptr)
+	{
+		m_pUI->Late_Update();
+	}
 }
 
 void CPlayer::Render(HDC hDC)
@@ -174,6 +199,11 @@ void CPlayer::Render(HDC hDC)
 			pOwned->Render(hDC);
 		}
 	}
+
+	if (m_pUI != nullptr)
+	{
+		m_pUI->Render(hDC);
+	}
 }
 
 void CPlayer::Release()
@@ -182,6 +212,7 @@ void CPlayer::Release()
 	{
 		Safe_Delete(pOwned);
 	}
+	Safe_Delete(m_pUI);
 }
 
 void CPlayer::Key_Input()

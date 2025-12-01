@@ -25,6 +25,15 @@
 using namespace Gdiplus;
 using namespace std;
 
+#include "CObjMgr.h"
+#include "CCamera.h"
+#include "CResourceMgr.h"
+#include "CMouse.h"
+#include "CKeyMgr.h"
+#include "CTileMgr.h"
+#include "CLineMgr.h"
+#include "CSceneMgr.h"
+#include "CTimeMgr.h"
 
 #ifdef _DEBUG
 

@@ -28,6 +28,8 @@ public:
 	RENDERID Get_RenderID() const										{ return m_eRender; }
 	void Update_Rect();
 	void Move_Frame();
+	float Get_MaxHp() const												{ return m_fMaxHp; }
+	float Get_CurHp() const												{ return m_fCurHp; }
 
 
 protected:
@@ -38,6 +40,9 @@ protected:
 
 	// 수치 관련
 	float		m_fSpeed;
+	float		m_fMaxHp;
+	float		m_fCurHp;
+
 
 	// 애니메이션
 	FRAME		m_tFrame;

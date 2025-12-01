@@ -101,7 +101,7 @@ void CPlayer::Late_Update()
 	float fOnLine(0.f), fDist(0.f);
 
 	//하향 점프 버튼이 눌렸을때 or 대쉬중엔 순간적으로 선 충돌을 잠시 끈다
-	if (!(m_bBottomJump || m_bDash))
+	if (!(m_bJump||m_bBottomJump || m_bDash))
 		m_IsOnLine = GET(CLineMgr)->Collision_Line(this, &fOnLine);
 
 	m_IsOnBlock = CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
@@ -303,7 +303,7 @@ void CPlayer::Jump()
 	{
 		m_ft += 0.01f;
 		if (m_ft >= 0.4f)
-			m_tInfo.fY -= m_v0 * (m_fDashAcct - m_fDasht) + 2 - (7 * 0.5f) * m_ft * m_ft;
+			m_tInfo.fY -= -(GRAVITY * 0.5f) * m_ft * m_ft;//m_v0* (m_fDashAcct - m_fDasht) + 2 - (7 * 0.5f) * m_ft * m_ft;
 		else
 			m_tInfo.fY -= m_v0 * (0.4-m_ft);
 		m_eCurState = JUMP;

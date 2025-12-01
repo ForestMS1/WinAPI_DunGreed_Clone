@@ -16,8 +16,10 @@
 #include <algorithm>
 #include <string>
 #include <vector>
-#include <objidl.h>   // IStream 정의
+#include <ole2.h>   // IStream 정의
 #include <gdiplus.h>
+#include <iostream>
+#include <io.h>
 
 #pragma comment(lib, "Gdiplus.lib")
 using namespace Gdiplus;

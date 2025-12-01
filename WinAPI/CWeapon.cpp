@@ -20,18 +20,35 @@ CWeapon::~CWeapon()
 
 void CWeapon::Initialize()
 {
-
+    m_eRender = GAMEOBJECT;
 }
 
 int CWeapon::Update()
 {
     POINT mousePt = GET(CMouse)->Get_Point();
-    m_fAngle = atan2(m_tInfo.fY - mousePt.y, m_tInfo.fX - mousePt.x);
+    Vec2 mousePos = GET(CCamera)->GetRealPos(mousePt);
+
+    float	fWidth(0.f), fHeight(0.f), fDiagonal(0.f);
 
 
-    m_tInfo.fX = m_pOwner->Get_Info()->fX - (m_fOffsetX * cosf(m_fAngle)) - GET(CCamera)->Get_ScrollX();
-    m_tInfo.fY = m_pOwner->Get_Info()->fY - (m_fOffsetY * sinf(m_fAngle)) - GET(CCamera)->Get_ScrollY();
+    fWidth = (float)mousePos.fX - m_tInfo.fX;
+    fHeight = (float)mousePos.fY - m_tInfo.fY;
+
+    fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
+
+    m_fAngle = acosf(fWidth / fDiagonal);
+
+    if (mousePos.fY > m_tInfo.fY)
+        m_fAngle = 2.f * PI - m_fAngle;
+
+
+    m_tInfo.fX = m_pOwner->Get_Info()->fX + (m_fOffsetX * cosf(m_fAngle));
+    m_tInfo.fY = m_pOwner->Get_Info()->fY - (m_fOffsetY * sinf(m_fAngle));
+
+
     __super::Update_Rect();
+
+
 
 
 
@@ -47,7 +64,10 @@ void CWeapon::Late_Update()
 void CWeapon::Render(HDC hDC)
 {
     if (g_bDebugMod)
-        Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+        Rectangle(hDC, m_tRect.left - GET(CCamera)->Get_ScrollX(),
+            m_tRect.top - GET(CCamera)->Get_ScrollY(),
+            m_tRect.right - GET(CCamera)->Get_ScrollX(),
+            m_tRect.bottom - GET(CCamera)->Get_ScrollY());
 }
 
 void CWeapon::Release()

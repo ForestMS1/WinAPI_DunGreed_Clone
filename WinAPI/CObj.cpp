@@ -2,7 +2,7 @@
 #include "CObj.h"
 
 CObj::CObj() : m_fSpeed(0.f), m_bIsFlipped(false), m_bIsDead(false)
-, m_iFrameWidth(0.f), m_iFrameHeight(0.f)
+, m_iFrameWidth(0.f), m_iFrameHeight(0.f), m_eRender(RENDER_END)
 {
 	ZeroMemory(&m_tInfo, sizeof(m_tInfo));
 	ZeroMemory(&m_tRect, sizeof(m_tRect));

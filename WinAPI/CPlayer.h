@@ -24,6 +24,7 @@ private:
 	void Motion_Change();
 	void Jump();
 	void Dash();
+	void Attack();
 	bool ToMouse();
 
 	// TODO : 나중에 다른곳으로 빼자

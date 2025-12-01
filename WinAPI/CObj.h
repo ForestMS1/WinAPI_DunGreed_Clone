@@ -25,7 +25,7 @@ public:
 	bool IsDead() const													{ return m_bIsDead; }
 	void SetDead()														{ m_bIsDead = true; }
 	bool IsFlipped() const 												{ return m_bIsFlipped; }
-
+	RENDERID Get_RenderID() const										{ return m_eRender; }
 	void Update_Rect();
 	void Move_Frame();
 
@@ -45,6 +45,8 @@ protected:
 	bool		m_bIsFlipped; // 좌 우 반전
 	float			m_iFrameWidth;
 	float			m_iFrameHeight;
+	//렌더순서
+	RENDERID	m_eRender;
 
 
 	// 생사 여부

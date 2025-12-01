@@ -17,5 +17,6 @@ public:
 
 private:
 	list<CObj*>		m_ObjLayer[OBJ_END];
+	list<CObj*>		m_RenderList[RENDER_END];
 };
 

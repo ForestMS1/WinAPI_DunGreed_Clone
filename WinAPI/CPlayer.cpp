@@ -37,6 +37,8 @@ void CPlayer::Initialize()
 
 	m_wsFrameKey = L"Player";
 
+	m_eRender = PLAYER;
+
 	m_eCurState = IDLE;
 
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerIdle.bmp", L"PlayerIdle");
@@ -94,8 +96,6 @@ int CPlayer::Update()
 
 void CPlayer::Late_Update()
 {
-	Motion_Change();
-
 	float fOnLine(0.f), fDist(0.f);
 
 	//하향 점프 버튼이 눌렸을때 or 대쉬중엔 순간적으로 선 충돌을 잠시 끈다
@@ -107,7 +107,10 @@ void CPlayer::Late_Update()
 	if (m_IsOnLine || m_IsOnBlock)
 		m_bIsGround = true;
 	else
+	{
 		m_bIsGround = false;
+		m_eCurState = JUMP;
+	}
 
 	for (auto& pOwned : m_vecOwned)
 	{
@@ -116,6 +119,21 @@ void CPlayer::Late_Update()
 			pOwned->Late_Update();
 		}
 	}
+
+#ifdef _DEBUG
+	if (GET(CKeyMgr)->Key_Pressing(VK_RETURN))
+	{
+		system("cls");
+		Vec2 rp = GET(CCamera)->GetRealPos(Vec2(m_tInfo.fX, m_tInfo.fY));
+		Vec2 renderPos = GET(CCamera)->GetRenderPos(Vec2(m_tInfo.fX, m_tInfo.fY));
+		cout << "플레이어 실제 위치 : " << rp.fX << "\t" << rp.fY << endl;
+		cout << "플레이어 렌더 위치 : " << renderPos.fX << "\t" << renderPos.fY << endl;
+		cout << "IsGround : " << m_bIsGround << "\t" << "IsOnLine : " << m_IsOnLine << "\t" << "IsOnBlock : " << m_IsOnBlock << endl;
+		cout << m_eCurState;
+	}
+#endif // _DEBUG
+
+	Motion_Change();
 }
 
 void CPlayer::Render(HDC hDC)
@@ -194,7 +212,7 @@ void CPlayer::Key_Input()
 	{
 		if (GET(CKeyMgr)->Key_Down(VK_SPACE))
 		{
-			m_v0 = 25.f;
+			m_v0 = 30.f;
 			m_bJump = true;
 			m_eCurState = JUMP;
 			
@@ -272,7 +290,10 @@ void CPlayer::Jump()
 	if (m_bJump && m_ft < m_fDashAcct)
 	{
 		m_ft += 0.01f;
-		m_tInfo.fY -= m_v0 * (m_fDashAcct - m_fDasht) + 2 - (7 * 0.5f) * m_ft * m_ft;
+		if (m_ft >= 0.4f)
+			m_tInfo.fY -= m_v0 * (m_fDashAcct - m_fDasht) + 2 - (7 * 0.5f) * m_ft * m_ft;
+		else
+			m_tInfo.fY -= m_v0 * (0.4-m_ft);
 		m_eCurState = JUMP;
 	}
 	else
@@ -300,15 +321,23 @@ void CPlayer::Dash()
 	if (m_bDash && m_fDasht < m_fDashAcct)
 	{
 		m_fDasht += 0.01f;
-		m_tInfo.fX += m_fDashSpeed * cosf(fRadian) *(m_fDashAcct-m_fDasht);
-		if(!m_IsOnBlock)
-			m_tInfo.fY -= m_fDashSpeed * sinf(fRadian)* (m_fDashAcct - m_fDasht);
+		m_tInfo.fX += m_fDashSpeed * cosf(fRadian) * (m_fDashAcct - m_fDasht);
+			if (!(m_IsOnBlock && sinf(fRadian) < 0))
+				m_tInfo.fY -= m_fDashSpeed * sinf(fRadian) * (m_fDashAcct - m_fDasht);
+
+
+
 	}
 	else
 	{
 		m_fDasht = 0.f;
 		m_bDash = false;
 	}
+}
+
+void CPlayer::Attack()
+{
+
 }
 
 bool CPlayer::ToMouse()

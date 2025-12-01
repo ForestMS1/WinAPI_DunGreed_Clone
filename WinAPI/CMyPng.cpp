@@ -7,7 +7,6 @@ CMyPng::CMyPng() : m_Img(nullptr)
 
 CMyPng::~CMyPng()
 {
-	Safe_Delete(m_Img);
 }
 
 

@@ -43,6 +43,20 @@ void CMainGame::Initialize()
 	GET(CSceneMgr)->ChangeScene(L"Test");
 
 	GET(CMouse)->Initialize();
+
+
+#ifdef _DEBUG
+
+	if (::AllocConsole() == TRUE)
+	{
+		FILE* nfp[3];
+		freopen_s(nfp + 0, "CONOUT$", "rb", stdin);
+		freopen_s(nfp + 1, "CONOUT$", "wb", stdout);
+		freopen_s(nfp + 2, "CONOUT$", "wb", stderr);
+		std::ios::sync_with_stdio();
+	}
+
+#endif // _DEBUG
 	
 }
 
@@ -62,6 +76,7 @@ void CMainGame::Late_Update()
 	GET(CKeyMgr)->Update();
 	GET(CObjMgr)->Late_Update();
 	GET(CTileMgr)->Late_Update();
+	GET(CMouse)->Late_Update();
 }
 
 void CMainGame::Render()
@@ -96,6 +111,12 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
+#ifdef _DEBUG
+
+	FreeConsole();
+
+#endif // _DEBUG
+
 	CMouse::Destroy_Instance();
 	CTileMgr::Destroy_Instance();
 	CCamera::Destroy_Instance();

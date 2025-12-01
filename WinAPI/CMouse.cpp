@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CMouse.h"
 #include "CResourceMgr.h"
+#include "CKeyMgr.h"
+#include "CCamera.h"
 CMouse* CMouse::m_pInstance = nullptr;
 
 CMouse::CMouse() : m_iOption(0)
@@ -35,7 +37,15 @@ void CMouse::Update()
 }
 void CMouse::Late_Update()
 {
-
+#ifdef _DEBUG
+	if (GET(CKeyMgr)->Key_Pressing(VK_RETURN))
+	{
+		Vec2 rp = GET(CCamera)->GetRealPos(Vec2(m_tInfo.fX, m_tInfo.fY));
+		Vec2 renderPos = GET(CCamera)->GetRenderPos(Vec2(m_tInfo.fX, m_tInfo.fY));
+		cout << "마우스 실제 위치 : " << rp.fX << "\t" << rp.fY << endl;
+		cout << "마우스 렌더 위치 : " << renderPos.fX << "\t" << renderPos.fY << endl;
+	}
+#endif // _DEBUG
 }
 void CMouse::Render(HDC hDC)
 {

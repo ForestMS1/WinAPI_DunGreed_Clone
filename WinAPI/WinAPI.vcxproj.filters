@@ -19,9 +19,6 @@
     <Filter Include="Object">
       <UniqueIdentifier>{2c2d0b9a-ebc1-4248-af24-1a40bc133dd3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Player">
-      <UniqueIdentifier>{f5d6e52e-a400-4b4b-99b3-3e0b9a35674a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{a0365df8-2048-4b74-9f06-b634677ca34c}</UniqueIdentifier>
     </Filter>
@@ -94,17 +91,29 @@
     <Filter Include="Object\UI\MapTileUI\TileOptionBtn">
       <UniqueIdentifier>{6dec7ac1-7ec9-46db-9a3d-f8e38be44db5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Player\Owned">
+    <Filter Include="Object\Unit">
+      <UniqueIdentifier>{09622dd1-ba33-45c4-8768-8bd8ebc95282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Player">
+      <UniqueIdentifier>{f5d6e52e-a400-4b4b-99b3-3e0b9a35674a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Player\Owned">
       <UniqueIdentifier>{e0eb827f-33ce-478b-afe1-3c111a35f66a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Player\Owned\PlayerEffect">
+    <Filter Include="Object\Unit\Player\Owned\PlayerEffect">
       <UniqueIdentifier>{9da2fbe2-e285-424f-a4cf-f2ad47afa91f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Player\Owned\Weapon">
+    <Filter Include="Object\Unit\Player\Owned\Weapon">
       <UniqueIdentifier>{b9324e07-a2f9-4e28-b02a-da822058fec7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Player\Owned\Weapon\CosmosSword">
+    <Filter Include="Object\Unit\Player\Owned\Weapon\CosmosSword">
       <UniqueIdentifier>{7dfa6be8-d5e9-4342-add4-c35076c2374f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\NPC">
+      <UniqueIdentifier>{243aa404-0ebb-435f-b39d-589c9ae8b68f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy">
+      <UniqueIdentifier>{61e5bdb2-5370-4b01-a0be-aee3fe4921c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -133,7 +142,7 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="CPlayer.h">
-      <Filter>Object\Player</Filter>
+      <Filter>Object\Unit\Player</Filter>
     </ClInclude>
     <ClInclude Include="CObjMgr.h">
       <Filter>Manager\ObjMgr</Filter>
@@ -208,13 +217,16 @@
       <Filter>Object\UI\MapTileUI</Filter>
     </ClInclude>
     <ClInclude Include="CRunEffect.h">
-      <Filter>Object\Player\Owned\PlayerEffect</Filter>
+      <Filter>Object\Unit\Player\Owned\PlayerEffect</Filter>
     </ClInclude>
     <ClInclude Include="CWeapon.h">
-      <Filter>Object\Player\Owned\Weapon</Filter>
+      <Filter>Object\Unit\Player\Owned\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="CCosmosSword.h">
-      <Filter>Object\Player\Owned\Weapon\CosmosSword</Filter>
+      <Filter>Object\Unit\Player\Owned\Weapon\CosmosSword</Filter>
+    </ClInclude>
+    <ClInclude Include="CUnit.h">
+      <Filter>Object\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +243,7 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="CPlayer.cpp">
-      <Filter>Object\Player</Filter>
+      <Filter>Object\Unit\Player</Filter>
     </ClCompile>
     <ClCompile Include="CObjMgr.cpp">
       <Filter>Manager\ObjMgr</Filter>
@@ -306,13 +318,16 @@
       <Filter>Object\UI\MapTileUI</Filter>
     </ClCompile>
     <ClCompile Include="CRunEffect.cpp">
-      <Filter>Object\Player\Owned\PlayerEffect</Filter>
+      <Filter>Object\Unit\Player\Owned\PlayerEffect</Filter>
     </ClCompile>
     <ClCompile Include="CWeapon.cpp">
-      <Filter>Object\Player\Owned\Weapon</Filter>
+      <Filter>Object\Unit\Player\Owned\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="CCosmosSword.cpp">
-      <Filter>Object\Player\Owned\Weapon\CosmosSword</Filter>
+      <Filter>Object\Unit\Player\Owned\Weapon\CosmosSword</Filter>
+    </ClCompile>
+    <ClCompile Include="CUnit.cpp">
+      <Filter>Object\Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

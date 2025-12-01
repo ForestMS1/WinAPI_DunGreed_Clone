@@ -6,6 +6,7 @@ CUI::CUI() : m_bIsFlipped(false), m_bIsOpen(true), m_pParentUI(nullptr)
 	ZeroMemory(&m_tInfo, sizeof(m_tInfo));
 	ZeroMemory(&m_tRect, sizeof(m_tRect));
 	ZeroMemory(&m_tFrame, sizeof(m_tFrame));
+	m_eRender = UI;
 }
 
 CUI::~CUI()

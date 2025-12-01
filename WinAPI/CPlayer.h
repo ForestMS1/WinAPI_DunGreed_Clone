@@ -25,7 +25,6 @@ private:
 	void Jump();
 	void Dash();
 	bool ToMouse();
-	void Dash();
 
 	// TODO : 나중에 다른곳으로 빼자
 	float lerp(float x, float y, float t)

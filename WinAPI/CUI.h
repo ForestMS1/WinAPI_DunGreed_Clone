@@ -16,8 +16,18 @@ public:
 
 public:
 	bool IsOpen() const { return m_bIsOpen; }
-	void Open() { m_bIsOpen = true; }
-	void Close() { m_bIsOpen = false; }
+	void Open() 
+	{ 
+		m_bIsOpen = true;
+		for (auto& pChild : m_vecChildUI)
+			pChild->Open();
+	}
+	void Close()
+	{
+		m_bIsOpen = false;
+		for (auto& pChild : m_vecChildUI)
+			pChild->Close();
+	}
 	void SetParentUI(CUI* pParentUI) { m_pParentUI = pParentUI; }
 	CUI* GetParentUI() const { return m_pParentUI; }
 	void AddChildUI(CUI* pChildUI) 

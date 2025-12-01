@@ -7,8 +7,10 @@
 #include "CTileMgr.h"
 #include "CLineMgr.h"
 #include "CCosmosSword.h"
+#include "CMouse.h"
 CPlayer::CPlayer() : m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false)
-, m_bIsGround(false)
+, m_bIsGround(false), m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false)
+,m_IsOnBlock(false)
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
@@ -65,14 +67,16 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
-	if (!m_bJump)
+	if (!(m_bJump || m_bDash))
 		m_tInfo.fY += GRAVITY;
 
 	m_bIsFlipped = ToMouse();
 
+
 	Key_Input();
 
 	Jump();
+	Dash();
 
 	Update_Rect();
 
@@ -93,15 +97,14 @@ void CPlayer::Late_Update()
 	Motion_Change();
 
 	float fOnLine(0.f), fDist(0.f);
-	bool IsOnLine(false), IsOnTile(false);
 
-	//하향 점프 버튼이 눌렸을때 순간적으로 선 충돌을 잠시 끈다
-	if(!m_bBottomJump)
-		IsOnLine = GET(CLineMgr)->Collision_Line(this, &fOnLine);
+	//하향 점프 버튼이 눌렸을때 or 대쉬중엔 순간적으로 선 충돌을 잠시 끈다
+	if (!(m_bBottomJump || m_bDash))
+		m_IsOnLine = GET(CLineMgr)->Collision_Line(this, &fOnLine);
 
-	IsOnTile = CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
+	m_IsOnBlock = CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
 
-	if (IsOnTile || IsOnLine)
+	if (m_IsOnLine || m_IsOnBlock)
 		m_bIsGround = true;
 	else
 		m_bIsGround = false;
@@ -189,9 +192,9 @@ void CPlayer::Key_Input()
 	}
 	else
 	{
-		if (GET(CKeyMgr)->Key_Pressing(VK_SPACE))
+		if (GET(CKeyMgr)->Key_Down(VK_SPACE))
 		{
-			m_v0 = 20.f;
+			m_v0 = 25.f;
 			m_bJump = true;
 			m_eCurState = JUMP;
 			
@@ -203,11 +206,11 @@ void CPlayer::Key_Input()
 		m_bBottomJump = false;
 	}
 
-	if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
+	if (GET(CKeyMgr)->Key_Down(VK_RBUTTON))
 	{
-		Dash();
+		m_bDash = true;
+		m_vDashDir = GET(CCamera)->GetRealPos(GET(CMouse)->Get_Point());
 	}
-
 
 }
 
@@ -266,16 +269,45 @@ void CPlayer::Motion_Change()
 
 void CPlayer::Jump()
 {
-	if (m_bJump && m_ft < m_fAcct)
+	if (m_bJump && m_ft < m_fDashAcct)
 	{
-		m_ft += 0.2f;
-		m_tInfo.fY -= m_v0 - (7 * 0.5f) * m_ft * m_ft;
+		m_ft += 0.01f;
+		m_tInfo.fY -= m_v0 * (m_fDashAcct - m_fDasht) + 2 - (7 * 0.5f) * m_ft * m_ft;
 		m_eCurState = JUMP;
 	}
 	else
 	{
 		m_ft = 0.f;
 		m_bJump = false;
+	}
+}
+
+void CPlayer::Dash()
+{
+	float	fWidth(0.f), fHeight(0.f), fDiagonal(0.f), fRadian(0.f);
+
+
+	fWidth = m_vDashDir.fX - m_tInfo.fX;
+	fHeight = m_vDashDir.fY - m_tInfo.fY;
+
+	fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
+
+	fRadian = acosf(fWidth / fDiagonal);
+
+	if (m_vDashDir.fY > m_tInfo.fY)
+		fRadian = 2.f * PI - fRadian;
+
+	if (m_bDash && m_fDasht < m_fDashAcct)
+	{
+		m_fDasht += 0.01f;
+		m_tInfo.fX += m_fDashSpeed * cosf(fRadian) *(m_fDashAcct-m_fDasht);
+		if(!m_IsOnBlock)
+			m_tInfo.fY -= m_fDashSpeed * sinf(fRadian)* (m_fDashAcct - m_fDasht);
+	}
+	else
+	{
+		m_fDasht = 0.f;
+		m_bDash = false;
 	}
 }
 
@@ -297,8 +329,4 @@ bool CPlayer::ToMouse()
 	}
 
 	//TODO : 마우스 방향으로 무기회전
-}
-
-void CPlayer::Dash()
-{
 }

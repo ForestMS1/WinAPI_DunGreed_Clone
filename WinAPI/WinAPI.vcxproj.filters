@@ -118,6 +118,9 @@
     <Filter Include="Object\Unit\Player\Owned\Weapon\SwingFX">
       <UniqueIdentifier>{c8956d7d-d941-48ac-8518-ed58703b6046}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\UI\PlayerUI">
+      <UniqueIdentifier>{7c835421-92e4-46ba-a34e-3f8a0cfd7b5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -234,6 +237,9 @@
     <ClInclude Include="CSwingFX.h">
       <Filter>Object\Unit\Player\Owned\Weapon\SwingFX</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayerUI.h">
+      <Filter>Object\UI\PlayerUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -337,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="CSwingFX.cpp">
       <Filter>Object\Unit\Player\Owned\Weapon\SwingFX</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerUI.cpp">
+      <Filter>Object\UI\PlayerUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

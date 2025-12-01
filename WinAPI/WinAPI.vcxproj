@@ -141,6 +141,7 @@
     <ClInclude Include="CCosmosSword.h" />
     <ClInclude Include="CMapTileOptionUI.h" />
     <ClInclude Include="CMouse.h" />
+    <ClInclude Include="CPlayerUI.h" />
     <ClInclude Include="CRunEffect.h" />
     <ClInclude Include="CSwingFX.h" />
     <ClInclude Include="CTest.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="CCosmosSword.cpp" />
     <ClCompile Include="CMapTileOptionUI.cpp" />
     <ClCompile Include="CMouse.cpp" />
+    <ClCompile Include="CPlayerUI.cpp" />
     <ClCompile Include="CRunEffect.cpp" />
     <ClCompile Include="CSwingFX.cpp" />
     <ClCompile Include="CTest.cpp" />

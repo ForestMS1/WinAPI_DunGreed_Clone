@@ -26,6 +26,10 @@ void CWeapon::Initialize()
 
 int CWeapon::Update()
 {
+    __super::Update_Rect();
+
+    Move_Frame();
+
     POINT mousePt = GET(CMouse)->Get_Point();
     Vec2 mousePos = GET(CCamera)->GetRealPos(mousePt);
 
@@ -36,6 +40,8 @@ int CWeapon::Update()
     fHeight = (float)mousePos.fY - m_tInfo.fY;
 
     fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
+    if (fDiagonal <= 30.f)
+        return 0;
 
     m_fAngle = acosf(fWidth / fDiagonal);
 
@@ -45,12 +51,6 @@ int CWeapon::Update()
 
     m_tInfo.fX = m_pOwner->Get_Info()->fX + (m_fOffsetX * cosf(m_fAngle));
     m_tInfo.fY = m_pOwner->Get_Info()->fY - (m_fOffsetY * sinf(m_fAngle));
-
-
-    __super::Update_Rect();
-
-
-    Move_Frame();
     return 0;
 }
 

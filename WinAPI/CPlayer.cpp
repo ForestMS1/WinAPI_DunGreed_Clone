@@ -145,7 +145,7 @@ void CPlayer::Late_Update()
 #ifdef _DEBUG
 	if (GET(CKeyMgr)->Key_Pressing(VK_RETURN))
 	{
-		system("cls");5
+		system("cls");
 		Vec2 rp = GET(CCamera)->GetRealPos(Vec2(m_tInfo.fX, m_tInfo.fY));
 		Vec2 renderPos = GET(CCamera)->GetRenderPos(Vec2(m_tInfo.fX, m_tInfo.fY));
 		cout << "플레이어 실제 위치 : " << rp.fX << "\t" << rp.fY << endl;

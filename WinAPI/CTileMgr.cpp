@@ -184,7 +184,7 @@ void CTileMgr::Load_Tile()
 	}
 
 	CloseHandle(hFile);
-	MessageBox(g_hWnd, _T("Load 완료"), L"Success", MB_OK);
+	//MessageBox(g_hWnd, _T("Load 완료"), L"Success", MB_OK);
 }
 
 void CTileMgr::Clear_Tile()

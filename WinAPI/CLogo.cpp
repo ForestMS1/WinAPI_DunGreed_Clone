@@ -6,7 +6,7 @@
 #include "CGameStartBtn.h"
 #include "CResourceMgr.h"
 
-CLogo::CLogo() : m_pGoTileBtn(nullptr)
+CLogo::CLogo() : m_pGoTileBtn(nullptr), m_pGameStartBtn(nullptr)
 {
 }
 

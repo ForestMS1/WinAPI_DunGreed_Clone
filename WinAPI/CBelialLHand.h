@@ -1,30 +1,27 @@
 #pragma once
 #include "CEnemy.h"
-#include "CBelialRHand.h"
-#include "CBelialLHand.h"
-
-class CBelial :
+class CBelialLHand :
     public CEnemy
 {
 public:
-    CBelial();
-    ~CBelial();
+    CBelialLHand();
+    CBelialLHand(CEnemy* pBelial);
+    ~CBelialLHand();
+public:
+
     // CEnemy을(를) 통해 상속됨
     void Initialize() override;
     int Update() override;
     void Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
-
-    BELIAL_STATE GetCurState() const { return m_eCurState; }
-private:
     void Motion_Change() override;
+
 private:
+    CEnemy* m_pOwner;
+
+
     BELIAL_STATE m_ePreState;
     BELIAL_STATE m_eCurState;
-
-    //스읍... 이게 맞나 너무 하드코딩같지만 일단 끼워
-    CBelialRHand* m_pRHand;
-    CBelialLHand* m_pLHand;
 };
 

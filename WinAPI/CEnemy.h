@@ -1,5 +1,9 @@
 #pragma once
 #include "CObj.h"
+
+enum BELIAL_STATE { IDLE, ATTACK_ROTATE, ATTACK_HAND, ATTACK_SPEAR, DEAD, STATE_END };
+
+
 class CEnemy :
     public CObj
 {

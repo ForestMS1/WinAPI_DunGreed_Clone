@@ -148,6 +148,9 @@
     <Filter Include="Object\Unit\Enemy\Belial\BelialRHand">
       <UniqueIdentifier>{ff3472b0-487f-4aac-a03d-907f35f25b6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\Belial\BelialLHand">
+      <UniqueIdentifier>{44909b2f-7586-4ca7-b7a7-cc14e38cfa8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -294,6 +297,12 @@
     <ClInclude Include="CBelial.h">
       <Filter>Object\Unit\Enemy\Belial</Filter>
     </ClInclude>
+    <ClInclude Include="CBelialRHand.h">
+      <Filter>Object\Unit\Enemy\Belial\BelialRHand</Filter>
+    </ClInclude>
+    <ClInclude Include="CBelialLHand.h">
+      <Filter>Object\Unit\Enemy\Belial\BelialLHand</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -427,6 +436,12 @@
     </ClCompile>
     <ClCompile Include="CBelial.cpp">
       <Filter>Object\Unit\Enemy\Belial</Filter>
+    </ClCompile>
+    <ClCompile Include="CBelialRHand.cpp">
+      <Filter>Object\Unit\Enemy\Belial\BelialRHand</Filter>
+    </ClCompile>
+    <ClCompile Include="CBelialLHand.cpp">
+      <Filter>Object\Unit\Enemy\Belial\BelialLHand</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

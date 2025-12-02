@@ -12,7 +12,7 @@ CBelial::~CBelial()
 
 void CBelial::Initialize()
 {
-	m_fMaxHp = 500.f;
+	m_fMaxHp = 30.f;
 	m_fCurHp = m_fMaxHp;
 
 	m_tInfo.fX = 2500.f;
@@ -84,9 +84,12 @@ void CBelial::Late_Update()
 
 void CBelial::Render(HDC hDC)
 {
-	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
 	int ScrollX = (int)GET(CCamera)->Get_ScrollX();
 	int ScrollY = (int)GET(CCamera)->Get_ScrollY();
+	if (g_bDebugMod)
+		Rectangle(hDC, m_tRect.left - ScrollX, m_tRect.top - ScrollY, m_tRect.right - ScrollX, m_tRect.bottom - ScrollY);
+	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
+
 	GdiTransparentBlt(
 		hDC,
 		m_tRect.left - ScrollX,

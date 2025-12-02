@@ -39,6 +39,10 @@ void CCosmosSword::Initialize()
     m_tFrame.dwSpeed = 100;
     m_tFrame.iMotion = 0;
     m_tFrame.dwTime = GetTickCount();
+
+    m_fDamage = 10.f;
+    m_iMaxAttackCount = 1;
+    m_iCurAttackCount = 0;
 }
 
 int CCosmosSword::Update()
@@ -78,6 +82,11 @@ void CCosmosSword::Late_Update()
                 m_tRect.bottom
             };
         }
+        CCollisionMgr::Collision_Weapon(this, GET(CObjMgr)->GetObjLayer(OBJ_MONSTER));
+    }
+    else
+    {
+        m_iCurAttackCount = 0;
     }
     if (m_pSwingFX != nullptr)
     {

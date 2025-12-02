@@ -4,13 +4,13 @@
 #include "CCamera.h"
 #include "CMouse.h"
 
-CWeapon::CWeapon()
+CWeapon::CWeapon() : m_fDamage(0.f), m_iMaxAttackCount(0), m_iCurAttackCount(0)
 {
     m_pOwner = nullptr;
     ZeroMemory(&m_tAttackRect, sizeof(RECT));
 }
 
-CWeapon::CWeapon(CObj* pOwner) : m_fOffsetX(0.f), m_fOffsetY(0.f) , m_fAngle(0.f)
+CWeapon::CWeapon(CObj* pOwner) : m_fOffsetX(0.f), m_fOffsetY(0.f) , m_fAngle(0.f) , m_fDamage(0.f)
 {
     m_pOwner = pOwner;
 }

@@ -2,6 +2,8 @@
 #include "CCollisionMgr.h"
 #include "CTile.h"
 #include "CCamera.h"
+#include "CEnemy.h"
+#include "CWeapon.h"
 void CCollisionMgr::Collision_Rect(list<CObj*> _Dst, list<CObj*> _Src)
 {
 
@@ -18,6 +20,30 @@ void CCollisionMgr::Collision_Rect(list<CObj*> _Dst, list<CObj*> _Src)
 			}
 		}
 	}
+
+}
+void CCollisionMgr::Collision_Weapon(CWeapon* pWeapon, list<CObj*> _Src)
+{
+
+	RECT	rc{};
+
+	for (auto& Src : _Src)
+	{
+		if (IntersectRect(&rc, pWeapon->Get_AttackRect(), Src->Get_Rect()))
+		{
+			CObj* pEnemy = nullptr;
+			pEnemy = dynamic_cast<CEnemy*>(Src);
+			if (pEnemy != nullptr)
+			{
+				if (pWeapon->Get_MaxAttackCount() > pWeapon->Get_CurAttackCount())
+				{
+					pWeapon->Set_AttackCount();
+					dynamic_cast<CEnemy*>(pEnemy)->OnDamage(pWeapon->Get_Damage());
+				}
+			}
+		}
+	}
+	
 
 }
 

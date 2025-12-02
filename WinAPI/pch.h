@@ -34,6 +34,7 @@ using namespace std;
 #include "CLineMgr.h"
 #include "CSceneMgr.h"
 #include "CTimeMgr.h"
+#include "CCollisionMgr.h"
 
 #ifdef _DEBUG
 

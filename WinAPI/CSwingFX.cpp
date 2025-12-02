@@ -23,7 +23,7 @@ CSwingFX::~CSwingFX()
 
 void CSwingFX::Initialize()
 {
-	GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Effect/CosmosSwordSwingFXTemp.png", L"CosmosSwordSwingFX");
+	GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Effect/CosmosSwingFXTemp.png", L"CosmosSwordSwingFX");
 	m_wsFrameKey = L"CosmosSwordSwingFX";
 	m_iFrameWidth = 158.f;
 	m_iFrameHeight = 181.f;
@@ -39,11 +39,11 @@ void CSwingFX::Initialize()
 
 int CSwingFX::Update()
 {
-	RECT atr = dynamic_cast<CWeapon*>(m_pOwner)->Get_AttackRect();
-	m_tRect.left = atr.left;
-	m_tRect.top =  atr.top;
-	m_tRect.right = atr.right;
-	m_tRect.bottom = atr.bottom;
+	RECT* atr = dynamic_cast<CWeapon*>(m_pOwner)->Get_AttackRect();
+	m_tRect.left = atr->left;
+	m_tRect.top =  atr->top;
+	m_tRect.right = atr->right;
+	m_tRect.bottom = atr->bottom;
 
 	m_tInfo.fX = m_tRect.left + m_tInfo.fCX * 0.5f;
 	m_tInfo.fY = m_tRect.top + m_tInfo.fCY * 0.5f;
@@ -70,12 +70,12 @@ void CSwingFX::Render(HDC hDC)
 	CObj* pPlayer = dynamic_cast<CWeapon*>(m_pOwner)->Get_Owner();
 	if (dynamic_cast<CPlayer*>(pPlayer)->Get_State() == CPlayer::ATTACK)
 	{
-		/*Rectangle(
+		Rectangle(
 			hDC,
 			m_tRect.left - GET(CCamera)->Get_ScrollX(),
 			m_tRect.top - GET(CCamera)->Get_ScrollY(),
 			m_tRect.right - GET(CCamera)->Get_ScrollX(),
-			m_tRect.bottom - GET(CCamera)->Get_ScrollY());*/
+			m_tRect.bottom - GET(CCamera)->Get_ScrollY());
 
 		//1. 회전 시킬 사진을 비트맵으로 불러들인다..
 		Bitmap* _bmp = (Bitmap*)GET(CResourceMgr)->Find_Png(L"CosmosSwordSwingFX");
@@ -97,7 +97,7 @@ void CSwingFX::Render(HDC hDC)
 		Matrix _matrix;
 
 
-		_matrix.RotateAt(90 - (m_fAngle * 180 / PI), PointF((float)(_tempBmp.GetWidth() / 2), (float)(_tempBmp.GetHeight() / 2)));
+		_matrix.RotateAt( - (m_fAngle * 180 / PI), PointF((float)(_tempBmp.GetWidth() / 2), (float)(_tempBmp.GetHeight() / 2)));
 
 		//6. 5번의 좌표계를 2번에 세팅해서 DC를 회전시킨다.
 		_tempgx.SetTransform(&_matrix);
@@ -110,8 +110,10 @@ void CSwingFX::Render(HDC hDC)
 		//8. 회전되어 그려진 그림을 원하는 좌표에 그린다.
 		_gx.DrawImage(
 			&_tempBmp,
-			(int)(m_tInfo.fX - GET(CCamera)->Get_ScrollX() - _tempBmp.GetWidth() / 2),
-			(int)(m_tInfo.fY - GET(CCamera)->Get_ScrollY() - _tempBmp.GetHeight() / 2)
+			//(int)(m_tInfo.fX - GET(CCamera)->Get_ScrollX() - _tempBmp.GetWidth() / 2),
+			//(int)(m_tInfo.fY - GET(CCamera)->Get_ScrollY() - _tempBmp.GetHeight() / 2)
+			(int)(m_tInfo.fX - GET(CCamera)->Get_ScrollX() - _tempBmp.GetWidth() / 2) + 167,
+			(int)(m_tInfo.fY - GET(CCamera)->Get_ScrollY() - _tempBmp.GetHeight() / 2) + 90
 		);
 	}
 }

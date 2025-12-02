@@ -145,7 +145,7 @@ void CPlayer::Late_Update()
 #ifdef _DEBUG
 	if (GET(CKeyMgr)->Key_Pressing(VK_RETURN))
 	{
-		system("cls");
+		system("cls");5
 		Vec2 rp = GET(CCamera)->GetRealPos(Vec2(m_tInfo.fX, m_tInfo.fY));
 		Vec2 renderPos = GET(CCamera)->GetRenderPos(Vec2(m_tInfo.fX, m_tInfo.fY));
 		cout << "플레이어 실제 위치 : " << rp.fX << "\t" << rp.fY << endl;
@@ -261,6 +261,18 @@ void CPlayer::Key_Input()
 	{
 		m_bDash = true;
 		m_vDashDir = GET(CCamera)->GetRealPos(GET(CMouse)->Get_Point());
+
+		float	fWidth(0.f), fHeight(0.f), fDiagonal(0.f);
+
+
+		fWidth = m_vDashDir.fX - m_tInfo.fX;
+		fHeight = m_vDashDir.fY - m_tInfo.fY;
+
+		fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
+
+		m_fDashRadian = acosf(fWidth / fDiagonal);
+		if (m_vDashDir.fY > m_tInfo.fY)
+			m_fDashRadian = 2.f * PI - m_fDashRadian;
 	}
 	if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
@@ -348,28 +360,12 @@ void CPlayer::Jump()
 
 void CPlayer::Dash()
 {
-	float	fWidth(0.f), fHeight(0.f), fDiagonal(0.f), fRadian(0.f);
-
-
-	fWidth = m_vDashDir.fX - m_tInfo.fX;
-	fHeight = m_vDashDir.fY - m_tInfo.fY;
-
-	fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
-
-	fRadian = acosf(fWidth / fDiagonal);
-
-	if (m_vDashDir.fY > m_tInfo.fY)
-		fRadian = 2.f * PI - fRadian;
-
 	if (m_bDash && m_fDasht < m_fDashAcct)
 	{
 		m_fDasht += 0.01f;
-		m_tInfo.fX += m_fDashSpeed * cosf(fRadian) * (m_fDashAcct - m_fDasht);
-			if (!(m_IsOnBlock && sinf(fRadian) < 0))
-				m_tInfo.fY -= m_fDashSpeed * sinf(fRadian) * (m_fDashAcct - m_fDasht);
-
-
-
+		m_tInfo.fX += m_fDashSpeed * cosf(m_fDashRadian) * (m_fDashAcct - m_fDasht);
+			if (!(m_IsOnBlock && sinf(m_fDashRadian) < 0))
+				m_tInfo.fY -= m_fDashSpeed * sinf(m_fDashRadian) * (m_fDashAcct - m_fDasht);
 	}
 	else
 	{

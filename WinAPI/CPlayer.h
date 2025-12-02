@@ -65,6 +65,7 @@ private:
 	float				m_fDashAcct;
 	bool				m_bDash;
 	Vec2				m_vDashDir;
+	float				m_fDashRadian;
 
 	// АјАн
 	bool				m_bAttack;

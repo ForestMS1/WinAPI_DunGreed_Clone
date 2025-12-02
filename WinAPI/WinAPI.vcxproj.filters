@@ -142,6 +142,12 @@
     <Filter Include="Object\UI\LogoSceneUI\GameStartBtn">
       <UniqueIdentifier>{3864b755-5ffa-491c-a6ce-5f24d3e2f575}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\Belial">
+      <UniqueIdentifier>{d5ed4ab6-9d50-421c-9558-c8d8d9759fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy\Belial\BelialRHand">
+      <UniqueIdentifier>{ff3472b0-487f-4aac-a03d-907f35f25b6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -276,6 +282,18 @@
     <ClInclude Include="CGameStartBtn.h">
       <Filter>Object\UI\LogoSceneUI\GameStartBtn</Filter>
     </ClInclude>
+    <ClInclude Include="CGoldUI.h">
+      <Filter>Object\UI\PlayerUI\GoldUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CFoodUI.h">
+      <Filter>Object\UI\PlayerUI\FoodUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemy.h">
+      <Filter>Object\Unit\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CBelial.h">
+      <Filter>Object\Unit\Enemy\Belial</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -397,6 +415,18 @@
     </ClCompile>
     <ClCompile Include="CGameStartBtn.cpp">
       <Filter>Object\UI\LogoSceneUI\GameStartBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="CFoodUI.cpp">
+      <Filter>Object\UI\PlayerUI\FoodUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CGoldUI.cpp">
+      <Filter>Object\UI\PlayerUI\GoldUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemy.cpp">
+      <Filter>Object\Unit\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="CBelial.cpp">
+      <Filter>Object\Unit\Enemy\Belial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

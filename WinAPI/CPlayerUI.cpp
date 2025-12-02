@@ -2,7 +2,9 @@
 #include "CPlayerUI.h"
 #include "CPlayerHpBar.h"
 #include "CEquipedUI.h"
-
+#include "CFoodUI.h"
+#include "CGoldUI.h"
+#include "CPlayerDashBar.h"
 CPlayerUI::CPlayerUI()
 {
 	m_pPlayer = nullptr;
@@ -29,7 +31,10 @@ void CPlayerUI::Initialize()
 	if (m_vecChildUI.empty())
 	{
 		AddChildUI(new CPlayerHpBar);
+		AddChildUI(new CPlayerDashBar);
 		AddChildUI(new CEquipedUI);
+		AddChildUI(new CFoodUI);
+		AddChildUI(new CGoldUI);
 	}
 
 	for (auto& pChildUI : m_vecChildUI)

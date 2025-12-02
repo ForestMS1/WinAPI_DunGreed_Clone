@@ -1,11 +1,11 @@
 #pragma once
 #include "CUI.h"
-class CPlayerDashBar :
+class CFoodUI :
     public CUI
 {
 public:
-    CPlayerDashBar();
-    ~CPlayerDashBar();
+    CFoodUI();
+    ~CFoodUI();
 public:
     // CUI을(를) 통해 상속됨
     void Initialize() override;
@@ -14,8 +14,7 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 private:
-    int m_iMaxDashCount;
-    int m_iCurDashCount;
-    float m_fCurDashGage;
+    float m_fMaxSatiety;
+    float m_fCurSatiety;
 };
 

@@ -8,6 +8,7 @@
 #include "CResourceMgr.h"
 #include "CKeyMgr.h"
 #include "CTileMgr.h"
+#include "CBelial.h"
 CTest::CTest() : m_bIsDrawing(false)
 {
 	ZeroMemory(&m_ptMouse, sizeof(m_ptMouse));
@@ -26,6 +27,7 @@ void CTest::Initialize()
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownBG_Day.bmp", L"TownBG_Day");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownLayer_Day.bmp", L"TownLayer_Day");
 	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(100.f, 100.f));
+	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBelial>::Create(0.f, 0.f));
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
@@ -50,49 +52,49 @@ void CTest::Late_Update()
 void CTest::Render(HDC hDC)
 {
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
-	//HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud");
-	////TODO : 배경 무한 움직임
-	//StretchBlt(
-	//	hDC,
-	//	0,
-	//	0,
-	//	WINCX,
-	//	WINCY,
-	//	hMemDC,
-	//	0,
-	//	0,
-	//	960,
-	//	540,
-	//	SRCCOPY
-	//);
-	//hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownBG_Day");
-	//GdiTransparentBlt(
-	//	hDC,
-	//	0,												// 복사 받을 공간의 LEFT	
-	//	0,												// 복사 받을 공간의 TOP
-	//	WINCX,											// 복사 받을 공간의 가로 
-	//	WINCY,											// 복사 받을 공간의 세로 
-	//	hMemDC,											// 복사 할 DC
-	//	0,
-	//	0,
-	//	320,
-	//	142,
-	//	RGB(255, 0, 255)
-	//);
-	//hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownLayer_Day");
-	//GdiTransparentBlt(
-	//	hDC,
-	//	0,												// 복사 받을 공간의 LEFT	
-	//	0,												// 복사 받을 공간의 TOP
-	//	WINCX,											// 복사 받을 공간의 가로 
-	//	WINCY,											// 복사 받을 공간의 세로 
-	//	hMemDC,											// 복사 할 DC
-	//	0,
-	//	0,
-	//	320,
-	//	95,
-	//	RGB(255, 0, 255)
-	//);
+	HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud");
+	//TODO : 배경 무한 움직임
+	StretchBlt(
+		hDC,
+		0,
+		0,
+		WINCX,
+		WINCY,
+		hMemDC,
+		0,
+		0,
+		960,
+		540,
+		SRCCOPY
+	);
+	hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownBG_Day");
+	GdiTransparentBlt(
+		hDC,
+		0,												// 복사 받을 공간의 LEFT	
+		0,												// 복사 받을 공간의 TOP
+		WINCX,											// 복사 받을 공간의 가로 
+		WINCY,											// 복사 받을 공간의 세로 
+		hMemDC,											// 복사 할 DC
+		0,
+		0,
+		320,
+		142,
+		RGB(255, 0, 255)
+	);
+	hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownLayer_Day");
+	GdiTransparentBlt(
+		hDC,
+		0,												// 복사 받을 공간의 LEFT	
+		0,												// 복사 받을 공간의 TOP
+		WINCX,											// 복사 받을 공간의 가로 
+		WINCY,											// 복사 받을 공간의 세로 
+		hMemDC,											// 복사 할 DC
+		0,
+		0,
+		320,
+		95,
+		RGB(255, 0, 255)
+	);
 
 	GET(CTileMgr)->Render(hDC);
 	GET(CObjMgr)->Render(hDC);

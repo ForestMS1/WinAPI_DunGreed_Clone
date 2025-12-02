@@ -43,8 +43,30 @@ void CCollisionMgr::Collision_Weapon(CWeapon* pWeapon, list<CObj*> _Src)
 			}
 		}
 	}
-	
+}
 
+void CCollisionMgr::MonsterDetecPlayer(CObj* pPlayer, list<CObj*> _Src)
+{
+
+	RECT	rc{};
+
+	for (auto& Src : _Src)
+	{
+		if (IntersectRect(&rc, pPlayer->Get_Rect(), dynamic_cast<CEnemy*>(Src)->GetDetectRect()))
+		{
+			if (Src != nullptr)
+			{
+				dynamic_cast<CEnemy*>(Src)->InPlayer();
+			}
+		}
+		else
+		{
+			if (Src != nullptr)
+			{
+				dynamic_cast<CEnemy*>(Src)->OutPlayer();
+			}
+		}
+	}
 }
 
 void CCollisionMgr::Collision_RectEx(list<CObj*> _Dst, list<CObj*> _Src)

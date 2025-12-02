@@ -20,6 +20,10 @@ void CBelial::Initialize()
 	m_tInfo.fCX = 210.f;
 	m_tInfo.fCY = 285.f;
 
+	//플레이어 감지 범위
+	m_fDetectfCX = 700.f;
+	m_fDetectfCY = 700.f;
+
 	m_tFrame.iStart = 0;
 	m_tFrame.iMotion = 0;
 	m_tFrame.iEnd = 9;
@@ -59,10 +63,15 @@ int CBelial::Update()
 		//return OBJ_DEAD;
 	}
 	__super::Update_Rect();
+	Update_DetectRect();
 
 	if(m_eCurState != DEAD)
 		Move_Frame();
 
+	if (m_bIsInPlayer)
+		m_eCurState = ATTACK_HAND;
+	else
+		m_eCurState = IDLE;
 
 	if (m_pRHand != nullptr)
 		m_pRHand->Update();
@@ -87,7 +96,14 @@ void CBelial::Render(HDC hDC)
 	int ScrollX = (int)GET(CCamera)->Get_ScrollX();
 	int ScrollY = (int)GET(CCamera)->Get_ScrollY();
 	if (g_bDebugMod)
+	{
 		Rectangle(hDC, m_tRect.left - ScrollX, m_tRect.top - ScrollY, m_tRect.right - ScrollX, m_tRect.bottom - ScrollY);
+		HPEN hPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
+		hPen = (HPEN)SelectObject(hDC, hPen);
+		Rectangle(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.top - ScrollY, m_tDetectRect.right - ScrollX, m_tDetectRect.bottom - ScrollY);
+		hPen = (HPEN)SelectObject(hDC, hPen);
+		DeleteObject(hPen);
+	}
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
 
 	GdiTransparentBlt(

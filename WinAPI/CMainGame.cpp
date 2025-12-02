@@ -83,6 +83,8 @@ void CMainGame::Late_Update()
 	GET(CObjMgr)->Late_Update();
 	GET(CTileMgr)->Late_Update();
 	GET(CMouse)->Late_Update();
+	if(!GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).empty())
+		CCollisionMgr::MonsterDetecPlayer(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front(), GET(CObjMgr)->GetObjLayer(OBJ_MONSTER));
 }
 
 void CMainGame::Render()

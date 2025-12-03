@@ -151,6 +151,18 @@
     <Filter Include="Object\Unit\Enemy\Belial\BelialLHand">
       <UniqueIdentifier>{44909b2f-7586-4ca7-b7a7-cc14e38cfa8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\Belial\BelialRHand\Laser">
+      <UniqueIdentifier>{8b1acae9-12bf-42e3-b69a-6994e8531372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Bullet">
+      <UniqueIdentifier>{2a1f9d75-19eb-414f-b7d6-f72e47424437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Bullet\EnemyBullet">
+      <UniqueIdentifier>{7698e986-21ac-4384-867e-51029e0994a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Bullet\EnemyBullet\BelialBullet">
+      <UniqueIdentifier>{cd46fb94-f71a-45a0-bd87-7b3636c2e6e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -303,6 +315,15 @@
     <ClInclude Include="CBelialLHand.h">
       <Filter>Object\Unit\Enemy\Belial\BelialLHand</Filter>
     </ClInclude>
+    <ClInclude Include="CBullet.h">
+      <Filter>Object\Unit\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyBullet.h">
+      <Filter>Object\Unit\Bullet\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CBelialBullet.h">
+      <Filter>Object\Unit\Bullet\EnemyBullet\BelialBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -442,6 +463,15 @@
     </ClCompile>
     <ClCompile Include="CBelialLHand.cpp">
       <Filter>Object\Unit\Enemy\Belial\BelialLHand</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet.cpp">
+      <Filter>Object\Unit\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemyBullet.cpp">
+      <Filter>Object\Unit\Bullet\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CBelialBullet.cpp">
+      <Filter>Object\Unit\Bullet\EnemyBullet\BelialBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

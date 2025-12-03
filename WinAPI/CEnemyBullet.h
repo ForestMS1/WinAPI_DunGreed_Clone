@@ -1,19 +1,17 @@
 #pragma once
-#include "CObj.h"
-class CUnit :
-    public CObj
+#include "CBullet.h"
+class CEnemyBullet :
+    public CBullet
 {
 public:
-    CUnit();
-    virtual~CUnit();
-
+    CEnemyBullet();
+    virtual~CEnemyBullet();
+public:
     // CObj을(를) 통해 상속됨
     void Initialize() override;
     int Update() override;
     void Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
-
-    void OnDamage(int dmg) { m_fCurHp -= dmg; if (m_fCurHp <= 0.f) m_fCurHp = 0.f; }
 };
 

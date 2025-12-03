@@ -20,7 +20,31 @@ void CCollisionMgr::Collision_Rect(list<CObj*> _Dst, list<CObj*> _Src)
 			}
 		}
 	}
+}
 
+void CCollisionMgr::Collision_Bullet(list<CObj*> _Dst, list<CObj*> _Src)
+{
+
+	RECT	rc{};
+
+	for (auto& Dst : _Dst)
+	{
+		for (auto& Src : _Src)
+		{
+			if (IntersectRect(&rc, Dst->Get_Rect(), Src->Get_Rect()))
+			{
+				CUnit* pTarget = nullptr;
+				pTarget = dynamic_cast<CUnit*>(Dst);
+				CBullet* pBullet = nullptr;
+				pBullet = dynamic_cast<CBullet*>(Src);
+				if (pTarget != nullptr && pBullet != nullptr)
+				{
+					pTarget->OnDamage(pBullet->Get_Damage());
+					pBullet->SetDead();
+				}
+			}
+		}
+	}
 }
 void CCollisionMgr::Collision_Weapon(CWeapon* pWeapon, list<CObj*> _Src)
 {

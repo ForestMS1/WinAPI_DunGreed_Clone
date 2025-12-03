@@ -19,6 +19,7 @@ public:
     BELIAL_STATE GetCurState() const { return m_eCurState; }
 private:
     void Motion_Change() override;
+    void Attack_Rotate();
 private:
     BELIAL_STATE m_ePreState;
     BELIAL_STATE m_eCurState;
@@ -26,5 +27,8 @@ private:
     //스읍... 이게 맞나 너무 하드코딩같지만 일단 끼워
     CBelialRHand* m_pRHand;
     CBelialLHand* m_pLHand;
+
+
+    DWORD m_dwRotateAttackTick;
 };
 

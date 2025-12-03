@@ -35,6 +35,7 @@ using namespace std;
 #include "CSceneMgr.h"
 #include "CTimeMgr.h"
 #include "CCollisionMgr.h"
+#include "CAbstractFactory.h"
 
 #ifdef _DEBUG
 

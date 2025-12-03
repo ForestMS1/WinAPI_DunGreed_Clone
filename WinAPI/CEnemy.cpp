@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "CEnemy.h"
 
-CEnemy::CEnemy() : m_fMaxHp(0.f), m_fCurHp(0.f)
-, m_fDetectfCX(0.f), m_fDetectfCY(0.f), m_bIsInPlayer(false)
+CEnemy::CEnemy() : m_fDetectfCX(0.f), m_fDetectfCY(0.f), m_bIsInPlayer(false)
 {
 	ZeroMemory(&m_tDetectRect, sizeof(RECT));
 	m_eRender = GAMEOBJECT;

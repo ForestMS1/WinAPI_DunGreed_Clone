@@ -34,6 +34,7 @@ void CBelialRHand::Initialize()
 	m_tFrame.dwTime = GetTickCount();
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossHandIdle.bmp", L"HandIdle");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossHandAttack.bmp", L"HandAttack");
+
 	m_wsFrameKey = L"HandIdle";
 }
 

@@ -1,9 +1,9 @@
 #pragma once
-#include "CObj.h"
+#include "CUnit.h"
 #include "CWeapon.h"
 #include "CRunEffect.h"
 #include "CUI.h"
-class CPlayer : public CObj
+class CPlayer : public CUnit
 {
 public:
 	enum STATE {IDLE, WALK, JUMP, DASH, ATTACK, HIT, DEAD, END};

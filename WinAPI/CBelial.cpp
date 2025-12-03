@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "CBelial.h"
+#include "CBelialBullet.h"
 
-CBelial::CBelial() : m_pRHand(nullptr), m_pLHand(nullptr)
+CBelial::CBelial() : m_pRHand(nullptr), m_pLHand(nullptr), m_dwRotateAttackTick(GetTickCount())
 {
 }
 
@@ -12,7 +13,7 @@ CBelial::~CBelial()
 
 void CBelial::Initialize()
 {
-	m_fMaxHp = 30.f;
+	m_fMaxHp = 100.f;
 	m_fCurHp = m_fMaxHp;
 
 	m_tInfo.fX = 2500.f;
@@ -33,6 +34,8 @@ void CBelial::Initialize()
 	m_tFrame.dwTime = GetTickCount();
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossIdle.bmp", L"BelialIdle");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossAttack.bmp", L"BelialAttack");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossBack.bmp", L"SkellBossBack");
+
 	
 	m_eCurState = IDLE;
 	m_wsFrameKey = L"BelialIdle";
@@ -64,12 +67,13 @@ int CBelial::Update()
 	}
 	__super::Update_Rect();
 	Update_DetectRect();
+	Attack_Rotate();
 
 	if(m_eCurState != DEAD)
 		Move_Frame();
 
 	if (m_bIsInPlayer)
-		m_eCurState = ATTACK_HAND;
+		m_eCurState = ATTACK_ROTATE;
 	else
 		m_eCurState = IDLE;
 
@@ -104,6 +108,7 @@ void CBelial::Render(HDC hDC)
 		hPen = (HPEN)SelectObject(hDC, hPen);
 		DeleteObject(hPen);
 	}
+
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
 
 	GdiTransparentBlt(
@@ -152,7 +157,7 @@ void CBelial::Motion_Change()
 		case BELIAL_STATE::ATTACK_ROTATE:
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 9;
-			m_tFrame.dwSpeed = 100;
+			m_tFrame.dwSpeed = 500;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"BelialAttack";
 			m_iFrameWidth = 210.f;
@@ -185,4 +190,34 @@ void CBelial::Motion_Change()
 		m_ePreState = m_eCurState;
 	}
 
+}
+
+void CBelial::Attack_Rotate()
+{
+	static float RightAngle = 0.f;
+	static float ToptAngle = 90.f;
+	static float LefttAngle = 180.f;
+	static float DownAngle = 270.f;
+	if (m_eCurState == ATTACK_ROTATE && m_tFrame.iStart <= m_tFrame.iEnd)
+	{
+		if (m_dwRotateAttackTick + 100 < GetTickCount())
+		{
+			float offsetX = 20.f;
+			float offsetY = 100.f;
+			GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET, CAbstractFactory<CBelialBullet>::CreateBullet(m_tInfo.fX+offsetX, m_tInfo.fY+offsetY, RightAngle));
+			GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET, CAbstractFactory<CBelialBullet>::CreateBullet(m_tInfo.fX+offsetX, m_tInfo.fY+offsetY, ToptAngle));
+			GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET, CAbstractFactory<CBelialBullet>::CreateBullet(m_tInfo.fX+offsetX, m_tInfo.fY+offsetY, LefttAngle));
+			GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET, CAbstractFactory<CBelialBullet>::CreateBullet(m_tInfo.fX+offsetX, m_tInfo.fY+offsetY, DownAngle));
+			RightAngle +=	5.f;
+			ToptAngle  +=	5.f;
+			LefttAngle +=	5.f;
+			DownAngle  +=	5.f;
+			m_dwRotateAttackTick = GetTickCount();
+
+		}
+	}
+	else
+	{
+		m_eCurState = IDLE;
+	}
 }

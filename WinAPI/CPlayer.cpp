@@ -86,6 +86,13 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
+	if (m_fCurHp == 0)
+	{
+		m_bIsDead = true;
+		m_eCurState = DEAD;
+		Motion_Change();
+		return 0;
+	}
 	if (!(m_bJump || m_bDash))
 		m_tInfo.fY += GRAVITY;
 
@@ -150,6 +157,7 @@ void CPlayer::Late_Update()
 		Vec2 renderPos = GET(CCamera)->GetRenderPos(Vec2(m_tInfo.fX, m_tInfo.fY));
 		cout << "플레이어 실제 위치 : " << rp.fX << "\t" << rp.fY << endl;
 		cout << "플레이어 렌더 위치 : " << renderPos.fX << "\t" << renderPos.fY << endl;
+		cout << "플레이어 MaxHP : " << m_fMaxHp <<  " 플레이어 CurHP : " << m_fCurHp << endl;
 		cout << "IsGround : " << m_bIsGround << "\t" << "IsOnLine : " << m_IsOnLine << "\t" << "IsOnBlock : " << m_IsOnBlock << endl;
 		cout << m_eCurState;
 	}

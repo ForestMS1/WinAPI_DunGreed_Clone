@@ -102,9 +102,14 @@ void CBelial::Render(HDC hDC)
 	if (g_bDebugMod)
 	{
 		Rectangle(hDC, m_tRect.left - ScrollX, m_tRect.top - ScrollY, m_tRect.right - ScrollX, m_tRect.bottom - ScrollY);
-		HPEN hPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
+
+		HPEN hPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255));
 		hPen = (HPEN)SelectObject(hDC, hPen);
-		Rectangle(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.top - ScrollY, m_tDetectRect.right - ScrollX, m_tDetectRect.bottom - ScrollY);
+		MoveToEx(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.top - ScrollY, nullptr);
+		LineTo(hDC, m_tDetectRect.right - ScrollX, m_tDetectRect.top - ScrollY);
+		LineTo(hDC, m_tDetectRect.right - ScrollX, m_tDetectRect.bottom - ScrollY);
+		LineTo(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.bottom - ScrollY);
+		LineTo(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.top - ScrollY);
 		hPen = (HPEN)SelectObject(hDC, hPen);
 		DeleteObject(hPen);
 	}
@@ -152,6 +157,8 @@ void CBelial::Motion_Change()
 			m_tFrame.dwTime = GetTickCount();
 			m_iFrameWidth = 210.f;
 			m_iFrameHeight = 285.f;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
 			break;
 
 		case BELIAL_STATE::ATTACK_ROTATE:

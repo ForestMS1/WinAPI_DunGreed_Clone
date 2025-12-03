@@ -3,7 +3,7 @@
 
 CBullet::CBullet() : m_fDamage(0.f), m_fAngle(0.f)
 {
-	m_eRender = GAMEOBJECT;
+	m_eRender = BULLET;
 }
 
 CBullet::~CBullet()

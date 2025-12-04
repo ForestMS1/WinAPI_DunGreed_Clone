@@ -18,7 +18,7 @@ void CBelialScene::Initialize()
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
-	GET(CTileMgr)->Load_Tile();
+	GET(CTileMgr)->Load_Tile(L"BelialSceneTile");
 
 	// Camera ÁöÁ¤
 	GET(CCamera)->Initialize();

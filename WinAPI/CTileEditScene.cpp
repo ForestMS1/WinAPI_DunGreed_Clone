@@ -221,7 +221,7 @@ void CTileEditScene::Key_Input()
 	}
 	if (GET(CKeyMgr)->Key_Pressing('R'))
 	{
-		GET(CTileMgr)->Load_Tile();
+		GET(CTileMgr)->Load_Tile(L"TestScene");
 	}
 #pragma endregion
 

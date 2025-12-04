@@ -142,9 +142,12 @@ void CTileMgr::Save_Tile()
 	MessageBox(g_hWnd, _T("Tile 저장 완료"), L"Success", MB_OK);
 }
 
-void CTileMgr::Load_Tile()
+void CTileMgr::Load_Tile(wstring fileName)
 {
-	HANDLE	hFile = CreateFile(L"../Resources/Data/Tile.dat", // 파일 이름이 포함된 경로
+	fileName.append(L".dat");
+	wstring filePath = L"../Resources/Data/";
+	filePath.append(fileName);
+	HANDLE	hFile = CreateFile(filePath.c_str(), // 파일 이름이 포함된 경로
 		GENERIC_READ,		// 파일 접근 모드(GENERIC_WRITE : 쓰기, GENERIC_READ : 읽기)
 		NULL,				// 공유 방식(파일이 열려 있는 상태에서 다른 프로세스가 오픈 할 때 허가하는 것에 대해 설정, 지정하지 않을 경우 NULL)
 		NULL,				// 보안 속성(기본값인 경우 NULL)

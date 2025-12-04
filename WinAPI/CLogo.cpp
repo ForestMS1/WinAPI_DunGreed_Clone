@@ -46,6 +46,12 @@ void CLogo::Late_Update()
 		m_pGoTileBtn->Late_Update();
 	if (m_pGameStartBtn != nullptr)
 		m_pGameStartBtn->Late_Update();
+
+	//юс╫ц
+	if (GET(CKeyMgr)->Key_Down('Z'))
+	{
+		GET(CSceneMgr)->ChangeScene(L"Belial");
+	}
 }
 
 void CLogo::Render(HDC hDC)

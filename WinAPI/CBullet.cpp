@@ -24,6 +24,7 @@ int CBullet::Update()
 
 void CBullet::Late_Update()
 {
+	//타일과 닿으면 사라지는 효과
 }
 
 void CBullet::Render(HDC hDC)

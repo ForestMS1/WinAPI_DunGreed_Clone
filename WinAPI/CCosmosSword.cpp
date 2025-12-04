@@ -66,6 +66,7 @@ void CCosmosSword::Late_Update()
 
     if (dynamic_cast<CPlayer*>(m_pOwner)->Get_State() == CPlayer::ATTACK)
     {
+        m_fAngle += 60;
         if (!m_pOwner->IsFlipped())
         {
             
@@ -84,6 +85,7 @@ void CCosmosSword::Late_Update()
         }
         else
         {
+            m_fAngle += 270;
             m_tAttackRect =
             {
                 m_tRect.left - 60,
@@ -216,7 +218,12 @@ void CCosmosSword::Render(HDC hDC)
     _gx.TranslateTransform(targetX, targetY);
 
     // 3-2. 각도만큼 회전 (m_fAngle은 Degree라고 가정)
-    _gx.RotateTransform(-(m_fAngle+270) * 180.f / PI);
+    float offset = 0.f;
+    if (m_pOwner->IsFlipped())
+        offset = 60.f;
+    else
+        offset = 0.f;
+    _gx.RotateTransform(-(m_fAngle+270 + offset) * 180.f / PI);
 
     // 3-3. 원본 중심점을 원점으로 이동 (-centerX, -centerY)
     // 이 과정을 거쳐야 DrawImage(0, 0) 호출 시 원본 이미지의 중심이 

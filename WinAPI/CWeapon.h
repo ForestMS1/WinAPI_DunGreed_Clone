@@ -16,6 +16,8 @@ public:
 
 	CObj* Get_Owner() const { return m_pOwner; }
 	RECT*  Get_AttackRect()  { return &m_tAttackRect; }
+	INFO* GET_AttackInfo() { return &m_tAttackInfo; }
+	void Update_AttackRect();
 	float Get_Angle() const { return m_fAngle; }
 	float Get_Damage() const { return m_fDamage; }
 	void Set_AttackCount() { m_iCurAttackCount++; }
@@ -32,6 +34,7 @@ protected:
 
 	// 공격 범위
 	RECT			m_tAttackRect;
+	INFO			m_tAttackInfo;
 	// 공격력
 	float			m_fDamage;
 	int				m_iMaxAttackCount; // 무기의 한번에 줄 수 있는 최대 공격횟수

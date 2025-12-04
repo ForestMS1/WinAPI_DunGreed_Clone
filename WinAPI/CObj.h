@@ -28,6 +28,7 @@ public:
 	RENDERID Get_RenderID() const										{ return m_eRender; }
 	void Update_Rect();
 	void Move_Frame();
+	void Move_Frame_No_Loop();
 	float Get_MaxHp() const												{ return m_fMaxHp; }
 	float Get_CurHp() const												{ return m_fCurHp; }
 

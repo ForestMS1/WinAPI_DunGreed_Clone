@@ -2,6 +2,7 @@
 #include "CEnemy.h"
 #include "CBelialRHand.h"
 #include "CBelialLHand.h"
+#include "SpearMgr.h"
 
 class CBelial :
     public CEnemy
@@ -28,6 +29,12 @@ private:
     CBelialRHand* m_pRHand;
     CBelialLHand* m_pLHand;
 
+    //spear
+    SpearMgr* m_pSpearMgr;
+
+
+    //패턴 바뀌는 시간
+    DWORD m_dwChangePattern;
 
     DWORD m_dwRotateAttackTick;
 };

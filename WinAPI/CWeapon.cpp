@@ -72,3 +72,11 @@ void CWeapon::Release()
 {
     m_pOwner = nullptr;
 }
+
+void CWeapon::Update_AttackRect()
+{
+    m_tAttackRect.left = m_tAttackInfo.fX - m_tAttackInfo.fCX * 0.5f;
+    m_tAttackRect.top = m_tAttackInfo.fY - m_tAttackInfo.fCY * 0.5f;
+    m_tAttackRect.right = m_tAttackInfo.fX + m_tAttackInfo.fCX * 0.5f;
+    m_tAttackRect.bottom = m_tAttackInfo.fY + m_tAttackInfo.fCY * 0.5f;
+}

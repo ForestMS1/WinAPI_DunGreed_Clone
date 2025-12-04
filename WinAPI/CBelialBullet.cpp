@@ -16,7 +16,7 @@ void CBelialBullet::Initialize()
 	m_tInfo.fCY = 39.f;
 
 	m_fSpeed = 5.f;
-	m_fDamage = 10.f;
+	m_fDamage = 3.f;
 
 	m_iFrameWidth = 39.f;
 	m_iFrameHeight = 39.f;

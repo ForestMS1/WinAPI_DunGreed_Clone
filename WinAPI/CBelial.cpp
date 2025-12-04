@@ -3,6 +3,7 @@
 #include "CBelialBullet.h"
 
 CBelial::CBelial() : m_pRHand(nullptr), m_pLHand(nullptr), m_dwRotateAttackTick(GetTickCount())
+, m_pSpearMgr(nullptr)
 {
 }
 
@@ -16,8 +17,8 @@ void CBelial::Initialize()
 	m_fMaxHp = 100.f;
 	m_fCurHp = m_fMaxHp;
 
-	m_tInfo.fX = 2500.f;
-	m_tInfo.fY = 200.f;
+	m_tInfo.fX = 1700.f;
+	m_tInfo.fY = 400.f;
 	m_tInfo.fCX = 210.f;
 	m_tInfo.fCY = 285.f;
 
@@ -36,7 +37,9 @@ void CBelial::Initialize()
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossAttack.bmp", L"BelialAttack");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossBack.bmp", L"SkellBossBack");
 
-	
+	srand(time(0));
+	m_dwChangePattern = GetTickCount();
+
 	m_eCurState = IDLE;
 	m_wsFrameKey = L"BelialIdle";
 
@@ -51,6 +54,13 @@ void CBelial::Initialize()
 		m_pLHand = new CBelialLHand(this);
 		m_pLHand->Initialize();
 	}
+
+	//창
+	if (m_pSpearMgr == nullptr)
+	{
+		m_pSpearMgr = new SpearMgr(this);
+		m_pSpearMgr->Initialize();
+	}
 }
 
 int CBelial::Update()
@@ -63,7 +73,7 @@ int CBelial::Update()
 		// 리턴하기전에 딜레이 줘야할듯?
 		
 		//return OBJ_NOEVENT;
-		//return OBJ_DEAD;
+		return OBJ_DEAD;
 	}
 	__super::Update_Rect();
 	Update_DetectRect();
@@ -73,14 +83,17 @@ int CBelial::Update()
 		Move_Frame();
 
 	if (m_bIsInPlayer)
-		m_eCurState = ATTACK_ROTATE;
+		m_eCurState = ATTACK_SPEAR;
 	else
-		m_eCurState = IDLE;
+		m_eCurState = ATTACK_HAND;
+
 
 	if (m_pRHand != nullptr)
 		m_pRHand->Update();
 	if (m_pLHand != nullptr)
 		m_pLHand->Update();
+	if (m_pSpearMgr != nullptr)
+		m_pSpearMgr->Update();
 
 	return OBJ_NOEVENT;
 }
@@ -93,6 +106,8 @@ void CBelial::Late_Update()
 		m_pRHand->Late_Update();
 	if (m_pLHand != nullptr)
 		m_pLHand->Late_Update();
+	if (m_pSpearMgr != nullptr)
+		m_pSpearMgr->Late_Update();
 }
 
 void CBelial::Render(HDC hDC)
@@ -134,12 +149,15 @@ void CBelial::Render(HDC hDC)
 		m_pRHand->Render(hDC);
 	if (m_pLHand != nullptr)
 		m_pLHand->Render(hDC);
+	if (m_pSpearMgr != nullptr)
+		m_pSpearMgr->Render(hDC);
 }
 
 void CBelial::Release()
 {
 	Safe_Delete(m_pRHand);
 	Safe_Delete(m_pLHand);
+	Safe_Delete(m_pSpearMgr);
 }
 
 void CBelial::Motion_Change()
@@ -162,7 +180,7 @@ void CBelial::Motion_Change()
 			break;
 
 		case BELIAL_STATE::ATTACK_ROTATE:
-			m_tFrame.iStart = 0;
+			m_tFrame.iStart = 2;
 			m_tFrame.iEnd = 9;
 			m_tFrame.dwSpeed = 500;
 			m_tFrame.dwTime = GetTickCount();

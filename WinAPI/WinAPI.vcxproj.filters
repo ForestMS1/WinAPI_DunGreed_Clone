@@ -163,6 +163,15 @@
     <Filter Include="Object\Unit\Bullet\EnemyBullet\BelialBullet">
       <UniqueIdentifier>{cd46fb94-f71a-45a0-bd87-7b3636c2e6e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\Belial\BelialSpear">
+      <UniqueIdentifier>{833488e9-36b9-4c9a-be81-ee5ef308f06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy\Belial\BelialSpear\SpearMgr">
+      <UniqueIdentifier>{a85e1021-3bc1-4e92-a923-c028bc77fa70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Player\Owned\Weapon\AttacRect">
+      <UniqueIdentifier>{5ed8004b-682e-4ad3-bb22-4f23bcf9e92e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -324,6 +333,12 @@
     <ClInclude Include="CBelialBullet.h">
       <Filter>Object\Unit\Bullet\EnemyBullet\BelialBullet</Filter>
     </ClInclude>
+    <ClInclude Include="CBelialSpear.h">
+      <Filter>Object\Unit\Enemy\Belial\BelialSpear</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearMgr.h">
+      <Filter>Object\Unit\Enemy\Belial\BelialSpear\SpearMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -472,6 +487,12 @@
     </ClCompile>
     <ClCompile Include="CBelialBullet.cpp">
       <Filter>Object\Unit\Bullet\EnemyBullet\BelialBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CBelialSpear.cpp">
+      <Filter>Object\Unit\Enemy\Belial\BelialSpear</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearMgr.cpp">
+      <Filter>Object\Unit\Enemy\Belial\BelialSpear\SpearMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

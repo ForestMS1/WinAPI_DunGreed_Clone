@@ -333,13 +333,6 @@ void CPlayer::Motion_Change()
 			m_iFrameHeight = 60;
 			break;
 		default:
-			m_tFrame.iStart = 0;
-			m_tFrame.iEnd = 4;
-			m_tFrame.dwSpeed = 100;
-			m_tFrame.dwTime = GetTickCount();
-			m_wsFrameKey = L"PlayerIdle";
-			m_iFrameWidth = 78;
-			m_iFrameHeight = 60;
 			break;
 		}
 

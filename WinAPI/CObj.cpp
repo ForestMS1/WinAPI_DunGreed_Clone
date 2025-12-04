@@ -34,3 +34,12 @@ void CObj::Move_Frame()
 			m_tFrame.iStart = 0;
 	}
 }
+
+void CObj::Move_Frame_No_Loop()
+{
+	if (m_tFrame.dwSpeed + m_tFrame.dwTime < GetTickCount() && m_tFrame.iStart <= m_tFrame.iEnd)
+	{
+		++m_tFrame.iStart;
+		m_tFrame.dwTime = GetTickCount();
+	}
+}

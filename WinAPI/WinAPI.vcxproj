@@ -140,6 +140,7 @@
     <ClInclude Include="CBelialBullet.h" />
     <ClInclude Include="CBelialLHand.h" />
     <ClInclude Include="CBelialRHand.h" />
+    <ClInclude Include="CBelialSpear.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCollisionMgr.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SpearMgr.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WinAPI.h" />
   </ItemGroup>
@@ -197,6 +199,7 @@
     <ClCompile Include="CBelialBullet.cpp" />
     <ClCompile Include="CBelialLHand.cpp" />
     <ClCompile Include="CBelialRHand.cpp" />
+    <ClCompile Include="CBelialSpear.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
@@ -247,6 +250,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SpearMgr.cpp" />
     <ClCompile Include="WinAPI.cpp" />
   </ItemGroup>
   <ItemGroup>

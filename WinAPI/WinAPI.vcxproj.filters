@@ -172,6 +172,9 @@
     <Filter Include="Object\Unit\Player\Owned\Weapon\AttacRect">
       <UniqueIdentifier>{5ed8004b-682e-4ad3-bb22-4f23bcf9e92e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\BelialScene">
+      <UniqueIdentifier>{451a0187-a7fc-443f-9365-80cb9f8be3cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -339,6 +342,12 @@
     <ClInclude Include="SpearMgr.h">
       <Filter>Object\Unit\Enemy\Belial\BelialSpear\SpearMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CLaser.h">
+      <Filter>Object\Unit\Enemy\Belial\BelialRHand\Laser</Filter>
+    </ClInclude>
+    <ClInclude Include="CBelialScene.h">
+      <Filter>Scene\BelialScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -493,6 +502,12 @@
     </ClCompile>
     <ClCompile Include="SpearMgr.cpp">
       <Filter>Object\Unit\Enemy\Belial\BelialSpear\SpearMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CLaser.cpp">
+      <Filter>Object\Unit\Enemy\Belial\BelialRHand\Laser</Filter>
+    </ClCompile>
+    <ClCompile Include="CBelialScene.cpp">
+      <Filter>Scene\BelialScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

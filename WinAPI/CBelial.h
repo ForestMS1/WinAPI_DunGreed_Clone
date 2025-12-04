@@ -21,6 +21,7 @@ public:
 private:
     void Motion_Change() override;
     void Attack_Rotate();
+    void Attack_Hand();
 private:
     BELIAL_STATE m_ePreState;
     BELIAL_STATE m_eCurState;
@@ -37,5 +38,9 @@ private:
     DWORD m_dwChangePattern;
 
     DWORD m_dwRotateAttackTick;
+    DWORD m_dwHandAttackTick;
+
+    bool HandAttack;
+    bool isRightHandOn;
 };
 

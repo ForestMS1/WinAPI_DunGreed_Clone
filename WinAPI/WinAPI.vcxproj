@@ -140,6 +140,7 @@
     <ClInclude Include="CBelialBullet.h" />
     <ClInclude Include="CBelialLHand.h" />
     <ClInclude Include="CBelialRHand.h" />
+    <ClInclude Include="CBelialScene.h" />
     <ClInclude Include="CBelialSpear.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCamera.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="CGameStartBtn.h" />
     <ClInclude Include="CGoldUI.h" />
     <ClInclude Include="CGoTileEditBtn.h" />
+    <ClInclude Include="CLaser.h" />
     <ClInclude Include="CMapTileOptionUI.h" />
     <ClInclude Include="CMouse.h" />
     <ClInclude Include="CPlayerDashBar.h" />
@@ -199,6 +201,7 @@
     <ClCompile Include="CBelialBullet.cpp" />
     <ClCompile Include="CBelialLHand.cpp" />
     <ClCompile Include="CBelialRHand.cpp" />
+    <ClCompile Include="CBelialScene.cpp" />
     <ClCompile Include="CBelialSpear.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCamera.cpp" />
@@ -211,6 +214,7 @@
     <ClCompile Include="CGameStartBtn.cpp" />
     <ClCompile Include="CGoldUI.cpp" />
     <ClCompile Include="CGoTileEditBtn.cpp" />
+    <ClCompile Include="CLaser.cpp" />
     <ClCompile Include="CMapTileOptionUI.cpp" />
     <ClCompile Include="CMouse.cpp" />
     <ClCompile Include="CPlayerDashBar.cpp" />

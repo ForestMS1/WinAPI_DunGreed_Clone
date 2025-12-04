@@ -10,6 +10,7 @@
 #include "CTileBtn.h"
 #include "CMouse.h"
 #include "CMapTileOptionUI.h"
+#include "CPlayer.h"
 CTileEditScene::CTileEditScene() : m_iDrawIDX(0), m_iDrawIDY(0), m_iOption(1)
 , m_pTileSelectUI(nullptr), m_pTileOptionSelectUI(nullptr)
 {
@@ -35,6 +36,9 @@ void CTileEditScene::Initialize()
 		m_pTileOptionSelectUI = new CMapTileOptionUI;
 	m_pTileSelectUI->Initialize();
 	m_pTileOptionSelectUI->Initialize();
+
+	Vec2 pv = GET(CCamera)->GetRealPos(GET(CMouse)->Get_Point());
+	//GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(50, 50));
 }
 
 void CTileEditScene::Update()
@@ -79,7 +83,7 @@ void CTileEditScene::Render(HDC hDC)
 	//	0);
 
 	GET(CTileMgr)->Render(hDC);
-
+	GET(CObjMgr)->Render(hDC);
 
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOld");
 
@@ -193,19 +197,19 @@ void CTileEditScene::Key_Input()
 #pragma endregion
 
 #pragma region 키입력_카메라이동
-	if (GET(CKeyMgr)->Key_Pressing('W'))
+	if (GET(CKeyMgr)->Key_Pressing(VK_UP))
 	{
 		GET(CCamera)->Set_ScrollY(-5.f);
 	}
-	if (GET(CKeyMgr)->Key_Pressing('A'))
+	if (GET(CKeyMgr)->Key_Pressing(VK_LEFT))
 	{
 		GET(CCamera)->Set_ScrollX(-5.f);
 	}
-	if (GET(CKeyMgr)->Key_Pressing('S'))
+	if (GET(CKeyMgr)->Key_Pressing(VK_DOWN))
 	{
 		GET(CCamera)->Set_ScrollY(5.f);
 	}
-	if (GET(CKeyMgr)->Key_Pressing('D'))
+	if (GET(CKeyMgr)->Key_Pressing(VK_RIGHT))
 	{
 		GET(CCamera)->Set_ScrollX(5.f);
 	}
@@ -234,15 +238,8 @@ void CTileEditScene::Key_Input()
 
 	if (GET(CKeyMgr)->Key_Down('Z'))
 	{
-		m_iOption--;
-		if (m_iOption < 0)
-			m_iOption = 0;
-	}
-	if (GET(CKeyMgr)->Key_Down('X'))
-	{
-		m_iOption++;
-		if (m_iOption > 6)
-			m_iOption = 6;
+		Vec2 pv = GET(CCamera)->GetRealPos(GET(CMouse)->Get_Point());
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(pv.fX, pv.fY));
 	}
 
 	if (GET(CKeyMgr)->Key_Down(VK_TAB))

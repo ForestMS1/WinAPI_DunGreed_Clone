@@ -14,6 +14,7 @@
 #include "CTileEditScene.h"
 #include "CTileMgr.h"
 #include "CMouse.h"
+#include "CBelialScene.h"
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
 	ZeroMemory(&m_szFPS, sizeof(m_szFPS));
@@ -41,6 +42,9 @@ void CMainGame::Initialize()
 	pScene = new CTest;
 	pScene->SetSceneID(SCENE_TEST);
 	GET(CSceneMgr)->CreateScene(L"Test", pScene);
+	pScene = new CBelialScene;
+	pScene->SetSceneID(SCENE_BELIAL);
+	GET(CSceneMgr)->CreateScene(L"Belial", pScene);
 	pScene = new CTileEditScene;
 	pScene->SetSceneID(SCENE_MAPTOOL);
 	GET(CSceneMgr)->CreateScene(L"TileEdit", pScene);
@@ -107,6 +111,8 @@ void CMainGame::Render()
 	}
 
 	GET(CSceneMgr)->Render(m_hBackDC);
+	GET(CTileMgr)->Render(m_hBackDC);
+	GET(CObjMgr)->Render(m_hBackDC);
 	GET(CMouse)->Render(m_hBackDC);
 
 	BitBlt(m_hDC,				// 복사 받을 DC

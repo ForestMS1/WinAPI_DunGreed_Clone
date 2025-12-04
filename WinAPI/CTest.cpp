@@ -96,14 +96,15 @@ void CTest::Render(HDC hDC)
 	//	RGB(255, 0, 255)
 	//);
 
-	GET(CTileMgr)->Render(hDC);
-	GET(CObjMgr)->Render(hDC);
+	//GET(CTileMgr)->Render(hDC);
+	//GET(CObjMgr)->Render(hDC);
 	//GET(CLineMgr)->Render(hDC); //굳이 그릴필요 없음
 }
 
 void CTest::Release()
 {
 	GET(CObjMgr)->DeleteLayerObj(OBJ_PLAYER);
+	GET(CObjMgr)->DeleteLayerObj(OBJ_MONSTER);
 }
 
 void CTest::Key_Input()

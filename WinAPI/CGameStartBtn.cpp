@@ -41,7 +41,7 @@ void CGameStartBtn::Late_Update()
 		m_bMouseOn = true;
 		if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 		{
-			GET(CSceneMgr)->ChangeScene(L"Test");
+			GET(CSceneMgr)->ChangeScene(L"Belial");
 		}
 	}
 	else

@@ -3,7 +3,7 @@
 #include "CBelialBullet.h"
 
 CBelial::CBelial() : m_pRHand(nullptr), m_pLHand(nullptr), m_dwRotateAttackTick(GetTickCount())
-, m_pSpearMgr(nullptr)
+, m_pSpearMgr(nullptr), m_dwHandAttackTick(GetTickCount()), HandAttack(false)
 {
 }
 
@@ -17,8 +17,8 @@ void CBelial::Initialize()
 	m_fMaxHp = 100.f;
 	m_fCurHp = m_fMaxHp;
 
-	m_tInfo.fX = 1700.f;
-	m_tInfo.fY = 400.f;
+	//m_tInfo.fX = 1700.f;
+	//m_tInfo.fY = 400.f;
 	m_tInfo.fCX = 210.f;
 	m_tInfo.fCY = 285.f;
 
@@ -72,20 +72,23 @@ int CBelial::Update()
 
 		// 리턴하기전에 딜레이 줘야할듯?
 		
-		//return OBJ_NOEVENT;
-		return OBJ_DEAD;
+		return OBJ_NOEVENT;
+		//return OBJ_DEAD;
 	}
 	__super::Update_Rect();
 	Update_DetectRect();
 	Attack_Rotate();
+	Attack_Hand();
 
 	if(m_eCurState != DEAD)
 		Move_Frame();
 
-	if (m_bIsInPlayer)
-		m_eCurState = ATTACK_SPEAR;
-	else
-		m_eCurState = ATTACK_HAND;
+
+	if (m_dwChangePattern + 7000 < GetTickCount())
+	{
+		m_eCurState = BELIAL_STATE((rand() % 3)+1);
+		m_dwChangePattern = GetTickCount();
+	}
 
 
 	if (m_pRHand != nullptr)
@@ -180,7 +183,7 @@ void CBelial::Motion_Change()
 			break;
 
 		case BELIAL_STATE::ATTACK_ROTATE:
-			m_tFrame.iStart = 2;
+			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 9;
 			m_tFrame.dwSpeed = 500;
 			m_tFrame.dwTime = GetTickCount();
@@ -200,6 +203,26 @@ void CBelial::Motion_Change()
 			m_iFrameHeight = 384.f;
 			m_tInfo.fCX = m_iFrameWidth;
 			m_tInfo.fCY = m_iFrameHeight;
+			break;
+		case BELIAL_STATE::ATTACK_HAND:
+			m_tFrame.iStart = 0;
+			m_tFrame.iMotion = 0;
+			m_tFrame.iEnd = 9;
+			m_wsFrameKey = L"BelialIdle";
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_iFrameWidth = 210.f;
+			m_iFrameHeight = 285.f;
+			break;
+		case BELIAL_STATE::ATTACK_SPEAR:
+			m_tFrame.iStart = 0;
+			m_tFrame.iMotion = 0;
+			m_tFrame.iEnd = 9;
+			m_wsFrameKey = L"BelialIdle";
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_iFrameWidth = 210.f;
+			m_iFrameHeight = 285.f;
 			break;
 		default:
 			m_tFrame.iStart = 0;
@@ -241,8 +264,15 @@ void CBelial::Attack_Rotate()
 
 		}
 	}
-	else
+}
+
+void CBelial::Attack_Hand()
+{
+	if (m_eCurState == ATTACK_HAND && m_dwHandAttackTick + 2000 < GetTickCount())
 	{
-		m_eCurState = IDLE;
+		isRightHandOn = !isRightHandOn;
+		m_pRHand->SetActive(isRightHandOn);
+		m_pLHand->SetActive(!isRightHandOn);
+		m_dwHandAttackTick = GetTickCount();
 	}
 }

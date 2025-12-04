@@ -24,7 +24,7 @@ void CBelialSpear::Initialize()
 	m_tInfo.fCX = 62.f;
 	m_tInfo.fCY = 190;
 	m_fAngle = 0.f;
-	m_fSpeed = 25.f;
+	m_fSpeed = 50.f;
 	__super::Update_Rect();
 	if (!GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).empty())
 		m_pTarget = GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front();
@@ -101,8 +101,11 @@ void CBelialSpear::Late_Update()
 		CObj* pPlayer = GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front();
 		if (m_iMaxAttackCount > m_iCurAttackCount && IntersectRect(&rt, &m_tRect, GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front()->Get_Rect()))
 		{
-			dynamic_cast<CPlayer*>(pPlayer)->OnDamage(m_fDamage);
-			m_iCurAttackCount++;
+			if (isAttack && !isGround)
+			{
+				dynamic_cast<CPlayer*>(pPlayer)->OnDamage(m_fDamage);
+				m_iCurAttackCount++;
+			}
 		}
 	}
 }

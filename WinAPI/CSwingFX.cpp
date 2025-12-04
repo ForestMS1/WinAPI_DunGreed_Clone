@@ -98,8 +98,8 @@ void CSwingFX::Render(HDC hDC)
 		float centerY = (float)H / 2.0f; // 현재 프레임의 상대적 중심 Y (m_iFrameHeight / 2.0f)
 
 		// 최종적으로 이미지가 그려질 화면상의 중심 좌표 (스크롤 및 Info 반영)
-		float targetX = pPlayer->Get_Info()->fX - ScrollX;
-		float targetY = pPlayer->Get_Info()->fY - ScrollY;
+		float targetX = m_pOwner->Get_Info()->fX - ScrollX;
+		float targetY = m_pOwner->Get_Info()->fY - ScrollY;
 
 		// 원본 이미지 시트에서 현재 프레임의 시작 위치
 		int srcX = FrameX * W;
@@ -130,7 +130,7 @@ void CSwingFX::Render(HDC hDC)
 
 		_gx.DrawImage(
 			_bmp,
-			(int)(-centerX), (int)(-centerY), // Dest X, Y: 변환된 좌표계의 (0, 0)에 그려지도록 (중심 정렬)
+			0,0,/*(int)(-centerX), (int)(-centerY),*/ // Dest X, Y: 변환된 좌표계의 (0, 0)에 그려지도록 (중심 정렬)
 			srcX, srcY,                       // Source X, Y: 이미지 시트에서 현재 프레임 시작 위치
 			W, H,                             // Source W, H: 현재 프레임의 너비와 높이
 			UnitPixel

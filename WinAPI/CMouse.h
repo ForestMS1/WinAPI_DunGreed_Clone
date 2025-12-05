@@ -1,5 +1,6 @@
 #pragma once
 #include "Define.h"
+#include "CItem.h"
 class CMouse
 {
 	SINGLE(CMouse)
@@ -21,6 +22,9 @@ private:
 	INFO m_tInfo;
 	RECT m_tRect;
 	POINT m_ptInfo;
+
+	//아이템 집기 위한 변수
+	CItem* m_pItem;
 
 	// 타일에디터에서 값을 넘겨주기 위한 변수
 	int m_iDrawIDX;

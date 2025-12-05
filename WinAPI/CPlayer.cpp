@@ -9,6 +9,8 @@
 #include "CCosmosSword.h"
 #include "CMouse.h"
 #include "CPlayerUI.h"
+#include "CInventoryUI.h"
+#include "CGatlingGun.h"
 CPlayer::CPlayer() : 
 	m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false), m_bIsGround(false), 
 	m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false), m_IsOnBlock(false),
@@ -16,7 +18,7 @@ CPlayer::CPlayer() :
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
-	m_pUI = nullptr;
+	m_pMainUI = nullptr;
 }
 CPlayer::~CPlayer()
 {
@@ -58,7 +60,7 @@ void CPlayer::Initialize()
 	//¹«±â
 	if (m_pWeapon == nullptr)
 	{
-		m_pWeapon = new CCosmosSword(this);
+		m_pWeapon = new CGatlingGun(this);
 		m_vecOwned.push_back(m_pWeapon);
 	}
 	//ÀÌÆåÆ®
@@ -77,10 +79,15 @@ void CPlayer::Initialize()
 	}
 
 	//UI
-	if (m_pUI == nullptr)
+	if (m_pMainUI == nullptr)
 	{
-		m_pUI = new CPlayerUI(this);
-		m_pUI->Initialize();
+		m_pMainUI = new CPlayerUI(this);
+		m_pMainUI->Initialize();
+	}
+	if (m_pInventoryUI == nullptr)
+	{
+		m_pInventoryUI = new CInventoryUI(this);
+		m_pInventoryUI->Initialize();
 	}
 }
 
@@ -116,9 +123,13 @@ int CPlayer::Update()
 			pOwned->Update();
 		}
 	}
-	if (m_pUI != nullptr)
+	if (m_pMainUI != nullptr)
 	{
-		m_pUI->Update();
+		m_pMainUI->Update();
+	}
+	if (m_pInventoryUI != nullptr)
+	{
+		m_pInventoryUI->Update();
 	}
 	return OBJ_NOEVENT;
 }
@@ -165,9 +176,13 @@ void CPlayer::Late_Update()
 
 	Motion_Change();
 
-	if (m_pUI != nullptr)
+	if (m_pMainUI != nullptr)
 	{
-		m_pUI->Late_Update();
+		m_pMainUI->Late_Update();
+	}
+	if (m_pInventoryUI != nullptr)
+	{
+		m_pInventoryUI->Late_Update();
 	}
 }
 
@@ -208,9 +223,13 @@ void CPlayer::Render(HDC hDC)
 		}
 	}
 
-	if (m_pUI != nullptr)
+	if (m_pMainUI != nullptr)
 	{
-		m_pUI->Render(hDC);
+		m_pMainUI->Render(hDC);
+	}
+	if (m_pInventoryUI != nullptr)
+	{
+		m_pInventoryUI->Render(hDC);
 	}
 }
 
@@ -220,7 +239,8 @@ void CPlayer::Release()
 	{
 		Safe_Delete(pOwned);
 	}
-	Safe_Delete(m_pUI);
+	Safe_Delete(m_pMainUI);
+	Safe_Delete(m_pInventoryUI);
 }
 
 void CPlayer::Key_Input()
@@ -285,6 +305,13 @@ void CPlayer::Key_Input()
 	if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
 		m_bAttack = true;
+	}
+	if (GET(CKeyMgr)->Key_Down('Z'))
+	{
+		if (m_pInventoryUI->IsOpen())
+			m_pInventoryUI->Close();
+		else
+			m_pInventoryUI->Open();
 	}
 }
 

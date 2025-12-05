@@ -178,6 +178,24 @@
     <Filter Include="Object\UI\InventoryUI">
       <UniqueIdentifier>{5ace61d2-ef0e-4125-8fe4-1376dcfd73ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\UI\InventoryUI\Cell">
+      <UniqueIdentifier>{4cdfb279-de93-491b-ac99-cc6b04461872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item">
+      <UniqueIdentifier>{8a523062-37d8-451d-a0a9-fc5cc32b998e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\InventoryUI\EquipSlotOn">
+      <UniqueIdentifier>{2ffb1e5f-2ce9-4fae-b090-3868984ddf83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Player\Owned\Weapon\GatlingGun">
+      <UniqueIdentifier>{a963fd54-d726-493a-ac70-41d555698c28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Bullet\PlayerBullet">
+      <UniqueIdentifier>{77339e77-4477-4793-9e0d-238f31261248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Bullet\PlayerBullet\GatlingGunBullet">
+      <UniqueIdentifier>{0f361783-17c6-4078-8979-578fbf2f1071}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -354,6 +372,24 @@
     <ClInclude Include="CInventoryUI.h">
       <Filter>Object\UI\InventoryUI</Filter>
     </ClInclude>
+    <ClInclude Include="CCell.h">
+      <Filter>Object\UI\InventoryUI\Cell</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CEquipSlotOn.h">
+      <Filter>Object\UI\InventoryUI\EquipSlotOn</Filter>
+    </ClInclude>
+    <ClInclude Include="CGatlingGun.h">
+      <Filter>Object\Unit\Player\Owned\Weapon\GatlingGun</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerBullet.h">
+      <Filter>Object\Unit\Bullet\PlayerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CGatlingGunBullet.h">
+      <Filter>Object\Unit\Bullet\PlayerBullet\GatlingGunBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -517,6 +553,24 @@
     </ClCompile>
     <ClCompile Include="CInventoryUI.cpp">
       <Filter>Object\UI\InventoryUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CCell.cpp">
+      <Filter>Object\UI\InventoryUI\Cell</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CEquipSlotOn.cpp">
+      <Filter>Object\UI\InventoryUI\EquipSlotOn</Filter>
+    </ClCompile>
+    <ClCompile Include="CGatlingGun.cpp">
+      <Filter>Object\Unit\Player\Owned\Weapon\GatlingGun</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerBullet.cpp">
+      <Filter>Object\Unit\Bullet\PlayerBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CGatlingGunBullet.cpp">
+      <Filter>Object\Unit\Bullet\PlayerBullet\GatlingGunBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -74,7 +74,8 @@ private:
 	float				m_fAttackt;
 
 	//UI (최상위부모UI)
-	CUI*				m_pUI;
+	CUI*				m_pMainUI;
+	CUI*				m_pInventoryUI;
 
 
 

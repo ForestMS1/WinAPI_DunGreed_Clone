@@ -5,14 +5,14 @@
 #include "CCamera.h"
 CMouse* CMouse::m_pInstance = nullptr;
 
-CMouse::CMouse() : m_iOption(0)
+CMouse::CMouse() : m_iOption(0), m_pItem(nullptr)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 	ZeroMemory(&m_tRect, sizeof(RECT));
 }
 CMouse::~CMouse()
 {
-
+	Release();
 }
 
 void CMouse::Initialize()

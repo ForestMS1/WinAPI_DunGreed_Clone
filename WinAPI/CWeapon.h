@@ -1,6 +1,6 @@
 #pragma once
-#include "CObj.h"
-class CWeapon : public CObj
+#include "CItem.h"
+class CWeapon : public CItem
 {
 public:
 	CWeapon();

@@ -86,7 +86,11 @@ int CBelial::Update()
 
 	if (m_dwChangePattern + 7000 < GetTickCount())
 	{
-		m_eCurState = BELIAL_STATE((rand() % 3)+1);
+		m_ePreState = m_eCurState;
+		do
+		{
+			m_eCurState = BELIAL_STATE((rand() % 3) + 1);
+		} while (m_ePreState == m_eCurState);
 		m_dwChangePattern = GetTickCount();
 	}
 

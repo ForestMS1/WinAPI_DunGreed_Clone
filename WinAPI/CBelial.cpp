@@ -72,8 +72,8 @@ int CBelial::Update()
 
 		// 리턴하기전에 딜레이 줘야할듯?
 		
-		return OBJ_NOEVENT;
-		//return OBJ_DEAD;
+		//return OBJ_NOEVENT;
+		return OBJ_DEAD;
 	}
 	__super::Update_Rect();
 	Update_DetectRect();

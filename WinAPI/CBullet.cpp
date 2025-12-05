@@ -19,12 +19,15 @@ int CBullet::Update()
 {
 	__super::Update_Rect();
 	Move_Frame();
+
+	if (m_tInfo.fX < 0 || m_tInfo.fY < 0 || m_tInfo.fX > 1920.f || m_tInfo.fY > 1920.f)
+		return OBJ_DEAD;
 	return 0;
 }
 
 void CBullet::Late_Update()
 {
-	//타일과 닿으면 사라지는 효과
+	
 }
 
 void CBullet::Render(HDC hDC)

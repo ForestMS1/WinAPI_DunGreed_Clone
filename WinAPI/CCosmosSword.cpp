@@ -64,7 +64,8 @@ void CCosmosSword::Late_Update()
 {
     CWeapon::Late_Update();
 
-    if (dynamic_cast<CPlayer*>(m_pOwner)->Get_State() == CPlayer::ATTACK)
+    //if (dynamic_cast<CPlayer*>(m_pOwner)->Get_State() == CPlayer::ATTACK)
+    if (dynamic_cast<CPlayer*>(m_pOwner)->Get_IsAttack())
     {
         m_fAngle += 60;
         if (!m_pOwner->IsFlipped())

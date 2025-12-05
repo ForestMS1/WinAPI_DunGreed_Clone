@@ -4,19 +4,24 @@
 #include "CCamera.h"
 #include "CEnemy.h"
 #include "CWeapon.h"
-void CCollisionMgr::Collision_Rect(list<CObj*> _Dst, list<CObj*> _Src)
+
+//(Å¸ÀÏ, ÃÑ¾Ë)
+void CCollisionMgr::Collision_Rect(vector<CObj*> _Dst, list<CObj*> _Src)
 {
 
 	RECT	rc{};
 
 	for (auto& Dst : _Dst)
 	{
-		for (auto& Src : _Src)
+		if (dynamic_cast<CTile*>(Dst)->Get_Option() >= BLOCKED &&
+			dynamic_cast<CTile*>(Dst)->Get_Option() <= BLOCKED_DOWNHILL)
 		{
-			if (IntersectRect(&rc, Dst->Get_Rect(), Src->Get_Rect()))
+			for (auto& Src : _Src)
 			{
-				//Dst->Set_Dead();
-				//Src->Set_Dead();
+				if (IntersectRect(&rc, Dst->Get_Rect(), Src->Get_Rect()))
+				{
+					Src->SetDead(); //ÃÑ¾Ë »ç¶óÁü Ã³¸®
+				}
 			}
 		}
 	}
@@ -196,6 +201,20 @@ bool CCollisionMgr::Check_Rect(CObj* pDst, CObj* pSrc, float* pX, float* pY)
 
 		return true;
 	}
+
+	return false;
+}
+
+bool CCollisionMgr::Check_Rect(CObj* pDst, CObj* pSrc)
+{
+	float		fWidth = fabsf(pDst->Get_Info()->fX - pSrc->Get_Info()->fX);
+	float		fHeight = fabsf(pDst->Get_Info()->fY - pSrc->Get_Info()->fY);
+
+	float		fRadiusX = (pDst->Get_Info()->fCX + pSrc->Get_Info()->fCX) * 0.5f;
+	float		fRadiusY = (pDst->Get_Info()->fCY + pSrc->Get_Info()->fCY) * 0.5f;
+
+	if (fRadiusX >= fWidth && fRadiusY >= fHeight)
+		return true;
 
 	return false;
 }

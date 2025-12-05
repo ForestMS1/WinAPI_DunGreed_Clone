@@ -153,6 +153,7 @@
     <ClInclude Include="CGameStartBtn.h" />
     <ClInclude Include="CGoldUI.h" />
     <ClInclude Include="CGoTileEditBtn.h" />
+    <ClInclude Include="CInventoryUI.h" />
     <ClInclude Include="CLaser.h" />
     <ClInclude Include="CMapTileOptionUI.h" />
     <ClInclude Include="CMouse.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="CGameStartBtn.cpp" />
     <ClCompile Include="CGoldUI.cpp" />
     <ClCompile Include="CGoTileEditBtn.cpp" />
+    <ClCompile Include="CInventoryUI.cpp" />
     <ClCompile Include="CLaser.cpp" />
     <ClCompile Include="CMapTileOptionUI.cpp" />
     <ClCompile Include="CMouse.cpp" />

@@ -175,6 +175,9 @@
     <Filter Include="Scene\BelialScene">
       <UniqueIdentifier>{451a0187-a7fc-443f-9365-80cb9f8be3cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\UI\InventoryUI">
+      <UniqueIdentifier>{5ace61d2-ef0e-4125-8fe4-1376dcfd73ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -348,6 +351,9 @@
     <ClInclude Include="CBelialScene.h">
       <Filter>Scene\BelialScene</Filter>
     </ClInclude>
+    <ClInclude Include="CInventoryUI.h">
+      <Filter>Object\UI\InventoryUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -508,6 +514,9 @@
     </ClCompile>
     <ClCompile Include="CBelialScene.cpp">
       <Filter>Scene\BelialScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CInventoryUI.cpp">
+      <Filter>Object\UI\InventoryUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

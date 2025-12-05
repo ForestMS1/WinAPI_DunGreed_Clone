@@ -53,7 +53,8 @@ int CSwingFX::Update()
 	
 
 	CObj* pPlayer = dynamic_cast<CPlayer*>(dynamic_cast<CWeapon*>(m_pOwner)->Get_Owner());
-	if (dynamic_cast<CPlayer*>(pPlayer)->Get_State() == CPlayer::ATTACK)
+	//if (dynamic_cast<CPlayer*>(pPlayer)->Get_State() == CPlayer::ATTACK)
+	if(dynamic_cast<CPlayer*>(pPlayer)->Get_IsAttack())
 	{
 		m_fAngle = dynamic_cast<CWeapon*>(m_pOwner)->Get_Angle();
 		Move_Frame();
@@ -69,7 +70,8 @@ void CSwingFX::Late_Update()
 void CSwingFX::Render(HDC hDC)
 {
 	CObj* pPlayer = dynamic_cast<CWeapon*>(m_pOwner)->Get_Owner();
-	if (dynamic_cast<CPlayer*>(pPlayer)->Get_State() == CPlayer::ATTACK)
+	//if (dynamic_cast<CPlayer*>(pPlayer)->Get_State() == CPlayer::ATTACK)
+	if (dynamic_cast<CPlayer*>(pPlayer)->Get_IsAttack())
 	{
 		//Rectangle(
 		//	hDC,

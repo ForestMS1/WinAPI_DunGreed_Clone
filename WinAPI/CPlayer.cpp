@@ -314,6 +314,8 @@ void CPlayer::Motion_Change()
 			m_iFrameHeight = 60;
 			break;
 		case JUMP:
+			if (m_bAttack)
+				m_eCurState = ATTACK;
 			m_tFrame.iStart = 0;
 			m_tFrame.iEnd = 0;
 			m_tFrame.dwSpeed = 50;

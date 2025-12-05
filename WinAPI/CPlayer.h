@@ -19,6 +19,7 @@ public:
 	bool IsGround() const { return m_bIsGround; }
 
 	STATE Get_State() const { return m_eCurState;  }
+	bool Get_IsAttack() const { return m_bAttack; }
 
 private:
 	void Key_Input();

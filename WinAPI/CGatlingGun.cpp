@@ -2,6 +2,10 @@
 #include "CGatlingGun.h"
 #include "CPlayer.h"
 #include "CGatlingGunBullet.h"
+CGatlingGun::CGatlingGun()
+{
+	m_pOwner = nullptr;
+}
 CGatlingGun::CGatlingGun(CObj* pOwner)
 {
 	m_pOwner = pOwner;
@@ -15,11 +19,15 @@ void CGatlingGun::Initialize()
 {
     __super::Initialize();
     GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Weapon/GatlingGun.png", L"GatlingGun");
-    m_fOffsetX = m_pOwner->Get_Info()->fCX * 0.5f;
-    m_fOffsetY = m_pOwner->Get_Info()->fCY * 0.5f;
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Item/Weapon/GatlingGun.Bmp", L"GatlingGunBmp");
+	if (m_pOwner != nullptr)
+	{
+		m_fOffsetX = m_pOwner->Get_Info()->fCX * 0.5f;
+		m_fOffsetY = m_pOwner->Get_Info()->fCY * 0.5f;
 
-    m_tInfo.fX = m_pOwner->Get_Info()->fX + m_fOffsetX;
-    m_tInfo.fY = m_pOwner->Get_Info()->fY - m_fOffsetY;
+		m_tInfo.fX = m_pOwner->Get_Info()->fX + m_fOffsetX;
+		m_tInfo.fY = m_pOwner->Get_Info()->fY - m_fOffsetY;
+	}
     m_iFrameWidth = 70;
     m_iFrameHeight = 65;
     m_tInfo.fCX = m_iFrameWidth;
@@ -34,6 +42,7 @@ void CGatlingGun::Initialize()
     m_fDamage = 30.f;
 	m_iMaxAttackCount = 3;
 	m_iCurAttackCount = 0;
+	m_wsFrameKey = L"GatlingGunBmp";
 }
 
 int CGatlingGun::Update()

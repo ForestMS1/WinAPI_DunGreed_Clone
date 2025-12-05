@@ -31,6 +31,9 @@ public:
 	void Move_Frame_No_Loop();
 	float Get_MaxHp() const												{ return m_fMaxHp; }
 	float Get_CurHp() const												{ return m_fCurHp; }
+	wstring Get_FrameKey() const										{ return m_wsFrameKey; }
+	int Get_FrameWidth() const											{ return m_iFrameWidth; }
+	int Get_FrameHeight() const											{ return m_iFrameHeight; }
 
 
 protected:

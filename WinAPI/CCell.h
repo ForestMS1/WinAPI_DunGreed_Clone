@@ -19,8 +19,14 @@ public:
 	void Render(HDC hDC) override;
 
 	void Release() override;
+
+	void SetItem(CItem* pItem) { m_pItem = pItem; }
+	CItem* GetItem() const { return m_pItem; }
+private:
+	void Clicked();
 private:
 	CItem* m_pItem;
 	bool   m_bMouseOn;
+	bool   m_bClicked;
 };
 

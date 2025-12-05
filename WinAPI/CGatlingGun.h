@@ -4,6 +4,7 @@ class CGatlingGun :
     public CWeapon
 {
 public:
+	CGatlingGun();
 	CGatlingGun(CObj* pOwner);
 	~CGatlingGun();
 public:

@@ -36,6 +36,9 @@ void CBelial::Initialize()
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossIdle.bmp", L"BelialIdle");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossAttack.bmp", L"BelialAttack");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossBack.bmp", L"SkellBossBack");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossIdleHit.bmp", L"SkellIdleHit");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossAttackHit.bmp", L"SkellBossAttackHit");
+
 
 	srand(time(0));
 	m_dwChangePattern = GetTickCount();
@@ -92,6 +95,11 @@ int CBelial::Update()
 			m_eCurState = BELIAL_STATE((rand() % 3) + 1);
 		} while (m_ePreState == m_eCurState);
 		m_dwChangePattern = GetTickCount();
+	}
+
+	if (m_bIsHit && m_dwLastHitTime + 10 < GetTickCount())
+	{
+		m_bIsHit = false;
 	}
 
 
@@ -151,6 +159,46 @@ void CBelial::Render(HDC hDC)
 		m_iFrameHeight,
 		RGB(255, 0, 255)
 	);
+
+	if (m_bIsHit)
+	{
+		if (m_eCurState == ATTACK_ROTATE)
+		{
+			HDC hHitDC = GET(CResourceMgr)->Find_Bmp(L"SkellBossAttackHit");
+
+			GdiTransparentBlt(
+				hDC,
+				m_tRect.left - ScrollX,
+				m_tRect.top - ScrollY,
+				m_tInfo.fCX,
+				m_tInfo.fCY,
+				hHitDC,
+				m_iFrameWidth * m_tFrame.iStart,
+				m_iFrameHeight * m_tFrame.iMotion,
+				m_iFrameWidth,
+				m_iFrameHeight,
+				RGB(255, 0, 255)
+			);
+		}
+		else
+		{
+			HDC hHitDC = GET(CResourceMgr)->Find_Bmp(L"SkellIdleHit");
+
+			GdiTransparentBlt(
+				hDC,
+				m_tRect.left - ScrollX,
+				m_tRect.top - ScrollY,
+				m_tInfo.fCX,
+				m_tInfo.fCY,
+				hHitDC,
+				m_iFrameWidth * m_tFrame.iStart,
+				m_iFrameHeight * m_tFrame.iMotion,
+				m_iFrameWidth,
+				m_iFrameHeight,
+				RGB(255, 0, 255)
+			);
+		}
+	}
 
 	if (m_pRHand != nullptr)
 		m_pRHand->Render(hDC);

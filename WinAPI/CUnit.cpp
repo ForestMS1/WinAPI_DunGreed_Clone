@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CUnit.h"
 
-CUnit::CUnit()
+CUnit::CUnit() : m_bIsHit(false), m_dwLastHitTime(GetTickCount())
 {
 }
 

@@ -14,6 +14,17 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
-    void OnDamage(int dmg) { m_fCurHp -= dmg; if (m_fCurHp <= 0.f) m_fCurHp = 0.f; }
+    void OnDamage(int dmg) 
+    { 
+        m_fCurHp -= dmg; 
+        if (m_fCurHp <= 0.f) 
+            m_fCurHp = 0.f; 
+
+        m_dwLastHitTime = GetTickCount();
+        m_bIsHit = true;
+    }
+protected:
+    bool m_bIsHit;
+    DWORD m_dwLastHitTime;
 };
 

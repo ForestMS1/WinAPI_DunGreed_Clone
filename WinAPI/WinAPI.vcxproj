@@ -142,6 +142,7 @@
     <ClInclude Include="CBelialRHand.h" />
     <ClInclude Include="CBelialScene.h" />
     <ClInclude Include="CBelialSpear.h" />
+    <ClInclude Include="CBelialUI.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCell.h" />
@@ -213,6 +214,7 @@
     <ClCompile Include="CBelialRHand.cpp" />
     <ClCompile Include="CBelialScene.cpp" />
     <ClCompile Include="CBelialSpear.cpp" />
+    <ClCompile Include="CBelialUI.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCell.cpp" />

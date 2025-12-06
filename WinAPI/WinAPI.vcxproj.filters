@@ -205,6 +205,9 @@
     <Filter Include="Object\UI\InventoryUI\EquipSlotOn\WeaponBtn1">
       <UniqueIdentifier>{1ce3936e-95b8-45da-8f31-67d356fa8a02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\UI\BelialUI">
+      <UniqueIdentifier>{a00302db-62d6-44bb-b031-30c23e1281fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -408,6 +411,9 @@
     <ClInclude Include="CWeaponBtn1.h">
       <Filter>Object\UI\InventoryUI\EquipSlotOn\WeaponBtn1</Filter>
     </ClInclude>
+    <ClInclude Include="CBelialUI.h">
+      <Filter>Object\UI\BelialUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -598,6 +604,9 @@
     </ClCompile>
     <ClCompile Include="CWeaponBtn1.cpp">
       <Filter>Object\UI\InventoryUI\EquipSlotOn\WeaponBtn1</Filter>
+    </ClCompile>
+    <ClCompile Include="CBelialUI.cpp">
+      <Filter>Object\UI\BelialUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

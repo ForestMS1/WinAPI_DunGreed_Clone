@@ -25,7 +25,7 @@ void CInventoryUI::Initialize()
 	m_tInfo.fCX = 369.f;
 	m_tInfo.fCY = 564.f;
 	m_tInfo.fX = WINCX - m_tInfo.fCX * 0.5f;
-	m_tInfo.fY = WINCY - m_tInfo.fCY * 0.5f;
+	m_tInfo.fY = m_tInfo.fCY * 0.5f;
 	__super::Update_Rect();
 
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Inventory/InventoryBase.bmp", L"InventoryBase");

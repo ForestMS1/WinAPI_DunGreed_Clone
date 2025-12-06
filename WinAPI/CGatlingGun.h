@@ -15,5 +15,6 @@ public:
 	void Release() override;
 	CWeapon* Clone() override { return new CGatlingGun(*this); }
 private:
+	DWORD	m_dwShootDelay;
 };
 

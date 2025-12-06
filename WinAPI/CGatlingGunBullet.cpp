@@ -15,7 +15,7 @@ void CGatlingGunBullet::Initialize()
 	m_tInfo.fCX = 28.f;
 	m_tInfo.fCY = 10.f;
 
-	m_fSpeed = 5.f;
+	m_fSpeed = 20.f;
 	m_fDamage = 3.f;
 
 	m_iFrameWidth = 28.f;
@@ -90,7 +90,7 @@ void CGatlingGunBullet::Render(HDC hDC)
 	// 참고: (m_fAngle + 270) * 180.f / PI 대신 -m_fAngle을 사용해 테스트해보세요.
 	// GDI+의 RotateTransform은 Degree를 사용합니다. PI 변환이 필요 없습니다.
 	// 회전 방향에 따라 부호를 조정하세요.
-	_gx.RotateTransform((m_fAngle) * PI / 180.f);
+	_gx.RotateTransform(-m_fAngle);
 
 	// 3-3. 원본 중심점 (현재 프레임의 중심)을 원점으로 이동
 	_gx.TranslateTransform(-centerX, -centerY);

@@ -2,6 +2,8 @@
 #include "CBelialScene.h"
 #include "CPlayer.h"
 #include "CBelial.h"
+#include "CPlayerUI.h"
+#include "CInventoryUI.h"
 
 CBelialScene::CBelialScene()
 {
@@ -20,6 +22,10 @@ void CBelialScene::Initialize()
 	GET(CTileMgr)->Initialize();
 	GET(CTileMgr)->Load_Tile(L"BelialSceneTile");
 
+	GET(CPlayerMgr)->Initialize();
+	GET(CUIMgr)->Insert_UI(L"PlayerUI", new CPlayerUI(GET(CPlayerMgr)->GetPlayer()));
+	GET(CUIMgr)->Insert_UI(L"InventoryUI", new CInventoryUI(GET(CPlayerMgr)->GetPlayer()));
+	GET(CUIMgr)->Initialize();
 	// Camera ÁöÁ¤
 	GET(CCamera)->Initialize();
 	//GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));

@@ -25,6 +25,7 @@ public:
 	//void PutItem(CItem** putSlot) { *putSlot = m_pItem; m_pItem = nullptr; m_eState = EMPTY; }
 	MouseState Get_State() const { return m_eState; }
 	void		Set_State(MouseState eState) { m_eState = eState; }
+	void Delete_Item() { Safe_Delete(m_pItem); }
 
 private:
 	INFO m_tInfo;

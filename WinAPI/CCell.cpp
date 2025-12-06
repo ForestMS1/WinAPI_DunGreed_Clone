@@ -2,11 +2,11 @@
 #include "CCell.h"
 #include "CGatlingGun.h"
 
-CCell::CCell() : m_bMouseOn(false)
+CCell::CCell() : m_bMouseOn(false), m_pItem(nullptr)
 {
 }
 
-CCell::CCell(CUI* pParentUI) : m_bMouseOn(false)
+CCell::CCell(CUI* pParentUI) : m_bMouseOn(false), m_pItem(nullptr)
 {
 	m_pParentUI = pParentUI;
 }
@@ -22,9 +22,12 @@ void CCell::Initialize()
 	m_tInfo.fCY = 57.f;
 	__super::Update_Rect();
 
-	m_pItem = new CGatlingGun;
-	m_pItem->Initialize();
-	m_pItem->Set_Pos(m_tInfo.fX, m_tInfo.fY);
+	//m_pItem = new CGatlingGun;
+	if (m_pItem != nullptr)
+	{
+		m_pItem->Initialize();
+		m_pItem->Set_Pos(m_tInfo.fX, m_tInfo.fY);
+	}
 }
 
 int CCell::Update()
@@ -34,9 +37,10 @@ int CCell::Update()
 		//마우스에게 아이템 정보 해제
 		if (m_pItem == nullptr && GET(CMouse)->Get_Item() != nullptr)
 		{
-			m_pItem = GET(CMouse)->Get_Item();
+			Safe_Delete(m_pItem);
+			m_pItem = GET(CMouse)->Get_Item()->Clone();
 			GET(CMouse)->Set_State(CMouse::MouseState::EMPTY);
-			GET(CMouse)->Set_Item(nullptr);
+			GET(CMouse)->Delete_Item();
 		}
 
 		return 0;
@@ -52,6 +56,12 @@ int CCell::Update()
 	{
 		m_bMouseOn = false;
 	}
+
+	if (m_pItem != nullptr)
+	{
+		m_pItem->Set_Pos(m_tInfo.fX, m_tInfo.fY);
+	}
+
 	Clicked();
 	return 0;
 }
@@ -117,16 +127,17 @@ void CCell::Clicked()
 	if (GET(CMouse)->Get_State() == CMouse::MouseState::EMPTY && m_bMouseOn && GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
 		//마우스에게 아이템 정보 전달
-		GET(CMouse)->PickItem(m_pItem);
+		GET(CMouse)->PickItem(m_pItem->Clone());
 
-		m_pItem = nullptr;
+		Safe_Delete(m_pItem);
 	}
 	if (m_bMouseOn && m_pItem == nullptr &&
 		GET(CMouse)->Get_State() == CMouse::MouseState::PICKITEM && GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
 		//마우스에게 아이템 정보 해제
-		m_pItem = GET(CMouse)->Get_Item();
+		Safe_Delete(m_pItem);
+		m_pItem = GET(CMouse)->Get_Item()->Clone();
 		GET(CMouse)->Set_State(CMouse::MouseState::EMPTY);
-		GET(CMouse)->Set_Item(nullptr);
+		GET(CMouse)->Delete_Item();
 	}
 }

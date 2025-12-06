@@ -57,24 +57,15 @@ void CPlayer::Initialize()
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerDie.bmp", L"PlayerDie");
 
 	//¹«±â
-	if (m_pWeapon == nullptr)
-	{
-		m_pWeapon = new CGatlingGun(this);
-		m_vecOwned.push_back(m_pWeapon);
-	}
+	//if (m_pWeapon == nullptr)
+	//{
+	//	m_pWeapon = new CGatlingGun(this);
+	//}
 	//ÀÌÆåÆ®
 	if (m_pRunEffect == nullptr)
 	{
 		m_pRunEffect = new CRunEffect(this);
-		m_vecOwned.push_back(m_pRunEffect);
-	}
-
-	for (auto& pOwned : m_vecOwned)
-	{
-		if (pOwned)
-		{
-			pOwned->Initialize();
-		}
+		m_pRunEffect->Initialize();
 	}
 }
 
@@ -103,13 +94,12 @@ int CPlayer::Update()
 
 	Move_Frame();
 
-	for (auto& pOwned : m_vecOwned)
-	{
-		if (pOwned)
-		{
-			pOwned->Update();
-		}
-	}
+	//¹«±â
+	if (m_pWeapon != nullptr)
+		m_pWeapon->Update();
+	//ÀÌÆåÆ®
+	if (m_pRunEffect != nullptr)
+		m_pRunEffect->Update();
 	return OBJ_NOEVENT;
 }
 
@@ -131,13 +121,12 @@ void CPlayer::Late_Update()
 		m_eCurState = JUMP;
 	}
 
-	for (auto& pOwned : m_vecOwned)
-	{
-		if (pOwned)
-		{
-			pOwned->Late_Update();
-		}
-	}
+	//¹«±â
+	if (m_pWeapon != nullptr)
+		m_pWeapon->Late_Update();
+	//ÀÌÆåÆ®
+	if (m_pRunEffect != nullptr)
+		m_pRunEffect->Late_Update();
 
 #ifdef _DEBUG
 	if (GET(CKeyMgr)->Key_Pressing(VK_RETURN))
@@ -185,28 +174,23 @@ void CPlayer::Render(HDC hDC)
 		RGB(255, 0, 255)
 	);
 
-	for (auto& pOwned : m_vecOwned)
-	{
-		if (pOwned)
-		{
-			pOwned->Render(hDC);
-		}
-	}
+	//¹«±â
+	if (m_pWeapon != nullptr)
+		m_pWeapon->Render(hDC);
+	//ÀÌÆåÆ®
+	if (m_pRunEffect != nullptr)
+		m_pRunEffect->Render(hDC);
 
 }
 
 void CPlayer::Release()
 {
-	for (auto& pOwned : m_vecOwned)
-	{
-		Safe_Delete(pOwned);
-	}
+	Safe_Delete<CItem*>(m_pWeapon);
+	Safe_Delete(m_pRunEffect);
 }
 
 void CPlayer::Key_Input()
 {
-	if (GET(CUIMgr)->Find_UI(L"InventoryUI")->IsOpen())
-		return;
 	if (GET(CKeyMgr)->Key_Pressing('A'))
 	{
 		m_tInfo.fX -= m_fSpeed;
@@ -246,6 +230,8 @@ void CPlayer::Key_Input()
 		m_bBottomJump = false;
 	}
 
+	if (GET(CUIMgr)->Find_UI(L"InventoryUI") != nullptr && GET(CUIMgr)->Find_UI(L"InventoryUI")->IsOpen())
+		return;
 	if (GET(CKeyMgr)->Key_Down(VK_RBUTTON))
 	{
 		m_bDash = true;

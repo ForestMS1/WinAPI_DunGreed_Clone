@@ -13,6 +13,7 @@ public:
 	void Late_Update() override;
 	void Render(HDC hDC) override;
 	void Release() override;
+	CWeapon* Clone() override { return new CGatlingGun(*this); }
 private:
 };
 

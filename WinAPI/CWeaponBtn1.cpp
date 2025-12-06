@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "CWeaponBtn1.h"
+#include "CWeapon.h"
+#include "CGatlingGun.h"
 
 CWeaponBtn1::CWeaponBtn1() : m_pEquipedItem(nullptr)
 {
@@ -12,6 +14,7 @@ CWeaponBtn1::CWeaponBtn1(CUI* pParentUI) : m_pEquipedItem(nullptr)
 
 CWeaponBtn1::~CWeaponBtn1()
 {
+	Release();
 }
 
 void CWeaponBtn1::Initialize()
@@ -48,8 +51,6 @@ void CWeaponBtn1::Render(HDC hDC)
 {
 	CUI::Render(hDC);
 
-	Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
-
 	if (m_pEquipedItem != nullptr)
 	{
 		HDC hItemDC = GET(CResourceMgr)->Find_Bmp(m_pEquipedItem->Get_FrameKey());
@@ -71,6 +72,7 @@ void CWeaponBtn1::Render(HDC hDC)
 
 void CWeaponBtn1::Release()
 {
+	Safe_Delete(m_pEquipedItem);
 }
 
 void CWeaponBtn1::Cliked()
@@ -83,17 +85,20 @@ void CWeaponBtn1::Cliked()
 	if (GET(CMouse)->Get_State() == CMouse::MouseState::EMPTY && m_bMouseOn && GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
 		//마우스에게 아이템 정보 전달
-		GET(CMouse)->PickItem(m_pEquipedItem);
-
-		m_pEquipedItem = nullptr;
+		if(m_pEquipedItem != nullptr)
+			GET(CMouse)->PickItem(m_pEquipedItem->Clone());
+		Safe_Delete(m_pEquipedItem);
+		GET(CPlayerMgr)->EquipWeapon(nullptr);
 	}
 	if (m_bMouseOn && m_pEquipedItem == nullptr &&
 		GET(CMouse)->Get_State() == CMouse::MouseState::PICKITEM && GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
 		//마우스에게 아이템 정보 해제
-		m_pEquipedItem = GET(CMouse)->Get_Item();
+		Safe_Delete(m_pEquipedItem);
+		m_pEquipedItem = GET(CMouse)->Get_Item()->Clone();
+		GET(CPlayerMgr)->EquipWeapon(m_pEquipedItem->Clone());
 		GET(CMouse)->Set_State(CMouse::MouseState::EMPTY);
-		GET(CMouse)->Set_Item(nullptr);
+		GET(CMouse)->Delete_Item();
 	}
 
 }

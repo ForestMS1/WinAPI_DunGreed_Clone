@@ -5,14 +5,14 @@
 #include "CMouse.h"
 
 CWeapon::CWeapon() : m_fDamage(0.f), m_iMaxAttackCount(0), m_iCurAttackCount(0)
+, isEquiped(false), m_fAngle(0.f)
 {
-    m_pOwner = nullptr;
     ZeroMemory(&m_tAttackRect, sizeof(RECT));
 }
 
 CWeapon::CWeapon(CObj* pOwner) : m_fOffsetX(0.f), m_fOffsetY(0.f) , m_fAngle(0.f) , m_fDamage(0.f)
+, isEquiped(false)
 {
-    m_pOwner = pOwner;
 }
 CWeapon::~CWeapon()
 {
@@ -49,8 +49,8 @@ int CWeapon::Update()
         m_fAngle = 2.f * PI - m_fAngle;
 
 
-    m_tInfo.fX = m_pOwner->Get_Info()->fX + (m_fOffsetX * cosf(m_fAngle));
-    m_tInfo.fY = m_pOwner->Get_Info()->fY - (m_fOffsetY * sinf(m_fAngle));
+    m_tInfo.fX = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fX + (m_fOffsetX * cosf(m_fAngle));
+    m_tInfo.fY = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fY - (m_fOffsetY * sinf(m_fAngle));
     return 0;
 }
 
@@ -70,7 +70,6 @@ void CWeapon::Render(HDC hDC)
 
 void CWeapon::Release()
 {
-    m_pOwner = nullptr;
 }
 
 void CWeapon::Update_AttackRect()
@@ -80,3 +79,5 @@ void CWeapon::Update_AttackRect()
     m_tAttackRect.right = m_tAttackInfo.fX + m_tAttackInfo.fCX * 0.5f;
     m_tAttackRect.bottom = m_tAttackInfo.fY + m_tAttackInfo.fCY * 0.5f;
 }
+
+

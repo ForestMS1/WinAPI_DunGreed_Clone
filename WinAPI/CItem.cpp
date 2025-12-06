@@ -1,7 +1,10 @@
 #include "pch.h"
 #include "CItem.h"
 
-CItem::CItem()
+CItem::CItem():
+m_fAddAtk(0.f),
+m_fAddDfs(0.f),
+m_fAddHp(0.f)
 {
 }
 

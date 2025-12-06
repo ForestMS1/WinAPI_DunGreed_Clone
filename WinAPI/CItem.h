@@ -11,16 +11,15 @@ public:
 public:
 
     // CObj을(를) 통해 상속됨
-    void Initialize() override;
-    int Update() override;
-    void Late_Update() override;
-    void Render(HDC hDC) override;
-    void Release() override;
-
+    virtual void Initialize() override;
+    virtual int Update() override;
+    virtual void Late_Update() override;
+    virtual void Render(HDC hDC) override;
+    virtual void Release() override;
+    virtual CItem* Clone() = 0;
 private:
     float m_fAddAtk;
     float m_fAddDfs;
     float m_fAddHp;
-
 };
 

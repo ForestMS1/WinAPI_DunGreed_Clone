@@ -176,5 +176,5 @@ void CMouse::Render(HDC hDC)
 }
 void CMouse::Release()
 {
-
+	Safe_Delete(m_pItem);
 }

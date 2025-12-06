@@ -50,6 +50,7 @@ void CTest::Initialize()
 
 void CTest::Update()
 {
+	GET(CPlayerMgr)->Update();
 	Key_Input();
 }
 

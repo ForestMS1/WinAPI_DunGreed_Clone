@@ -7,14 +7,14 @@ public:
 	CWeapon(CObj* pOwner);
 	virtual ~CWeapon();
 public:
-	// CObj을(를) 통해 상속됨
+
 	void Initialize() override;
 	int Update() override;
 	void Late_Update() override;
 	void Render(HDC hDC) override;
 	void Release() override;
+	CItem* Clone() override { return new CWeapon(*this); }
 
-	CObj* Get_Owner() const { return m_pOwner; }
 	RECT*  Get_AttackRect()  { return &m_tAttackRect; }
 	INFO* GET_AttackInfo() { return &m_tAttackInfo; }
 	void Update_AttackRect();
@@ -24,7 +24,7 @@ public:
 	int Get_MaxAttackCount() const { return m_iMaxAttackCount; }
 	int Get_CurAttackCount() const { return m_iCurAttackCount; }
 protected:
-	CObj*			m_pOwner;
+	bool			isEquiped;
 
 	float			m_fOffsetX;
 	float			m_fOffsetY;
@@ -38,6 +38,8 @@ protected:
 	// 공격력
 	float			m_fDamage;
 	int				m_iMaxAttackCount; // 무기의 한번에 줄 수 있는 최대 공격횟수
-	int				m_iCurAttackCount; // 데미지 준 횟수
+	int				m_iCurAttackCount;
+
+	// 데미지 준 횟수
 };
 

@@ -21,6 +21,8 @@ public:
 	STATE Get_State() const { return m_eCurState;  }
 	bool Get_IsAttack() const { return m_bAttack; }
 
+	void Set_Weapon(CItem* pWeapon) { Safe_Delete(m_pWeapon); m_pWeapon = pWeapon; }
+
 private:
 	void Key_Input();
 	void Motion_Change();
@@ -40,10 +42,10 @@ private:
 	}
 
 private:
-	CWeapon*			m_pWeapon;
+	CItem*			m_pWeapon;
 	CRunEffect*			m_pRunEffect;
 	//플레이어가 장착한 무기, 플레이어의 이펙트 등을 담을 vector
-	vector<CObj*>		m_vecOwned;
+	//vector<CObj*>		m_vecOwned;
 
 private:
 	STATE				m_ePreState;

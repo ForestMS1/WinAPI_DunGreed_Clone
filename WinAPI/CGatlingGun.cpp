@@ -4,11 +4,11 @@
 #include "CGatlingGunBullet.h"
 CGatlingGun::CGatlingGun()
 {
-	m_pOwner = nullptr;
+
 }
 CGatlingGun::CGatlingGun(CObj* pOwner)
 {
-	m_pOwner = pOwner;
+
 }
 
 CGatlingGun::~CGatlingGun()
@@ -20,13 +20,13 @@ void CGatlingGun::Initialize()
     __super::Initialize();
     GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Weapon/GatlingGun.png", L"GatlingGun");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Item/Weapon/GatlingGun.Bmp", L"GatlingGunBmp");
-	if (m_pOwner != nullptr)
+	if (GET(CPlayerMgr)->GetPlayer() != nullptr)
 	{
-		m_fOffsetX = m_pOwner->Get_Info()->fCX * 0.5f;
-		m_fOffsetY = m_pOwner->Get_Info()->fCY * 0.5f;
+		m_fOffsetX = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fCX * 0.5f;
+		m_fOffsetY = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fCY * 0.5f;
 
-		m_tInfo.fX = m_pOwner->Get_Info()->fX + m_fOffsetX;
-		m_tInfo.fY = m_pOwner->Get_Info()->fY - m_fOffsetY;
+		m_tInfo.fX = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fX + m_fOffsetX;
+		m_tInfo.fY = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fY - m_fOffsetY;
 	}
     m_iFrameWidth = 70;
     m_iFrameHeight = 65;
@@ -57,7 +57,7 @@ void CGatlingGun::Late_Update()
     CWeapon::Late_Update();
 
 
-    if (dynamic_cast<CPlayer*>(m_pOwner)->Get_IsAttack() && m_iCurAttackCount < m_iMaxAttackCount)
+    if (dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->Get_IsAttack() && m_iCurAttackCount < m_iMaxAttackCount)
     {
 		GET(CObjMgr)->AddObject(OBJ_PLAYER_BULLET, 
 			CAbstractFactory<CGatlingGunBullet>::CreateBullet(m_tInfo.fX, m_tInfo.fY, m_fAngle * 180/PI));
@@ -93,8 +93,8 @@ void CGatlingGun::Render(HDC hDC)
 	float centerY = (float)H / 2.0f; // 현재 프레임의 상대적 중심 Y (m_iFrameHeight / 2.0f)
 
 	// 최종적으로 이미지가 그려질 화면상의 중심 좌표 (스크롤 및 Info 반영)
-	float targetX = m_pOwner->Get_Info()->fX - ScrollX;
-	float targetY = m_pOwner->Get_Info()->fY - ScrollY;
+	float targetX = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fX - ScrollX;
+	float targetY = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fY - ScrollY;
 
 	// 원본 이미지 시트에서 현재 프레임의 시작 위치
 	int srcX = FrameX * W;

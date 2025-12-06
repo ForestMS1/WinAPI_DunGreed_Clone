@@ -22,14 +22,16 @@ void CMapTileUI::Initialize()
 
 	m_tInfo.fX = WINCX>>1;
 	m_tInfo.fY = WINCY>>1;
-	m_tInfo.fCX = 1024;
+	//m_tInfo.fCX = 1024;
+	//m_tInfo.fCY = 512;
+	m_tInfo.fCX = 512;
 	m_tInfo.fCY = 512;
 
 	__super::Update_Rect();
 
 	for (int i = 0; i < 32; ++i)
 	{
-		for (int j = 0; j < 64; ++j)
+		for (int j = 0; j < 32; ++j)
 		{
 			float fX = m_tRect.left + (BMPTILECX * j) + (BMPTILECX >> 1);
 			float fY = m_tRect.top + (BMPTILECY * i) + (BMPTILECY >> 1);

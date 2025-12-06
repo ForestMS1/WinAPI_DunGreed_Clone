@@ -47,15 +47,18 @@ void CInventoryUI::Initialize()
 		{
 			CUI* pCell = new CCell;
 			pCell->Set_Pos(m_tRect.left + (57 + 10) * j + offsetX, m_tRect.top + (57 + 10) * i + offsetY);
-			if (i == 0 && j == 0)
-				dynamic_cast<CCell*>(pCell)->SetItem(new CCosmosSword);
-			else
-				dynamic_cast<CCell*>(pCell)->SetItem(new CGatlingGun);
+			//if (i == 0 && j == 0)
+			//	dynamic_cast<CCell*>(pCell)->SetItem(new CCosmosSword);
+			//else
+			//	dynamic_cast<CCell*>(pCell)->SetItem(new CGatlingGun);
 
 			AddChildUI(pCell);
 			pCell->Initialize();
 		}
 	}
+	//0~14¹øÀº ÅÛÄ­
+	dynamic_cast<CCell*>(m_vecChildUI[0])->SetItem(new CCosmosSword);
+	dynamic_cast<CCell*>(m_vecChildUI[1])->SetItem(new CGatlingGun);
 
 	CUI* pESlot = new CEquipSlotOn;
 	pESlot->Set_Pos(m_tRect.left + 110, m_tRect.top + 127);

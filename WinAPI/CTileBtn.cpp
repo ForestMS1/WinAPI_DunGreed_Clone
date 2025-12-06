@@ -57,7 +57,7 @@ void CTileBtn::Late_Update()
 
 void CTileBtn::Render(HDC hDC)
 {
-	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOld");
+	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTile");
 	int SrcX = (m_tRect.left - (m_pParentUI->Get_Rect()->left));
 	int SrcY = (m_tRect.top - (m_pParentUI->Get_Rect()->top));
 	//GET(CCamera)

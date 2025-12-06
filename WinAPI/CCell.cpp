@@ -29,6 +29,8 @@ void CCell::Initialize()
 
 int CCell::Update()
 {
+	if (!m_bIsOpen)
+		return 0;
 	__super::Update_Rect();
 	if (PtInRect(&m_tRect, GET(CMouse)->Get_Point()))
 	{
@@ -43,7 +45,6 @@ int CCell::Update()
 
 void CCell::Late_Update()
 {
-
 	Clicked();
 }
 
@@ -73,22 +74,7 @@ void CCell::Render(HDC hDC)
 
 	if (m_bClicked)
 	{
-		POINT mpt = GET(CMouse)->Get_Point();
-		HDC hMouseDC = GET(CResourceMgr)->Find_Bmp(m_pItem->Get_FrameKey());
-
-		GdiTransparentBlt(
-			hDC,
-			mpt.x - m_tInfo.fCX * 0.5f,
-			mpt.y - m_tInfo.fCY * 0.5f,
-			m_tInfo.fCX,
-			m_tInfo.fCY,
-			hMouseDC,
-			0,
-			0,
-			m_pItem->Get_FrameWidth(),
-			m_pItem->Get_FrameHeight(),
-			RGB(255, 0, 255)
-		);
+		// 마우스 클래스에서 렌더링 아이템 렌더링
 	}
 	else
 	{
@@ -116,19 +102,30 @@ void CCell::Release()
 
 void CCell::Clicked()
 {
+	if (!m_bIsOpen)
+	{
+		//마우스에게 아이템 정보 해제
+		GET(CMouse)->PutItem(m_pItem);
+
+		m_bClicked = false;
+		return;
+	}
+
 	if (!m_bClicked && m_bMouseOn && GET(CKeyMgr)->Key_Pressing(VK_LBUTTON))
 	{
 		//내 칸에는 템 렌더링 x
 
 		//마우스에게 아이템 정보 전달
-		GET(CMouse)->Set_Item(m_pItem);
+		GET(CMouse)->PickItem(m_pItem);
 
 		//마우스 좌표에 아이템 렌더링
 		m_bClicked = true;
 	}
+	else if (m_bClicked && GET(CKeyMgr)->Key_Pressing(VK_LBUTTON))
+	{
+		//마우스에게 아이템 정보 해제
+		GET(CMouse)->PutItem(m_pItem);
 
-	//if (GET(CKeyMgr)->Key_Up(VK_LBUTTON))
-	//{
-	//	m_bClicked = false;
-	//}
+		m_bClicked = false;
+	}
 }

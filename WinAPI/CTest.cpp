@@ -9,6 +9,9 @@
 #include "CKeyMgr.h"
 #include "CTileMgr.h"
 #include "CBelial.h"
+#include "CPlayerUI.h"
+#include "CInventoryUI.h"
+#include "CPlayerMgr.h"
 CTest::CTest() : m_bIsDrawing(false)
 {
 	ZeroMemory(&m_ptMouse, sizeof(m_ptMouse));
@@ -29,9 +32,15 @@ void CTest::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(100.f, 100.f));
 	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBelial>::Create(2000.f, 200.f));
 	GET(CObjMgr)->Initialize();
+	GET(CPlayerMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
 	GET(CTileMgr)->Load_Tile(L"TestScene");
+
+	GET(CUIMgr)->Insert_UI(L"PlayerUI", new CPlayerUI(GET(CPlayerMgr)->GetPlayer()));
+	GET(CUIMgr)->Insert_UI(L"InventoryUI", new CInventoryUI(GET(CPlayerMgr)->GetPlayer()));
+
+	GET(CUIMgr)->Initialize();
 
 	// Camera ÁöÁ¤
 	GET(CCamera)->Initialize();

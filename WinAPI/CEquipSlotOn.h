@@ -4,6 +4,8 @@ class CEquipSlotOn :
     public CUI
 {
 public:
+	enum EquipState {};
+public:
 	CEquipSlotOn();
 	CEquipSlotOn(CUI* pParentUI);
 	virtual ~CEquipSlotOn();
@@ -19,6 +21,10 @@ public:
 
 	void Release() override;
 private:
-	CItem* m_pItem;
+	void Cliked();
+private:
+	CItem* m_pEquipedItem;
+	bool   m_bMouseOn;
+	bool   m_bClicked;
 };
 

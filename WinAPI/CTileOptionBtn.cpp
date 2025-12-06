@@ -27,12 +27,6 @@ void CTileOptionBtn::Initialize()
 int CTileOptionBtn::Update()
 {
 	__super::Update_Rect();
-
-	return 0;
-}
-
-void CTileOptionBtn::Late_Update()
-{
 	POINT pt;
 	GetCursorPos(&pt);
 	ScreenToClient(g_hWnd, &pt);
@@ -49,6 +43,12 @@ void CTileOptionBtn::Late_Update()
 	}
 	else
 		m_bMouseOn = false;
+	return 0;
+}
+
+void CTileOptionBtn::Late_Update()
+{
+	
 
 }
 

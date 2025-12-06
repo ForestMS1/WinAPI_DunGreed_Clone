@@ -28,17 +28,12 @@ void CTileEditScene::Initialize()
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Background/SubBG.bmp", L"SubBG");
 	GET(CTileMgr)->Initialize();
 
+	GET(CUIMgr)->Insert_UI(L"MapTileUI", new CMapTileUI);
+	GET(CUIMgr)->Insert_UI(L"MapTileOptionUI", new CMapTileOptionUI);
+
+	GET(CUIMgr)->Initialize();
 	// Camera 지정
 	GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
-	if(m_pTileSelectUI == nullptr)
-		m_pTileSelectUI = new CMapTileUI;
-	if (m_pTileOptionSelectUI == nullptr)
-		m_pTileOptionSelectUI = new CMapTileOptionUI;
-	m_pTileSelectUI->Initialize();
-	m_pTileOptionSelectUI->Initialize();
-
-	Vec2 pv = GET(CCamera)->GetRealPos(GET(CMouse)->Get_Point());
-	//GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(50, 50));
 }
 
 void CTileEditScene::Update()
@@ -47,17 +42,11 @@ void CTileEditScene::Update()
 	ScreenToClient(g_hWnd, &m_ptMouse);
 
 	Key_Input();
-	GET(CTileMgr)->Update();
-	GET(CCamera)->Update();
-	m_pTileSelectUI->Update();
-	m_pTileOptionSelectUI->Update();
 }
 
 void CTileEditScene::Late_Update()
 {
-	GET(CTileMgr)->Late_Update();
-	m_pTileSelectUI->Late_Update();
-	m_pTileOptionSelectUI->Late_Update();
+
 	m_iDrawIDX = GET(CMouse)->Get_DrawIDX();
 	m_iDrawIDY = GET(CMouse)->Get_DrawIDY();
 	m_iOption = GET(CMouse)->Get_Option();
@@ -82,8 +71,8 @@ void CTileEditScene::Render(HDC hDC)
 	//	180,
 	//	0);
 
-	GET(CTileMgr)->Render(hDC);
-	GET(CObjMgr)->Render(hDC);
+	//GET(CTileMgr)->Render(hDC);
+	//GET(CObjMgr)->Render(hDC);
 
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOld");
 
@@ -111,7 +100,7 @@ void CTileEditScene::Render(HDC hDC)
 
 	hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOption");
 
-	if (!m_pTileSelectUI->IsOpen())
+	if (!GET(CUIMgr)->Find_UI(L"MapTileUI")->IsOpen())
 	{
 		// 마우스에 옵션값 사각형 이미지 띄우기
 		GdiTransparentBlt(
@@ -129,22 +118,6 @@ void CTileEditScene::Render(HDC hDC)
 		);
 	}
 
-
-	// 하단 옵션 사각형 이미지 띄우기
-	//GdiTransparentBlt(
-	//	hDC,
-	//	0,				// 복사 받을 공간의 LEFT	
-	//	WINCY-32,				// 복사 받을 공간의 TOP
-	//	256,												// 복사 받을 공간의 가로 
-	//	32,												// 복사 받을 공간의 세로 
-	//	hMemDC,														// 복사 할 DC
-	//	0,														// 원본이미지 left
-	//	0,														// 원본이미지 top
-	//	128,													// 원본이미지 가로
-	//	16,												// 원본이미지 세로
-	//	RGB(255, 0, 255)
-	//);
-
 	wstring text = L"Tile_Option : " + to_wstring(m_iOption);
 	TextOut(hDC, 10, 0, text.c_str(), text.length());
 	text = L"Camera_Move : WASD";
@@ -153,23 +126,19 @@ void CTileEditScene::Render(HDC hDC)
 	TextOut(hDC, 10, 40, text.c_str(), text.length());
 	text = L"Tile_Clear: C";
 	TextOut(hDC, 10, 60, text.c_str(), text.length());
-	m_pTileSelectUI->Render(hDC);
-	m_pTileOptionSelectUI->Render(hDC);
 
 #pragma endregion
 }
 
 void CTileEditScene::Release()
 {
-	Safe_Delete(m_pTileSelectUI);
-	Safe_Delete(m_pTileOptionSelectUI);
 }
 
 void CTileEditScene::Key_Input()
 {
 #pragma region 마우스_왼오_클릭_칠하기
-	if (GET(CKeyMgr)->Key_Pressing(VK_LBUTTON) && !m_pTileSelectUI->IsOpen()
-		&& !dynamic_cast<CMapTileOptionUI*>(m_pTileOptionSelectUI)->IsMouseOn())
+	if (GET(CKeyMgr)->Key_Pressing(VK_LBUTTON) && !GET(CUIMgr)->Find_UI(L"MapTileUI")->IsOpen()
+		&& !dynamic_cast<CMapTileOptionUI*>(GET(CUIMgr)->Find_UI(L"MapTileOptionUI"))->IsMouseOn())
 	{
 		POINT	pt;
 		GetCursorPos(&pt);
@@ -227,12 +196,12 @@ void CTileEditScene::Key_Input()
 
 	if (GET(CKeyMgr)->Key_Down(VK_SPACE))
 	{
-		if (m_pTileSelectUI)
+		if (GET(CUIMgr)->Find_UI(L"MapTileUI"))
 		{
-			if (m_pTileSelectUI->IsOpen())
-				m_pTileSelectUI->Close();
+			if (GET(CUIMgr)->Find_UI(L"MapTileUI")->IsOpen())
+				GET(CUIMgr)->Find_UI(L"MapTileUI")->Close();
 			else
-				m_pTileSelectUI->Open();
+				GET(CUIMgr)->Find_UI(L"MapTileUI")->Open();
 		}
 	}	
 

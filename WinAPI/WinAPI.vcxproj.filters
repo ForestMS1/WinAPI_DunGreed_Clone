@@ -196,6 +196,12 @@
     <Filter Include="Object\Unit\Bullet\PlayerBullet\GatlingGunBullet">
       <UniqueIdentifier>{0f361783-17c6-4078-8979-578fbf2f1071}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\UIMgr">
+      <UniqueIdentifier>{9cab0b70-79b1-46e1-9599-835a10bf75fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\PlayerMgr">
+      <UniqueIdentifier>{2cb4124e-7c26-43a5-a253-281d93fb9541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -390,6 +396,12 @@
     <ClInclude Include="CGatlingGunBullet.h">
       <Filter>Object\Unit\Bullet\PlayerBullet\GatlingGunBullet</Filter>
     </ClInclude>
+    <ClInclude Include="CUIMgr.h">
+      <Filter>Manager\UIMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerMgr.h">
+      <Filter>Manager\PlayerMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -571,6 +583,12 @@
     </ClCompile>
     <ClCompile Include="CGatlingGunBullet.cpp">
       <Filter>Object\Unit\Bullet\PlayerBullet\GatlingGunBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMgr.cpp">
+      <Filter>Manager\UIMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerMgr.cpp">
+      <Filter>Manager\PlayerMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

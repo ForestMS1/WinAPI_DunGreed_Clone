@@ -78,6 +78,7 @@ void CMainGame::Update()
 	GET(CObjMgr)->Update();
 	GET(CCamera)->Update();
 	GET(CTileMgr)->Update();
+	GET(CUIMgr)->Update();
 }
 
 void CMainGame::Late_Update()
@@ -87,6 +88,7 @@ void CMainGame::Late_Update()
 	GET(CObjMgr)->Late_Update();
 	GET(CTileMgr)->Late_Update();
 	GET(CMouse)->Late_Update();
+	GET(CUIMgr)->Late_Update();
 	if (!GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).empty())
 	{
 		CCollisionMgr::MonsterDetecPlayer(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front(), GET(CObjMgr)->GetObjLayer(OBJ_MONSTER));
@@ -115,6 +117,7 @@ void CMainGame::Render()
 	GET(CSceneMgr)->Render(m_hBackDC);
 	GET(CTileMgr)->Render(m_hBackDC);
 	GET(CObjMgr)->Render(m_hBackDC);
+	GET(CUIMgr)->Render(m_hBackDC);
 	GET(CMouse)->Render(m_hBackDC);
 
 	BitBlt(m_hDC,				// 복사 받을 DC
@@ -135,7 +138,6 @@ void CMainGame::Release()
 	FreeConsole();
 
 #endif // _DEBUG
-
 	CMouse::Destroy_Instance();
 	CTileMgr::Destroy_Instance();
 	CCamera::Destroy_Instance();
@@ -144,6 +146,8 @@ void CMainGame::Release()
 	CResourceMgr::Destroy_Instance();
 	CSceneMgr::Destroy_Instance();
 	CObjMgr::Destroy_Instance();
+	CUIMgr::Destroy_Instance();
+	CPlayerMgr::Destroy_Instance();
 	CTimeMgr::Destroy_Instance();
 	ReleaseDC(g_hWnd, m_hDC);
 }

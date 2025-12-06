@@ -35,8 +35,8 @@ void CPlayerHpBar::Initialize()
 int CPlayerHpBar::Update()
 {
     //TODO : 플레이어의 체력을 받아와서 비례한 길이로 LifeBar 출력
-    m_fMaxHp = dynamic_cast<CPlayerUI*>(m_pParentUI)->GetPlayer()->Get_MaxHp();
-    m_fCurHp = dynamic_cast<CPlayerUI*>(m_pParentUI)->GetPlayer()->Get_CurHp();
+    m_fMaxHp = GET(CPlayerMgr)->GetPlayer()->Get_MaxHp();
+    m_fCurHp = GET(CPlayerMgr)->GetPlayer()->Get_CurHp();
     Move_Frame();
 
     return OBJ_NOEVENT;

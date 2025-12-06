@@ -18,7 +18,6 @@ CPlayer::CPlayer() :
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
-	m_pMainUI = nullptr;
 }
 CPlayer::~CPlayer()
 {
@@ -77,18 +76,6 @@ void CPlayer::Initialize()
 			pOwned->Initialize();
 		}
 	}
-
-	//UI
-	if (m_pMainUI == nullptr)
-	{
-		m_pMainUI = new CPlayerUI(this);
-		m_pMainUI->Initialize();
-	}
-	if (m_pInventoryUI == nullptr)
-	{
-		m_pInventoryUI = new CInventoryUI(this);
-		m_pInventoryUI->Initialize();
-	}
 }
 
 int CPlayer::Update()
@@ -122,14 +109,6 @@ int CPlayer::Update()
 		{
 			pOwned->Update();
 		}
-	}
-	if (m_pMainUI != nullptr)
-	{
-		m_pMainUI->Update();
-	}
-	if (m_pInventoryUI != nullptr)
-	{
-		m_pInventoryUI->Update();
 	}
 	return OBJ_NOEVENT;
 }
@@ -175,15 +154,6 @@ void CPlayer::Late_Update()
 #endif // _DEBUG
 
 	Motion_Change();
-
-	if (m_pMainUI != nullptr)
-	{
-		m_pMainUI->Late_Update();
-	}
-	if (m_pInventoryUI != nullptr)
-	{
-		m_pInventoryUI->Late_Update();
-	}
 }
 
 void CPlayer::Render(HDC hDC)
@@ -223,14 +193,6 @@ void CPlayer::Render(HDC hDC)
 		}
 	}
 
-	if (m_pMainUI != nullptr)
-	{
-		m_pMainUI->Render(hDC);
-	}
-	if (m_pInventoryUI != nullptr)
-	{
-		m_pInventoryUI->Render(hDC);
-	}
 }
 
 void CPlayer::Release()
@@ -239,8 +201,6 @@ void CPlayer::Release()
 	{
 		Safe_Delete(pOwned);
 	}
-	Safe_Delete(m_pMainUI);
-	Safe_Delete(m_pInventoryUI);
 }
 
 void CPlayer::Key_Input()
@@ -305,13 +265,6 @@ void CPlayer::Key_Input()
 	if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
 		m_bAttack = true;
-	}
-	if (GET(CKeyMgr)->Key_Down('Z'))
-	{
-		if (m_pInventoryUI->IsOpen())
-			m_pInventoryUI->Close();
-		else
-			m_pInventoryUI->Open();
 	}
 }
 

@@ -21,6 +21,8 @@ public:
 
 	CObj* GetPlayer() const { return m_pPlayer; }
 private:
+	void Key_Input();
+private:
 	CObj* m_pPlayer;
 };
 

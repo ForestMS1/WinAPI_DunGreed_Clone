@@ -7,6 +7,7 @@
 CTile::CTile() : m_iOption(ERASE)
 {
 	ZeroMemory(&m_tTileInfo, sizeof(TILEINFO));
+	m_eRender = BACK;
 }
 
 CTile::~CTile()

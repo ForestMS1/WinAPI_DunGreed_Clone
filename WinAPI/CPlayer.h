@@ -73,10 +73,6 @@ private:
 	float				m_fAttackAcct;
 	float				m_fAttackt;
 
-	//UI (최상위부모UI)
-	CUI*				m_pMainUI;
-	CUI*				m_pInventoryUI;
-
 
 
 	// 애니메이션 잘라올 사이즈

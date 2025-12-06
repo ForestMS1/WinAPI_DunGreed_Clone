@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CInventoryUI.h"
 #include "CCell.h"
+#include "CEquipSlotOn.h"
 
 CInventoryUI::CInventoryUI()
 {
@@ -48,6 +49,10 @@ void CInventoryUI::Initialize()
 		}
 	}
 
+	CUI* pESlot = new CEquipSlotOn;
+	pESlot->Set_Pos(m_tRect.left + 110, m_tRect.top + 127);
+	AddChildUI(pESlot);
+
 	for (auto& pChild : m_vecChildUI)
 	{
 		pChild->Initialize();
@@ -60,6 +65,7 @@ int CInventoryUI::Update()
 	{
 		pChild->Update();
 	}
+	Key_Input();
 	return 0;
 }
 
@@ -102,4 +108,15 @@ void CInventoryUI::Release()
 		Safe_Delete(pChild);
 	}
 	m_vecChildUI.clear();
+}
+
+void CInventoryUI::Key_Input()
+{
+	if (GET(CKeyMgr)->Key_Down('Z'))
+	{
+		if (m_bIsOpen)
+			Close();
+		else
+			Open();
+	}
 }

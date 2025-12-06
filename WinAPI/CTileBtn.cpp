@@ -28,11 +28,6 @@ int CTileBtn::Update()
 	m_iCurTileX = (m_tRect.left - m_pParentUI->Get_Rect()->left) / m_tInfo.fCX;
 	m_iCurTileY = (m_tRect.top - m_pParentUI->Get_Rect()->top) / m_tInfo.fCY;
 
-	return 0;
-}
-
-void CTileBtn::Late_Update()
-{
 	POINT pt;
 	GetCursorPos(&pt);
 	ScreenToClient(g_hWnd, &pt);
@@ -52,6 +47,11 @@ void CTileBtn::Late_Update()
 	}
 	else
 		m_bMouseOn = false;
+	return 0;
+}
+
+void CTileBtn::Late_Update()
+{
 
 }
 

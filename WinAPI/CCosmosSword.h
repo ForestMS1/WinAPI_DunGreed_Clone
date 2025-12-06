@@ -6,6 +6,10 @@ class CCosmosSword :
 {
 public:
 	CCosmosSword();
+	CCosmosSword(const CCosmosSword& rhs)
+	{
+		m_pSwingFX = dynamic_cast<CSwingFX*>(rhs.m_pSwingFX)->Clone();
+	}
 	~CCosmosSword();
 public:
 	void Initialize() override;
@@ -13,7 +17,12 @@ public:
 	void Late_Update() override;
 	void Render(HDC hDC) override;
 	void Release() override;
-	CWeapon* Clone() override { return new CCosmosSword(*this); }
+	CWeapon* Clone() override 
+	{ 
+		CCosmosSword* pSword = new CCosmosSword(*this);
+		pSword->Initialize();
+		return pSword; 
+	}
 
 private:
 	CObj* m_pSwingFX;

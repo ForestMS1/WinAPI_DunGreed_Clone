@@ -109,8 +109,8 @@ void CCell::Render(HDC hDC)
 			hItemDC,
 			0,
 			0,
-			m_pItem->Get_FrameWidth(),
-			m_pItem->Get_FrameHeight(),
+			57,
+			57,
 			RGB(255, 0, 255)
 		);
 	}
@@ -127,7 +127,8 @@ void CCell::Clicked()
 	if (GET(CMouse)->Get_State() == CMouse::MouseState::EMPTY && m_bMouseOn && GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
 		//마우스에게 아이템 정보 전달
-		GET(CMouse)->PickItem(m_pItem->Clone());
+		if(m_pItem != nullptr)
+			GET(CMouse)->PickItem(m_pItem->Clone());
 
 		Safe_Delete(m_pItem);
 	}

@@ -119,8 +119,8 @@ void CMouse::Render(HDC hDC)
 			hMouseDC,
 			0,
 			0,
-			m_pItem->Get_FrameWidth(),
-			m_pItem->Get_FrameHeight(),
+			57,
+			57,
 			RGB(255, 0, 255)
 		);
 	}

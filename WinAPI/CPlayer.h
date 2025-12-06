@@ -20,6 +20,7 @@ public:
 
 	STATE Get_State() const { return m_eCurState;  }
 	bool Get_IsAttack() const { return m_bAttack; }
+	CItem* Get_EquipWeapon() const { return m_pWeapon; }
 
 	void Set_Weapon(CItem* pWeapon) { Safe_Delete(m_pWeapon); m_pWeapon = pWeapon; }
 

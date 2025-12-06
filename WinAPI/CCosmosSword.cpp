@@ -19,11 +19,12 @@ void CCosmosSword::Initialize()
     __super::Initialize();
     if (m_pSwingFX == nullptr)
     {
-        m_pSwingFX = new CSwingFX(this);
-        m_pSwingFX->Initialize();
+        m_pSwingFX = new CSwingFX;
     }
+    m_pSwingFX->Initialize();
     GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Weapon/CosmosSwordNoAnim.png", L"CosmosSword");
     GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Weapon/LightSaber.png", L"LightSaber");
+    GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Item/Weapon/LightSaber.bmp", L"LightSaber");
     m_fOffsetX = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fCX * 0.5f;
     m_fOffsetY = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fCY * 0.5f;
 
@@ -47,6 +48,9 @@ void CCosmosSword::Initialize()
 
     m_tAttackInfo.fCX = 60.f;
     m_tAttackInfo.fCY = 90.f;
+
+    ZeroMemory(&m_tAttackRect, sizeof(RECT));
+    m_wsFrameKey = L"LightSaber";
 }
 
 int CCosmosSword::Update()

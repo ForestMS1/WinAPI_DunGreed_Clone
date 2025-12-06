@@ -20,7 +20,7 @@ public:
 
 	void Release() override;
 
-	void SetItem(CItem* pItem) {if(m_pItem == nullptr) m_pItem = pItem; }
+	void SetItem(CItem* pItem) {/*if(m_pItem == nullptr)*/ Safe_Delete(m_pItem); m_pItem = pItem; }
 	CItem* GetItem() const { return m_pItem; }
 private:
 	void Clicked();

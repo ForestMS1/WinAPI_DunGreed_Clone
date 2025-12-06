@@ -63,8 +63,8 @@ void CWeaponBtn1::Render(HDC hDC)
 			hItemDC,
 			0,
 			0,
-			m_pEquipedItem->Get_FrameWidth(),
-			m_pEquipedItem->Get_FrameHeight(),
+			57,
+			57,
 			RGB(255, 0, 255)
 		);
 	}

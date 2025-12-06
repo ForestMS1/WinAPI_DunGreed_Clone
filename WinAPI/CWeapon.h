@@ -4,7 +4,6 @@ class CWeapon : public CItem
 {
 public:
 	CWeapon();
-	CWeapon(CObj* pOwner);
 	virtual ~CWeapon();
 public:
 
@@ -24,7 +23,6 @@ public:
 	int Get_MaxAttackCount() const { return m_iMaxAttackCount; }
 	int Get_CurAttackCount() const { return m_iCurAttackCount; }
 protected:
-	bool			isEquiped;
 
 	float			m_fOffsetX;
 	float			m_fOffsetY;

@@ -8,12 +8,7 @@
 
 CSwingFX::CSwingFX()
 {
-	m_pOwner = nullptr;
-}
 
-CSwingFX::CSwingFX(CObj* pOwner)
-{
-	m_pOwner = pOwner;
 }
 
 CSwingFX::~CSwingFX()
@@ -40,7 +35,12 @@ void CSwingFX::Initialize()
 
 int CSwingFX::Update()
 {
-	RECT* atr = dynamic_cast<CWeapon*>(m_pOwner)->Get_AttackRect();
+    GET(CPlayerMgr)->GetEquip(L"Weapon1");
+	if (GET(CPlayerMgr)->GetEquip(L"Weapon1") == nullptr)
+		return 0;
+
+	CPlayer* pPlayer = dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer());
+	RECT* atr = dynamic_cast<CWeapon*>(pPlayer->Get_EquipWeapon())->Get_AttackRect();
 	m_tRect.left = atr->left;
 	m_tRect.top =  atr->top;
 	m_tRect.right = atr->right;
@@ -56,7 +56,7 @@ int CSwingFX::Update()
 	//if (dynamic_cast<CPlayer*>(pPlayer)->Get_State() == CPlayer::ATTACK)
 	if(dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->Get_IsAttack())
 	{
-		m_fAngle = dynamic_cast<CWeapon*>(m_pOwner)->Get_Angle();
+		m_fAngle = dynamic_cast<CWeapon*>(pPlayer->Get_EquipWeapon())->Get_Angle();
 		Move_Frame();
 	}
 
@@ -99,8 +99,11 @@ void CSwingFX::Render(HDC hDC)
 		float centerY = (float)H / 2.0f; // 현재 프레임의 상대적 중심 Y (m_iFrameHeight / 2.0f)
 
 		// 최종적으로 이미지가 그려질 화면상의 중심 좌표 (스크롤 및 Info 반영)
-		float targetX = m_pOwner->Get_Info()->fX - ScrollX;
-		float targetY = m_pOwner->Get_Info()->fY - ScrollY;
+		float targetX(0.f), targetY(0.f);
+		CPlayer* pPlayer = dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer());
+		targetX = pPlayer->Get_EquipWeapon()->Get_Info()->fX - ScrollX;
+		targetY = pPlayer->Get_EquipWeapon()->Get_Info()->fY - ScrollY;
+
 
 		// 원본 이미지 시트에서 현재 프레임의 시작 위치
 		int srcX = FrameX * W;

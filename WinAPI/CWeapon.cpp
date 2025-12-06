@@ -5,15 +5,11 @@
 #include "CMouse.h"
 
 CWeapon::CWeapon() : m_fDamage(0.f), m_iMaxAttackCount(0), m_iCurAttackCount(0)
-, isEquiped(false), m_fAngle(0.f)
+, m_fAngle(0.f)
 {
     ZeroMemory(&m_tAttackRect, sizeof(RECT));
 }
 
-CWeapon::CWeapon(CObj* pOwner) : m_fOffsetX(0.f), m_fOffsetY(0.f) , m_fAngle(0.f) , m_fDamage(0.f)
-, isEquiped(false)
-{
-}
 CWeapon::~CWeapon()
 {
     Release();

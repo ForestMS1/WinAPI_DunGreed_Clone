@@ -49,6 +49,27 @@ void CEquipedUI::Render(HDC hDC)
         72,
         RGB(255, 0, 255)
     );
+
+    CItem* pItem = GET(CPlayerMgr)->GetEquip(L"Weapon1");
+    if (pItem == nullptr)
+        return;
+    HDC hItemDC = GET(CResourceMgr)->Find_Bmp(pItem->Get_FrameKey());
+    int offsetX(0);
+    if (pItem->Get_FrameWidth() < m_tInfo.fCX * 0.5f)
+        offsetX = 30;
+    GdiTransparentBlt(
+        hDC,
+        m_tRect.left + 15 + offsetX,
+        m_tRect.top + 10,
+        pItem->Get_FrameWidth(),
+        pItem->Get_FrameHeight(),
+        hItemDC,
+        0,
+        0,
+        pItem->Get_FrameWidth(),
+        pItem->Get_FrameHeight(),
+        RGB(255, 0, 255)
+    );
 }
 
 void CEquipedUI::Release()

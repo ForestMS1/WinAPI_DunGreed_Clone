@@ -18,6 +18,15 @@
 #include <vector>
 #include <ole2.h>   // IStream 정의
 #include <gdiplus.h>
+
+#include <Vfw.h>
+#pragma comment(lib, "vfw32.lib")
+
+
+//#include "fmod.h"
+//#include "fmod.hpp"
+
+//#pragma comment(lib, "fmodex_vc.lib")
 #include <iostream>
 #include <io.h>
 

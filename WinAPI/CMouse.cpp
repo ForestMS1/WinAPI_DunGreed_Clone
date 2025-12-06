@@ -109,19 +109,22 @@ void CMouse::Render(HDC hDC)
 	{
 		POINT mpt = GET(CMouse)->Get_Point();
 		HDC hMouseDC = GET(CResourceMgr)->Find_Bmp(m_pItem->Get_FrameKey());
-
+		int offsetX(0);
+		if (m_pItem->Get_FrameWidth() < m_tInfo.fCX * 0.5f)
+			offsetX = 15;
 		GdiTransparentBlt(
 			hDC,
-			mpt.x - m_tInfo.fCX * 0.5f,
+			mpt.x - m_tInfo.fCX * 0.5f + offsetX,
 			mpt.y - m_tInfo.fCY * 0.5f,
-			m_tInfo.fCX,
-			m_tInfo.fCY,
+			m_pItem->Get_FrameWidth(),
+			m_pItem->Get_FrameHeight(),
 			hMouseDC,
 			0,
 			0,
-			57,
-			57,
+			m_pItem->Get_FrameWidth(),
+			m_pItem->Get_FrameHeight(),
 			RGB(255, 0, 255)
+
 		);
 	}
 

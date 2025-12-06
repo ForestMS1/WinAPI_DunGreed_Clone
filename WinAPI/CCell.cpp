@@ -100,17 +100,20 @@ void CCell::Render(HDC hDC)
 	{
 		HDC hItemDC = GET(CResourceMgr)->Find_Bmp(m_pItem->Get_FrameKey());
 
+		int offsetX(0);
+		if (m_pItem->Get_FrameWidth() < m_tInfo.fCX * 0.5f)
+			offsetX = 20;
 		GdiTransparentBlt(
 			hDC,
-			m_tRect.left,
+			m_tRect.left + offsetX,
 			m_tRect.top,
-			m_tInfo.fCX,
-			m_tInfo.fCY,
+			m_pItem->Get_FrameWidth(),
+			m_pItem->Get_FrameHeight(),
 			hItemDC,
 			0,
 			0,
-			57,
-			57,
+			m_pItem->Get_FrameWidth(),
+			m_pItem->Get_FrameHeight(),
 			RGB(255, 0, 255)
 		);
 	}

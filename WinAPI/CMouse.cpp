@@ -103,6 +103,7 @@ void CMouse::Render(HDC hDC)
 
 #pragma endregion
 
+#pragma region 인벤토리아이템집기
 
 	if (m_pItem != nullptr)
 	{
@@ -124,6 +125,7 @@ void CMouse::Render(HDC hDC)
 		);
 	}
 
+#pragma endregion
 
 #pragma region 타일에디터씬
 

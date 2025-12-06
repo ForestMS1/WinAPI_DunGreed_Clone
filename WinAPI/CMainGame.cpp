@@ -96,6 +96,7 @@ void CMainGame::Late_Update()
 		CCollisionMgr::Collision_Bullet(GET(CObjMgr)->GetObjLayer(OBJ_MONSTER), GET(CObjMgr)->GetObjLayer(OBJ_PLAYER_BULLET));
 	}
 	CCollisionMgr::Collision_Rect(GET(CTileMgr)->GetVecTile(), GET(CObjMgr)->GetObjLayer(OBJ_ENEMY_BULLET));
+	CCollisionMgr::Collision_Rect(GET(CTileMgr)->GetVecTile(), GET(CObjMgr)->GetObjLayer(OBJ_PLAYER_BULLET));
 }
 
 void CMainGame::Render()

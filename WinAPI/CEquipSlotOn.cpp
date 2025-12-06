@@ -1,12 +1,14 @@
 #include "pch.h"
 #include "CEquipSlotOn.h"
 
-CEquipSlotOn::CEquipSlotOn() : m_pEquipedItem(nullptr), m_bMouseOn(false), m_bClicked(false)
+CEquipSlotOn::CEquipSlotOn() : m_bMouseOn(false), m_bClicked(false)
+, m_pWeaponBtn1(nullptr)
 {
 	
 }
 
-CEquipSlotOn::CEquipSlotOn(CUI* pParentUI) : m_pEquipedItem(nullptr), m_bMouseOn(false), m_bClicked(false)
+CEquipSlotOn::CEquipSlotOn(CUI* pParentUI) : m_bMouseOn(false), m_bClicked(false)
+, m_pWeaponBtn1(nullptr)
 {
 	m_pParentUI = pParentUI;
 }
@@ -24,6 +26,13 @@ void CEquipSlotOn::Initialize()
 	m_tInfo.fCY = m_iFrameHeight;
 	__super::Update_Rect();
 
+	CUI* pESlot = new CWeaponBtn1;
+	AddChildUI(pESlot);
+	for (auto& pChild : m_vecChildUI)
+	{
+		pChild->Initialize();
+	}
+
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Inventory/EquipSlot1On.bmp", L"EquipSlot1On");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Inventory/EquipSlot2On.bmp", L"EquipSlot2On");
 }
@@ -32,13 +41,10 @@ int CEquipSlotOn::Update()
 {
 	CUI::Update();
 	__super::Update_Rect();
-	if (PtInRect(&m_tRect, GET(CMouse)->Get_Point()))
+
+	for (auto& pChild : m_vecChildUI)
 	{
-		m_bMouseOn = true;
-	}
-	else
-	{
-		m_bMouseOn = false;
+		pChild->Update();
 	}
 	return 0;
 }
@@ -46,6 +52,10 @@ int CEquipSlotOn::Update()
 void CEquipSlotOn::Late_Update()
 {
 	CUI::Late_Update();
+	for (auto& pChild : m_vecChildUI)
+	{
+		pChild->Late_Update();
+	}
 }
 
 void CEquipSlotOn::Render(HDC hDC)
@@ -65,61 +75,18 @@ void CEquipSlotOn::Render(HDC hDC)
 		m_iFrameHeight,
 		RGB(255, 0, 255)
 		);
-	if (m_pEquipedItem != nullptr)
+	for (auto& pChild : m_vecChildUI)
 	{
-		HDC hItemDC = GET(CResourceMgr)->Find_Bmp(m_pEquipedItem->Get_FrameKey());
-		GdiTransparentBlt(
-			hDC,
-			m_tRect.left,
-			m_tRect.top,
-			m_tInfo.fCX,
-			m_tInfo.fCY,
-			hItemDC,
-			0,
-			0,
-			m_pEquipedItem->Get_FrameWidth(),
-			m_pEquipedItem->Get_FrameHeight(),
-			RGB(255, 0, 255)
-		);
+		pChild->Render(hDC);
 	}
 }
 
 void CEquipSlotOn::Release()
 {
+	for (auto& pChild : m_vecChildUI)
+	{
+		Safe_Delete(pChild);
+	}
+	m_vecChildUI.clear();
 }
 
-void CEquipSlotOn::Cliked()
-{
-	if (!m_bIsOpen)
-	{
-		//마우스에게 아이템 정보 해제
-		GET(CMouse)->PutItem(m_pEquipedItem);
-
-		m_bClicked = false;
-		return;
-	}
-
-	if (!m_bClicked && m_bMouseOn && GET(CKeyMgr)->Key_Pressing(VK_LBUTTON))
-	{
-		if (m_pEquipedItem == nullptr)
-		{
-			if (GET(CMouse)->Get_State() != CMouse::MouseState::EMPTY)
-			{
-				GET(CMouse)->PutItem(m_pEquipedItem);
-			}
-		}
-		else
-		{
-			m_bClicked = true;
-			GET(CMouse)->PickItem(m_pEquipedItem);
-			m_pEquipedItem = nullptr;
-		}
-	}
-	else if (m_bClicked && GET(CKeyMgr)->Key_Pressing(VK_LBUTTON))
-	{
-		//마우스에게 아이템 정보 해제
-		GET(CMouse)->PutItem(m_pEquipedItem);
-
-		m_bClicked = false;
-	}
-}

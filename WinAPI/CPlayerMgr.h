@@ -14,5 +14,6 @@ public:
 	CObj* GetPlayer() const { return m_pPlayer; }
 private:
 	CObj* m_pPlayer;
+	map<wstring, CItem*> m_mapPlayerEquiped;
 };
 

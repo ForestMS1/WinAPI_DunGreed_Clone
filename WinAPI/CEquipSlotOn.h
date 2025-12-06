@@ -1,5 +1,6 @@
 #pragma once
 #include "CUI.h"
+#include "CWeaponBtn1.h"
 class CEquipSlotOn :
     public CUI
 {
@@ -23,8 +24,8 @@ public:
 private:
 	void Cliked();
 private:
-	CItem* m_pEquipedItem;
 	bool   m_bMouseOn;
 	bool   m_bClicked;
+	CWeaponBtn1 m_pWeaponBtn1;
 };
 

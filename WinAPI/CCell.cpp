@@ -2,11 +2,11 @@
 #include "CCell.h"
 #include "CGatlingGun.h"
 
-CCell::CCell() : m_bMouseOn(false), m_bClicked(false)
+CCell::CCell() : m_bMouseOn(false)
 {
 }
 
-CCell::CCell(CUI* pParentUI) : m_bMouseOn(false), m_bClicked(false)
+CCell::CCell(CUI* pParentUI) : m_bMouseOn(false)
 {
 	m_pParentUI = pParentUI;
 }
@@ -30,7 +30,19 @@ void CCell::Initialize()
 int CCell::Update()
 {
 	if (!m_bIsOpen)
+	{
+		//마우스에게 아이템 정보 해제
+		if (m_pItem == nullptr && GET(CMouse)->Get_Item() != nullptr)
+		{
+			m_pItem = GET(CMouse)->Get_Item();
+			GET(CMouse)->Set_State(CMouse::MouseState::EMPTY);
+			GET(CMouse)->Set_Item(nullptr);
+		}
+
 		return 0;
+	}
+
+
 	__super::Update_Rect();
 	if (PtInRect(&m_tRect, GET(CMouse)->Get_Point()))
 	{
@@ -40,12 +52,13 @@ int CCell::Update()
 	{
 		m_bMouseOn = false;
 	}
+	Clicked();
 	return 0;
 }
 
 void CCell::Late_Update()
 {
-	Clicked();
+
 }
 
 void CCell::Render(HDC hDC)
@@ -72,11 +85,8 @@ void CCell::Render(HDC hDC)
 		RGB(255, 0, 255)
 	);
 
-	if (m_bClicked)
-	{
-		// 마우스 클래스에서 렌더링 아이템 렌더링
-	}
-	else
+
+	if(m_pItem != nullptr)
 	{
 		HDC hItemDC = GET(CResourceMgr)->Find_Bmp(m_pItem->Get_FrameKey());
 
@@ -98,34 +108,25 @@ void CCell::Render(HDC hDC)
 
 void CCell::Release()
 {
+	Safe_Delete(m_pItem);
 }
 
 void CCell::Clicked()
 {
-	if (!m_bIsOpen)
+
+	if (GET(CMouse)->Get_State() == CMouse::MouseState::EMPTY && m_bMouseOn && GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
-		//마우스에게 아이템 정보 해제
-		GET(CMouse)->PutItem(m_pItem);
-
-		m_bClicked = false;
-		return;
-	}
-
-	if (!m_bClicked && m_bMouseOn && GET(CKeyMgr)->Key_Pressing(VK_LBUTTON))
-	{
-		//내 칸에는 템 렌더링 x
-
 		//마우스에게 아이템 정보 전달
 		GET(CMouse)->PickItem(m_pItem);
 
-		//마우스 좌표에 아이템 렌더링
-		m_bClicked = true;
+		m_pItem = nullptr;
 	}
-	else if (m_bClicked && GET(CKeyMgr)->Key_Pressing(VK_LBUTTON))
+	if (m_bMouseOn && m_pItem == nullptr &&
+		GET(CMouse)->Get_State() == CMouse::MouseState::PICKITEM && GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
 		//마우스에게 아이템 정보 해제
-		GET(CMouse)->PutItem(m_pItem);
-
-		m_bClicked = false;
+		m_pItem = GET(CMouse)->Get_Item();
+		GET(CMouse)->Set_State(CMouse::MouseState::EMPTY);
+		GET(CMouse)->Set_Item(nullptr);
 	}
 }

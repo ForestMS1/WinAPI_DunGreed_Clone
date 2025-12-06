@@ -1,13 +1,12 @@
 #pragma once
 #include "CUI.h"
-#include "CItem.h"
-class CCell :
+class CWeaponBtn1 :
     public CUI
 {
 public:
-	CCell();
-	CCell(CUI* pParentUI);
-	virtual ~CCell();
+	CWeaponBtn1();
+	CWeaponBtn1(CUI* pParentUI);
+	virtual ~CWeaponBtn1();
 public:
 	// CUI을(를) 통해 상속됨
 	void Initialize() override;
@@ -19,13 +18,11 @@ public:
 	void Render(HDC hDC) override;
 
 	void Release() override;
-
-	void SetItem(CItem* pItem) { m_pItem = pItem; }
-	CItem* GetItem() const { return m_pItem; }
 private:
-	void Clicked();
+	void Cliked();
 private:
-	CItem* m_pItem;
+	CItem* m_pEquipedItem;
 	bool   m_bMouseOn;
+	bool   m_bClicked;
 };
 

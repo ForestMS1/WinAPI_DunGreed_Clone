@@ -57,6 +57,7 @@ int SpearMgr::Update()
 				dynamic_cast<CBelialSpear*>(m_vecSpear[i])->SetActive(true);
 				dynamic_cast<CBelialSpear*>(m_vecSpear[i])->SetEffect(true);
 				m_dwSpawnTick = GetTickCount();
+				GET(CSoundMgr)->PlaySoundW(L"Belial_sword.wav", SOUND_ENEMY_ATTACK, 1.f);
 			}
 			if (dynamic_cast<CBelialSpear*>(m_vecSpear[i])->GetActive())
 			{

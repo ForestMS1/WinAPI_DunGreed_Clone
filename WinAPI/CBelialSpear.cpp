@@ -67,8 +67,14 @@ int CBelialSpear::Update()
 	//소환(isActive = true)되고나서 3초뒤에 발사
 	if (isAttack == false && m_dwDelay + 3000 < GetTickCount())
 	{
-		if(isAttack == false)
+		if (isAttack == false)
+		{
 			m_fShootAngle = m_fAngle;
+			if (isGround == false)
+			{
+				GET(CSoundMgr)->PlaySoundW(L"Belial_sword_shoot.wav", SOUND_ENEMY_ATTACK, 1.f);
+			}
+		}
 		isAttack = true;
 	}
 

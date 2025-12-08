@@ -62,6 +62,7 @@ int CLaser::Update()
 	{
 		isAttack = true;
 		m_dwDelay = GetTickCount();
+		GET(CSoundMgr)->PlaySoundW(L"Belial_lazer.wav", SOUND_ENEMY_ATTACK, 1.f);
 	}
 
 	Shoot();

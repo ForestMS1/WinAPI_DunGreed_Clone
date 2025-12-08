@@ -3,7 +3,7 @@
 #include "CBelialBullet.h"
 
 CBelial::CBelial() : m_pRHand(nullptr), m_pLHand(nullptr), m_dwRotateAttackTick(GetTickCount())
-, m_pSpearMgr(nullptr), m_dwHandAttackTick(GetTickCount()), HandAttack(false)
+, m_pSpearMgr(nullptr), m_dwHandAttackTick(GetTickCount()), HandAttack(false), m_bPlayBossBGM(false)
 {
 }
 
@@ -17,14 +17,14 @@ void CBelial::Initialize()
 	m_fMaxHp = 100.f;
 	m_fCurHp = m_fMaxHp;
 
-	//m_tInfo.fX = 1700.f;
-	//m_tInfo.fY = 400.f;
+	m_tInfo.fX = 1400.f;
+	m_tInfo.fY = 500.f;
 	m_tInfo.fCX = 210.f;
 	m_tInfo.fCY = 285.f;
 
 	//플레이어 감지 범위
-	m_fDetectfCX = 700.f;
-	m_fDetectfCY = 700.f;
+	m_fDetectfCX = 1700.f;
+	m_fDetectfCY = 1700.f;
 
 	m_tFrame.iStart = 0;
 	m_tFrame.iMotion = 0;
@@ -64,6 +64,8 @@ void CBelial::Initialize()
 		m_pSpearMgr = new SpearMgr(this);
 		m_pSpearMgr->Initialize();
 	}
+
+	m_SpawnEffectStartTime = GetTickCount();
 }
 
 int CBelial::Update()
@@ -76,6 +78,7 @@ int CBelial::Update()
 		// 리턴하기전에 딜레이 줘야할듯?
 		
 		//return OBJ_NOEVENT;
+		GET(CSoundMgr)->StopSound(SOUND_BGM);
 		return OBJ_DEAD;
 	}
 	__super::Update_Rect();
@@ -86,6 +89,29 @@ int CBelial::Update()
 	if(m_eCurState != DEAD)
 		Move_Frame();
 
+
+	if (m_pRHand != nullptr)
+		m_pRHand->Update();
+	if (m_pLHand != nullptr)
+		m_pLHand->Update();
+	if (m_pSpearMgr != nullptr)
+		m_pSpearMgr->Update();
+
+	if (m_bIsInPlayer && m_SpawnEffectStartTime < GetTickCount() && GetTickCount() < m_SpawnEffectStartTime + 5000)
+	{
+		GET(CCamera)->SetTarget(nullptr);
+		GET(CCamera)->SetLookAt(Vec2(1400, 500));
+		if (!m_bPlayBossBGM)
+		{
+			GET(CSoundMgr)->PlaySound(L"2.IceBoss.wav", SOUND_BGM, 1.f);
+			m_bPlayBossBGM = true;
+		}
+		return 0;
+	}
+	else
+	{
+		GET(CCamera)->SetTarget(GET(CPlayerMgr)->GetPlayer());
+	}
 
 	if (m_dwChangePattern + 7000 < GetTickCount())
 	{
@@ -101,14 +127,6 @@ int CBelial::Update()
 	{
 		m_bIsHit = false;
 	}
-
-
-	if (m_pRHand != nullptr)
-		m_pRHand->Update();
-	if (m_pLHand != nullptr)
-		m_pLHand->Update();
-	if (m_pSpearMgr != nullptr)
-		m_pSpearMgr->Update();
 
 	return OBJ_NOEVENT;
 }
@@ -313,7 +331,7 @@ void CBelial::Attack_Rotate()
 			LefttAngle +=	5.f;
 			DownAngle  +=	5.f;
 			m_dwRotateAttackTick = GetTickCount();
-
+			GET(CSoundMgr)->PlaySoundW(L"BelialBullet.wav", SOUND_ENEMY_ATTACK, 1.f);
 		}
 	}
 }

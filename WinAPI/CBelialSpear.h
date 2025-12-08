@@ -41,5 +41,6 @@ private:
     float			m_fDamage;
     int				m_iMaxAttackCount; // 무기의 한번에 줄 수 있는 최대 공격횟수
     int				m_iCurAttackCount; // 데미지 준 횟수
+
 };
 

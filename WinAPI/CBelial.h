@@ -42,5 +42,8 @@ private:
 
     bool HandAttack;
     bool isRightHandOn;
+
+    DWORD m_SpawnEffectStartTime;
+    bool m_bPlayBossBGM;
 };
 

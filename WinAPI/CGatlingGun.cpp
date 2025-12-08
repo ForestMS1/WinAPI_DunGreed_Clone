@@ -64,6 +64,7 @@ void CGatlingGun::Late_Update()
 			CAbstractFactory<CGatlingGunBullet>::CreateBullet(m_tInfo.fX, m_tInfo.fY, m_fAngle * 180/PI));
 		m_iCurAttackCount++;
 		m_dwShootDelay = GetTickCount();
+		GET(CSoundMgr)->PlaySound(L"GatlingShot.wav", SOUND_EFFECT, 1.f);
     }
 	else if(!dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->Get_IsAttack())
 	{

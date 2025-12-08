@@ -48,6 +48,8 @@ void CTest::Initialize()
 	GET(CCamera)->Initialize();
 	//GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
+
+	GET(CSoundMgr)->PlayBGM(L"BGM_Town.wav", 0.3f);
 }
 
 void CTest::Update()

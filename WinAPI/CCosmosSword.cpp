@@ -41,8 +41,8 @@ void CCosmosSword::Initialize()
     m_tFrame.iMotion = 0;
     m_tFrame.dwTime = GetTickCount();
 
-    m_fDamage = 30.f;
-    m_iMaxAttackCount = 1;
+    m_fDamage = 10.f;
+    m_iMaxAttackCount = 3;
     m_iCurAttackCount = 0;
 
 
@@ -100,7 +100,8 @@ void CCosmosSword::Late_Update()
             //m_tAttackInfo.fX = m_tInfo.fX + m_tInfo.fCX * 2.f;
             //m_tAttackInfo.fY = m_tInfo.fY;
         }
-
+        for(int i = 0; i < m_iMaxAttackCount; ++i)
+            GET(CSoundMgr)->PlaySoundW(L"LightSaber.wav", SOUND_EFFECT, 1.f);
         CCollisionMgr::Collision_Weapon(this, GET(CObjMgr)->GetObjLayer(OBJ_MONSTER));
     }
     else

@@ -54,6 +54,8 @@ void CPlayerMgr::EquipWeapon(CItem* pItem, wstring key)
 {
 	Safe_Delete(m_mapPlayerEquiped[key]);
 	m_mapPlayerEquiped[key] = pItem;
+	if(pItem == nullptr)
+		dynamic_cast<CPlayer*>(m_pPlayer)->Set_Weapon(nullptr);
 
 	if (dynamic_cast<CPlayer*>(m_pPlayer)->Get_EquipWeapon() == nullptr)
 	{

@@ -23,10 +23,10 @@
 #pragma comment(lib, "vfw32.lib")
 
 
-//#include "fmod.h"
-//#include "fmod.hpp"
+#include "fmod.h"
+#include "fmod.hpp"
 
-//#pragma comment(lib, "fmodex_vc.lib")
+#pragma comment(lib, "fmodex_vc.lib")
 #include <iostream>
 #include <io.h>
 
@@ -47,6 +47,7 @@ using namespace std;
 #include "CUIMgr.h"
 #include "CPlayerMgr.h"
 #include "CAbstractFactory.h"
+#include "CSoundMgr.h"
 #include "Define.h"
 
 #ifdef _DEBUG

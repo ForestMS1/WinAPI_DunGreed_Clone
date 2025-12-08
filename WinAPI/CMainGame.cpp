@@ -53,7 +53,7 @@ void CMainGame::Initialize()
 	GET(CSceneMgr)->ChangeScene(L"Logo");
 
 	GET(CMouse)->Initialize();
-
+	GET(CSoundMgr)->Initialize();
 
 #ifdef _DEBUG
 
@@ -139,6 +139,7 @@ void CMainGame::Release()
 	FreeConsole();
 
 #endif // _DEBUG
+	CSoundMgr::Destroy_Instance();
 	CMouse::Destroy_Instance();
 	CTileMgr::Destroy_Instance();
 	CCamera::Destroy_Instance();

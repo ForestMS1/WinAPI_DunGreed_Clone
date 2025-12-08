@@ -11,6 +11,7 @@
 #include "CPlayerUI.h"
 #include "CInventoryUI.h"
 #include "CGatlingGun.h"
+
 CPlayer::CPlayer() : 
 	m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false), m_bIsGround(false), 
 	m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false), m_IsOnBlock(false),
@@ -100,6 +101,7 @@ int CPlayer::Update()
 	//ÀÌÆåÆ®
 	if (m_pRunEffect != nullptr)
 		m_pRunEffect->Update();
+
 	return OBJ_NOEVENT;
 }
 
@@ -208,20 +210,21 @@ void CPlayer::Key_Input()
 
 	if (GET(CKeyMgr)->Key_Pressing('S'))
 	{
-		if (GET(CKeyMgr)->Key_Down(VK_SPACE))
+		if (GET(CKeyMgr)->Key_Pressing(VK_SPACE))
 		{
 			m_bBottomJump = true;
 			m_eCurState = JUMP;
+			GET(CSoundMgr)->PlaySound(L"Jumping.wav", SOUND_EFFECT, 1.f);
 		}
 	}
 	else
 	{
-		if (GET(CKeyMgr)->Key_Down(VK_SPACE))
+		if (GET(CKeyMgr)->Key_Pressing(VK_SPACE))
 		{
 			m_v0 = 30.f;
 			m_bJump = true;
 			m_eCurState = JUMP;
-			
+			GET(CSoundMgr)->PlaySound(L"Jumping.wav", SOUND_EFFECT, 1.f);
 		}
 	}
 
@@ -237,7 +240,7 @@ void CPlayer::Key_Input()
 
 	if (GET(CUIMgr)->Find_UI(L"InventoryUI") != nullptr && GET(CUIMgr)->Find_UI(L"InventoryUI")->IsOpen())
 		return;
-	if (GET(CKeyMgr)->Key_Down(VK_RBUTTON))
+	if (GET(CKeyMgr)->Key_Pressing(VK_RBUTTON))
 	{
 		m_bDash = true;
 		m_vDashDir = GET(CCamera)->GetRealPos(GET(CMouse)->Get_Point());
@@ -253,8 +256,9 @@ void CPlayer::Key_Input()
 		m_fDashRadian = acosf(fWidth / fDiagonal);
 		if (m_vDashDir.fY > m_tInfo.fY)
 			m_fDashRadian = 2.f * PI - m_fDashRadian;
+		GET(CSoundMgr)->PlaySoundW(L"Dash.wav", SOUND_EFFECT, 1.f);
 	}
-	if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
+	if (GET(CKeyMgr)->Key_Pressing(VK_LBUTTON))
 	{
 		m_bAttack = true;
 	}

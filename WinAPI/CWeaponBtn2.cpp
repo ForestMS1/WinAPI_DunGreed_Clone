@@ -50,7 +50,6 @@ void CWeaponBtn2::Late_Update()
 void CWeaponBtn2::Render(HDC hDC)
 {
 	CUI::Render(hDC);
-	Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 	if (m_pEquipedItem != nullptr)
 	{
 		HDC hItemDC = GET(CResourceMgr)->Find_Bmp(m_pEquipedItem->Get_FrameKey());

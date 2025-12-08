@@ -42,7 +42,7 @@ void CCollisionMgr::Collision_Bullet(list<CObj*> _Dst, list<CObj*> _Src)
 				pTarget = dynamic_cast<CUnit*>(Dst);
 				CBullet* pBullet = nullptr;
 				pBullet = dynamic_cast<CBullet*>(Src);
-				if (pTarget != nullptr && pBullet != nullptr)
+				if (pTarget != nullptr && pBullet != nullptr && !pBullet->IsDead())
 				{
 					pTarget->OnDamage(pBullet->Get_Damage());
 					pBullet->SetDead();

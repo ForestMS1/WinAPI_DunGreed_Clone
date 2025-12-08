@@ -214,6 +214,12 @@
     <Filter Include="Object\UI\InventoryUI\EquipSlotOn\WeaponBtn2">
       <UniqueIdentifier>{4aa52821-df71-4cb8-9517-21d3e1429867}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\UI\EnemyHpBarUI">
+      <UniqueIdentifier>{6fe72f65-9766-4240-a6dc-ccddf50ecbc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Bullet\EnemyBullet\BatBullet">
+      <UniqueIdentifier>{7ae6b2e6-fb24-402a-bc08-3af2d8a09765}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -426,6 +432,12 @@
     <ClInclude Include="CWeaponBtn2.h">
       <Filter>Object\UI\InventoryUI\EquipSlotOn\WeaponBtn2</Filter>
     </ClInclude>
+    <ClInclude Include="CEnemyHpBarUI.h">
+      <Filter>Object\UI\EnemyHpBarUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CBatBullet.h">
+      <Filter>Object\Unit\Bullet\EnemyBullet\BatBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -625,6 +637,12 @@
     </ClCompile>
     <ClCompile Include="CWeaponBtn2.cpp">
       <Filter>Object\UI\InventoryUI\EquipSlotOn\WeaponBtn2</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemyHpBarUI.cpp">
+      <Filter>Object\UI\EnemyHpBarUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CBatBullet.cpp">
+      <Filter>Object\Unit\Bullet\EnemyBullet\BatBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

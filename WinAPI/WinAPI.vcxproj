@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CAbstractFactory.h" />
+    <ClInclude Include="CBatBullet.h" />
     <ClInclude Include="CBelial.h" />
     <ClInclude Include="CBelialBullet.h" />
     <ClInclude Include="CBelialLHand.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="CCosmosSword.h" />
     <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CEnemyBullet.h" />
+    <ClInclude Include="CEnemyHpBarUI.h" />
     <ClInclude Include="CEquipedUI.h" />
     <ClInclude Include="CEquipSlotOn.h" />
     <ClInclude Include="CFoodUI.h" />
@@ -210,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAbstractFactory.cpp" />
+    <ClCompile Include="CBatBullet.cpp" />
     <ClCompile Include="CBelial.cpp" />
     <ClCompile Include="CBelialBullet.cpp" />
     <ClCompile Include="CBelialLHand.cpp" />
@@ -224,6 +227,7 @@
     <ClCompile Include="CCosmosSword.cpp" />
     <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CEnemyBullet.cpp" />
+    <ClCompile Include="CEnemyHpBarUI.cpp" />
     <ClCompile Include="CEquipedUI.cpp" />
     <ClCompile Include="CEquipSlotOn.cpp" />
     <ClCompile Include="CFoodUI.cpp" />

@@ -28,16 +28,27 @@ void CGatlingGunBullet::Initialize()
 	m_tFrame.dwTime = GetTickCount();
 
 	GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Bullet/Bullet03.png", L"Bullet03");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Bat/BatBulletHit.bmp", L"BatBulletHit");
 	m_wsFrameKey = L"Bullet03";
+	m_ePreState = IDLE;
+	m_eCurState = IDLE;
 }
 
 int CGatlingGunBullet::Update()
 {
-	CBullet::Update();
-	m_tInfo.fX += m_fSpeed * cosf(m_fAngle * PI / 180.f);
-	m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * PI / 180.f);
 	if (m_bIsDead)
-		return OBJ_DEAD;
+	{
+		m_eCurState = DEAD;
+		Move_Frame_No_Loop();
+		if (m_tFrame.iStart >= m_tFrame.iEnd)
+			return OBJ_DEAD;
+	}
+	else
+	{
+		CBullet::Update();
+		m_tInfo.fX += m_fSpeed * cosf(m_fAngle * PI / 180.f);
+		m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * PI / 180.f);
+	}
 	return 0;
 }
 
@@ -48,7 +59,26 @@ void CGatlingGunBullet::Late_Update()
 void CGatlingGunBullet::Render(HDC hDC)
 {
 	CBullet::Render(hDC);
-
+	if (m_eCurState == DEAD)
+	{
+		HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"BatBulletHit");
+		int ScrollX = GET(CCamera)->Get_ScrollX();
+		int ScrollY = GET(CCamera)->Get_ScrollY();
+		GdiTransparentBlt(
+			hDC,
+			m_tRect.left - ScrollX,
+			m_tRect.top - ScrollY,
+			m_tInfo.fCX,
+			m_tInfo.fCY,
+			hMemDC,
+			m_iFrameWidth * m_tFrame.iStart,
+			m_iFrameHeight * m_tFrame.iMotion,
+			m_iFrameWidth,
+			m_iFrameHeight,
+			RGB(255, 0, 255)
+		);
+		return;
+	}
 
 	int ScrollX = GET(CCamera)->Get_ScrollX();
 	int ScrollY = GET(CCamera)->Get_ScrollY();
@@ -114,4 +144,42 @@ void CGatlingGunBullet::Render(HDC hDC)
 
 void CGatlingGunBullet::Release()
 {
+}
+
+void CGatlingGunBullet::Motion_Change()
+{
+	if (m_ePreState != m_eCurState)
+	{
+		switch (m_eCurState)
+		{
+		case IDLE:
+			m_tInfo.fCX = 28.f;
+			m_tInfo.fCY = 10.f;
+			m_iFrameWidth = 28.f;
+			m_iFrameHeight = 10.f;
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 0;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"Bullet03";
+			break;
+		case DEAD:
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 6;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_iFrameWidth = 546 / 7;
+			m_iFrameHeight = 78.f;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
+			m_wsFrameKey = L"BatBulletHit";
+			break;
+		default:
+			break;
+		}
+
+		m_ePreState = m_eCurState;
+	}
 }

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CUI.h"
 
-CUI::CUI() : m_bIsFlipped(false), m_bIsOpen(true), m_pParentUI(nullptr)
+CUI::CUI() : m_bIsFlipped(false), m_bIsOpen(false), m_pParentUI(nullptr)
 {
 	ZeroMemory(&m_tInfo, sizeof(m_tInfo));
 	ZeroMemory(&m_tRect, sizeof(m_tRect));

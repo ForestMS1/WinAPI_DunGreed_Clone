@@ -11,8 +11,13 @@ public:
     CEnemy();
     virtual ~CEnemy();
 
+    void Initialize() override;
+    int Update() override;
+    void Late_Update() override;
+    void Render(HDC hDC) override;
+    void Release() override;
 
-
+    void ToPlayerAngle();
     void Update_DetectRect();
     RECT* GetDetectRect() { return &m_tDetectRect; }
     void InPlayer() { m_bIsInPlayer = true; }
@@ -24,5 +29,9 @@ protected:
     float m_fDetectfCX;
     float m_fDetectfCY;
     bool  m_bIsInPlayer;
+
+    float m_fAngle;
+
+    CUI* m_pHpBarUI;
 };
 

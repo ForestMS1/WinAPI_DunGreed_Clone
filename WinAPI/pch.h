@@ -47,6 +47,7 @@ using namespace std;
 #include "CUIMgr.h"
 #include "CPlayerMgr.h"
 #include "CAbstractFactory.h"
+#include "Define.h"
 
 #ifdef _DEBUG
 

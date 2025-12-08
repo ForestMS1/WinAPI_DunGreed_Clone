@@ -57,23 +57,24 @@ void CTileEditScene::Render(HDC hDC)
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
 
 #pragma region 마우스커서에_현재_선택된_타일_그리기
-	//HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"SubBG");
-	//GdiTransparentBlt(
-	//	hDC,
-	//	0,
-	//	0,
-	//	WINCX,
-	//	WINCY,
-	//	hTownDC,
-	//	0,
-	//	0,
-	//	320,
-	//	180,
-	//	0);
 
 	//GET(CTileMgr)->Render(hDC);
 	//GET(CObjMgr)->Render(hDC);
-
+	int scrollX = GET(CCamera)->Get_ScrollX();
+	int scrollY = GET(CCamera)->Get_ScrollY();
+	//HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"Town");
+	//GdiTransparentBlt(
+	//	hDC,
+	//	0 - scrollX,
+	//	0 - scrollY,
+	//	8400,
+	//	2400,
+	//	hTownDC,
+	//	0,
+	//	0,
+	//	4200,
+	//	1200,
+	//	RGB(255,0,255));
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOld");
 
 	int frameWidth = BMPTILECX;

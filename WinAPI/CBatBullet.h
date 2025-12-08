@@ -1,12 +1,13 @@
 #pragma once
-#include "CPlayerBullet.h"
-class CGatlingGunBullet :
-    public CPlayerBullet
+#include "CEnemyBullet.h"
+class CBatBullet :
+    public CEnemyBullet
 {
+private:
     enum STATE { IDLE, DEAD, END };
 public:
-    CGatlingGunBullet();
-    virtual~CGatlingGunBullet();
+    CBatBullet();
+    virtual~CBatBullet();
 public:
     // CObj을(를) 통해 상속됨
     void Initialize() override;
@@ -14,7 +15,6 @@ public:
     void Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
-private:
     void Motion_Change();
 private:
     STATE m_eCurState;

@@ -17,8 +17,11 @@ public:
     void OnDamage(int dmg) 
     { 
         m_fCurHp -= dmg; 
-        if (m_fCurHp <= 0.f) 
-            m_fCurHp = 0.f; 
+        if (m_fCurHp <= 0.f)
+        {
+            m_fCurHp = 0.f;
+            m_bIsDead = true;
+        }
 
         m_dwLastHitTime = GetTickCount();
         m_bIsHit = true;

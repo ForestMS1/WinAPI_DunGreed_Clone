@@ -33,6 +33,7 @@ void CMainGame::Initialize()
 	m_hBitMap = CreateCompatibleBitmap(m_hDC, WINCX, WINCY);
 	HBITMAP hBit = (HBITMAP)SelectObject(m_hBackDC, m_hBitMap);
 	DeleteObject(hBit);
+	GET(CSoundMgr)->Initialize();
 
 
 	//¾À µî·Ï
@@ -53,7 +54,6 @@ void CMainGame::Initialize()
 	GET(CSceneMgr)->ChangeScene(L"Logo");
 
 	GET(CMouse)->Initialize();
-	GET(CSoundMgr)->Initialize();
 
 #ifdef _DEBUG
 

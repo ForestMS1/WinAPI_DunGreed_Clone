@@ -96,6 +96,7 @@ void CLogo::Render(HDC hDC)
 void CLogo::Release()
 {
 	CObjMgr::Get_Instance()->DeleteLayerObj(OBJ_PLAYER);
+	GET(CSoundMgr)->StopAll();
 	Safe_Delete(m_pGoTileBtn);
 	Safe_Delete(m_pGameStartBtn);
 }

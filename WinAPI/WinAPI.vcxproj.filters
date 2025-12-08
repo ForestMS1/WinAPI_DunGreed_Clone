@@ -220,6 +220,27 @@
     <Filter Include="Object\Unit\Bullet\EnemyBullet\BatBullet">
       <UniqueIdentifier>{7ae6b2e6-fb24-402a-bc08-3af2d8a09765}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\SoundMgr">
+      <UniqueIdentifier>{5391e056-aabd-4b22-83b5-5d86d8afefac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\inc">
+      <UniqueIdentifier>{f2ff1364-951b-496c-875e-4ba8b05e96ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\inc\FMOD">
+      <UniqueIdentifier>{f4a8bfdc-3b3a-487f-a0c8-0ca2dd9cf89a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\lib">
+      <UniqueIdentifier>{ee196333-167f-432b-83f7-995950555699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\lib\FMOD">
+      <UniqueIdentifier>{908cccac-dd21-44f9-a54e-684077e0543d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\lib\FMOD\x64">
+      <UniqueIdentifier>{9cc5f1e0-de1d-425e-ae9b-4dd6d79046f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\lib\FMOD\x86">
+      <UniqueIdentifier>{1f9f1c7b-5e2c-470f-99da-9b925dfd13a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -438,6 +459,33 @@
     <ClInclude Include="CBatBullet.h">
       <Filter>Object\Unit\Bullet\EnemyBullet\BatBullet</Filter>
     </ClInclude>
+    <ClInclude Include="CSoundMgr.h">
+      <Filter>Manager\SoundMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\FMOD\fmod.h">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\FMOD\fmod.hpp">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\FMOD\fmod_codec.h">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\FMOD\fmod_common.h">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\FMOD\fmod_dsp.h">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\FMOD\fmod_dsp_effects.h">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\FMOD\fmod_errors.h">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\FMOD\fmod_output.h">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -644,6 +692,9 @@
     <ClCompile Include="CBatBullet.cpp">
       <Filter>Object\Unit\Bullet\EnemyBullet\BatBullet</Filter>
     </ClCompile>
+    <ClCompile Include="CSoundMgr.cpp">
+      <Filter>Manager\SoundMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WinAPI.rc">
@@ -657,5 +708,49 @@
     <Image Include="WinAPI.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fmod.dll" />
+    <None Include="inc\FMOD\fmod.cs">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </None>
+    <None Include="inc\FMOD\fmod_dsp.cs">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </None>
+    <None Include="inc\FMOD\fmod_errors.cs">
+      <Filter>헤더 파일\inc\FMOD</Filter>
+    </None>
+    <None Include="lib\FMOD\x64\fmod.dll">
+      <Filter>헤더 파일\lib\FMOD\x64</Filter>
+    </None>
+    <None Include="lib\FMOD\x64\fmodL.dll">
+      <Filter>헤더 파일\lib\FMOD\x64</Filter>
+    </None>
+    <None Include="lib\FMOD\x86\fmod.dll">
+      <Filter>헤더 파일\lib\FMOD\x86</Filter>
+    </None>
+    <None Include="lib\FMOD\x86\fmodL.dll">
+      <Filter>헤더 파일\lib\FMOD\x86</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\FMOD\x64\fmod_vc.lib">
+      <Filter>헤더 파일\lib\FMOD\x64</Filter>
+    </Library>
+    <Library Include="lib\FMOD\x64\fmodL_vc.lib">
+      <Filter>헤더 파일\lib\FMOD\x64</Filter>
+    </Library>
+    <Library Include="lib\FMOD\x86\fmod_vc.lib">
+      <Filter>헤더 파일\lib\FMOD\x86</Filter>
+    </Library>
+    <Library Include="lib\FMOD\x86\fmodL_vc.lib">
+      <Filter>헤더 파일\lib\FMOD\x86</Filter>
+    </Library>
+    <Library Include="lib\FMOD\x86\libfmod.a">
+      <Filter>헤더 파일\lib\FMOD\x86</Filter>
+    </Library>
+    <Library Include="lib\FMOD\x86\libfmodL.a">
+      <Filter>헤더 파일\lib\FMOD\x86</Filter>
+    </Library>
   </ItemGroup>
 </Project>

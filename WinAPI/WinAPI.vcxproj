@@ -78,10 +78,13 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Users\HP\Desktop\WinAPI\WinAPI\inc\FMOD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\HP\Desktop\WinAPI\WinAPI\lib\FMOD\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -94,12 +97,15 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Users\HP\Desktop\WinAPI\WinAPI\inc\FMOD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\HP\Desktop\WinAPI\WinAPI\lib\FMOD\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,10 +116,13 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Users\HP\Desktop\WinAPI\WinAPI\inc\FMOD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\HP\Desktop\WinAPI\WinAPI\lib\FMOD\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -126,12 +135,15 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Users\HP\Desktop\WinAPI\WinAPI\inc\FMOD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\HP\Desktop\WinAPI\WinAPI\lib\FMOD\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmodex64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -172,6 +184,7 @@
     <ClInclude Include="CPlayerMgr.h" />
     <ClInclude Include="CPlayerUI.h" />
     <ClInclude Include="CRunEffect.h" />
+    <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="CSwingFX.h" />
     <ClInclude Include="CTest.h" />
     <ClInclude Include="CKeyMgr.h" />
@@ -204,6 +217,14 @@
     <ClInclude Include="CWeaponBtn2.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="inc\FMOD\fmod.h" />
+    <ClInclude Include="inc\FMOD\fmod.hpp" />
+    <ClInclude Include="inc\FMOD\fmod_codec.h" />
+    <ClInclude Include="inc\FMOD\fmod_common.h" />
+    <ClInclude Include="inc\FMOD\fmod_dsp.h" />
+    <ClInclude Include="inc\FMOD\fmod_dsp_effects.h" />
+    <ClInclude Include="inc\FMOD\fmod_errors.h" />
+    <ClInclude Include="inc\FMOD\fmod_output.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SpearMgr.h" />
@@ -248,6 +269,7 @@
     <ClCompile Include="CPlayerMgr.cpp" />
     <ClCompile Include="CPlayerUI.cpp" />
     <ClCompile Include="CRunEffect.cpp" />
+    <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="CSwingFX.cpp" />
     <ClCompile Include="CTest.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
@@ -293,6 +315,24 @@
   <ItemGroup>
     <Image Include="small.ico" />
     <Image Include="WinAPI.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fmod.dll" />
+    <None Include="inc\FMOD\fmod.cs" />
+    <None Include="inc\FMOD\fmod_dsp.cs" />
+    <None Include="inc\FMOD\fmod_errors.cs" />
+    <None Include="lib\FMOD\x64\fmod.dll" />
+    <None Include="lib\FMOD\x64\fmodL.dll" />
+    <None Include="lib\FMOD\x86\fmod.dll" />
+    <None Include="lib\FMOD\x86\fmodL.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\FMOD\x64\fmodL_vc.lib" />
+    <Library Include="lib\FMOD\x64\fmod_vc.lib" />
+    <Library Include="lib\FMOD\x86\fmodL_vc.lib" />
+    <Library Include="lib\FMOD\x86\fmod_vc.lib" />
+    <Library Include="lib\FMOD\x86\libfmod.a" />
+    <Library Include="lib\FMOD\x86\libfmodL.a" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

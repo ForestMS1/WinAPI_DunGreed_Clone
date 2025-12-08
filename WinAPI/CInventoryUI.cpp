@@ -125,6 +125,7 @@ void CInventoryUI::Key_Input()
 {
 	if (GET(CKeyMgr)->Key_Down('Z'))
 	{
+		GET(CSoundMgr)->PlaySoundW(L"Inventory_open.wav", SOUND_EFFECT, 1.0f);
 		if (m_bIsOpen)
 			Close();
 		else

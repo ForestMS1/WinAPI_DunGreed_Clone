@@ -32,6 +32,7 @@ void CLogo::Initialize()
 		m_pGameStartBtn = new CGameStartBtn;
 		m_pGameStartBtn->Initialize();
 	}
+	GET(CSoundMgr)->PlayBGM(L"Title.wav", 1.f);
 }
 
 void CLogo::Update()

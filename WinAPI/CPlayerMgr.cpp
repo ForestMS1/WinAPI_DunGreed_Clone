@@ -54,6 +54,9 @@ void CPlayerMgr::EquipWeapon(CItem* pItem, wstring key)
 {
 	Safe_Delete(m_mapPlayerEquiped[key]);
 	m_mapPlayerEquiped[key] = pItem;
+
+	GET(CSoundMgr)->PlaySoundW(L"Equip.wav", SOUND_EFFECT, 1.0f);
+
 	if(pItem == nullptr)
 		dynamic_cast<CPlayer*>(m_pPlayer)->Set_Weapon(nullptr);
 
@@ -81,6 +84,7 @@ void CPlayerMgr::EquipWeapon(CItem* pItem, wstring key)
 
 void CPlayerMgr::SetChange()
 {
+	GET(CSoundMgr)->PlaySoundW(L"Swap_weapon.wav", SOUND_EFFECT, 1.0f);
 	m_bIsFirstSet = !m_bIsFirstSet;
 
 	if (m_bIsFirstSet)

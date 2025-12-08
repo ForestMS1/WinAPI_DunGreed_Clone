@@ -26,5 +26,7 @@ public:
 
 private:
 	CObj* m_pSwingFX;
+	DWORD m_dwSoundTick;
+	UINT m_SoundIndex;
 };
 

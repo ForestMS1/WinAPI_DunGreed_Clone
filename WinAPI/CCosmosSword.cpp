@@ -51,6 +51,8 @@ void CCosmosSword::Initialize()
 
     ZeroMemory(&m_tAttackRect, sizeof(RECT));
     m_wsFrameKey = L"LightSaber";
+    m_SoundIndex = SOUND_PLAYER_ATTACK1;
+    m_dwSoundTick = GetTickCount();
 }
 
 int CCosmosSword::Update()
@@ -100,8 +102,14 @@ void CCosmosSword::Late_Update()
             //m_tAttackInfo.fX = m_tInfo.fX + m_tInfo.fCX * 2.f;
             //m_tAttackInfo.fY = m_tInfo.fY;
         }
-        for(int i = 0; i < m_iMaxAttackCount; ++i)
-            GET(CSoundMgr)->PlaySoundW(L"LightSaber.wav", SOUND_EFFECT, 1.f);
+        if (m_dwSoundTick + 80 < GetTickCount())
+        {
+            m_SoundIndex++;
+            if (m_SoundIndex > SOUND_PLAYER_ATTACK6)
+                m_SoundIndex = SOUND_PLAYER_ATTACK1;
+            GET(CSoundMgr)->PlaySoundW(L"LightSaver.wav", (CHANNELID)m_SoundIndex, 1.f);
+            m_dwSoundTick = GetTickCount();
+        }
         CCollisionMgr::Collision_Weapon(this, GET(CObjMgr)->GetObjLayer(OBJ_MONSTER));
     }
     else
@@ -112,6 +120,7 @@ void CCosmosSword::Late_Update()
     {
         m_pSwingFX->Late_Update();
     }
+
 }
 
 void CCosmosSword::Render(HDC hDC)

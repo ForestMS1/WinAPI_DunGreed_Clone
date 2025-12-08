@@ -50,7 +50,7 @@ int CRunEffect::Update()
 			m_tFrame.iMotion = 0;
 		}
 		Move_Frame();
-		GET(CSoundMgr)->PlaySoundW(L"step_lth1.wav", SOUND_EFFECT, 1.f);
+		GET(CSoundMgr)->PlaySoundW(L"step_lth1.wav", SOUND_PLAYER_WALK, 1.f);
 	}
 	else
 	{

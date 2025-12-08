@@ -50,7 +50,11 @@ void CEquipedUI::Render(HDC hDC)
         RGB(255, 0, 255)
     );
 
-    CItem* pItem = GET(CPlayerMgr)->GetEquip(L"Weapon1");
+    CItem* pItem = nullptr;
+    if(GET(CPlayerMgr)->IsFirstSet())
+        pItem = GET(CPlayerMgr)->GetEquip(L"Weapon1");
+    else
+        pItem = GET(CPlayerMgr)->GetEquip(L"Weapon2");
     if (pItem == nullptr)
         return;
     HDC hItemDC = GET(CResourceMgr)->Find_Bmp(pItem->Get_FrameKey());

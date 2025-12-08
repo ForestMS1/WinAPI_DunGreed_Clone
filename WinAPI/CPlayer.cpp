@@ -230,6 +230,11 @@ void CPlayer::Key_Input()
 		m_bBottomJump = false;
 	}
 
+	if (GET(CKeyMgr)->Key_Down('C'))
+	{
+		GET(CPlayerMgr)->SetChange();
+	}
+
 	if (GET(CUIMgr)->Find_UI(L"InventoryUI") != nullptr && GET(CUIMgr)->Find_UI(L"InventoryUI")->IsOpen())
 		return;
 	if (GET(CKeyMgr)->Key_Down(VK_RBUTTON))

@@ -1,14 +1,14 @@
 #include "pch.h"
 #include "CEquipSlotOn.h"
+#include "CWeaponBtn1.h"
+#include "CWeaponBtn2.h"
 
 CEquipSlotOn::CEquipSlotOn() : m_bMouseOn(false), m_bClicked(false)
-, m_pWeaponBtn1(nullptr)
 {
 	
 }
 
 CEquipSlotOn::CEquipSlotOn(CUI* pParentUI) : m_bMouseOn(false), m_bClicked(false)
-, m_pWeaponBtn1(nullptr)
 {
 	m_pParentUI = pParentUI;
 }
@@ -28,6 +28,9 @@ void CEquipSlotOn::Initialize()
 
 	CUI* pESlot = new CWeaponBtn1;
 	AddChildUI(pESlot);
+	pESlot = new CWeaponBtn2;
+	AddChildUI(pESlot);
+
 	for (auto& pChild : m_vecChildUI)
 	{
 		pChild->Initialize();

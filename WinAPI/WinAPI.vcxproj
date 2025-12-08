@@ -156,6 +156,7 @@
     <ClInclude Include="CGameStartBtn.h" />
     <ClInclude Include="CGatlingGun.h" />
     <ClInclude Include="CGatlingGunBullet.h" />
+    <ClInclude Include="CGiantBat.h" />
     <ClInclude Include="CGoldUI.h" />
     <ClInclude Include="CGoTileEditBtn.h" />
     <ClInclude Include="CInventoryUI.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="CUnit.h" />
     <ClInclude Include="CWeapon.h" />
     <ClInclude Include="CWeaponBtn1.h" />
+    <ClInclude Include="CWeaponBtn2.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
@@ -228,6 +230,7 @@
     <ClCompile Include="CGameStartBtn.cpp" />
     <ClCompile Include="CGatlingGun.cpp" />
     <ClCompile Include="CGatlingGunBullet.cpp" />
+    <ClCompile Include="CGiantBat.cpp" />
     <ClCompile Include="CGoldUI.cpp" />
     <ClCompile Include="CGoTileEditBtn.cpp" />
     <ClCompile Include="CInventoryUI.cpp" />
@@ -270,6 +273,7 @@
     <ClCompile Include="CUnit.cpp" />
     <ClCompile Include="CWeapon.cpp" />
     <ClCompile Include="CWeaponBtn1.cpp" />
+    <ClCompile Include="CWeaponBtn2.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

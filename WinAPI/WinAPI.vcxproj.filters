@@ -208,6 +208,12 @@
     <Filter Include="Object\UI\BelialUI">
       <UniqueIdentifier>{a00302db-62d6-44bb-b031-30c23e1281fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\GiantBat">
+      <UniqueIdentifier>{bb382311-a6f3-4715-88e0-6658ba4e9109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\InventoryUI\EquipSlotOn\WeaponBtn2">
+      <UniqueIdentifier>{4aa52821-df71-4cb8-9517-21d3e1429867}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -414,6 +420,12 @@
     <ClInclude Include="CBelialUI.h">
       <Filter>Object\UI\BelialUI</Filter>
     </ClInclude>
+    <ClInclude Include="CGiantBat.h">
+      <Filter>Object\Unit\Enemy\GiantBat</Filter>
+    </ClInclude>
+    <ClInclude Include="CWeaponBtn2.h">
+      <Filter>Object\UI\InventoryUI\EquipSlotOn\WeaponBtn2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -607,6 +619,12 @@
     </ClCompile>
     <ClCompile Include="CBelialUI.cpp">
       <Filter>Object\UI\BelialUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CGiantBat.cpp">
+      <Filter>Object\Unit\Enemy\GiantBat</Filter>
+    </ClCompile>
+    <ClCompile Include="CWeaponBtn2.cpp">
+      <Filter>Object\UI\InventoryUI\EquipSlotOn\WeaponBtn2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

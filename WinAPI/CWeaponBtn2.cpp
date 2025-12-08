@@ -1,31 +1,31 @@
 #include "pch.h"
-#include "CWeaponBtn1.h"
+#include "CWeaponBtn2.h"
 #include "CWeapon.h"
 #include "CGatlingGun.h"
 
-CWeaponBtn1::CWeaponBtn1() : m_pEquipedItem(nullptr)
+CWeaponBtn2::CWeaponBtn2() : m_pEquipedItem(nullptr)
 {
 }
 
-CWeaponBtn1::CWeaponBtn1(CUI* pParentUI) : m_pEquipedItem(nullptr)
+CWeaponBtn2::CWeaponBtn2(CUI* pParentUI) : m_pEquipedItem(nullptr)
 {
-    m_pParentUI = pParentUI;
+	m_pParentUI = pParentUI;
 }
 
-CWeaponBtn1::~CWeaponBtn1()
+CWeaponBtn2::~CWeaponBtn2()
 {
 	Release();
 }
 
-void CWeaponBtn1::Initialize()
+void CWeaponBtn2::Initialize()
 {
-    m_tInfo.fCX = 57.f;
-    m_tInfo.fCY = 57.f;
-	m_tInfo.fX = m_pParentUI->Get_Rect()->left + 38;
+	m_tInfo.fCX = 57.f;
+	m_tInfo.fCY = 57.f;
+	m_tInfo.fX = m_pParentUI->Get_Rect()->left + 200;
 	m_tInfo.fY = m_pParentUI->Get_Rect()->top + 53;
 }
 
-int CWeaponBtn1::Update()
+int CWeaponBtn2::Update()
 {
 	CUI::Update();
 	__super::Update_Rect();
@@ -39,18 +39,18 @@ int CWeaponBtn1::Update()
 	}
 	Cliked();
 
-    return 0;
+	return 0;
 }
 
-void CWeaponBtn1::Late_Update()
+void CWeaponBtn2::Late_Update()
 {
 	CUI::Late_Update();
 }
 
-void CWeaponBtn1::Render(HDC hDC)
+void CWeaponBtn2::Render(HDC hDC)
 {
 	CUI::Render(hDC);
-
+	Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 	if (m_pEquipedItem != nullptr)
 	{
 		HDC hItemDC = GET(CResourceMgr)->Find_Bmp(m_pEquipedItem->Get_FrameKey());
@@ -74,12 +74,12 @@ void CWeaponBtn1::Render(HDC hDC)
 	}
 }
 
-void CWeaponBtn1::Release()
+void CWeaponBtn2::Release()
 {
 	Safe_Delete(m_pEquipedItem);
 }
 
-void CWeaponBtn1::Cliked()
+void CWeaponBtn2::Cliked()
 {
 	if (!m_bIsOpen)
 	{
@@ -89,10 +89,10 @@ void CWeaponBtn1::Cliked()
 	if (GET(CMouse)->Get_State() == CMouse::MouseState::EMPTY && m_bMouseOn && GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 	{
 		//마우스에게 아이템 정보 전달
-		if(m_pEquipedItem != nullptr)
+		if (m_pEquipedItem != nullptr)
 			GET(CMouse)->PickItem(m_pEquipedItem->Clone());
 		Safe_Delete(m_pEquipedItem);
-		GET(CPlayerMgr)->EquipWeapon(nullptr, L"Weapon1");
+		GET(CPlayerMgr)->EquipWeapon(nullptr, L"Weapon2");
 	}
 	if (m_bMouseOn && m_pEquipedItem == nullptr &&
 		GET(CMouse)->Get_State() == CMouse::MouseState::PICKITEM && GET(CKeyMgr)->Key_Down(VK_LBUTTON))
@@ -100,7 +100,7 @@ void CWeaponBtn1::Cliked()
 		//마우스에게 아이템 정보 해제
 		Safe_Delete(m_pEquipedItem);
 		m_pEquipedItem = GET(CMouse)->Get_Item()->Clone();
-		GET(CPlayerMgr)->EquipWeapon(m_pEquipedItem->Clone(), L"Weapon1");
+		GET(CPlayerMgr)->EquipWeapon(m_pEquipedItem->Clone(), L"Weapon2");
 		GET(CMouse)->Set_State(CMouse::MouseState::EMPTY);
 		GET(CMouse)->Delete_Item();
 	}

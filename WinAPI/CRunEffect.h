@@ -16,5 +16,6 @@ public:
     void Release() override;
 private:
     CObj* m_pOwner;
+    DWORD m_dwSoundTick;
 };
 

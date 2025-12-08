@@ -26,7 +26,7 @@
 #include"fmod.h"
 #include "fmod.hpp"
 
-#pragma comment(lib, "fmodex64_vc.lib")
+//#pragma comment(lib, "fmodex64_vc.lib")
 #include <iostream>
 #include <io.h>
 

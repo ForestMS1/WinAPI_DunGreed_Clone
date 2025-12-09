@@ -97,13 +97,14 @@ int CBelial::Update()
 	if (m_pSpearMgr != nullptr)
 		m_pSpearMgr->Update();
 
-	if (m_bIsInPlayer && m_SpawnEffectStartTime < GetTickCount() && GetTickCount() < m_SpawnEffectStartTime + 5000)
+	if (m_bIsInPlayer && m_SpawnEffectStartTime < GetTickCount() && GetTickCount() < m_SpawnEffectStartTime + 7000)
 	{
 		GET(CCamera)->SetTarget(nullptr);
 		GET(CCamera)->SetLookAt(Vec2(1400, 500));
 		if (!m_bPlayBossBGM)
 		{
-			GET(CSoundMgr)->PlaySound(L"2.IceBoss.wav", SOUND_BGM, 1.f);
+			GET(CSoundMgr)->PlaySound(L"JailBoss.wav", SOUND_BGM, 1.f);
+			//GET(CSoundMgr)->PlaySound(L"2.IceBoss.wav", SOUND_BGM, 1.f);
 			m_bPlayBossBGM = true;
 		}
 		return 0;
@@ -113,7 +114,7 @@ int CBelial::Update()
 		GET(CCamera)->SetTarget(GET(CPlayerMgr)->GetPlayer());
 	}
 
-	if (m_dwChangePattern + 7000 < GetTickCount())
+	if (m_SpawnEffectStartTime + 9000 < GetTickCount() && m_dwChangePattern + 7000 < GetTickCount())
 	{
 		m_ePreState = m_eCurState;
 		do

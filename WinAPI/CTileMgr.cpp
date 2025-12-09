@@ -77,6 +77,7 @@ void CTileMgr::Release()
 		Safe_Delete(pTile);
 	}
 	m_vecTile.clear();
+	GET(CLineMgr)->Release();
 }
 
 void CTileMgr::Picking_Tile(POINT ptMouse, int iDrawIDX, int iDrawIDY, int iOption)
@@ -196,4 +197,5 @@ void CTileMgr::Clear_Tile()
 	{
 		dynamic_cast<CTile*>(pTile)->Set_Option(ERASE);
 	}
+	GET(CLineMgr)->Release();
 }

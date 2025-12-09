@@ -14,6 +14,7 @@ public:
 	void AddObject(OBJ_LAYER eLayer, CObj* pObj);
 	list<CObj*> GetObjLayer(OBJ_LAYER eLayer) const { return m_ObjLayer[eLayer]; }
 	void DeleteLayerObj(OBJ_LAYER eLayer);
+	void DeleteAllLayer();
 
 private:
 	list<CObj*>		m_ObjLayer[OBJ_END];

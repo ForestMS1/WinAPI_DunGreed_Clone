@@ -28,13 +28,13 @@ void CGameStartBtn::Initialize()
 
 int CGameStartBtn::Update()
 {
-
+	__super::Update_Rect();
 	return 0;
 }
 
 void CGameStartBtn::Late_Update()
 {
-	Vec2 vc = GET(CCamera)->GetRenderPos(GET(CMouse)->Get_Point());
+	Vec2 vc = GET(CCamera)->GetRealPos(GET(CMouse)->Get_Point());
 	POINT pt = { (int)vc.fX , (int)vc.fY };
 	if (PtInRect(&m_tRect, pt))
 	{
@@ -53,6 +53,7 @@ void CGameStartBtn::Late_Update()
 		m_tFrame.iMotion = 0;
 	else
 		m_tFrame.iMotion = 1;
+	return;
 }
 
 void CGameStartBtn::Render(HDC hDC)

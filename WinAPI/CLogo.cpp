@@ -25,18 +25,27 @@ void CLogo::Initialize()
 	if (m_pGoTileBtn == nullptr)
 	{
 		m_pGoTileBtn = new CGoTileEditBtn;
-		m_pGoTileBtn->Initialize();
 	}
+	m_pGoTileBtn->Initialize();
+
 	if (m_pGameStartBtn == nullptr)
 	{
 		m_pGameStartBtn = new CGameStartBtn;
-		m_pGameStartBtn->Initialize();
 	}
+	m_pGameStartBtn->Initialize();
+
+	GET(CCamera)->SetTarget(nullptr);
+	GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
+
 	GET(CSoundMgr)->PlayBGM(L"Title.wav", 1.f);
 }
 
 void CLogo::Update()
 {
+	if (m_pGoTileBtn != nullptr)
+		m_pGoTileBtn->Update();
+	if (m_pGameStartBtn != nullptr)
+		m_pGameStartBtn->Update();
 	CObjMgr::Get_Instance()->Update();
 }
 

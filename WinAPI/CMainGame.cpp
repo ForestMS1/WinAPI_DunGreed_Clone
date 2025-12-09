@@ -106,7 +106,9 @@ void CMainGame::Render()
 	DWORD curTime = GetTickCount();
 	if (m_dwLastTime + 1000 < curTime)
 	{
-		swprintf_s(m_szFPS, L"FPS : %d, DT : %f, m_vLookAt : (%f, %f)", m_iFps, DT, GET(CCamera)->GetLookAt().fX, GET(CCamera)->GetLookAt().fY);
+		swprintf_s(m_szFPS, L"FPS : %d, DT : %f, m_vLookAt : (%f, %f), MousePosVec : (%d, %d)", 
+			m_iFps, DT, GET(CCamera)->GetLookAt().fX, GET(CCamera)->GetLookAt().fY,
+			GET(CMouse)->Get_Point().x, GET(CMouse)->Get_Point().y);
 		m_iFps = 0;
 
 

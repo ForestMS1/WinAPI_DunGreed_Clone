@@ -119,3 +119,16 @@ void CObjMgr::DeleteLayerObj(OBJ_LAYER eLayer)
 	}
 	m_ObjLayer[eLayer].clear();
 }
+
+void CObjMgr::DeleteAllLayer()
+{
+	for (UINT i = 0; i < OBJ_END; ++i)
+	{
+		list<CObj*>::iterator iter = m_ObjLayer[i].begin();
+		for (; iter != m_ObjLayer[i].end(); ++iter)
+		{
+			Safe_Delete((*iter));
+		}
+		m_ObjLayer[i].clear();
+	}
+}

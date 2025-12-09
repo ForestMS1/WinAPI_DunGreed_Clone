@@ -34,6 +34,10 @@ void CBelialScene::Initialize()
 
 void CBelialScene::Update()
 {
+	if (GET(CKeyMgr)->Key_Down('X'))
+	{
+		GET(CSceneMgr)->ChangeScene(L"Logo");
+	}
 }
 
 void CBelialScene::Late_Update()
@@ -49,6 +53,10 @@ void CBelialScene::Render(HDC hDC)
 
 void CBelialScene::Release()
 {
-	GET(CObjMgr)->DeleteLayerObj(OBJ_PLAYER);
-	GET(CObjMgr)->DeleteLayerObj(OBJ_MONSTER);
+	//GET(CObjMgr)->DeleteLayerObj(OBJ_PLAYER);
+	//GET(CObjMgr)->DeleteLayerObj(OBJ_MONSTER);
+	GET(CObjMgr)->DeleteAllLayer();
+	GET(CTileMgr)->Clear_Tile();
+	GET(CUIMgr)->Release();
+	GET(CSoundMgr)->StopAll();
 }

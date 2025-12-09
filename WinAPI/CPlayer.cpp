@@ -31,8 +31,8 @@ void CPlayer::Initialize()
 	m_fMaxHp = 100.f;
 	m_fCurHp = 70.f;
 
-	m_tInfo.fX = 400.f;
-	m_tInfo.fY = 400.f;
+	//m_tInfo.fX = 400.f;
+	//m_tInfo.fY = 400.f;
 	m_tInfo.fCX = 45.f;
 	m_tInfo.fCY = 60.f;
 

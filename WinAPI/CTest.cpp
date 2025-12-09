@@ -13,6 +13,7 @@
 #include "CInventoryUI.h"
 #include "CPlayerMgr.h"
 #include "CGiantBat.h"
+#include "CBanshee.h"
 CTest::CTest() : m_bIsDrawing(false)
 {
 	ZeroMemory(&m_ptMouse, sizeof(m_ptMouse));
@@ -33,6 +34,7 @@ void CTest::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(100.f, 100.f));
 	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBelial>::Create(2000.f, 200.f));
 	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(500.f, 200.f));
+	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(700.f, 200.f));
 	GET(CObjMgr)->Initialize();
 	GET(CPlayerMgr)->Initialize();
 	GET(CLineMgr)->Initialize();

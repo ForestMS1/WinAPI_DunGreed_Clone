@@ -247,6 +247,12 @@
     <Filter Include="Scene\DungeonScene\DungeonStart">
       <UniqueIdentifier>{92a664a8-8aa9-4c76-a5e0-e8b613f5016f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\Banshee">
+      <UniqueIdentifier>{c527b6e5-1d9f-413b-83c7-acaba224af89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Bullet\EnemyBullet\BansheeBullet">
+      <UniqueIdentifier>{c70535df-521f-43ea-9c95-13b2e62d634e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -495,6 +501,12 @@
     <ClInclude Include="CDungeonStart.h">
       <Filter>Scene\DungeonScene\DungeonStart</Filter>
     </ClInclude>
+    <ClInclude Include="CBanshee.h">
+      <Filter>Object\Unit\Enemy\Banshee</Filter>
+    </ClInclude>
+    <ClInclude Include="CBansheeBullet.h">
+      <Filter>Object\Unit\Bullet\EnemyBullet\BansheeBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -706,6 +718,12 @@
     </ClCompile>
     <ClCompile Include="CDungeonStart.cpp">
       <Filter>Scene\DungeonScene\DungeonStart</Filter>
+    </ClCompile>
+    <ClCompile Include="CBanshee.cpp">
+      <Filter>Object\Unit\Enemy\Banshee</Filter>
+    </ClCompile>
+    <ClCompile Include="CBansheeBullet.cpp">
+      <Filter>Object\Unit\Bullet\EnemyBullet\BansheeBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

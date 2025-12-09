@@ -148,6 +148,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CAbstractFactory.h" />
+    <ClInclude Include="CBanshee.h" />
+    <ClInclude Include="CBansheeBullet.h" />
     <ClInclude Include="CBatBullet.h" />
     <ClInclude Include="CBelial.h" />
     <ClInclude Include="CBelialBullet.h" />
@@ -234,6 +236,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAbstractFactory.cpp" />
+    <ClCompile Include="CBanshee.cpp" />
+    <ClCompile Include="CBansheeBullet.cpp" />
     <ClCompile Include="CBatBullet.cpp" />
     <ClCompile Include="CBelial.cpp" />
     <ClCompile Include="CBelialBullet.cpp" />

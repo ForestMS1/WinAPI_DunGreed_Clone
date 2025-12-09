@@ -17,14 +17,14 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
-    BELIAL_STATE GetCurState() const { return m_eCurState; }
+    BELIAL_STATE GetCurState() const { return m_eBelialCurState; }
 private:
     void Motion_Change() override;
     void Attack_Rotate();
     void Attack_Hand();
 private:
-    BELIAL_STATE m_ePreState;
-    BELIAL_STATE m_eCurState;
+    BELIAL_STATE m_eBelailPreState;
+    BELIAL_STATE m_eBelialCurState;
 
     //스읍... 이게 맞나 너무 하드코딩같지만 일단 끼워
     CBelialRHand* m_pRHand;

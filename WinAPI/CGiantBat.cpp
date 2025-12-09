@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CGiantBat.h"
 #include "CBatBullet.h"
-CGiantBat::CGiantBat() : spawnTick(GetTickCount())
+CGiantBat::CGiantBat()
 {
 }
 
@@ -47,8 +47,6 @@ void CGiantBat::Initialize()
 
 	m_eCurState = SPAWN;
 	m_wsFrameKey = L"EnemySpawn";
-	m_dwSpawnTime = GetTickCount();
-
 }
 
 int CGiantBat::Update()
@@ -56,9 +54,7 @@ int CGiantBat::Update()
 	CEnemy::Update();
 	if (m_eCurState == SPAWN)
 	{
-		Move_Frame_No_Loop();
-		if (m_tFrame.iStart >= m_tFrame.iEnd)
-			m_eCurState = IDLE;
+		SpawnEffect();
 		return 0;
 	}
 
@@ -66,7 +62,7 @@ int CGiantBat::Update()
 	{
 		//m_bIsDead = true;
 		m_eCurState = DEAD;
-		Move_Frame_No_Loop();
+		DeadEffect();
 		if (m_tFrame.iStart >= m_tFrame.iEnd)
 			return OBJ_DEAD;
 		else

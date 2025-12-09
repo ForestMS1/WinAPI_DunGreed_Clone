@@ -3,7 +3,7 @@
 #include "CEnemyHpBarUI.h"
 
 CEnemy::CEnemy() : m_fDetectfCX(0.f), m_fDetectfCY(0.f), m_bIsInPlayer(false), m_fAngle(0.f)
-, m_pHpBarUI(nullptr)
+, m_pHpBarUI(nullptr), m_bIsSpawnSound(false)
 {
 	ZeroMemory(&m_tDetectRect, sizeof(RECT));
 	m_eRender = GAMEOBJECT;
@@ -65,4 +65,26 @@ void CEnemy::Update_DetectRect()
 	m_tDetectRect.top = m_tInfo.fY - m_fDetectfCY * 0.5f;
 	m_tDetectRect.right = m_tInfo.fX + m_fDetectfCX * 0.5f;
 	m_tDetectRect.bottom = m_tInfo.fY + m_fDetectfCY * 0.5f;
+}
+
+void CEnemy::SpawnEffect()
+{
+	Move_Frame_No_Loop();
+	if (!m_bIsSpawnSound)
+	{
+		GET(CSoundMgr)->PlaySoundW(L"SpawnMonster.wav", SOUND_EFFECT, 1.f);
+		m_bIsSpawnSound = true;
+	}
+	if (m_tFrame.iStart >= m_tFrame.iEnd)
+		m_eCurState = IDLE;
+}
+
+void CEnemy::DeadEffect()
+{
+	Move_Frame_No_Loop();
+	if (m_bIsSpawnSound)
+	{
+		GET(CSoundMgr)->PlaySoundW(L"MonsterDie.wav", SOUND_EFFECT, 1.f);
+		m_bIsSpawnSound = false;
+	}
 }

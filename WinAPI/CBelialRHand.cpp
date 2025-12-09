@@ -45,18 +45,18 @@ void CBelialRHand::Initialize()
 	}
 	m_pLaser->Initialize();
 
-	m_ePreState = BELIAL_STATE::IDLE;
+	m_eBelailPreState = BELIAL_STATE::BELAIL_IDLE;
 }
 
 int CBelialRHand::Update()
 {
-	m_eCurState = dynamic_cast<CBelial*>(m_pOwner)->GetCurState();
+	m_eBelialCurState = dynamic_cast<CBelial*>(m_pOwner)->GetCurState();
 	__super::Update_Rect();
-	if(m_eCurState != BELIAL_STATE::DEAD)
+	if(m_eBelialCurState != BELIAL_STATE::BELIAL_DEAD)
 		Move_Frame();
 
 
-	if (!m_bMoveEnd && m_eCurState == BELIAL_STATE::ATTACK_HAND && m_fMoveDuration < 1.25f)
+	if (!m_bMoveEnd && m_eBelialCurState == BELIAL_STATE::ATTACK_HAND && m_fMoveDuration < 1.25f)
 	{
 		CBelialRHand::MoveToPlayer();
 		m_fMoveDuration += 0.01f;
@@ -69,7 +69,7 @@ int CBelialRHand::Update()
 
 	if (!m_isActive)
 		return 0;
-	if (m_bMoveEnd && m_eCurState == BELIAL_STATE::ATTACK_HAND && m_fAtackDuration < 1.25f)
+	if (m_bMoveEnd && m_eBelialCurState == BELIAL_STATE::ATTACK_HAND && m_fAtackDuration < 1.25f)
 	{
 		m_pLaser->SetActive(true);
 		m_pLaser->Update();
@@ -127,11 +127,11 @@ void CBelialRHand::Release()
 
 void CBelialRHand::Motion_Change()
 {
-	if (m_ePreState != m_eCurState)
+	if (m_eBelailPreState != m_eBelialCurState)
 	{
-		switch (m_eCurState)
+		switch (m_eBelialCurState)
 		{
-		case BELIAL_STATE::IDLE:
+		case BELIAL_STATE::BELAIL_IDLE:
 			m_tFrame.iStart = 0;
 			m_tFrame.iMotion = 0;
 			m_tFrame.iEnd = 9;
@@ -166,7 +166,7 @@ void CBelialRHand::Motion_Change()
 			m_tInfo.fCY = m_iFrameHeight;
 			m_tFrame.dwTime = GetTickCount();
 			break;
-		case BELIAL_STATE::DEAD:
+		case BELIAL_STATE::BELIAL_DEAD:
 			m_tFrame.iStart = 9;
 			m_tFrame.iMotion = 0;
 			m_tFrame.iEnd = 9;
@@ -191,7 +191,7 @@ void CBelialRHand::Motion_Change()
 			m_tInfo.fCY = m_iFrameHeight;
 			break;
 		}
-		m_ePreState = m_eCurState;
+		m_eBelailPreState = m_eBelialCurState;
 	}
 }
 

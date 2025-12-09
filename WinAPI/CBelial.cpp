@@ -43,7 +43,7 @@ void CBelial::Initialize()
 	srand(time(0));
 	m_dwChangePattern = GetTickCount();
 
-	m_eCurState = IDLE;
+	m_eBelialCurState = BELAIL_IDLE;
 	m_wsFrameKey = L"BelialIdle";
 
 	//손 생성
@@ -73,7 +73,7 @@ int CBelial::Update()
 	if (m_fCurHp <= 0.f)
 	{
 		m_bIsDead = true;
-		m_eCurState = DEAD;
+		m_eBelialCurState = BELIAL_DEAD;
 
 		// 리턴하기전에 딜레이 줘야할듯?
 		
@@ -86,7 +86,7 @@ int CBelial::Update()
 	Attack_Rotate();
 	Attack_Hand();
 
-	if(m_eCurState != DEAD)
+	if(m_eBelialCurState != BELIAL_DEAD)
 		Move_Frame();
 
 
@@ -116,11 +116,11 @@ int CBelial::Update()
 
 	if (m_SpawnEffectStartTime + 9000 < GetTickCount() && m_dwChangePattern + 7000 < GetTickCount())
 	{
-		m_ePreState = m_eCurState;
+		m_eBelailPreState = m_eBelialCurState;
 		do
 		{
-			m_eCurState = BELIAL_STATE((rand() % 3) + 1);
-		} while (m_ePreState == m_eCurState);
+			m_eBelialCurState = BELIAL_STATE((rand() % 3) + 1);
+		} while (m_eBelailPreState == m_eBelialCurState);
 		m_dwChangePattern = GetTickCount();
 	}
 
@@ -181,7 +181,7 @@ void CBelial::Render(HDC hDC)
 
 	if (m_bIsHit)
 	{
-		if (m_eCurState == ATTACK_ROTATE)
+		if (m_eBelialCurState == ATTACK_ROTATE)
 		{
 			HDC hHitDC = GET(CResourceMgr)->Find_Bmp(L"SkellBossAttackHit");
 
@@ -236,11 +236,11 @@ void CBelial::Release()
 
 void CBelial::Motion_Change()
 {
-	if (m_ePreState != m_eCurState)
+	if (m_eBelailPreState != m_eBelialCurState)
 	{
-		switch (m_eCurState)
+		switch (m_eBelialCurState)
 		{
-		case BELIAL_STATE::IDLE:
+		case BELIAL_STATE::BELAIL_IDLE:
 			m_tFrame.iStart = 0;
 			m_tFrame.iMotion = 0;
 			m_tFrame.iEnd = 9;
@@ -264,7 +264,7 @@ void CBelial::Motion_Change()
 			m_tInfo.fCX = m_iFrameWidth;
 			m_tInfo.fCY = m_iFrameHeight;
 			break;
-		case BELIAL_STATE::DEAD:
+		case BELIAL_STATE::BELIAL_DEAD:
 			m_tFrame.iStart = 3;
 			m_tFrame.iEnd = 3;
 			m_tFrame.dwSpeed = 100;
@@ -306,7 +306,7 @@ void CBelial::Motion_Change()
 			m_iFrameHeight = 285.f;
 			break;
 		}
-		m_ePreState = m_eCurState;
+		m_eBelailPreState = m_eBelialCurState;
 	}
 
 }
@@ -317,7 +317,7 @@ void CBelial::Attack_Rotate()
 	static float ToptAngle = 90.f;
 	static float LefttAngle = 180.f;
 	static float DownAngle = 270.f;
-	if (m_eCurState == ATTACK_ROTATE && m_tFrame.iStart <= m_tFrame.iEnd)
+	if (m_eBelialCurState == ATTACK_ROTATE && m_tFrame.iStart <= m_tFrame.iEnd)
 	{
 		if (m_dwRotateAttackTick + 100 < GetTickCount())
 		{
@@ -339,7 +339,7 @@ void CBelial::Attack_Rotate()
 
 void CBelial::Attack_Hand()
 {
-	if (m_eCurState == ATTACK_HAND && m_dwHandAttackTick + 2000 < GetTickCount())
+	if (m_eBelialCurState == ATTACK_HAND && m_dwHandAttackTick + 2000 < GetTickCount())
 	{
 		isRightHandOn = !isRightHandOn;
 		m_pRHand->SetActive(isRightHandOn);

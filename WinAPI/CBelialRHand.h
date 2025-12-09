@@ -23,8 +23,8 @@ private:
 private:
     CEnemy* m_pOwner;
     CLaser* m_pLaser;
-    BELIAL_STATE m_ePreState;
-    BELIAL_STATE m_eCurState;
+    BELIAL_STATE m_eBelailPreState;
+    BELIAL_STATE m_eBelialCurState;
 
     float   m_fAtackDuration;
     float   m_fMoveDuration;

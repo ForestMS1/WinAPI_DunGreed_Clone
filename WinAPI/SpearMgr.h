@@ -21,8 +21,8 @@ public:
 private:
     CEnemy* m_pOwner;
     vector<CEnemy*>     m_vecSpear;
-    BELIAL_STATE m_ePreState;
-    BELIAL_STATE m_eCurState;
+    BELIAL_STATE m_eBelailPreState;
+    BELIAL_STATE m_eBelialCurState;
 
     DWORD       m_dwSpawnTick;
 

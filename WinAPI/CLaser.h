@@ -25,7 +25,7 @@ private:
     CEnemy* m_pOwner;
 
     BELIAL_STATE m_ePreState;
-    BELIAL_STATE m_eCurState;
+    BELIAL_STATE m_eBelialCurState;
 
     CObj* m_pTarget;
     bool    isActive;

@@ -1,12 +1,13 @@
 #pragma once
 #include "CUnit.h"
 
-enum BELIAL_STATE { IDLE, ATTACK_ROTATE, ATTACK_HAND, ATTACK_SPEAR, DEAD, STATE_END };
-
+enum BELIAL_STATE { BELAIL_IDLE, ATTACK_ROTATE, ATTACK_HAND, ATTACK_SPEAR, BELIAL_DEAD, STATE_END };
 
 class CEnemy :
     public CUnit
 {
+protected:
+    enum STATE { SPAWN, IDLE, ATTACK, DEAD, END };
 public:
     CEnemy();
     virtual ~CEnemy();
@@ -23,6 +24,10 @@ public:
     void InPlayer() { m_bIsInPlayer = true; }
     void OutPlayer() { m_bIsInPlayer = false; }
     virtual void Motion_Change() PURE;
+
+protected:
+    void SpawnEffect();
+    void DeadEffect();
 protected:
     //플레이어를 감지 할 범위
     RECT  m_tDetectRect;
@@ -33,5 +38,10 @@ protected:
     float m_fAngle;
 
     CUI* m_pHpBarUI;
+
+    bool m_bIsSpawnSound;
+
+    STATE m_ePreState;
+    STATE m_eCurState;
 };
 

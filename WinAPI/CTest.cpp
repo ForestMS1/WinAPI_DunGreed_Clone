@@ -60,7 +60,8 @@ void CTest::Update()
 
 void CTest::Late_Update()
 {
-
+	if(GET(CKeyMgr)->Key_Down('N'))
+		GET(CSceneMgr)->ChangeScene(L"DungeonStart");
 }
 
 void CTest::Render(HDC hDC)
@@ -117,8 +118,10 @@ void CTest::Render(HDC hDC)
 
 void CTest::Release()
 {
-	GET(CObjMgr)->DeleteLayerObj(OBJ_PLAYER);
-	GET(CObjMgr)->DeleteLayerObj(OBJ_MONSTER);
+	GET(CObjMgr)->DeleteAllLayer();
+	GET(CTileMgr)->Clear_Tile();
+	GET(CUIMgr)->Release();
+	GET(CSoundMgr)->StopAll();
 }
 
 void CTest::Key_Input()

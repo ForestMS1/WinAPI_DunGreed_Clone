@@ -79,7 +79,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             }
         }
 
-        else
+        else if(GetActiveWindow() == g_hWnd)
         {
             if (dwTime + 10 < GetTickCount())
             {

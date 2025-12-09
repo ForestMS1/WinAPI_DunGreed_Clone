@@ -241,6 +241,12 @@
     <Filter Include="헤더 파일\lib\FMOD\x86">
       <UniqueIdentifier>{1f9f1c7b-5e2c-470f-99da-9b925dfd13a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\DungeonScene">
+      <UniqueIdentifier>{b73ab191-da8e-4157-b65a-e70909c706be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\DungeonScene\DungeonStart">
+      <UniqueIdentifier>{92a664a8-8aa9-4c76-a5e0-e8b613f5016f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -486,6 +492,9 @@
     <ClInclude Include="inc\FMOD\fmod_output.h">
       <Filter>헤더 파일\inc\FMOD</Filter>
     </ClInclude>
+    <ClInclude Include="CDungeonStart.h">
+      <Filter>Scene\DungeonScene\DungeonStart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -694,6 +703,9 @@
     </ClCompile>
     <ClCompile Include="CSoundMgr.cpp">
       <Filter>Manager\SoundMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CDungeonStart.cpp">
+      <Filter>Scene\DungeonScene\DungeonStart</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,7 @@ void CBelialScene::Initialize()
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
-	GET(CTileMgr)->Load_Tile(L"BelialSceneTile");
+	GET(CTileMgr)->Load_Tile(L"BelialScene");
 
 	GET(CPlayerMgr)->Initialize();
 	GET(CUIMgr)->Insert_UI(L"PlayerUI", new CPlayerUI(GET(CPlayerMgr)->GetPlayer()));

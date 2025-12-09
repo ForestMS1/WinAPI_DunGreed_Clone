@@ -75,6 +75,21 @@ void CTileEditScene::Render(HDC hDC)
 	//	4200,
 	//	1200,
 	//	RGB(255,0,255));
+
+	HDC hBackDC = GET(CResourceMgr)->Find_Bmp(L"SubBG");
+	GdiTransparentBlt(
+		hDC,
+		0 - scrollX,
+		0 - scrollY,
+		WINCX,
+		WINCY,
+		hBackDC,
+		0,
+		0,
+		320,
+		180,
+		RGB(255,0,255));
+
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOld");
 
 	int frameWidth = BMPTILECX;
@@ -133,6 +148,10 @@ void CTileEditScene::Render(HDC hDC)
 
 void CTileEditScene::Release()
 {
+	GET(CObjMgr)->DeleteAllLayer();
+	GET(CTileMgr)->Clear_Tile();
+	GET(CUIMgr)->Release();
+	GET(CSoundMgr)->StopAll();
 }
 
 void CTileEditScene::Key_Input()

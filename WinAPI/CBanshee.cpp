@@ -226,9 +226,9 @@ void CBanshee::Attack_CircleBullet()
 	if (m_bIsInPlayer)
 	{
 		CEnemy::ToPlayerAngle();
-		m_eCurState = ATTACK;
+		
 		//TODO : 5초에 한번씩 플레이어에게 원 총알 발사
-		if (m_dwAttackTick + 5000 < GetTickCount())
+		if (m_dwAttackTick + 3000 < GetTickCount())
 		{
 			for (size_t i = 0; i < 8; ++i)
 			{
@@ -238,5 +238,9 @@ void CBanshee::Attack_CircleBullet()
 			GET(CSoundMgr)->PlaySoundW(L"Banshee_ATK.wav", SOUND_ENEMY_ATTACK, 1.f);
 			m_dwAttackTick = GetTickCount();
 		}
+		else if (GetTickCount() < m_dwAttackTick + 2000)
+			m_eCurState = ATTACK;
+		else if (GetTickCount() > m_dwAttackTick + 2000)
+			m_eCurState = IDLE;
 	}
 }

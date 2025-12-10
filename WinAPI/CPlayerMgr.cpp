@@ -5,9 +5,10 @@
 #include "CGatlingGun.h"
 CPlayerMgr* CPlayerMgr::m_pInstance = nullptr;
 
-CPlayerMgr::CPlayerMgr() : m_bIsFirstSet(true)
+CPlayerMgr::CPlayerMgr() : m_bIsFirstSet(true), m_fMaxHp(100.f), m_fCurHp(100.f)
 {
-	
+	m_pPlayer = nullptr;
+	m_vecItem = vector<CItem*>(15, nullptr);
 }
 CPlayerMgr::~CPlayerMgr()
 {
@@ -48,6 +49,12 @@ void CPlayerMgr::Release()
 		Safe_Delete<CItem*>(iter.second);
 	}
 	m_mapPlayerEquiped.clear();
+
+	for (auto iter : m_vecItem)
+	{
+		Safe_Delete(iter);
+	}
+	m_vecItem.clear();
 }
 
 void CPlayerMgr::EquipWeapon(CItem* pItem, wstring key)

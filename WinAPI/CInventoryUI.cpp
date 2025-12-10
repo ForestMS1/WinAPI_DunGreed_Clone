@@ -41,24 +41,31 @@ void CInventoryUI::Initialize()
 
 	float offsetX = 57.f;
 	float offsetY = 310.f;
+	vector<CItem*>& ItemVec = GET(CPlayerMgr)->GetItemVec();
 	for (size_t i = 0; i < 3; ++i)
 	{
 		for (size_t j = 0; j < 5; ++j)
 		{
-			CUI* pCell = new CCell;
+			CUI* pCell = new CCell(5 * i + j);
 			pCell->Set_Pos(m_tRect.left + (57 + 10) * j + offsetX, m_tRect.top + (57 + 10) * i + offsetY);
-			//if (i == 0 && j == 0)
-			//	dynamic_cast<CCell*>(pCell)->SetItem(new CCosmosSword);
-			//else
-			//	dynamic_cast<CCell*>(pCell)->SetItem(new CGatlingGun);
-
 			AddChildUI(pCell);
 			pCell->Initialize();
+
+			if (ItemVec[5 * i + j] == nullptr)
+				dynamic_cast<CCell*>(m_vecChildUI[5 * i + j])->SetItem(nullptr);
+			else
+				dynamic_cast<CCell*>(m_vecChildUI[5 * i + j])->SetItem(ItemVec[5 * i + j]->Clone());
+
 		}
 	}
 	//0~14¹øÀº ÅÛÄ­
-	dynamic_cast<CCell*>(m_vecChildUI[0])->SetItem(new CCosmosSword);
-	dynamic_cast<CCell*>(m_vecChildUI[1])->SetItem(new CGatlingGun);
+	if (GET(CSceneMgr)->GetCurSceneID() == SCENE_TEST)
+	{
+		dynamic_cast<CCell*>(m_vecChildUI[0])->SetItem(new CCosmosSword);
+		dynamic_cast<CCell*>(m_vecChildUI[1])->SetItem(new CGatlingGun);
+		ItemVec[0] = dynamic_cast<CCell*>(m_vecChildUI[0])->GetItem()->Clone();
+		ItemVec[1] = dynamic_cast<CCell*>(m_vecChildUI[1])->GetItem()->Clone();
+	}
 
 	CUI* pESlot = new CEquipSlotOn;
 	pESlot->Set_Pos(m_tRect.left + 110, m_tRect.top + 127);

@@ -23,6 +23,8 @@ void CWeaponBtn2::Initialize()
 	m_tInfo.fCY = 57.f;
 	m_tInfo.fX = m_pParentUI->Get_Rect()->left + 200;
 	m_tInfo.fY = m_pParentUI->Get_Rect()->top + 53;
+	if (GET(CPlayerMgr)->GetEquip(L"Weapon2") != nullptr)
+		m_pEquipedItem = GET(CPlayerMgr)->GetEquip(L"Weapon2")->Clone();
 }
 
 int CWeaponBtn2::Update()

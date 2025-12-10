@@ -1,11 +1,11 @@
 #pragma once
 #include "CScene.h"
-class CDungeonStart :
+class CDungeon01 :
     public CScene
 {
 public:
-    CDungeonStart();
-    virtual ~CDungeonStart();
+    CDungeon01();
+    virtual ~CDungeon01();
 public:
     // CScene을(를) 통해 상속됨
     void Initialize() override;
@@ -15,5 +15,8 @@ public:
     void Release() override;
 
     void Key_Input();
+
+private:
+    CObj* m_pDoor;
 };
 

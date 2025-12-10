@@ -1,25 +1,30 @@
 #include "pch.h"
-#include "CDungeonStart.h"
+#include "CDungeon01.h"
 #include "CPlayer.h"
 #include "CGiantBat.h"
 #include "CPlayerUI.h"
 #include "CInventoryUI.h"
-CDungeonStart::CDungeonStart()
+#include "CBanshee.h"
+#include "CDoorLeft.h"
+CDungeon01::CDungeon01()
 {
 }
 
-CDungeonStart::~CDungeonStart()
+CDungeon01::~CDungeon01()
 {
 }
 
-void CDungeonStart::Initialize()
+void CDungeon01::Initialize()
 {
 	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(500.f, 600.f));
-	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
+	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
+	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(1400.f, 500.f));
+	m_pDoor = CAbstractFactory<CDoorLeft>::Create(200.f, 500.f);
+	GET(CObjMgr)->AddObject(OBJ_DOOR, m_pDoor);
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
-	GET(CTileMgr)->Load_Tile(L"DungeonStart");
+	GET(CTileMgr)->Load_Tile(L"Dungeon01");
 
 	GET(CPlayerMgr)->Initialize();
 	GET(CUIMgr)->Insert_UI(L"PlayerUI", new CPlayerUI(GET(CPlayerMgr)->GetPlayer()));
@@ -30,23 +35,23 @@ void CDungeonStart::Initialize()
 
 	// Camera ÁöÁ¤
 	GET(CCamera)->Initialize();
-	//GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 
-	GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
+	//GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
 }
 
-void CDungeonStart::Update()
+void CDungeon01::Update()
 {
 }
 
-void CDungeonStart::Late_Update()
+void CDungeon01::Late_Update()
 {
-	if (GET(CKeyMgr)->Key_Down('N'))
-		GET(CSceneMgr)->ChangeScene(L"Dungeon01");
+	if (dynamic_cast<CDoorLeft*>(m_pDoor)->GetDoorState() == CDoorLeft::DOOR_STATE::OPEN
+		&& CCollisionMgr::Check_Rect(GET(CPlayerMgr)->GetPlayer(), m_pDoor))
+		GET(CSceneMgr)->ChangeScene(L"Belial");
 }
 
-void CDungeonStart::Render(HDC hDC)
+void CDungeon01::Render(HDC hDC)
 {
 	int scrollX = GET(CCamera)->Get_ScrollX();
 	int scrollY = GET(CCamera)->Get_ScrollY();
@@ -102,10 +107,10 @@ void CDungeonStart::Render(HDC hDC)
 		RGB(255, 0, 255));
 }
 
-void CDungeonStart::Release()
+void CDungeon01::Release()
 {
 	GET(CObjMgr)->DeleteAllLayer();
 	GET(CTileMgr)->Clear_Tile();
 	GET(CUIMgr)->Release();
-	//GET(CSoundMgr)->StopAll();
+	GET(CSoundMgr)->StopAll();
 }

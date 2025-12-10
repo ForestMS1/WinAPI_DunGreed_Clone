@@ -142,6 +142,45 @@ void CCollisionMgr::Collision_RectEx(list<CObj*> _Dst, list<CObj*> _Src)
 	}
 }
 
+void CCollisionMgr::Collision_RectEx(CObj* _Dst, CObj* _Src)
+{
+	float	fWidth(0.f), fHeight(0.f);
+
+
+	if (Check_Rect(_Dst, _Src, &fWidth, &fHeight))
+	{
+		// 상 하 충돌
+		if (fWidth > fHeight)
+		{
+			// 상 충돌
+			if (_Dst->Get_Info()->fY < _Src->Get_Info()->fY)
+			{
+				_Dst->Set_PosY(-fHeight);
+			}
+			// 하 충돌
+			else
+			{
+				_Dst->Set_PosY(fHeight);
+			}
+		}
+
+		// 좌 우 충돌
+		else
+		{
+			// 좌 충돌
+			if (_Dst->Get_Info()->fX < _Src->Get_Info()->fX)
+			{
+				_Dst->Set_PosX(-fWidth);
+			}
+			// 우 충돌
+			else
+			{
+				_Dst->Set_PosX(fWidth);
+			}
+		}
+	}
+}
+
 // 플레이어가 땅에 닿으면 true, 다른충돌은 false 리턴
 bool CCollisionMgr::Collision_RectTile(CObj* pPlayer, vector<CObj*>& _Src)
 {

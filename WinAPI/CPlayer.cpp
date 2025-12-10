@@ -57,11 +57,20 @@ void CPlayer::Initialize()
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/RunEffectL.bmp", L"RunEffectL");
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerDie.bmp", L"PlayerDie");
 
-	//¹«±â
-	//if (m_pWeapon == nullptr)
-	//{
-	//	m_pWeapon = new CGatlingGun(this);
-	//}
+	if (GET(CPlayerMgr)->IsFirstSet())
+	{
+		if (GET(CPlayerMgr)->GetEquip(L"Weapon1") != nullptr && m_pWeapon == nullptr)
+			m_pWeapon = GET(CPlayerMgr)->GetEquip(L"Weapon1")->Clone();
+	}
+	else
+	{
+		if (GET(CPlayerMgr)->GetEquip(L"Weapon2") != nullptr && m_pWeapon == nullptr)
+			m_pWeapon = GET(CPlayerMgr)->GetEquip(L"Weapon2")->Clone();
+	}
+
+	m_fMaxHp = GET(CPlayerMgr)->GetMaxHp();
+	m_fCurHp = GET(CPlayerMgr)->GetCurHp();
+
 	//ÀÌÆåÆ®
 	if (m_pRunEffect == nullptr)
 	{
@@ -187,6 +196,8 @@ void CPlayer::Render(HDC hDC)
 
 void CPlayer::Release()
 {
+	GET(CPlayerMgr)->SetMaxHp(m_fMaxHp);
+	GET(CPlayerMgr)->SetCurHp(m_fCurHp);
 	Safe_Delete<CItem*>(m_pWeapon);
 	Safe_Delete(m_pRunEffect);
 }

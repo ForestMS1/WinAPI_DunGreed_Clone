@@ -24,9 +24,22 @@ public:
 	
 	void SetChange();
 	bool IsFirstSet() const { return m_bIsFirstSet; }
+
+	void AddItem(CItem* pItem) { if (pItem != nullptr) { m_vecItem.push_back(pItem->Clone()); } }
+	vector<CItem*>& GetItemVec() { return m_vecItem; }
+	void SetMaxHp(float MaxHp) { m_fMaxHp = MaxHp; }
+	void SetCurHp(float CurHp) { m_fCurHp = CurHp; }
+	float GetMaxHp() const { return m_fMaxHp; }
+	float GetCurHp() const { return m_fCurHp; }
 private:
 	CObj* m_pPlayer;
 	map<wstring, CItem*> m_mapPlayerEquiped;
 	bool	m_bIsFirstSet;
+
+	
+	//플레이어에 상태 저장
+	float m_fMaxHp;
+	float m_fCurHp;
+	vector<CItem*> m_vecItem;
 };
 

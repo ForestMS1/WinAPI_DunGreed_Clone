@@ -7,11 +7,12 @@
 
 CCosmosSword::CCosmosSword()
 {
-    m_pSwingFX = nullptr;
+    //m_pSwingFX = nullptr;
+    m_pSwingFX = new CSwingFX;
 }
 CCosmosSword::~CCosmosSword()
 {
-    Safe_Delete(m_pSwingFX);
+    Release();
 }
 
 void CCosmosSword::Initialize()

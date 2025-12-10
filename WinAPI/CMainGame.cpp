@@ -16,6 +16,7 @@
 #include "CMouse.h"
 #include "CBelialScene.h"
 #include "CDungeonStart.h"
+#include "CDungeon01.h"
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
 	ZeroMemory(&m_szFPS, sizeof(m_szFPS));
@@ -41,18 +42,26 @@ void CMainGame::Initialize()
 	CScene* pScene = new CLogo;
 	pScene->SetSceneID(SCENE_LOGO);
 	GET(CSceneMgr)->CreateScene(L"Logo", pScene);
+
 	pScene = new CTest;
 	pScene->SetSceneID(SCENE_TEST);
 	GET(CSceneMgr)->CreateScene(L"Test", pScene);
+
 	pScene = new CBelialScene;
 	pScene->SetSceneID(SCENE_BELIAL);
 	GET(CSceneMgr)->CreateScene(L"Belial", pScene);
+
 	pScene = new CTileEditScene;
 	pScene->SetSceneID(SCENE_MAPTOOL);
 	GET(CSceneMgr)->CreateScene(L"TileEdit", pScene);
+
 	pScene = new CDungeonStart;
 	pScene->SetSceneID(SCENE_DUNGEON_START);
 	GET(CSceneMgr)->CreateScene(L"DungeonStart", pScene);
+
+	pScene = new CDungeon01;
+	pScene->SetSceneID(SCENE_DUNGEON_01);
+	GET(CSceneMgr)->CreateScene(L"Dungeon01", pScene);
 
 	// 최초로 나올 씬
 	GET(CSceneMgr)->ChangeScene(L"Logo");

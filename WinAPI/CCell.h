@@ -5,7 +5,7 @@ class CCell :
     public CUI
 {
 public:
-	CCell();
+	CCell(UINT idx);
 	CCell(CUI* pParentUI);
 	virtual ~CCell();
 public:
@@ -27,5 +27,6 @@ private:
 private:
 	CItem* m_pItem;
 	bool   m_bMouseOn;
+	UINT   m_iIndex;
 };
 

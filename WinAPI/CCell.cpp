@@ -2,11 +2,11 @@
 #include "CCell.h"
 #include "CGatlingGun.h"
 
-CCell::CCell() : m_bMouseOn(false), m_pItem(nullptr)
+CCell::CCell(UINT idx) : m_bMouseOn(false), m_pItem(nullptr) , m_iIndex(idx)
 {
 }
 
-CCell::CCell(CUI* pParentUI) : m_bMouseOn(false), m_pItem(nullptr)
+CCell::CCell(CUI* pParentUI) : m_bMouseOn(false), m_pItem(nullptr), m_iIndex(0)
 {
 	m_pParentUI = pParentUI;
 }
@@ -133,6 +133,9 @@ void CCell::Clicked()
 		if(m_pItem != nullptr)
 			GET(CMouse)->PickItem(m_pItem->Clone());
 
+		vector<CItem*>& ItemVec = GET(CPlayerMgr)->GetItemVec();
+		Safe_Delete(ItemVec[m_iIndex]);
+
 		Safe_Delete(m_pItem);
 	}
 	if (m_bMouseOn && m_pItem == nullptr &&
@@ -141,6 +144,10 @@ void CCell::Clicked()
 		//마우스에게 아이템 정보 해제
 		Safe_Delete(m_pItem);
 		m_pItem = GET(CMouse)->Get_Item()->Clone();
+
+		vector<CItem*>& ItemVec = GET(CPlayerMgr)->GetItemVec();
+		ItemVec[m_iIndex] = m_pItem->Clone();
+
 		GET(CMouse)->Set_State(CMouse::MouseState::EMPTY);
 		GET(CMouse)->Delete_Item();
 	}

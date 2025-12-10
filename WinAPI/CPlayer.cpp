@@ -57,15 +57,18 @@ void CPlayer::Initialize()
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/RunEffectL.bmp", L"RunEffectL");
 	CResourceMgr::Get_Instance()->Insert_Bmp(L"../Resources/Images/Unit/Player/PlayerDie.bmp", L"PlayerDie");
 
-	if (GET(CPlayerMgr)->IsFirstSet())
+	if (GET(CSceneMgr)->GetCurSceneID() != SCENE_TEST)
 	{
-		if (GET(CPlayerMgr)->GetEquip(L"Weapon1") != nullptr && m_pWeapon == nullptr)
-			m_pWeapon = GET(CPlayerMgr)->GetEquip(L"Weapon1")->Clone();
-	}
-	else
-	{
-		if (GET(CPlayerMgr)->GetEquip(L"Weapon2") != nullptr && m_pWeapon == nullptr)
-			m_pWeapon = GET(CPlayerMgr)->GetEquip(L"Weapon2")->Clone();
+		if (GET(CPlayerMgr)->IsFirstSet())
+		{
+			if (GET(CPlayerMgr)->GetEquip(L"Weapon1") != nullptr && m_pWeapon == nullptr)
+				m_pWeapon = GET(CPlayerMgr)->GetEquip(L"Weapon1")->Clone();
+		}
+		else
+		{
+			if (GET(CPlayerMgr)->GetEquip(L"Weapon2") != nullptr && m_pWeapon == nullptr)
+				m_pWeapon = GET(CPlayerMgr)->GetEquip(L"Weapon2")->Clone();
+		}
 	}
 
 	m_fMaxHp = GET(CPlayerMgr)->GetMaxHp();

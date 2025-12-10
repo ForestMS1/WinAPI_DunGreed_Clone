@@ -1,6 +1,5 @@
 #pragma once
 #include "Define.h"
-
 class CScene abstract
 {
 public:
@@ -15,8 +14,12 @@ public:
 
 	void SetSceneID(SCENEID Id) { SCENEID = Id; }
 	SCENEID GetSceneID() const { return SCENEID; }
-
+protected:
+	void OpenDoor();
+	void DoorToNextScene();
 protected:
 	SCENEID	 SCENEID;
+
+	bool m_bIsClearScene;
 };
 

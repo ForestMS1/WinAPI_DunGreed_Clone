@@ -5,7 +5,7 @@
 #include "CPlayerUI.h"
 #include "CInventoryUI.h"
 #include "CBanshee.h"
-#include "CDoorLeft.h"
+#include "CDoor.h"
 CDungeon01::CDungeon01()
 {
 }
@@ -16,21 +16,20 @@ CDungeon01::~CDungeon01()
 
 void CDungeon01::Initialize()
 {
-	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(500.f, 600.f));
-	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
-	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(1400.f, 500.f));
-
-	CObj* pDoor = CAbstractFactory<CDoorLeft>::Create(100.f, 600.f);
-	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
-	m_mapDoor.insert({ pDoor, L"Belial" });
-
+	//아직 클리어 안한 씬에서만 몹 생성
+	if (!m_bIsClearScene)
+	{
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(1400.f, 500.f));
+	}
+	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1300.f, 600.f));
+	GET(CPlayerMgr)->Initialize();
 
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
 	GET(CTileMgr)->Load_Tile(L"Dungeon01");
 
-	GET(CPlayerMgr)->Initialize();
 	GET(CUIMgr)->Insert_UI(L"PlayerUI", new CPlayerUI(GET(CPlayerMgr)->GetPlayer()));
 	GET(CUIMgr)->Insert_UI(L"InventoryUI", new CInventoryUI(GET(CPlayerMgr)->GetPlayer()));
 	GET(CUIMgr)->Initialize();
@@ -41,28 +40,29 @@ void CDungeon01::Initialize()
 	GET(CCamera)->Initialize();
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 
+	//---------------------------------문 설치---------------------------------------
+	CObj* pDoor = CAbstractFactory<CDoor>::Create(100.f, 610.f);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Belial");
+	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
+
+	pDoor = CAbstractFactory<CDoor>::Create(1600.f, 610.f);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"DungeonStart");
+	dynamic_cast<CDoor*>(pDoor)->SetDoorState(CDoor::CLOSE_RIGHT);
+	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
+	//---------------------------------문 설치---------------------------------------
+
 	//GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
 }
 
 void CDungeon01::Update()
 {
-	if (GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty())
-	{
-		for (auto& iter : m_mapDoor)
-		{
-			dynamic_cast<CDoorLeft*>(iter.first)->SetDoorState(CDoorLeft::OPEN);
-		}
-	}
+	m_bIsClearScene = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
+	OpenDoor();
 }
 
 void CDungeon01::Late_Update()
 {
-	for (auto& iter : m_mapDoor)
-	{
-		if (dynamic_cast<CDoorLeft*>(iter.first)->GetDoorState() == CDoorLeft::DOOR_STATE::OPEN
-			&& CCollisionMgr::Check_Rect(GET(CPlayerMgr)->GetPlayer(), iter.first))
-			GET(CSceneMgr)->ChangeScene(iter.second);
-	}
+	DoorToNextScene();
 }
 
 void CDungeon01::Render(HDC hDC)
@@ -70,55 +70,55 @@ void CDungeon01::Render(HDC hDC)
 	int scrollX = GET(CCamera)->Get_ScrollX();
 	int scrollY = GET(CCamera)->Get_ScrollY();
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
-	HDC hBackDC = GET(CResourceMgr)->Find_Bmp(L"SubBG");
-	GdiTransparentBlt(
-		hDC,
-		0 - scrollX,
-		0 - scrollY,
-		WINCX,
-		WINCY,
-		hBackDC,
-		0,
-		0,
-		320,
-		180,
-		RGB(255, 0, 255));
-	GdiTransparentBlt(
-		hDC,
-		WINCX - scrollX,
-		0 - scrollY,
-		WINCX,
-		WINCY,
-		hBackDC,
-		0,
-		0,
-		320,
-		180,
-		RGB(255, 0, 255));
-	GdiTransparentBlt(
-		hDC,
-		0 - scrollX,
-		WINCY - scrollY,
-		WINCX,
-		WINCY,
-		hBackDC,
-		0,
-		0,
-		320,
-		180,
-		RGB(255, 0, 255));
-	GdiTransparentBlt(
-		hDC,
-		WINCX - scrollX,
-		WINCY - scrollY,
-		WINCX,
-		WINCY,
-		hBackDC,
-		0,
-		0,
-		320,
-		180,
-		RGB(255, 0, 255));
+	//HDC hBackDC = GET(CResourceMgr)->Find_Bmp(L"SubBG");
+	//GdiTransparentBlt(
+	//	hDC,
+	//	0 - scrollX,
+	//	0 - scrollY,
+	//	WINCX,
+	//	WINCY,
+	//	hBackDC,
+	//	0,
+	//	0,
+	//	320,
+	//	180,
+	//	RGB(255, 0, 255));
+	//GdiTransparentBlt(
+	//	hDC,
+	//	WINCX - scrollX,
+	//	0 - scrollY,
+	//	WINCX,
+	//	WINCY,
+	//	hBackDC,
+	//	0,
+	//	0,
+	//	320,
+	//	180,
+	//	RGB(255, 0, 255));
+	//GdiTransparentBlt(
+	//	hDC,
+	//	0 - scrollX,
+	//	WINCY - scrollY,
+	//	WINCX,
+	//	WINCY,
+	//	hBackDC,
+	//	0,
+	//	0,
+	//	320,
+	//	180,
+	//	RGB(255, 0, 255));
+	//GdiTransparentBlt(
+	//	hDC,
+	//	WINCX - scrollX,
+	//	WINCY - scrollY,
+	//	WINCX,
+	//	WINCY,
+	//	hBackDC,
+	//	0,
+	//	0,
+	//	320,
+	//	180,
+	//	RGB(255, 0, 255));
 }
 
 void CDungeon01::Release()

@@ -516,13 +516,10 @@
     <ClInclude Include="CBansheeBullet.h">
       <Filter>Object\Unit\Bullet\EnemyBullet\BansheeBullet</Filter>
     </ClInclude>
-    <ClInclude Include="CDoor.h">
-      <Filter>Object\Dungeon\Door</Filter>
-    </ClInclude>
     <ClInclude Include="CDungeon01.h">
       <Filter>Scene\DungeonScene\Dungeon01</Filter>
     </ClInclude>
-    <ClInclude Include="CDoorLeft.h">
+    <ClInclude Include="CDoor.h">
       <Filter>Object\Dungeon\Door</Filter>
     </ClInclude>
   </ItemGroup>
@@ -743,13 +740,10 @@
     <ClCompile Include="CBansheeBullet.cpp">
       <Filter>Object\Unit\Bullet\EnemyBullet\BansheeBullet</Filter>
     </ClCompile>
-    <ClCompile Include="CDoor.cpp">
-      <Filter>Object\Dungeon\Door</Filter>
-    </ClCompile>
     <ClCompile Include="CDungeon01.cpp">
       <Filter>Scene\DungeonScene\Dungeon01</Filter>
     </ClCompile>
-    <ClCompile Include="CDoorLeft.cpp">
+    <ClCompile Include="CDoor.cpp">
       <Filter>Object\Dungeon\Door</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,6 +4,7 @@
 #include "CGiantBat.h"
 #include "CPlayerUI.h"
 #include "CInventoryUI.h"
+#include "CDoor.h"
 CDungeonStart::CDungeonStart()
 {
 }
@@ -34,16 +35,25 @@ void CDungeonStart::Initialize()
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 
 	GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
+
+	//---------------------------------문 설치---------------------------------------
+	//이미 클리어 한 씬이면 문 설치 안함
+	if (m_bIsClearScene)
+		return;
+	CObj* pDoor = CAbstractFactory<CDoor>::Create(80.f, 545.f);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon01");
+	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
+	//---------------------------------문 설치---------------------------------------
 }
 
 void CDungeonStart::Update()
 {
+	OpenDoor();
 }
 
 void CDungeonStart::Late_Update()
 {
-	if (GET(CKeyMgr)->Key_Down('N'))
-		GET(CSceneMgr)->ChangeScene(L"Dungeon01");
+	DoorToNextScene();
 }
 
 void CDungeonStart::Render(HDC hDC)

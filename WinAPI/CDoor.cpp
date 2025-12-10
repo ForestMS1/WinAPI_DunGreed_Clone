@@ -13,8 +13,8 @@ CDoor::~CDoor()
 
 void CDoor::Initialize()
 {
-	m_iFrameWidth = 192;
-	m_iFrameHeight = 58;
+	m_iFrameWidth = 58;
+	m_iFrameHeight = 192;
 	m_tInfo.fCX = m_iFrameWidth;
 	m_tInfo.fCY = m_iFrameHeight;
 	m_tFrame.iStart = 0;
@@ -22,20 +22,36 @@ void CDoor::Initialize()
 	m_tFrame.iMotion = 0;
 	m_tFrame.dwSpeed = 100.f;
 	m_tFrame.dwTime = GetTickCount();
-	m_wsFrameKey = L"Door";
+	m_wsFrameKey = L"Door_Left";
 	__super::Update_Rect();
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Dungeon/Door/Door.bmp", L"Door");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Dungeon/Door/Door_Left.bmp", L"Door_Left");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Dungeon/Door/Door_Right.bmp", L"Door_Right");
+
+	m_ePreState = END;
+	m_eCurState = CLOSE_LEFT;
 }
 
 int CDoor::Update()
 {
-	if (m_eCurState == IDLE)
-		Move_Frame();
-	else
+	__super::Update_Rect();
+	if (m_eCurState == IDLE_LEFT || m_eCurState == IDLE_BOTTOM || m_eCurState == IDLE_RIGHT)
+		Move_Frame(9);
+	if(m_eCurState == CLOSE_LEFT || m_eCurState == OPEN_LEFT
+		|| m_eCurState == CLOSE_BOTTOM || m_eCurState == OPEN_BOTTOM
+		|| m_eCurState == CLOSE_RIGHT || m_eCurState == OPEN_RIGHT)
 	{
 		Move_Frame_No_Loop();
+
 		if (m_tFrame.iStart >= m_tFrame.iEnd)
-			m_eCurState == IDLE;
+		{
+			if (m_eCurState == CLOSE_LEFT)
+				m_eCurState = IDLE_LEFT;
+			else if (m_eCurState == CLOSE_BOTTOM)
+				m_eCurState = IDLE_BOTTOM;
+			else if (m_eCurState == CLOSE_RIGHT)
+				m_eCurState = IDLE_RIGHT;
+		}
 	}
 	return 0;
 }
@@ -43,7 +59,7 @@ int CDoor::Update()
 void CDoor::Late_Update()
 {
 	Motion_Change();
-	if (m_eCurState == IDLE)
+	if (m_eCurState == IDLE_LEFT || m_eCurState == IDLE_BOTTOM || m_eCurState == IDLE_RIGHT)
 		CCollisionMgr::Collision_RectEx(GET(CPlayerMgr)->GetPlayer(), this);
 }
 
@@ -77,7 +93,43 @@ void CDoor::Motion_Change()
 	{
 		switch (m_eCurState)
 		{
-		case CLOSE:
+		case CLOSE_LEFT:
+			m_iFrameWidth = 58;
+			m_iFrameHeight = 192;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 8;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"Door_Left";
+			break;
+		case IDLE_LEFT:
+			m_iFrameWidth = 58;
+			m_iFrameHeight = 192;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
+			m_tFrame.iStart = 8;
+			m_tFrame.iEnd = 15;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"Door_Left";
+			break;
+		case OPEN_LEFT:
+			m_iFrameWidth = 58;
+			m_iFrameHeight = 192;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
+			m_tFrame.iStart = 15;
+			m_tFrame.iEnd = 22;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"Door_Left";
+			break;
+		case CLOSE_BOTTOM:
 			m_iFrameWidth = 192;
 			m_iFrameHeight = 58;
 			m_tInfo.fCX = m_iFrameWidth;
@@ -89,7 +141,7 @@ void CDoor::Motion_Change()
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"Door";
 			break;
-		case IDLE:
+		case IDLE_BOTTOM:
 			m_iFrameWidth = 192;
 			m_iFrameHeight = 58;
 			m_tInfo.fCX = m_iFrameWidth;
@@ -101,7 +153,7 @@ void CDoor::Motion_Change()
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"Door";
 			break;
-		case OPEN:
+		case OPEN_BOTTOM:
 			m_iFrameWidth = 192;
 			m_iFrameHeight = 58;
 			m_tInfo.fCX = m_iFrameWidth;
@@ -112,6 +164,42 @@ void CDoor::Motion_Change()
 			m_tFrame.dwSpeed = 100.f;
 			m_tFrame.dwTime = GetTickCount();
 			m_wsFrameKey = L"Door";
+			break;
+		case CLOSE_RIGHT:
+			m_iFrameWidth = 58;
+			m_iFrameHeight = 192;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 8;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"Door_Right";
+			break;
+		case IDLE_RIGHT:
+			m_iFrameWidth = 58;
+			m_iFrameHeight = 192;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
+			m_tFrame.iStart = 8;
+			m_tFrame.iEnd = 15;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"Door_Right";
+			break;
+		case OPEN_RIGHT:
+			m_iFrameWidth = 58;
+			m_iFrameHeight = 192;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
+			m_tFrame.iStart = 15;
+			m_tFrame.iEnd = 22;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"Door_Right";
 			break;
 		default:
 			break;

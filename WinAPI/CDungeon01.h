@@ -15,8 +15,5 @@ public:
     void Release() override;
 
     void Key_Input();
-
-private:
-    unordered_map<CObj*, wstring> m_mapDoor;
 };
 

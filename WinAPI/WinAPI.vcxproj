@@ -164,7 +164,6 @@
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CCosmosSword.h" />
     <ClInclude Include="CDoor.h" />
-    <ClInclude Include="CDoorLeft.h" />
     <ClInclude Include="CDungeon01.h" />
     <ClInclude Include="CDungeonStart.h" />
     <ClInclude Include="CEnemy.h" />
@@ -255,7 +254,6 @@
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CCosmosSword.cpp" />
     <ClCompile Include="CDoor.cpp" />
-    <ClCompile Include="CDoorLeft.cpp" />
     <ClCompile Include="CDungeon01.cpp" />
     <ClCompile Include="CDungeonStart.cpp" />
     <ClCompile Include="CEnemy.cpp" />

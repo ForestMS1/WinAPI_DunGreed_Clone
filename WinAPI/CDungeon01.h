@@ -17,6 +17,6 @@ public:
     void Key_Input();
 
 private:
-    CObj* m_pDoor;
+    unordered_map<CObj*, wstring> m_mapDoor;
 };
 

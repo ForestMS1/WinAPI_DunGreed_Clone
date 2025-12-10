@@ -210,7 +210,8 @@ void CTileEditScene::Key_Input()
 	}
 	if (GET(CKeyMgr)->Key_Pressing('R'))
 	{
-		GET(CTileMgr)->Load_Tile(L"TestScene");
+		//GET(CTileMgr)->Load_Tile(L"TestScene");
+		GET(CTileMgr)->Load_Tile(L"Dungeon01");
 	}
 #pragma endregion
 

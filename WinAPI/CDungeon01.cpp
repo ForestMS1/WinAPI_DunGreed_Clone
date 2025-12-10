@@ -19,8 +19,12 @@ void CDungeon01::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(500.f, 600.f));
 	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
 	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(1400.f, 500.f));
-	m_pDoor = CAbstractFactory<CDoorLeft>::Create(200.f, 500.f);
-	GET(CObjMgr)->AddObject(OBJ_DOOR, m_pDoor);
+
+	CObj* pDoor = CAbstractFactory<CDoorLeft>::Create(100.f, 600.f);
+	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
+	m_mapDoor.insert({ pDoor, L"Belial" });
+
+
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
@@ -42,13 +46,23 @@ void CDungeon01::Initialize()
 
 void CDungeon01::Update()
 {
+	if (GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty())
+	{
+		for (auto& iter : m_mapDoor)
+		{
+			dynamic_cast<CDoorLeft*>(iter.first)->SetDoorState(CDoorLeft::OPEN);
+		}
+	}
 }
 
 void CDungeon01::Late_Update()
 {
-	if (dynamic_cast<CDoorLeft*>(m_pDoor)->GetDoorState() == CDoorLeft::DOOR_STATE::OPEN
-		&& CCollisionMgr::Check_Rect(GET(CPlayerMgr)->GetPlayer(), m_pDoor))
-		GET(CSceneMgr)->ChangeScene(L"Belial");
+	for (auto& iter : m_mapDoor)
+	{
+		if (dynamic_cast<CDoorLeft*>(iter.first)->GetDoorState() == CDoorLeft::DOOR_STATE::OPEN
+			&& CCollisionMgr::Check_Rect(GET(CPlayerMgr)->GetPlayer(), iter.first))
+			GET(CSceneMgr)->ChangeScene(iter.second);
+	}
 }
 
 void CDungeon01::Render(HDC hDC)

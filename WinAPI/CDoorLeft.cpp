@@ -25,18 +25,22 @@ void CDoorLeft::Initialize()
 	m_wsFrameKey = L"Door_Left";
 	__super::Update_Rect();
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Dungeon/Door/Door_Left.bmp", L"Door_Left");
-	m_eCurState = OPEN;
+	m_ePreState = END;
+	m_eCurState = CLOSE;
 }
 
 int CDoorLeft::Update()
 {
 	if (m_eCurState == IDLE)
 		Move_Frame(9);
-	else
+	if(m_eCurState == CLOSE || m_eCurState == OPEN)
 	{
 		Move_Frame_No_Loop();
-		if (m_tFrame.iStart >= m_tFrame.iEnd)
-			m_eCurState == IDLE;
+
+		if (m_tFrame.iStart >= m_tFrame.iEnd && m_eCurState == CLOSE)
+		{
+			m_eCurState = IDLE;
+		}
 	}
 	return 0;
 }
@@ -95,7 +99,7 @@ void CDoorLeft::Motion_Change()
 			m_iFrameHeight = 192;
 			m_tInfo.fCX = m_iFrameWidth;
 			m_tInfo.fCY = m_iFrameHeight;
-			m_tFrame.iStart = 9;
+			m_tFrame.iStart = 8;
 			m_tFrame.iEnd = 15;
 			m_tFrame.iMotion = 0;
 			m_tFrame.dwSpeed = 100.f;
@@ -107,7 +111,7 @@ void CDoorLeft::Motion_Change()
 			m_iFrameHeight = 192;
 			m_tInfo.fCX = m_iFrameWidth;
 			m_tInfo.fCY = m_iFrameHeight;
-			m_tFrame.iStart = 16;
+			m_tFrame.iStart = 15;
 			m_tFrame.iEnd = 22;
 			m_tFrame.iMotion = 0;
 			m_tFrame.dwSpeed = 100.f;

@@ -16,6 +16,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 HWND g_hWnd;
 bool g_bDebugMod = false;
 
+
 /* GDI 관련 데이터 */
 ULONG_PTR gdiplusToken;
 GdiplusStartupInput gdiplusStartupInput;
@@ -176,6 +177,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE:
+        break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -230,3 +233,4 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
     return (INT_PTR)FALSE;
 }
+

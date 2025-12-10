@@ -29,8 +29,15 @@ public:
 	vector<CItem*>& GetItemVec() { return m_vecItem; }
 	void SetMaxHp(float MaxHp) { m_fMaxHp = MaxHp; }
 	void SetCurHp(float CurHp) { m_fCurHp = CurHp; }
+	void SetGold(float gold) { m_iGold = gold; }
+	void SetMaxSatiety(float maxSatiety) { m_fMaxSatiety = maxSatiety; }
+	void SetCurSatiety(float curSatiety) { m_fCurSatiety = curSatiety; }
+
 	float GetMaxHp() const { return m_fMaxHp; }
 	float GetCurHp() const { return m_fCurHp; }
+	int	  GetGold() const { return m_iGold; }
+	float GetMaxSatiety() const { return m_fMaxSatiety; }
+	float GetCurSatiety() const { return m_fCurSatiety; }
 private:
 	CObj* m_pPlayer;
 	map<wstring, CItem*> m_mapPlayerEquiped;
@@ -40,6 +47,9 @@ private:
 	//플레이어에 상태 저장
 	float m_fMaxHp;
 	float m_fCurHp;
+	int	  m_iGold;
+	float m_fMaxSatiety;
+	float m_fCurSatiety;
 	vector<CItem*> m_vecItem;
 };
 

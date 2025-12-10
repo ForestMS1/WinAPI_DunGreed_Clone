@@ -16,5 +16,6 @@ public:
 private:
     float m_fMaxHp;
     float m_fCurHp;
+    HFONT m_hFont;
 };
 

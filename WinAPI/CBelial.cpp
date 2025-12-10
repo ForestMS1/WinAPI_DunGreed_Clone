@@ -4,6 +4,7 @@
 
 CBelial::CBelial() : m_pRHand(nullptr), m_pLHand(nullptr), m_dwRotateAttackTick(GetTickCount())
 , m_pSpearMgr(nullptr), m_dwHandAttackTick(GetTickCount()), HandAttack(false), m_bPlayBossBGM(false)
+, m_bIntro(false)
 {
 }
 
@@ -38,6 +39,7 @@ void CBelial::Initialize()
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossBack.bmp", L"SkellBossBack");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossIdleHit.bmp", L"SkellIdleHit");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossAttackHit.bmp", L"SkellBossAttackHit");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BossIntro.bmp", L"BossIntro");
 
 
 	srand(time(0));
@@ -66,6 +68,10 @@ void CBelial::Initialize()
 	}
 
 	m_SpawnEffectStartTime = GetTickCount();
+
+	AddFontResource(TEXT("Aa카시오페아"));
+	m_hFont = CreateFont(100, 0, 0, 0, 0, 0, 0, 0,
+		HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("Aa카시오페아"));
 }
 
 int CBelial::Update()
@@ -107,11 +113,13 @@ int CBelial::Update()
 			//GET(CSoundMgr)->PlaySound(L"2.IceBoss.wav", SOUND_BGM, 1.f);
 			m_bPlayBossBGM = true;
 		}
+		m_bIntro = true;
 		return 0;
 	}
 	else
 	{
 		GET(CCamera)->SetTarget(GET(CPlayerMgr)->GetPlayer());
+		m_bIntro = false;
 	}
 
 	if (m_SpawnEffectStartTime + 9000 < GetTickCount() && m_dwChangePattern + 7000 < GetTickCount())
@@ -225,6 +233,19 @@ void CBelial::Render(HDC hDC)
 		m_pLHand->Render(hDC);
 	if (m_pSpearMgr != nullptr)
 		m_pSpearMgr->Render(hDC);
+
+	if (m_bIntro)
+	{
+		GET(CUIMgr)->Find_UI(L"PlayerUI")->Close();
+		//HFONT hOldFont = (HFONT)SelectObject(hDC, m_hFont);
+		//wstring text = L"벨 리 알";
+		//SetBkMode(hDC, TRANSPARENT);
+		//SetTextColor(hDC, RGB(255, 255, 255));
+		//TextOut(hDC, 200, WINCY - 200, text.c_str(), (int)text.size());
+		//SelectObject(hDC, hOldFont);
+	}
+	else
+		GET(CUIMgr)->Find_UI(L"PlayerUI")->Open();
 }
 
 void CBelial::Release()
@@ -232,6 +253,12 @@ void CBelial::Release()
 	Safe_Delete(m_pRHand);
 	Safe_Delete(m_pLHand);
 	Safe_Delete(m_pSpearMgr);
+	if (m_hFont)
+	{
+		DeleteObject(m_hFont);
+		m_hFont = NULL;
+	}
+	RemoveFontResource(TEXT("Aa카시오페아"));
 }
 
 void CBelial::Motion_Change()

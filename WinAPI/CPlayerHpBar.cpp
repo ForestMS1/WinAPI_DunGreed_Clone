@@ -30,6 +30,10 @@ void CPlayerHpBar::Initialize()
     m_tFrame.iMotion = 0;
     m_tFrame.dwSpeed = 50.f;
     m_tFrame.dwTime = GetTickCount();
+
+    AddFontResource(TEXT("Aa카시오페아"));
+    m_hFont = CreateFont(40, 0, 0, 0, 0, 0, 0, 0,
+        HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("Aa카시오페아"));
 }
 
 int CPlayerHpBar::Update()
@@ -107,8 +111,22 @@ void CPlayerHpBar::Render(HDC hDC)
         64,
         RGB(255, 0, 255)
     );
+
+
+    HFONT hOldFont = (HFONT)SelectObject(hDC, m_hFont);
+    wstring text = to_wstring((int)m_fCurHp).append(L"/").append(to_wstring((int)m_fMaxHp));
+    SetBkMode(hDC, TRANSPARENT);
+    SetTextColor(hDC, RGB(255, 255, 255));
+    TextOut(hDC, m_tRect.left + 90, m_tRect.top + 3, text.c_str(), (int)text.size());
+    SelectObject(hDC, hOldFont);
 }
 
 void CPlayerHpBar::Release()
 {
+    if (m_hFont)
+    {
+        DeleteObject(m_hFont);
+        m_hFont = NULL;
+    }
+    RemoveFontResource(TEXT("Aa카시오페아"));
 }

@@ -45,5 +45,8 @@ private:
 
     DWORD m_SpawnEffectStartTime;
     bool m_bPlayBossBGM;
+
+    bool m_bIntro;
+    HFONT m_hFont;
 };
 

@@ -4,7 +4,7 @@
 #include "CBelial.h"
 #include "CPlayerUI.h"
 #include "CInventoryUI.h"
-
+#include "CDoor.h"
 CBelialScene::CBelialScene()
 {
 }
@@ -30,18 +30,22 @@ void CBelialScene::Initialize()
 	GET(CCamera)->Initialize();
 	//GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
+
+	//---------------------------------문 설치---------------------------------------
+	CObj* pDoor = CAbstractFactory<CDoor>::Create(200.f, 990.f);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon01");
+	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
+	//---------------------------------문 설치---------------------------------------
 }
 
 void CBelialScene::Update()
 {
-	if (GET(CKeyMgr)->Key_Down('X'))
-	{
-		GET(CSceneMgr)->ChangeScene(L"Logo");
-	}
+	OpenDoor();
 }
 
 void CBelialScene::Late_Update()
 {
+	DoorToNextScene();
 }
 
 void CBelialScene::Render(HDC hDC)

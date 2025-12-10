@@ -14,6 +14,7 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 private:
-    float m_fCurGold;
+    int m_iCurGold;
+    HFONT m_hFont;
 };
 

@@ -15,7 +15,7 @@
 CPlayer::CPlayer() : 
 	m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false), m_bIsGround(false), 
 	m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false), m_IsOnBlock(false),
-	m_bAttack(false), m_fAttackAcct(0.2f), m_fAttackt(0.f)
+	m_bAttack(false), m_fAttackAcct(0.2f), m_fAttackt(0.f), m_fMaxSatiety(100.f), m_fCurSatiety(0.f)
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
@@ -73,6 +73,9 @@ void CPlayer::Initialize()
 
 	m_fMaxHp = GET(CPlayerMgr)->GetMaxHp();
 	m_fCurHp = GET(CPlayerMgr)->GetCurHp();
+	m_iGold = GET(CPlayerMgr)->GetGold();
+	m_fMaxSatiety = GET(CPlayerMgr)->GetMaxSatiety();
+	m_fCurSatiety = GET(CPlayerMgr)->GetCurSatiety();
 
 	//ÀÌÆåÆ®
 	if (m_pRunEffect == nullptr)
@@ -201,6 +204,10 @@ void CPlayer::Release()
 {
 	GET(CPlayerMgr)->SetMaxHp(m_fMaxHp);
 	GET(CPlayerMgr)->SetCurHp(m_fCurHp);
+	GET(CPlayerMgr)->SetGold(m_iGold);
+	GET(CPlayerMgr)->SetMaxSatiety(m_fMaxSatiety);
+	GET(CPlayerMgr)->SetCurSatiety(m_fCurSatiety);
+
 	Safe_Delete<CItem*>(m_pWeapon);
 	Safe_Delete(m_pRunEffect);
 }

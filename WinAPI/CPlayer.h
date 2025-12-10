@@ -52,6 +52,11 @@ private:
 	STATE				m_ePreState;
 	STATE				m_eCurState;
 
+	//소지금, 포만감
+	int					m_iGold;
+	float				m_fMaxSatiety;
+	float				m_fCurSatiety;
+
 	// 점프
 	float				m_v0;	 // 점프 초기속력
 	float				m_ft;	 // 흐르는 시간

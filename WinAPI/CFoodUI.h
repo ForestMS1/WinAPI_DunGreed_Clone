@@ -16,5 +16,6 @@ public:
 private:
     float m_fMaxSatiety;
     float m_fCurSatiety;
+    HFONT m_hFont;
 };
 

@@ -50,8 +50,8 @@ void CEnemyHpBarUI::Render(HDC hDC)
         hDC,
         m_tRect.left - scrollX,
         m_tRect.top - scrollY,
-        m_tInfo.fCX,
-        m_tInfo.fCY,
+        m_tInfo.fCX + 8,
+        m_tInfo.fCY + 8,
         hBackDC,
         0,
         0,
@@ -64,8 +64,8 @@ void CEnemyHpBarUI::Render(HDC hDC)
 
     GdiTransparentBlt(
         hDC,
-        m_tRect.left - scrollX,
-        m_tRect.top - scrollY,
+        m_tRect.left - scrollX + 4,
+        m_tRect.top - scrollY + 4,
         m_tInfo.fCX * (m_fCurHp / m_fMaxHp),
         m_tInfo.fCY,
         hLifeDC,

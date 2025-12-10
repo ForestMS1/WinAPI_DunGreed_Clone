@@ -20,11 +20,18 @@ void CFoodUI::Initialize()
     __super::Update_Rect();
     m_bIsOpen = true;
     GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/WorldMap/Food.bmp", L"Food");
+
+
+    AddFontResource(TEXT("Aa카시오페아"));
+    m_hFont = CreateFont(20, 0, 0, 0, 0, 0, 0, 0,
+        HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("Aa카시오페아"));
 }
 
 int CFoodUI::Update()
 {
     //TODO : 현재 포만감 가져오고 폰트 띄우기
+    m_fMaxSatiety = GET(CPlayerMgr)->GetMaxSatiety();
+    m_fCurSatiety = GET(CPlayerMgr)->GetCurSatiety();
 	return 0;
 }
 
@@ -48,8 +55,21 @@ void CFoodUI::Render(HDC hDC)
         14,
         RGB(255, 0, 255)
     );
+
+    HFONT hOldFont = (HFONT)SelectObject(hDC, m_hFont);
+    wstring text = to_wstring((int)m_fCurSatiety).append(L"/").append(to_wstring((int)m_fMaxSatiety));
+    SetBkMode(hDC, TRANSPARENT);
+    SetTextColor(hDC, RGB(255, 255, 255));
+    TextOut(hDC, m_tRect.left + 40, m_tRect.top + 4, text.c_str(), (int)text.size());
+    SelectObject(hDC, hOldFont);
 }
 
 void CFoodUI::Release()
 {
+    if (m_hFont)
+    {
+        DeleteObject(m_hFont);
+        m_hFont = NULL;
+    }
+    RemoveFontResource(TEXT("Aa카시오페아"));
 }

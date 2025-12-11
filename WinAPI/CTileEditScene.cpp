@@ -24,8 +24,17 @@ CTileEditScene::~CTileEditScene()
 
 void CTileEditScene::Initialize()
 {
+
+	GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Town/Villiaged2.png", L"Villiaged2");
+
+
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownTinyVersion.bmp", L"Town");
-	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Background/SubBG.bmp", L"SubBG");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/Cloud.bmp", L"Cloud");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownBG_Day.bmp", L"TownBG_Day");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/Tree0.bmp", L"Tree0");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/Tree1.bmp", L"Tree1");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/StreetLight_0.bmp", L"StreetLight_0");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/StreetLight_1.bmp", L"StreetLight_1");
 	GET(CTileMgr)->Initialize();
 
 	GET(CUIMgr)->Insert_UI(L"MapTileUI", new CMapTileUI);
@@ -42,6 +51,8 @@ void CTileEditScene::Update()
 	ScreenToClient(g_hWnd, &m_ptMouse);
 
 	Key_Input();
+
+	//GET(CLineMgr)->Update();
 }
 
 void CTileEditScene::Late_Update()
@@ -55,40 +66,35 @@ void CTileEditScene::Late_Update()
 void CTileEditScene::Render(HDC hDC)
 {
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
-
-#pragma region 마우스커서에_현재_선택된_타일_그리기
-
-	//GET(CTileMgr)->Render(hDC);
-	//GET(CObjMgr)->Render(hDC);
 	int scrollX = GET(CCamera)->Get_ScrollX();
 	int scrollY = GET(CCamera)->Get_ScrollY();
-	//HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"Town");
-	//GdiTransparentBlt(
-	//	hDC,
-	//	0 - scrollX,
-	//	0 - scrollY,
-	//	8400,
-	//	2400,
-	//	hTownDC,
-	//	0,
-	//	0,
-	//	4200,
-	//	1200,
-	//	RGB(255,0,255));
-
-	HDC hBackDC = GET(CResourceMgr)->Find_Bmp(L"SubBG");
+	HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"Cloud");
 	GdiTransparentBlt(
 		hDC,
-		0 - scrollX,
-		0 - scrollY,
+		0,
+		0,
 		WINCX,
 		WINCY,
-		hBackDC,
+		hTownDC,
+		0,
+		0,
+		960,
+		540,
+		RGB(255,0,255));
+
+	HDC hTownBGDC = GET(CResourceMgr)->Find_Bmp(L"TownBG_Day");
+	GdiTransparentBlt(
+		hDC,
+		0,
+		0,
+		WINCX,
+		WINCY,
+		hTownBGDC,
 		0,
 		0,
 		320,
-		180,
-		RGB(255,0,255));
+		142,
+		RGB(255, 0, 255));
 
 	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOld");
 
@@ -98,42 +104,20 @@ void CTileEditScene::Render(HDC hDC)
 	int SrcX = frameWidth * m_iDrawIDX;
 	int SrcY = frameHeight * m_iDrawIDY;
 
+	Image* img = GET(CResourceMgr)->Find_Png(L"Villiaged2");
+	Graphics graphics(hDC);
+	graphics.SetInterpolationMode(Gdiplus::InterpolationModeNearestNeighbor);
+	const int DEST_WIDTH = 2048 * 3;
+	const int DEST_HEIGHT = 320 * 3;
 
-	// 마우스 커서에 선택된 타일 출력
-	GdiTransparentBlt(
-		hDC,
-		m_ptMouse.x - TILECX/2,				// 복사 받을 공간의 LEFT	
-		m_ptMouse.y - TILECY/2,				// 복사 받을 공간의 TOP
-		TILECX,												// 복사 받을 공간의 가로 
-		TILECY,												// 복사 받을 공간의 세로 
-		hMemDC,														// 복사 할 DC
-		SrcX,														// 원본이미지 left
-		SrcY,														// 원본이미지 top
-		frameWidth,													// 원본이미지 가로
-		frameHeight,												// 원본이미지 세로
-		RGB(255, 0, 255)
+	Gdiplus::Rect rt(
+		0 - scrollX,             // X 좌표 시작점
+		8 - scrollY,             // Y 좌표 시작점
+		DEST_WIDTH,    // 출력할 너비 (2048)
+		DEST_HEIGHT    // 출력할 높이 (320)
 	);
 
-	hMemDC = GET(CResourceMgr)->Find_Bmp(L"MapTileOption");
-
-	if (!GET(CUIMgr)->Find_UI(L"MapTileUI")->IsOpen())
-	{
-		// 마우스에 옵션값 사각형 이미지 띄우기
-		GdiTransparentBlt(
-			hDC,
-			m_ptMouse.x - TILECX / 2,							// 복사 받을 공간의 LEFT	
-			m_ptMouse.y - TILECY / 2,							// 복사 받을 공간의 TOP
-			TILECX,												// 복사 받을 공간의 가로 
-			TILECY,												// 복사 받을 공간의 세로 
-			hMemDC,												// 복사 할 DC
-			m_iOption * BMPTILECX,								// 원본이미지 left
-			0,													// 원본이미지 top
-			16,													// 원본이미지 가로
-			16,													// 원본이미지 세로
-			RGB(255, 0, 255)
-		);
-	}
-
+	graphics.DrawImage(img, rt);
 	wstring text = L"Tile_Option : " + to_wstring(m_iOption);
 	TextOut(hDC, 10, 0, text.c_str(), text.length());
 	text = L"Camera_Move : WASD";
@@ -142,8 +126,7 @@ void CTileEditScene::Render(HDC hDC)
 	TextOut(hDC, 10, 40, text.c_str(), text.length());
 	text = L"Tile_Clear: C";
 	TextOut(hDC, 10, 60, text.c_str(), text.length());
-
-#pragma endregion
+	//GET(CLineMgr)->Render(hDC);
 }
 
 void CTileEditScene::Release()
@@ -211,7 +194,8 @@ void CTileEditScene::Key_Input()
 	if (GET(CKeyMgr)->Key_Pressing('R'))
 	{
 		//GET(CTileMgr)->Load_Tile(L"TestScene");
-		GET(CTileMgr)->Load_Tile(L"BelialScene");
+		//GET(CTileMgr)->Load_Tile(L"BelialScene");
+		GET(CTileMgr)->Load_Tile(L"Tile");
 	}
 #pragma endregion
 

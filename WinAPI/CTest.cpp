@@ -29,19 +29,28 @@ CTest::~CTest()
 
 void CTest::Initialize()
 {
+	GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Town/Villiaged2.png", L"Villiaged2");
+
+
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/Cloud.bmp", L"Cloud");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownBG_Day.bmp", L"TownBG_Day");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownLayer_Day.bmp", L"TownLayer_Day");
-	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(100.f, 100.f));
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/Shop.bmp", L"Shop");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TrainingSchool.bmp", L"TrainingSchool");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/DungeonSignL.bmp", L"DungeonSignL");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/DungeonSignR.bmp", L"DungeonSignR");
+	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(200.f, 550.f));
 	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBelial>::Create(2000.f, 200.f));
-	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(500.f, 200.f));
-	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(700.f, 200.f));
-	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Giant>::Create(1000.f, 400.f));
+	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(500.f, 200.f));
+	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(700.f, 200.f));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Giant>::Create(4934.f, 414.f));
 	GET(CObjMgr)->Initialize();
 	GET(CPlayerMgr)->Initialize();
-	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
-	GET(CTileMgr)->Load_Tile(L"TestScene");
+	GET(CTileMgr)->Load_Tile(L"TownScene");
+	GET(CLineMgr)->Load_Line();
+	GET(CLineMgr)->Initialize();
+
 
 	GET(CUIMgr)->Insert_UI(L"PlayerUI", new CPlayerUI(GET(CPlayerMgr)->GetPlayer()));
 	GET(CUIMgr)->Insert_UI(L"InventoryUI", new CInventoryUI(GET(CPlayerMgr)->GetPlayer()));
@@ -70,6 +79,8 @@ void CTest::Late_Update()
 
 void CTest::Render(HDC hDC)
 {
+	int scrollX = GET(CCamera)->Get_ScrollX();
+	int scrollY = GET(CCamera)->Get_ScrollY();
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
 	HDC hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud");
 	//TODO : 배경 무한 움직임
@@ -100,24 +111,63 @@ void CTest::Render(HDC hDC)
 		142,
 		RGB(255, 0, 255)
 	);
-	//hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TownLayer_Day");
+	//hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Shop");
 	//GdiTransparentBlt(
 	//	hDC,
-	//	0,												// 복사 받을 공간의 LEFT	
-	//	0,												// 복사 받을 공간의 TOP
-	//	WINCX,											// 복사 받을 공간의 가로 
-	//	WINCY,											// 복사 받을 공간의 세로 
+	//	-20 - scrollX,												// 복사 받을 공간의 LEFT	
+	//	-35 - scrollY,												// 복사 받을 공간의 TOP
+	//	564,											// 복사 받을 공간의 가로 
+	//	356,											// 복사 받을 공간의 세로 
 	//	hMemDC,											// 복사 할 DC
 	//	0,
 	//	0,
-	//	320,
-	//	95,
+	//	564,
+	//	356,
+	//	RGB(255, 0, 255)
+	//);
+	//hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"TrainingSchool");
+	//GdiTransparentBlt(
+	//	hDC,
+	//	1600 - scrollX,												// 복사 받을 공간의 LEFT	
+	//	220 - scrollY,												// 복사 받을 공간의 TOP
+	//	270 * 3,											// 복사 받을 공간의 가로 
+	//	77 * 3,											// 복사 받을 공간의 세로 
+	//	hMemDC,											// 복사 할 DC
+	//	0,
+	//	0,
+	//	270,
+	//	77,
 	//	RGB(255, 0, 255)
 	//);
 
-	//GET(CTileMgr)->Render(hDC);
-	//GET(CObjMgr)->Render(hDC);
-	//GET(CLineMgr)->Render(hDC); //굳이 그릴필요 없음
+	//hMemDC = CResourceMgr::Get_Instance()->Find_Bmp(L"DungeonSignL");
+	//GdiTransparentBlt(
+	//	hDC,
+	//	2300 - scrollX,												// 복사 받을 공간의 LEFT	
+	//	580 - scrollY,												// 복사 받을 공간의 TOP
+	//	20 * 3,											// 복사 받을 공간의 가로 
+	//	22 * 3,											// 복사 받을 공간의 세로 
+	//	hMemDC,											// 복사 할 DC
+	//	0,
+	//	0,
+	//	20,
+	//	22,
+	//	RGB(255, 0, 255)
+	//);
+
+	Image* img = GET(CResourceMgr)->Find_Png(L"Villiaged2");
+	Graphics graphics(hDC);
+	graphics.SetInterpolationMode(Gdiplus::InterpolationModeNearestNeighbor);
+	const int DEST_WIDTH = 2048 * 3;
+	const int DEST_HEIGHT = 320 * 3;
+
+	Gdiplus::Rect rt(
+		0 - scrollX,             // X 좌표 시작점
+		8 - scrollY,             // Y 좌표 시작점
+		DEST_WIDTH,    // 출력할 너비 (2048)
+		DEST_HEIGHT    // 출력할 높이 (320)
+	);
+	graphics.DrawImage(img, rt);
 }
 
 void CTest::Release()

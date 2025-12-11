@@ -25,6 +25,20 @@ public:
     void OutPlayer() { m_bIsInPlayer = false; }
     virtual void Motion_Change() PURE;
 
+    void OnDamage(int dmg) override
+    {
+        m_fCurHp -= dmg;
+        if (m_fCurHp <= 0.f)
+        {
+            m_fCurHp = 0.f;
+            m_bIsDead = true;
+        }
+
+        m_dwLastHitTime = GetTickCount();
+        m_bIsHit = true;
+        GET(CSoundMgr)->PlaySoundW(L"Hit_Monster.wav", SOUND_EFFECT, 0.3f);
+    }
+
 protected:
     void SpawnEffect();
     void DeadEffect();

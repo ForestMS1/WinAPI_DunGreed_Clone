@@ -14,7 +14,7 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
-    void OnDamage(int dmg) 
+    virtual void OnDamage(int dmg) 
     { 
         m_fCurHp -= dmg; 
         if (m_fCurHp <= 0.f)

@@ -25,6 +25,20 @@ public:
 	void Set_Weapon(CItem* pWeapon) { Safe_Delete(m_pWeapon); m_pWeapon = pWeapon; }
 	void SetGold(int gold) { m_iGold = gold; }
 
+	void OnDamage(int dmg) override
+	{
+		m_fCurHp -= dmg;
+		if (m_fCurHp <= 0.f)
+		{
+			m_fCurHp = 0.f;
+			m_bIsDead = true;
+		}
+
+		m_dwLastHitTime = GetTickCount();
+		m_bIsHit = true;
+		GET(CSoundMgr)->PlaySoundW(L"Hit_Player.wav", SOUND_EFFECT, 1.f);
+	}
+
 private:
 	void Key_Input();
 	void Motion_Change();

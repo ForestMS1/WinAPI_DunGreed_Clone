@@ -14,7 +14,7 @@ void CGiantBat::Initialize()
 {
 	CEnemy::Initialize();
 
-	m_fMaxHp = 100.f;
+	m_fMaxHp = 500.f;
 	m_fCurHp = m_fMaxHp;
 
 	m_tInfo.fX = 500.f;
@@ -47,6 +47,7 @@ void CGiantBat::Initialize()
 
 	m_eCurState = SPAWN;
 	m_wsFrameKey = L"EnemySpawn";
+	m_iDropGold = 25;
 }
 
 int CGiantBat::Update()

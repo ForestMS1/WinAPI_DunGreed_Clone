@@ -274,6 +274,18 @@
     <Filter Include="Object\UI\ShopUI\ShopItemUI">
       <UniqueIdentifier>{6a954e03-dbf8-42f5-a11d-ffe712289326}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Text">
+      <UniqueIdentifier>{d579bbfd-b5fe-4247-b4fc-9713e3bce119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Text\DamageText">
+      <UniqueIdentifier>{8f9930d9-7243-4e33-86b6-ffad291436a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Text\GoldText">
+      <UniqueIdentifier>{02ad6148-8efd-4066-a2ab-bdf75b1fc460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item\Gold">
+      <UniqueIdentifier>{d3088296-b88d-4ef0-b86d-d41470b1c3b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -549,6 +561,15 @@
     <ClInclude Include="CShopItemUI.h">
       <Filter>Object\UI\ShopUI\ShopItemUI</Filter>
     </ClInclude>
+    <ClInclude Include="CDamageText.h">
+      <Filter>Object\Text\DamageText</Filter>
+    </ClInclude>
+    <ClInclude Include="CGoldText.h">
+      <Filter>Object\Text\GoldText</Filter>
+    </ClInclude>
+    <ClInclude Include="CGold.h">
+      <Filter>Object\Item\Gold</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -787,6 +808,15 @@
     </ClCompile>
     <ClCompile Include="CShopItemUI.cpp">
       <Filter>Object\UI\ShopUI\ShopItemUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CDamageText.cpp">
+      <Filter>Object\Text\DamageText</Filter>
+    </ClCompile>
+    <ClCompile Include="CGoldText.cpp">
+      <Filter>Object\Text\GoldText</Filter>
+    </ClCompile>
+    <ClCompile Include="CGold.cpp">
+      <Filter>Object\Item\Gold</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

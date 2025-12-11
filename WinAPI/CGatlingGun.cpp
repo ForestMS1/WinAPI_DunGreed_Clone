@@ -39,7 +39,7 @@ void CGatlingGun::Initialize()
     m_tFrame.iMotion = 0;
     m_tFrame.dwTime = GetTickCount();
 
-    m_fDamage = 30.f;
+    m_fDamage = 15.f;
 	m_iMaxAttackCount = 10;
 	m_iCurAttackCount = 0;
 	m_wsFrameKey = L"GatlingGunBmp";

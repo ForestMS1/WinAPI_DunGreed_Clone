@@ -16,7 +16,7 @@ void CGatlingGunBullet::Initialize()
 	m_tInfo.fCY = 10.f;
 
 	m_fSpeed = 20.f;
-	m_fDamage = 3.f;
+	m_fDamage = 15.f;
 
 	m_iFrameWidth = 28.f;
 	m_iFrameHeight = 10.f;

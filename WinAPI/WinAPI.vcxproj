@@ -163,6 +163,7 @@
     <ClInclude Include="CCell.h" />
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CCosmosSword.h" />
+    <ClInclude Include="CDamageText.h" />
     <ClInclude Include="CDoor.h" />
     <ClInclude Include="CDungeon01.h" />
     <ClInclude Include="CDungeonStart.h" />
@@ -176,6 +177,8 @@
     <ClInclude Include="CGatlingGun.h" />
     <ClInclude Include="CGatlingGunBullet.h" />
     <ClInclude Include="CGiantBat.h" />
+    <ClInclude Include="CGold.h" />
+    <ClInclude Include="CGoldText.h" />
     <ClInclude Include="CGoldUI.h" />
     <ClInclude Include="CGoTileEditBtn.h" />
     <ClInclude Include="CInventoryUI.h" />
@@ -258,6 +261,7 @@
     <ClCompile Include="CCell.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CCosmosSword.cpp" />
+    <ClCompile Include="CDamageText.cpp" />
     <ClCompile Include="CDoor.cpp" />
     <ClCompile Include="CDungeon01.cpp" />
     <ClCompile Include="CDungeonStart.cpp" />
@@ -271,6 +275,8 @@
     <ClCompile Include="CGatlingGun.cpp" />
     <ClCompile Include="CGatlingGunBullet.cpp" />
     <ClCompile Include="CGiantBat.cpp" />
+    <ClCompile Include="CGold.cpp" />
+    <ClCompile Include="CGoldText.cpp" />
     <ClCompile Include="CGoldUI.cpp" />
     <ClCompile Include="CGoTileEditBtn.cpp" />
     <ClCompile Include="CInventoryUI.cpp" />

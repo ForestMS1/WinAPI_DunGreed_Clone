@@ -27,7 +27,10 @@ public:
 
 	void OnDamage(int dmg) override
 	{
-		m_fCurHp -= dmg;
+		if (m_bIsHit)
+			return;
+		int result = dmg + (rand() % 5);
+		m_fCurHp -= result;
 		if (m_fCurHp <= 0.f)
 		{
 			m_fCurHp = 0.f;
@@ -37,7 +40,11 @@ public:
 		m_dwLastHitTime = GetTickCount();
 		m_bIsHit = true;
 		GET(CSoundMgr)->PlaySoundW(L"Hit_Player.wav", SOUND_EFFECT, 1.f);
+		CDamageText* pDamage = new CDamageText(result, m_tInfo.fX, m_tRect.top);
+		pDamage->Initialize();
+		GET(CObjMgr)->AddObject(OBJ_EFFECT, pDamage);
 	}
+	void GetDropGold(int gold);
 
 private:
 	void Key_Input();

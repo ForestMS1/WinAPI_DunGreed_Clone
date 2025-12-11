@@ -117,6 +117,12 @@ int CPlayer::Update()
 	if (m_pRunEffect != nullptr)
 		m_pRunEffect->Update();
 
+
+	if (m_bIsHit && m_dwLastHitTime + 80 < GetTickCount())
+	{
+		m_bIsHit = false;
+	}
+
 	return OBJ_NOEVENT;
 }
 
@@ -177,19 +183,22 @@ void CPlayer::Render(HDC hDC)
 			m_tRect.right - GET(CCamera)->Get_ScrollX(),
 			m_tRect.bottom - GET(CCamera)->Get_ScrollY());
 	}
-	GdiTransparentBlt(
-		hDC,
-		(int)(m_tRect.left - GET(CCamera)->Get_ScrollX() - 15),			// 복사 받을 공간의 LEFT	
-		(int)(m_tRect.top - GET(CCamera)->Get_ScrollY()),				// 복사 받을 공간의 TOP
-		m_iFrameWidth,													// 복사 받을 공간의 가로 
-		m_iFrameHeight,													// 복사 받을 공간의 세로 
-		hMemDC,															// 복사 할 DC
-		SrcX,															// 원본이미지 left
-		SrcY,															// 원본이미지 top
-		m_iFrameWidth,													// 원본이미지 가로
-		m_iFrameHeight,													// 원본이미지 세로
-		RGB(255, 0, 255)
-	);
+	if (!m_bIsHit)
+	{
+		GdiTransparentBlt(
+			hDC,
+			(int)(m_tRect.left - GET(CCamera)->Get_ScrollX() - 15),			// 복사 받을 공간의 LEFT	
+			(int)(m_tRect.top - GET(CCamera)->Get_ScrollY()),				// 복사 받을 공간의 TOP
+			m_iFrameWidth,													// 복사 받을 공간의 가로 
+			m_iFrameHeight,													// 복사 받을 공간의 세로 
+			hMemDC,															// 복사 할 DC
+			SrcX,															// 원본이미지 left
+			SrcY,															// 원본이미지 top
+			m_iFrameWidth,													// 원본이미지 가로
+			m_iFrameHeight,													// 원본이미지 세로
+			RGB(255, 0, 255)
+		);
+	}
 
 	//무기
 	if (m_pWeapon != nullptr)
@@ -210,6 +219,14 @@ void CPlayer::Release()
 
 	Safe_Delete<CItem*>(m_pWeapon);
 	Safe_Delete(m_pRunEffect);
+}
+
+void CPlayer::GetDropGold(int gold)
+{
+	GET(CSoundMgr)->PlaySoundW(L"Get_Coin.wav", SOUND_EFFECT, 1.f);
+	CGoldText* pDamage = new CGoldText(gold, m_tInfo.fX, m_tRect.top);
+	pDamage->Initialize();
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, pDamage);
 }
 
 void CPlayer::Key_Input()

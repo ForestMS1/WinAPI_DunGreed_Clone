@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "CEnemy.h"
 #include "CEnemyHpBarUI.h"
-
+#include "CGold.h"
 CEnemy::CEnemy() : m_fDetectfCX(0.f), m_fDetectfCY(0.f), m_bIsInPlayer(false), m_fAngle(0.f)
-, m_pHpBarUI(nullptr), m_bIsSpawnSound(false)
+, m_pHpBarUI(nullptr), m_bIsSpawnSound(false), m_iDropGold(0)
 {
 	ZeroMemory(&m_tDetectRect, sizeof(RECT));
 	m_eRender = GAMEOBJECT;
@@ -86,5 +86,19 @@ void CEnemy::DeadEffect()
 	{
 		GET(CSoundMgr)->PlaySoundW(L"MonsterDie.wav", SOUND_EFFECT, 1.f);
 		m_bIsSpawnSound = false;
+	}
+}
+
+void CEnemy::DropGold()
+{
+	if (m_bIsDead)
+	{
+		//for (size_t i = 0; i < 5; ++i)
+		//{
+			CItem* pGold = new CGold(m_iDropGold, m_tInfo.fX, m_tInfo.fY);
+			pGold->SetDrop(true);
+			pGold->Initialize();
+			GET(CObjMgr)->AddObject(OBJ_ITEM, pGold);
+		//}
 	}
 }

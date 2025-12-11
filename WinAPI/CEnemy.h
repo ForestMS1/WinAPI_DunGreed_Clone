@@ -27,21 +27,29 @@ public:
 
     void OnDamage(int dmg) override
     {
-        m_fCurHp -= dmg;
-        if (m_fCurHp <= 0.f)
+        if (m_bIsHit)
+            return;
+        int result = dmg + (rand()%5);
+        m_fCurHp -= result;
+        if (m_fCurHp <= 0.f && !m_bIsDead)
         {
             m_fCurHp = 0.f;
             m_bIsDead = true;
+            DropGold();
         }
 
         m_dwLastHitTime = GetTickCount();
         m_bIsHit = true;
         GET(CSoundMgr)->PlaySoundW(L"Hit_Monster.wav", SOUND_EFFECT, 0.3f);
+        CDamageText* pDamage = new CDamageText(result, m_tInfo.fX, m_tRect.top);
+        pDamage->Initialize();
+        GET(CObjMgr)->AddObject(OBJ_EFFECT, pDamage);
     }
 
 protected:
     void SpawnEffect();
     void DeadEffect();
+    void DropGold();
 protected:
     //플레이어를 감지 할 범위
     RECT  m_tDetectRect;
@@ -57,5 +65,7 @@ protected:
 
     STATE m_ePreState;
     STATE m_eCurState;
+
+    int  m_iDropGold;
 };
 

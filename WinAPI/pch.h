@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <queue>
 #include <ole2.h>   // IStream 정의
 #include <gdiplus.h>
 

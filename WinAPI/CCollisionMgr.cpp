@@ -5,6 +5,7 @@
 #include "CEnemy.h"
 #include "CWeapon.h"
 #include "CNPC.h"
+#include "CGold.h"
 
 //(Å¸ÀÏ, ÃÑ¾Ë)
 void CCollisionMgr::Collision_Rect(vector<CObj*> _Dst, list<CObj*> _Src)
@@ -118,6 +119,30 @@ void CCollisionMgr::NPCDetecPlayer(CObj* pPlayer, list<CObj*> _Src)
 			if (Src != nullptr)
 			{
 				dynamic_cast<CNPC*>(Src)->OutPlayer();
+			}
+		}
+	}
+}
+
+void CCollisionMgr::ItemDetecPlayer(CObj* pPlayer, list<CObj*> _Src)
+{
+
+	RECT	rc{};
+
+	for (auto& Src : _Src)
+	{
+		if (IntersectRect(&rc, pPlayer->Get_Rect(), dynamic_cast<CItem*>(Src)->GetDetectRect()))
+		{
+			if (Src != nullptr)
+			{
+				dynamic_cast<CItem*>(Src)->InPlayer();
+			}
+		}
+		else
+		{
+			if (Src != nullptr)
+			{
+				dynamic_cast<CItem*>(Src)->OutPlayer();
 			}
 		}
 	}

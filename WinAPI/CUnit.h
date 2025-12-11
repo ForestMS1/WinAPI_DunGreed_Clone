@@ -1,5 +1,7 @@
 #pragma once
 #include "CObj.h"
+#include "CDamageText.h"
+#include "CGoldText.h"
 class CUnit :
     public CObj
 {
@@ -25,6 +27,7 @@ public:
 
         m_dwLastHitTime = GetTickCount();
         m_bIsHit = true;
+        GET(CObjMgr)->AddObject(OBJ_EFFECT, new CDamageText(dmg, m_tInfo.fX, m_tInfo.fY));
     }
 protected:
     bool m_bIsHit;

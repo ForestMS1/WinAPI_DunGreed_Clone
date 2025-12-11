@@ -262,6 +262,18 @@
     <Filter Include="Scene\DungeonScene\Dungeon01">
       <UniqueIdentifier>{933543bc-b6d7-4ee7-9cdf-7153018ca946}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\NPC\NPC_Giant">
+      <UniqueIdentifier>{971bd612-38bb-438e-8ff1-6d64e58d7771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\NPCKeyUI">
+      <UniqueIdentifier>{2170dfe1-f703-452a-b82a-f880944a98d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\ShopUI">
+      <UniqueIdentifier>{b21e8a1f-c152-4980-b931-2c71282947cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\ShopUI\ShopItemUI">
+      <UniqueIdentifier>{6a954e03-dbf8-42f5-a11d-ffe712289326}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -522,6 +534,21 @@
     <ClInclude Include="CDoor.h">
       <Filter>Object\Dungeon\Door</Filter>
     </ClInclude>
+    <ClInclude Include="CNPC.h">
+      <Filter>Object\Unit\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="CNPC_Giant.h">
+      <Filter>Object\Unit\NPC\NPC_Giant</Filter>
+    </ClInclude>
+    <ClInclude Include="CNPCKeyUI.h">
+      <Filter>Object\UI\NPCKeyUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CShopUI.h">
+      <Filter>Object\UI\ShopUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CShopItemUI.h">
+      <Filter>Object\UI\ShopUI\ShopItemUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -745,6 +772,21 @@
     </ClCompile>
     <ClCompile Include="CDoor.cpp">
       <Filter>Object\Dungeon\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="CNPC.cpp">
+      <Filter>Object\Unit\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="CNPC_Giant.cpp">
+      <Filter>Object\Unit\NPC\NPC_Giant</Filter>
+    </ClCompile>
+    <ClCompile Include="CNPCKeyUI.cpp">
+      <Filter>Object\UI\NPCKeyUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CShopUI.cpp">
+      <Filter>Object\UI\ShopUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CShopItemUI.cpp">
+      <Filter>Object\UI\ShopUI\ShopItemUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

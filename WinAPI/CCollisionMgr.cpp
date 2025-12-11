@@ -4,6 +4,7 @@
 #include "CCamera.h"
 #include "CEnemy.h"
 #include "CWeapon.h"
+#include "CNPC.h"
 
 //(Å¸ÀÏ, ÃÑ¾Ë)
 void CCollisionMgr::Collision_Rect(vector<CObj*> _Dst, list<CObj*> _Src)
@@ -93,6 +94,30 @@ void CCollisionMgr::MonsterDetecPlayer(CObj* pPlayer, list<CObj*> _Src)
 			if (Src != nullptr)
 			{
 				dynamic_cast<CEnemy*>(Src)->OutPlayer();
+			}
+		}
+	}
+}
+
+void CCollisionMgr::NPCDetecPlayer(CObj* pPlayer, list<CObj*> _Src)
+{
+
+	RECT	rc{};
+
+	for (auto& Src : _Src)
+	{
+		if (IntersectRect(&rc, pPlayer->Get_Rect(), dynamic_cast<CNPC*>(Src)->GetDetectRect()))
+		{
+			if (Src != nullptr)
+			{
+				dynamic_cast<CNPC*>(Src)->InPlayer();
+			}
+		}
+		else
+		{
+			if (Src != nullptr)
+			{
+				dynamic_cast<CNPC*>(Src)->OutPlayer();
 			}
 		}
 	}

@@ -181,3 +181,9 @@ void CMouse::Release()
 {
 	Safe_Delete(m_pItem);
 }
+
+void CMouse::PickItem(CItem* pItem)
+{
+	m_pItem = pItem; m_eState = PICKITEM;
+	GET(CSoundMgr)->PlaySoundW(L"PickUpItem.wav", SOUND_EFFECT, 1.f);
+}

@@ -23,6 +23,7 @@ public:
 	CItem* Get_EquipWeapon() const { return m_pWeapon; }
 
 	void Set_Weapon(CItem* pWeapon) { Safe_Delete(m_pWeapon); m_pWeapon = pWeapon; }
+	void SetGold(int gold) { m_iGold = gold; }
 
 private:
 	void Key_Input();

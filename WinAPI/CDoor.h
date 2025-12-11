@@ -32,5 +32,7 @@ private:
     DOOR_STATE m_ePreState;
     DOOR_STATE m_eCurState;
     wstring m_wsNextSceneName;
+
+    bool m_bIsPlaySound;
 };
 

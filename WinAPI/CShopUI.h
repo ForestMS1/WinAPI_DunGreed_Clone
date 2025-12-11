@@ -1,12 +1,11 @@
 #pragma once
 #include "CUI.h"
-class CInventoryUI :
+class CShopUI :
     public CUI
 {
 public:
-	CInventoryUI();
-	CInventoryUI(CObj* pPlayer);
-	virtual ~CInventoryUI();
+	CShopUI();
+	virtual ~CShopUI();
 public:
 	// CUI을(를) 통해 상속됨
 	void Initialize() override;
@@ -19,11 +18,9 @@ public:
 
 	void Release() override;
 
-	CObj* GetPlayer() const { return m_pPlayer; }
 private:
-	void Key_Input();
+	void Clicked();
 private:
-	CObj* m_pPlayer;
-	HFONT m_hFont;
+	bool   m_bMouseOn;
 };
 

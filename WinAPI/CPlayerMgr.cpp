@@ -31,7 +31,8 @@ void CPlayerMgr::Initialize()
 
 void CPlayerMgr::Update()
 {
-
+	if(m_pPlayer != nullptr)
+		dynamic_cast<CPlayer*>(m_pPlayer)->SetGold(m_iGold);
 }
 
 void CPlayerMgr::Late_Update()

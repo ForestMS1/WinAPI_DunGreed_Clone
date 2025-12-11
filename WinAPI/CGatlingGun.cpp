@@ -43,6 +43,9 @@ void CGatlingGun::Initialize()
 	m_iMaxAttackCount = 10;
 	m_iCurAttackCount = 0;
 	m_wsFrameKey = L"GatlingGunBmp";
+
+	m_fShopPrice = 1500;
+	m_wsName = L"개틀링 건";
 }
 
 int CGatlingGun::Update()

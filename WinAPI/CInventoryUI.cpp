@@ -75,6 +75,11 @@ void CInventoryUI::Initialize()
 	{
 		pChild->Initialize();
 	}
+
+
+	AddFontResource(TEXT("Aa카시오페아"));
+	m_hFont = CreateFont(30, 0, 0, 0, 0, 0, 0, 0,
+		HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("Aa카시오페아"));
 }
 
 int CInventoryUI::Update()
@@ -117,6 +122,13 @@ void CInventoryUI::Render(HDC hDC)
 	{
 		pChild->Render(hDC);
 	}
+
+	HFONT hOldFont = (HFONT)SelectObject(hDC, m_hFont);
+	wstring text = to_wstring(GET(CPlayerMgr)->GetGold());
+	SetBkMode(hDC, TRANSPARENT);
+	SetTextColor(hDC, RGB(255, 255, 255));
+	TextOut(hDC, m_tRect.left + 250, m_tRect.top + 502, text.c_str(), (int)text.size());
+	SelectObject(hDC, hOldFont);
 }
 
 void CInventoryUI::Release()
@@ -126,6 +138,13 @@ void CInventoryUI::Release()
 		Safe_Delete(pChild);
 	}
 	m_vecChildUI.clear();
+
+	if (m_hFont)
+	{
+		DeleteObject(m_hFont);
+		m_hFont = NULL;
+	}
+	RemoveFontResource(TEXT("Aa카시오페아"));
 }
 
 void CInventoryUI::Key_Input()

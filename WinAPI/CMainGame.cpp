@@ -105,6 +105,7 @@ void CMainGame::Late_Update()
 	if (!GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).empty())
 	{
 		CCollisionMgr::MonsterDetecPlayer(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front(), GET(CObjMgr)->GetObjLayer(OBJ_MONSTER));
+		CCollisionMgr::NPCDetecPlayer(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front(), GET(CObjMgr)->GetObjLayer(OBJ_NPC));
 		CCollisionMgr::Collision_Bullet(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER), GET(CObjMgr)->GetObjLayer(OBJ_ENEMY_BULLET));
 		CCollisionMgr::Collision_Bullet(GET(CObjMgr)->GetObjLayer(OBJ_MONSTER), GET(CObjMgr)->GetObjLayer(OBJ_PLAYER_BULLET));
 	}

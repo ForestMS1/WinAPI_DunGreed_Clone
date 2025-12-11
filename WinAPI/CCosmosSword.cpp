@@ -54,6 +54,9 @@ void CCosmosSword::Initialize()
     m_wsFrameKey = L"LightSaber";
     m_SoundIndex = SOUND_PLAYER_ATTACK1;
     m_dwSoundTick = GetTickCount();
+
+    m_fShopPrice = 1000;
+    m_wsName = L"라이트 세이버";
 }
 
 int CCosmosSword::Update()

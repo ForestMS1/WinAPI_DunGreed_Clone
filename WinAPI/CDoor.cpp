@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CDoor.h"
 
-CDoor::CDoor()
+CDoor::CDoor() : m_bIsPlaySound(false)
 {
 	m_eRender = GAMEOBJECT;
 }
@@ -36,13 +36,20 @@ int CDoor::Update()
 {
 	__super::Update_Rect();
 	if (m_eCurState == IDLE_LEFT || m_eCurState == IDLE_BOTTOM || m_eCurState == IDLE_RIGHT)
+	{
 		Move_Frame(9);
+		m_bIsPlaySound = false;
+	}
 	if(m_eCurState == CLOSE_LEFT || m_eCurState == OPEN_LEFT
 		|| m_eCurState == CLOSE_BOTTOM || m_eCurState == OPEN_BOTTOM
 		|| m_eCurState == CLOSE_RIGHT || m_eCurState == OPEN_RIGHT)
 	{
 		Move_Frame_No_Loop();
-
+		if (!m_bIsPlaySound)
+		{
+			GET(CSoundMgr)->PlaySoundW(L"Door_move.wav", SOUND_EFFECT, 1.f);
+			m_bIsPlaySound = true;
+		}
 		if (m_tFrame.iStart >= m_tFrame.iEnd)
 		{
 			if (m_eCurState == CLOSE_LEFT)

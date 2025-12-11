@@ -33,6 +33,8 @@ void CBelial::Initialize()
 	m_tFrame.dwSpeed = 100.f;
 	m_iFrameWidth = 210.f;
 	m_iFrameHeight = 285.f;
+	m_tInfo.fCX = m_iFrameWidth;
+	m_tInfo.fCY = m_iFrameHeight;
 	m_tFrame.dwTime = GetTickCount();
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossIdle.bmp", L"BelialIdle");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossAttack.bmp", L"BelialAttack");
@@ -311,6 +313,8 @@ void CBelial::Motion_Change()
 			m_tFrame.dwTime = GetTickCount();
 			m_iFrameWidth = 210.f;
 			m_iFrameHeight = 285.f;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
 			break;
 		case BELIAL_STATE::ATTACK_SPEAR:
 			m_tFrame.iStart = 0;
@@ -321,16 +325,19 @@ void CBelial::Motion_Change()
 			m_tFrame.dwTime = GetTickCount();
 			m_iFrameWidth = 210.f;
 			m_iFrameHeight = 285.f;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
 			break;
 		default:
 			m_tFrame.iStart = 0;
 			m_tFrame.iMotion = 0;
 			m_tFrame.iEnd = 9;
-			m_wsFrameKey = L"BelialIdle";
 			m_tFrame.dwSpeed = 100.f;
-			m_tFrame.dwTime = GetTickCount();
 			m_iFrameWidth = 210.f;
 			m_iFrameHeight = 285.f;
+			m_wsFrameKey = L"BelialIdle";
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
 			break;
 		}
 		m_eBelailPreState = m_eBelialCurState;

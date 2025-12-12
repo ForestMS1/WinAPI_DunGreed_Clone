@@ -45,7 +45,7 @@ void CBanshee::Initialize()
 
 	m_eCurState = SPAWN;
 	m_wsFrameKey = L"EnemySpawn";
-	m_iDropGold = 25;
+	m_iDropGold = 125;
 }
 
 int CBanshee::Update()

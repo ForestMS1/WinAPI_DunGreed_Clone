@@ -13,11 +13,11 @@
 #include "CGatlingGun.h"
 #include "CDashFX.h"
 
-CPlayer::CPlayer() : 
-	m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false), m_bIsGround(false), 
+CPlayer::CPlayer() :
+	m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false), m_bIsGround(false),
 	m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false), m_IsOnBlock(false),
 	m_bAttack(false), m_fAttackAcct(0.2f), m_fAttackt(0.f), m_fMaxSatiety(100.f), m_fCurSatiety(0.f)
-	, m_iDashFXCount(0), m_bIsNoPlayerRender(false)
+	, m_iDashFXCount(0), m_bIsNoPlayerRender(false), m_bIsNoKeyInput(false)
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
@@ -237,6 +237,9 @@ void CPlayer::GetDropGold(int gold)
 
 void CPlayer::Key_Input()
 {
+	if (m_bIsNoKeyInput)
+		return;
+
 	if (GET(CKeyMgr)->Key_Pressing('A'))
 	{
 		m_tInfo.fX -= m_fSpeed;

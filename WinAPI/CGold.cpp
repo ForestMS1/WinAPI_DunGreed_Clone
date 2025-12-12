@@ -2,7 +2,7 @@
 #include "CGold.h"
 #include "CPlayer.h"
 
-CGold::CGold() : m_fSpeed(5.f), m_bIsGot(false)
+CGold::CGold() : m_fSpeed(2.5f), m_bIsGot(false)
 {
 }
 
@@ -11,6 +11,10 @@ CGold::CGold(int gold, float fX, float fY) : m_fSpeed(5.f), m_bIsGot(false)
 	m_iGold = gold;
 	m_tInfo.fX = fX;
 	m_tInfo.fY = fY;
+
+	m_fBurstAngle = (float)(rand() % 360);
+	m_fBurstSpeed = (float)(rand() % 3 + 10);
+	m_dwBurstEnd = GetTickCount() + 100;
 
 	//플레이어 감지 범위
 	m_fDetectfCX = 300.f;
@@ -62,7 +66,16 @@ int CGold::Update()
 	if (m_bIsGot)
 		return OBJ_DEAD;
 
+	if (GetTickCount() < m_dwBurstEnd)
+	{
+		float fRad = m_fBurstAngle * PI / 180.f;
+		m_tInfo.fX += m_fBurstSpeed * cosf(fRad);
+		m_tInfo.fY -= m_fBurstSpeed * sinf(fRad);
+	}
+
 	CItem::Update();
+
+
 	ToPlayerAngle();
 
 	if (m_bIsInPlayer)

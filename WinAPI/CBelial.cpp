@@ -19,6 +19,8 @@ void CBelial::Initialize()
 	m_fMaxHp = 100.f;
 	m_fCurHp = m_fMaxHp;
 
+	m_iDropGold = 125 + rand() % 20;
+
 	m_tInfo.fX = 1400.f;
 	m_tInfo.fY = 500.f;
 	m_tInfo.fCX = 210.f;

@@ -46,6 +46,7 @@ public:
 	}
 	void GetDropGold(int gold);
 	void SetNoPlayerRender() { m_bIsNoPlayerRender = true; }
+	void SetNoPlayerKeyInput() { m_bIsNoKeyInput = true; }
 private:
 	void Key_Input();
 	void Motion_Change();
@@ -111,7 +112,10 @@ private:
 	int m_iFrameWidth;
 	int m_iFrameHeight;
 
+	// 던전 입장시 렌더 끔
 	bool m_bIsNoPlayerRender;
+	// 던전 입장중에 키입력 방지
+	bool m_bIsNoKeyInput;
 	
 };
 

@@ -19,6 +19,10 @@ private:
     float m_fSpeed;
     bool m_bIsGot;
 
+    float m_fBurstAngle;
+    float m_fBurstSpeed;
+    DWORD m_dwBurstEnd;
+
     // CItem을(를) 통해 상속됨
     CItem* Clone() override;
 };

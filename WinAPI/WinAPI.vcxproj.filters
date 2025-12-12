@@ -301,6 +301,9 @@
     <Filter Include="Object\Dungeon\DungeonEat">
       <UniqueIdentifier>{a0c67c77-c096-40d7-a9f4-41cb35144b66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\Skel">
+      <UniqueIdentifier>{45865ec3-e762-4415-b375-193453cd96e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -600,6 +603,9 @@
     <ClInclude Include="CDungeonEat.h">
       <Filter>Object\Dungeon\DungeonEat</Filter>
     </ClInclude>
+    <ClInclude Include="CSkel.h">
+      <Filter>Object\Unit\Enemy\Skel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -862,6 +868,9 @@
     </ClCompile>
     <ClCompile Include="CDungeonEat.cpp">
       <Filter>Object\Dungeon\DungeonEat</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkel.cpp">
+      <Filter>Object\Unit\Enemy\Skel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

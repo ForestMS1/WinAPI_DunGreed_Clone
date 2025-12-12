@@ -36,6 +36,9 @@ public:
             m_fCurHp = 0.f;
             m_bIsDead = true;
             DropGold();
+            DropGold();
+            DropGold();
+            DropGold();
         }
 
         m_dwLastHitTime = GetTickCount();

@@ -45,6 +45,10 @@ int CDungeonEat::Update()
 	if (m_bIsInPlayer)
 	{
 		Move_Frame_No_Loop();
+		CObj* pPlayer = GET(CPlayerMgr)->GetPlayer();
+		if (dynamic_cast<CPlayer*>(pPlayer) != nullptr)
+			dynamic_cast<CPlayer*>(pPlayer)->SetNoPlayerKeyInput();
+
 		if (!m_bIsPlaySoundFirst)
 		{
 			GET(CSoundMgr)->PlaySoundW(L"DungeonEat.wav",SOUND_EFFECT, 1.f);

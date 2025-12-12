@@ -50,7 +50,7 @@ void CBigWhiteSkel::Initialize()
 	m_eCurState = SPAWN;
 	m_wsFrameKey = L"EnemySpawn";
 	srand(time(0));
-	m_iDropGold = 25 + (rand() % 10);
+	m_iDropGold = 200 + (rand() % 10);
 }
 
 int CBigWhiteSkel::Update()

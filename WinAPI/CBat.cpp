@@ -23,10 +23,10 @@ void CBat::Initialize()
 
 	m_tFrame.iStart = 0;
 	m_tFrame.iMotion = 0;
-	m_tFrame.iEnd = 5;
+	m_tFrame.iEnd = 14;
 	m_tFrame.dwSpeed = 100.f;
-	m_iFrameWidth = 93;
-	m_iFrameHeight = 60;
+	m_iFrameWidth = 124;
+	m_iFrameHeight = 124;
 	m_tInfo.fCX = m_iFrameWidth;
 	m_tInfo.fCY = m_iFrameHeight;
 	m_wsFrameKey = L"EnemySpawn";
@@ -51,6 +51,10 @@ void CBat::Initialize()
 int CBat::Update()
 {
 	CEnemy::Update();
+
+	__super::Update_Rect();
+	Update_DetectRect();
+
 	if (m_eCurState == SPAWN)
 	{
 		SpawnEffect();
@@ -59,7 +63,7 @@ int CBat::Update()
 
 	if (m_fCurHp <= 0.f)
 	{
-		//m_bIsDead = true;
+		m_bIsDead = true;
 		m_eCurState = DEAD;
 		DeadEffect();
 		if (m_tFrame.iStart >= m_tFrame.iEnd)
@@ -67,8 +71,6 @@ int CBat::Update()
 		else
 			return 0;
 	}
-	__super::Update_Rect();
-	Update_DetectRect();
 
 	Move_Frame();
 
@@ -192,8 +194,8 @@ void CBat::Motion_Change()
 			m_tFrame.dwSpeed = 100.f;
 			m_iFrameWidth = 128;
 			m_iFrameHeight = 128;
-			m_tInfo.fCX = m_iFrameWidth * 0.5;
-			m_tInfo.fCY = m_iFrameHeight * 0.5;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
 			m_wsFrameKey = L"EnemyDie_small";
 			m_tFrame.dwTime = GetTickCount();
 			break;

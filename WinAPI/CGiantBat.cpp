@@ -50,6 +50,10 @@ void CGiantBat::Initialize()
 int CGiantBat::Update()
 {
 	CEnemy::Update();
+
+	__super::Update_Rect();
+	Update_DetectRect();
+
 	if (m_eCurState == SPAWN)
 	{
 		SpawnEffect();
@@ -58,7 +62,7 @@ int CGiantBat::Update()
 
 	if (m_fCurHp <= 0.f)
 	{
-		//m_bIsDead = true;
+		m_bIsDead = true;
 		m_eCurState = DEAD;
 		DeadEffect();
 		if (m_tFrame.iStart >= m_tFrame.iEnd)
@@ -66,8 +70,6 @@ int CGiantBat::Update()
 		else
 			return 0;
 	}
-	__super::Update_Rect();
-	Update_DetectRect();
 
 	Move_Frame();
 

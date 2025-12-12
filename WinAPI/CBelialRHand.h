@@ -31,5 +31,8 @@ private:
     bool    m_isActive;
     bool    m_bMoveEnd;
     float   diffY;
+
+    BYTE m_bAlpha;
+    bool m_bIntro;
 };
 

@@ -5,7 +5,7 @@
 
 CBelial::CBelial() : m_pRHand(nullptr), m_pLHand(nullptr), m_dwRotateAttackTick(GetTickCount())
 , m_pSpearMgr(nullptr), m_dwHandAttackTick(GetTickCount()), HandAttack(false), m_bPlayBossBGM(false)
-, m_bIntro(false), m_pHpBarUI(nullptr)
+, m_bIntro(false), m_pHpBarUI(nullptr), m_bAlpha(0)
 {
 }
 
@@ -37,7 +37,7 @@ void CBelial::Initialize()
 	m_tInfo.fCX = m_iFrameWidth;
 	m_tInfo.fCY = m_iFrameHeight;
 	m_tFrame.dwTime = GetTickCount();
-	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossIdle.bmp", L"BelialIdle");
+	GET(CResourceMgr)->Insert_AlphaBmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossIdle.bmp", L"BelialIdle");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossAttack.bmp", L"BelialAttack");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossBack.bmp", L"SkellBossBack");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossIdleHit.bmp", L"SkellIdleHit");
@@ -124,6 +124,13 @@ int CBelial::Update()
 			m_bPlayBossBGM = true;
 		}
 		m_bIntro = true;
+
+		DWORD dwCurrentTime = GetTickCount();
+		DWORD dwElapsedTime = dwCurrentTime - m_SpawnEffectStartTime;
+
+		if (dwElapsedTime < 2500)
+			m_bAlpha = (BYTE)(((float)dwElapsedTime / 2500) * 255.f);
+
 		return 0;
 	}
 	else
@@ -188,21 +195,61 @@ void CBelial::Render(HDC hDC)
 		DeleteObject(hPen);
 	}
 
-	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
+	if (m_bIntro)
+	{
+		GET(CUIMgr)->Find_UI(L"PlayerUI")->Close();
+		m_pHpBarUI->Close();
+		//HFONT hOldFont = (HFONT)SelectObject(hDC, m_hFont);
+		//wstring text = L"벨 리 알";
+		//SetBkMode(hDC, TRANSPARENT);
+		//SetTextColor(hDC, RGB(255, 255, 255));
+		//TextOut(hDC, 200, WINCY - 200, text.c_str(), (int)text.size());
+		//SelectObject(hDC, hOldFont);
+		HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
 
-	GdiTransparentBlt(
-		hDC,
-		m_tRect.left - ScrollX,
-		m_tRect.top - ScrollY,
-		m_tInfo.fCX,
-		m_tInfo.fCY,
-		hMemDC,
-		m_iFrameWidth * m_tFrame.iStart,
-		m_iFrameHeight * m_tFrame.iMotion,
-		m_iFrameWidth,
-		m_iFrameHeight,
-		RGB(255, 0, 255)
-	);
+		BLENDFUNCTION bf = {};
+		bf.BlendOp = AC_SRC_OVER;					// 일반적인 소스 오버 블렌딩
+		bf.BlendFlags = 0;							// 예약 필드 (0으로 설정)
+		bf.SourceConstantAlpha = m_bAlpha;			// 우리가 설정한 불투명도 값 (0~255)
+		bf.AlphaFormat = AC_SRC_ALPHA;				// 알파 채널이 비트맵 자체에 없을 경우 (Constant Alpha 사용)
+
+
+		AlphaBlend(
+			hDC, // 대상 HDC
+			m_tRect.left - ScrollX, // 대상 X
+			m_tRect.top - ScrollY,  // 대상 Y
+			m_tInfo.fCX,            // 대상 너비
+			m_tInfo.fCY,            // 대상 높이
+			hMemDC,                   // 소스 HDC
+			m_iFrameWidth * m_tFrame.iStart,
+			m_iFrameHeight * 0,                    // 소스 Y
+			m_iFrameWidth,          // 소스 너비
+			m_iFrameHeight,         // 소스 높이
+			bf                      // BLENDFUNCTION 구조체
+		);
+	}
+	else
+	{
+		GET(CUIMgr)->Find_UI(L"PlayerUI")->Open();
+		if (m_SpawnEffectStartTime + 7000 < GetTickCount())
+			m_pHpBarUI->Open();
+		HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
+
+		GdiTransparentBlt(
+			hDC,
+			m_tRect.left - ScrollX,
+			m_tRect.top - ScrollY,
+			m_tInfo.fCX,
+			m_tInfo.fCY,
+			hMemDC,
+			m_iFrameWidth * m_tFrame.iStart,
+			m_iFrameHeight * m_tFrame.iMotion,
+			m_iFrameWidth,
+			m_iFrameHeight,
+			RGB(255, 0, 255)
+		);
+	}
+
 
 	if (m_bIsHit)
 	{
@@ -250,24 +297,6 @@ void CBelial::Render(HDC hDC)
 		m_pLHand->Render(hDC);
 	if (m_pSpearMgr != nullptr)
 		m_pSpearMgr->Render(hDC);
-
-	if (m_bIntro)
-	{
-		GET(CUIMgr)->Find_UI(L"PlayerUI")->Close();
-		m_pHpBarUI->Close();
-		//HFONT hOldFont = (HFONT)SelectObject(hDC, m_hFont);
-		//wstring text = L"벨 리 알";
-		//SetBkMode(hDC, TRANSPARENT);
-		//SetTextColor(hDC, RGB(255, 255, 255));
-		//TextOut(hDC, 200, WINCY - 200, text.c_str(), (int)text.size());
-		//SelectObject(hDC, hOldFont);
-	}
-	else
-	{
-		GET(CUIMgr)->Find_UI(L"PlayerUI")->Open();
-		if(m_SpawnEffectStartTime + 7000 < GetTickCount())
-			m_pHpBarUI->Open();
-	}
 
 	if (m_pHpBarUI != nullptr)
 		m_pHpBarUI->Render(hDC);

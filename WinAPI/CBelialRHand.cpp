@@ -34,6 +34,7 @@ void CBelialRHand::Initialize()
 	m_iFrameWidth = 171.f;
 	m_iFrameHeight = 378.f * 0.5f;
 	m_tFrame.dwTime = GetTickCount();
+	GET(CResourceMgr)->Insert_AlphaBmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossHandIdle.bmp", L"HandIdle");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossHandIdle.bmp", L"HandIdle");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossHandAttack.bmp", L"HandAttack");
 
@@ -50,6 +51,8 @@ void CBelialRHand::Initialize()
 
 int CBelialRHand::Update()
 {
+	m_bIntro = dynamic_cast<CBelial*>(m_pOwner)->IsIntro();
+	m_bAlpha = dynamic_cast<CBelial*>(m_pOwner)->GetAlpha();
 	m_eBelialCurState = dynamic_cast<CBelial*>(m_pOwner)->GetCurState();
 	__super::Update_Rect();
 	if(m_eBelialCurState != BELIAL_STATE::BELIAL_DEAD)
@@ -101,19 +104,46 @@ void CBelialRHand::Render(HDC hDC)
 
 	int ScrollX = (int)GET(CCamera)->Get_ScrollX();
 	int ScrollY = (int)GET(CCamera)->Get_ScrollY();
-	GdiTransparentBlt(
-		hDC,
-		m_tRect.left - ScrollX,
-		m_tRect.top - ScrollY,
-		m_tInfo.fCX,
-		m_tInfo.fCY,
-		hMemDC,
-		m_iFrameWidth * m_tFrame.iStart,
-		m_iFrameHeight * m_tFrame.iMotion,
-		m_iFrameWidth,
-		m_iFrameHeight,
-		RGB(255, 0, 255)
-	);
+
+	if (m_bIntro)
+	{
+		BLENDFUNCTION bf = {};
+		bf.BlendOp = AC_SRC_OVER;					// 일반적인 소스 오버 블렌딩
+		bf.BlendFlags = 0;							// 예약 필드 (0으로 설정)
+		bf.SourceConstantAlpha = m_bAlpha;			// 우리가 설정한 불투명도 값 (0~255)
+		bf.AlphaFormat = AC_SRC_ALPHA;				// 알파 채널이 비트맵 자체에 없을 경우 (Constant Alpha 사용)
+
+
+		AlphaBlend(
+			hDC, // 대상 HDC
+			m_tRect.left - ScrollX, // 대상 X
+			m_tRect.top - ScrollY,  // 대상 Y
+			m_tInfo.fCX,            // 대상 너비
+			m_tInfo.fCY,            // 대상 높이
+			hMemDC,                   // 소스 HDC
+			m_iFrameWidth * m_tFrame.iStart,
+			m_iFrameHeight * m_tFrame.iMotion,                    // 소스 Y
+			m_iFrameWidth,          // 소스 너비
+			m_iFrameHeight,         // 소스 높이
+			bf                      // BLENDFUNCTION 구조체
+		);
+	}
+	else
+	{
+		GdiTransparentBlt(
+			hDC,
+			m_tRect.left - ScrollX,
+			m_tRect.top - ScrollY,
+			m_tInfo.fCX,
+			m_tInfo.fCY,
+			hMemDC,
+			m_iFrameWidth * m_tFrame.iStart,
+			m_iFrameHeight * m_tFrame.iMotion,
+			m_iFrameWidth,
+			m_iFrameHeight,
+			RGB(255, 0, 255)
+		);
+	}
 	if (m_pLaser != nullptr)
 	{
 		m_pLaser->Render(hDC);

@@ -84,7 +84,7 @@ void CLaser::Late_Update()
 		CObj* pPlayer = GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front();
 		if (m_iMaxAttackCount > m_iCurAttackCount && IntersectRect(&rt, &m_tRect, GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front()->Get_Rect()))
 		{
-			if (isAttack)
+			if (isAttack && m_tFrame.iStart == m_tFrame.iEnd-2)
 			{
 				dynamic_cast<CPlayer*>(pPlayer)->OnDamage(m_fDamage);
 				m_iCurAttackCount++;

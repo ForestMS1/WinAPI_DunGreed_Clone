@@ -18,6 +18,8 @@ public:
     void Release() override;
 
     BELIAL_STATE GetCurState() const { return m_eBelialCurState; }
+    BYTE GetAlpha() const { return m_bAlpha; }
+    bool IsIntro() const { return m_bIntro; }
 private:
     void Motion_Change() override;
     void Attack_Rotate();
@@ -31,6 +33,8 @@ private:
     CBelialLHand* m_pLHand;
 
     CUI* m_pHpBarUI;
+
+    BYTE m_bAlpha;
 
     //spear
     SpearMgr* m_pSpearMgr;

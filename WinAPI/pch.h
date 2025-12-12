@@ -23,7 +23,7 @@
 #include <Vfw.h>
 #pragma comment(lib, "vfw32.lib")
 
-
+#pragma comment(lib, "Msimg32.lib")
 #include"fmod.h"
 #include "fmod.hpp"
 

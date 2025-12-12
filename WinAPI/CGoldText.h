@@ -19,6 +19,7 @@ private:
     DWORD m_dwSpawnTime; // 생성된 시간
     DWORD m_dwLifeTime = 1000;
     float m_fSpeed;
+    BYTE m_bAlpha;
 
     float m_ft;
 };

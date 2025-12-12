@@ -11,11 +11,13 @@
 #include "CPlayerUI.h"
 #include "CInventoryUI.h"
 #include "CGatlingGun.h"
+#include "CDashFX.h"
 
 CPlayer::CPlayer() : 
 	m_v0(0.f), m_ft(0.f), m_fAcct(3.f), m_bJump(false), m_bBottomJump(false), m_bIsGround(false), 
 	m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false), m_IsOnBlock(false),
 	m_bAttack(false), m_fAttackAcct(0.2f), m_fAttackt(0.f), m_fMaxSatiety(100.f), m_fCurSatiety(0.f)
+	, m_iDashFXCount(0)
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
@@ -226,6 +228,7 @@ void CPlayer::GetDropGold(int gold)
 	GET(CSoundMgr)->PlaySoundW(L"Get_Coin.wav", SOUND_EFFECT, 1.f);
 	CGoldText* pDamage = new CGoldText(gold, m_tInfo.fX, m_tRect.top);
 	pDamage->Initialize();
+	GET(CPlayerMgr)->GetDropGold(gold);
 	GET(CObjMgr)->AddObject(OBJ_EFFECT, pDamage);
 }
 
@@ -384,11 +387,19 @@ void CPlayer::Dash()
 		m_tInfo.fX += m_fDashSpeed * cosf(m_fDashRadian) * (m_fDashAcct - m_fDasht);
 			if (!(m_IsOnBlock && sinf(m_fDashRadian) < 0))
 				m_tInfo.fY -= m_fDashSpeed * sinf(m_fDashRadian) * (m_fDashAcct - m_fDasht);
+		CDashFX* pDashFX = new CDashFX(m_tInfo.fX, m_tInfo.fY + 10);
+		pDashFX->Initialize();
+		if (m_iDashFXCount < 15)
+		{
+			GET(CObjMgr)->AddObject(OBJ_EFFECT, pDashFX);
+			m_iDashFXCount++;
+		}
 	}
 	else
 	{
 		m_fDasht = 0.f;
 		m_bDash = false;
+		m_iDashFXCount = 0;
 	}
 }
 

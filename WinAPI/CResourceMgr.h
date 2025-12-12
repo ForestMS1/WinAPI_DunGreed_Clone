@@ -11,6 +11,7 @@ public:
 	Image* Find_Png(wstring ImgKey);
 	void Insert_Bmp(wstring FilePath, wstring ImgKey);
 	void Insert_Png(wstring FilePath, wstring ImgKey);
+	void Insert_AlphaBmp(wstring FilePath, wstring ImgKey);
 	void Release();
 
 

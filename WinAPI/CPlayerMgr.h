@@ -32,6 +32,8 @@ public:
 	void SetGold(float gold) { m_iGold = gold; }
 	void SetMaxSatiety(float maxSatiety) { m_fMaxSatiety = maxSatiety; }
 	void SetCurSatiety(float curSatiety) { m_fCurSatiety = curSatiety; }
+	void GetDropGold(int gold) { m_iGold += gold; }
+
 
 	float GetMaxHp() const { return m_fMaxHp; }
 	float GetCurHp() const { return m_fCurHp; }

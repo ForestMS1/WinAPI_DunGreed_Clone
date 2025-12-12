@@ -97,6 +97,7 @@ private:
 	bool				m_bDash;
 	Vec2				m_vDashDir;
 	float				m_fDashRadian;
+	int					m_iDashFXCount;
 
 	// АјАн
 	bool				m_bAttack;

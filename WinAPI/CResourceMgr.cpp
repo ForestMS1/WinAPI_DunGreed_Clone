@@ -39,6 +39,18 @@ void CResourceMgr::Insert_Bmp(wstring FilePath, wstring ImgKey)
     m_mapBit.insert({ ImgKey, pBit });
 }
 
+void CResourceMgr::Insert_AlphaBmp(wstring FilePath, wstring ImgKey)
+{
+    if (m_mapBit.find(ImgKey) != m_mapBit.end())
+        return;
+
+    CMyBit* pBit = new CMyBit;
+
+    pBit->Load_AlphaBmp(FilePath);
+
+    m_mapBit.insert({ ImgKey, pBit });
+}
+
 void CResourceMgr::Insert_Png(wstring FilePath, wstring ImgKey)
 {
     if (m_mapImg.find(ImgKey) != m_mapImg.end())
@@ -66,3 +78,5 @@ void CResourceMgr::Release()
     }
     m_mapBit.clear();
 }
+
+

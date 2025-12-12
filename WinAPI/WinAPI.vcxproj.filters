@@ -286,6 +286,9 @@
     <Filter Include="Object\Item\Gold">
       <UniqueIdentifier>{d3088296-b88d-4ef0-b86d-d41470b1c3b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\DashFX">
+      <UniqueIdentifier>{15df5aa5-ea20-40c7-939b-8813fc1d4948}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -570,6 +573,9 @@
     <ClInclude Include="CGold.h">
       <Filter>Object\Item\Gold</Filter>
     </ClInclude>
+    <ClInclude Include="CDashFX.h">
+      <Filter>Object\DashFX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -817,6 +823,9 @@
     </ClCompile>
     <ClCompile Include="CGold.cpp">
       <Filter>Object\Item\Gold</Filter>
+    </ClCompile>
+    <ClCompile Include="CDashFX.cpp">
+      <Filter>Object\DashFX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,37 +12,47 @@ CBelialBullet::~CBelialBullet()
 
 void CBelialBullet::Initialize()
 {
-	m_tInfo.fCX = 39.f;
-	m_tInfo.fCY = 39.f;
-
 	m_fSpeed = 5.f;
 	m_fDamage = 3.f;
 
-	m_iFrameWidth = 39.f;
-	m_iFrameHeight = 39.f;
-
+	m_iFrameWidth = 39;
+	m_iFrameHeight = 39;
+	m_tInfo.fCX = m_iFrameWidth;
+	m_tInfo.fCY = m_iFrameHeight;
 	m_tFrame.iStart = 0;
 	m_tFrame.iEnd = 1;
 	m_tFrame.iMotion = 0;
 	m_tFrame.dwSpeed = 100.f;
 	m_tFrame.dwTime = GetTickCount();
+	m_wsFrameKey = L"BossBullet";
 
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/BossBullet.bmp", L"BossBullet");
-	m_wsFrameKey = L"BossBullet";
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/BossBulletEffect.bmp", L"BossBulletEffect");
+	m_ePreState = IDLE;
+	m_eCurState = IDLE;
 }
 
 int CBelialBullet::Update()
 {
-	CBullet::Update();
-	m_tInfo.fX += m_fSpeed * cosf(m_fAngle * PI /180.f);
-	m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * PI / 180.f);
 	if (m_bIsDead)
-		return OBJ_DEAD;
+	{
+		Move_Frame_No_Loop();
+		m_eCurState = DEAD;
+		if (m_tFrame.iStart >= m_tFrame.iEnd)
+			return OBJ_DEAD;
+	}
+	else
+	{
+		CBullet::Update();
+		m_tInfo.fX += m_fSpeed * cosf(m_fAngle * PI / 180.f);
+		m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * PI / 180.f);
+	}
 	return 0;
 }
 
 void CBelialBullet::Late_Update()
 {
+	Motion_Change();
 }
 
 void CBelialBullet::Render(HDC hDC)
@@ -68,4 +78,42 @@ void CBelialBullet::Render(HDC hDC)
 
 void CBelialBullet::Release()
 {
+}
+
+void CBelialBullet::Motion_Change()
+{
+	if (m_ePreState != m_eCurState)
+	{
+		switch (m_eCurState)
+		{
+		case IDLE:
+			m_iFrameWidth = 39;
+			m_iFrameHeight = 39;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 1;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_wsFrameKey = L"BossBullet";
+			break;
+		case DEAD:
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 7;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_iFrameWidth = 312 / 8;
+			m_iFrameHeight = 39;
+			m_tInfo.fCX = m_iFrameWidth;
+			m_tInfo.fCY = m_iFrameHeight;
+			m_wsFrameKey = L"BossBulletEffect";
+			break;
+		default:
+			break;
+		}
+
+		m_ePreState = m_eCurState;
+	}
 }

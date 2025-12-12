@@ -3,6 +3,8 @@
 class CBelialBullet :
     public CEnemyBullet
 {
+private:
+    enum STATE { IDLE, DEAD, END };
 public:
     CBelialBullet();
     virtual~CBelialBullet();
@@ -13,5 +15,10 @@ public:
     void Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
+
+    void Motion_Change();
+private:
+    STATE m_eCurState;
+    STATE m_ePreState;
 };
 

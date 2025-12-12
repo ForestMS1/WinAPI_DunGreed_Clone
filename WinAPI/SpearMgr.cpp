@@ -21,7 +21,7 @@ SpearMgr::~SpearMgr()
 
 void SpearMgr::Initialize()
 {
-	float offsetY = 300.f;
+	float offsetY = 100.f;
 	m_tInfo.fX = m_pOwner->Get_Info()->fX;
 	m_tInfo.fY = m_pOwner->Get_Info()->fY - offsetY;
 	m_tInfo.fCX = 900.f;

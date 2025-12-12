@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "CBelial.h"
 #include "CBelialBullet.h"
+#include "CBelialUI.h"
 
 CBelial::CBelial() : m_pRHand(nullptr), m_pLHand(nullptr), m_dwRotateAttackTick(GetTickCount())
 , m_pSpearMgr(nullptr), m_dwHandAttackTick(GetTickCount()), HandAttack(false), m_bPlayBossBGM(false)
-, m_bIntro(false)
+, m_bIntro(false), m_pHpBarUI(nullptr)
 {
 }
 
@@ -71,6 +72,13 @@ void CBelial::Initialize()
 
 	m_SpawnEffectStartTime = GetTickCount();
 
+	//UI
+	if (m_pHpBarUI == nullptr)
+		m_pHpBarUI = new CBelialUI(this);
+	m_pHpBarUI->Initialize();
+	if (m_pHpBarUI != nullptr)
+		m_pHpBarUI->Close();
+
 	AddFontResource(TEXT("Aa카시오페아"));
 	m_hFont = CreateFont(100, 0, 0, 0, 0, 0, 0, 0,
 		HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("Aa카시오페아"));
@@ -122,6 +130,8 @@ int CBelial::Update()
 	{
 		GET(CCamera)->SetTarget(GET(CPlayerMgr)->GetPlayer());
 		m_bIntro = false;
+		//if (m_pHpBarUI != nullptr)
+		//	m_pHpBarUI->Open();
 	}
 
 	if (m_SpawnEffectStartTime + 9000 < GetTickCount() && m_dwChangePattern + 7000 < GetTickCount())
@@ -139,6 +149,9 @@ int CBelial::Update()
 		m_bIsHit = false;
 	}
 
+	if (m_pHpBarUI != nullptr)
+		m_pHpBarUI->Update();
+
 	return OBJ_NOEVENT;
 }
 
@@ -152,6 +165,8 @@ void CBelial::Late_Update()
 		m_pLHand->Late_Update();
 	if (m_pSpearMgr != nullptr)
 		m_pSpearMgr->Late_Update();
+	if (m_pHpBarUI != nullptr)
+		m_pHpBarUI->Late_Update();
 }
 
 void CBelial::Render(HDC hDC)
@@ -239,6 +254,7 @@ void CBelial::Render(HDC hDC)
 	if (m_bIntro)
 	{
 		GET(CUIMgr)->Find_UI(L"PlayerUI")->Close();
+		m_pHpBarUI->Close();
 		//HFONT hOldFont = (HFONT)SelectObject(hDC, m_hFont);
 		//wstring text = L"벨 리 알";
 		//SetBkMode(hDC, TRANSPARENT);
@@ -247,7 +263,14 @@ void CBelial::Render(HDC hDC)
 		//SelectObject(hDC, hOldFont);
 	}
 	else
+	{
 		GET(CUIMgr)->Find_UI(L"PlayerUI")->Open();
+		if(m_SpawnEffectStartTime + 7000 < GetTickCount())
+			m_pHpBarUI->Open();
+	}
+
+	if (m_pHpBarUI != nullptr)
+		m_pHpBarUI->Render(hDC);
 }
 
 void CBelial::Release()

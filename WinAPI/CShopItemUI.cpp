@@ -36,6 +36,9 @@ int CShopItemUI::Update()
 {
 	__super::Update_Rect();
 
+	if (!m_bIsOpen)
+		return 0;
+
 	if (PtInRect(&m_tRect, GET(CMouse)->Get_Point()))
 	{
 		m_bMouseOn = true;

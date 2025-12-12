@@ -5,7 +5,8 @@ CDashFX::CDashFX(float fX, float fY) : m_ft(0.f) , m_bAlpha(255)
 {
 	m_tInfo.fX = fX;
 	m_tInfo.fY = fY;
-	m_eRender = EFFECT;
+	//m_eRender = EFFECT;
+	m_eRender = GAMEOBJECT;
 	m_dwSpawnTime = GetTickCount();
 	m_dwLifeTime = 500;
 }

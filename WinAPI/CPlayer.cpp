@@ -390,12 +390,17 @@ void CPlayer::Dash()
 		m_tInfo.fX += m_fDashSpeed * cosf(m_fDashRadian) * (m_fDashAcct - m_fDasht);
 			if (!(m_IsOnBlock && sinf(m_fDashRadian) < 0))
 				m_tInfo.fY -= m_fDashSpeed * sinf(m_fDashRadian) * (m_fDashAcct - m_fDasht);
-		CDashFX* pDashFX = new CDashFX(m_tInfo.fX, m_tInfo.fY + 10);
-		pDashFX->Initialize();
-		if (m_iDashFXCount < 15)
+
+		if (m_dwDashFXTick + 40 < GetTickCount())
 		{
-			GET(CObjMgr)->AddObject(OBJ_EFFECT, pDashFX);
-			m_iDashFXCount++;
+			CDashFX* pDashFX = new CDashFX(m_tInfo.fX, m_tInfo.fY + 10);
+			pDashFX->Initialize();
+			if (m_iDashFXCount < 10)
+			{
+				GET(CObjMgr)->AddObject(OBJ_EFFECT, pDashFX);
+				m_iDashFXCount++;
+			}
+			m_dwDashFXTick = GetTickCount();
 		}
 	}
 	else

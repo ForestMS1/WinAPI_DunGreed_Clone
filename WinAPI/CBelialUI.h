@@ -4,7 +4,7 @@ class CBelialUI :
     public CUI
 {
 public:
-	CBelialUI();
+	CBelialUI(CObj* pOwner);
 	virtual ~CBelialUI();
 public:
 	// CUI을(를) 통해 상속됨
@@ -20,6 +20,8 @@ public:
 
 
 private:
-
+	CObj* m_pOwner;
+	float m_fMaxHp;
+	float m_fCurHp;
 };
 

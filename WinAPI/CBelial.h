@@ -30,6 +30,8 @@ private:
     CBelialRHand* m_pRHand;
     CBelialLHand* m_pLHand;
 
+    CUI* m_pHpBarUI;
+
     //spear
     SpearMgr* m_pSpearMgr;
 

@@ -30,8 +30,12 @@ int CItem::Update()
 
 void CItem::Late_Update()
 {
-	if(m_bIsDrop)
+	if (m_bIsDrop)
+	{
 		CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
+		float py;
+		GET(CLineMgr)->Collision_Line(this, &py);
+	}
 }
 
 void CItem::Render(HDC hDC)

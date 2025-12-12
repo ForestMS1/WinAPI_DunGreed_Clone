@@ -33,11 +33,16 @@ int CEnemyHpBarUI::Update()
 {
     m_fCurHp = m_pOwner->Get_CurHp();
 
+    float offsetY = m_pOwner->Get_Info()->fCY * 0.5f;
+    m_tInfo.fX = m_pOwner->Get_Info()->fX;
+    m_tInfo.fY = m_pOwner->Get_Info()->fY + offsetY;
+    __super::Update_Rect();
 	return 0;
 }
 
 void CEnemyHpBarUI::Late_Update()
 {
+
 }
 
 void CEnemyHpBarUI::Render(HDC hDC)

@@ -150,6 +150,7 @@
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CBanshee.h" />
     <ClInclude Include="CBansheeBullet.h" />
+    <ClInclude Include="CBat.h" />
     <ClInclude Include="CBatBullet.h" />
     <ClInclude Include="CBelial.h" />
     <ClInclude Include="CBelialBullet.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="CBelialScene.h" />
     <ClInclude Include="CBelialSpear.h" />
     <ClInclude Include="CBelialUI.h" />
+    <ClInclude Include="CBigWhiteSkel.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCell.h" />
@@ -185,6 +187,7 @@
     <ClInclude Include="CInventoryUI.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CLaser.h" />
+    <ClInclude Include="CLittleGhost.h" />
     <ClInclude Include="CMapTileOptionUI.h" />
     <ClInclude Include="CMouse.h" />
     <ClInclude Include="CNPC.h" />
@@ -249,6 +252,7 @@
     <ClCompile Include="CAbstractFactory.cpp" />
     <ClCompile Include="CBanshee.cpp" />
     <ClCompile Include="CBansheeBullet.cpp" />
+    <ClCompile Include="CBat.cpp" />
     <ClCompile Include="CBatBullet.cpp" />
     <ClCompile Include="CBelial.cpp" />
     <ClCompile Include="CBelialBullet.cpp" />
@@ -257,6 +261,7 @@
     <ClCompile Include="CBelialScene.cpp" />
     <ClCompile Include="CBelialSpear.cpp" />
     <ClCompile Include="CBelialUI.cpp" />
+    <ClCompile Include="CBigWhiteSkel.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCell.cpp" />
@@ -284,6 +289,7 @@
     <ClCompile Include="CInventoryUI.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CLaser.cpp" />
+    <ClCompile Include="CLittleGhost.cpp" />
     <ClCompile Include="CMapTileOptionUI.cpp" />
     <ClCompile Include="CMouse.cpp" />
     <ClCompile Include="CNPC.cpp" />

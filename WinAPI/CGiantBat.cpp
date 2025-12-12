@@ -17,9 +17,6 @@ void CGiantBat::Initialize()
 	m_fMaxHp = 500.f;
 	m_fCurHp = m_fMaxHp;
 
-	m_tInfo.fX = 500.f;
-	m_tInfo.fY = 400.f;
-
 	//플레이어 감지 범위
 	m_fDetectfCX = 700.f;
 	m_fDetectfCY = 700.f;
@@ -100,42 +97,27 @@ void CGiantBat::Late_Update()
 void CGiantBat::Render(HDC hDC)
 {
 	CEnemy::Render(hDC);
-	int ScrollX = (int)GET(CCamera)->Get_ScrollX();
-	int ScrollY = (int)GET(CCamera)->Get_ScrollY();
-	if (g_bDebugMod)
+
+	if (!m_bIsHit)
 	{
-		Rectangle(hDC, m_tRect.left - ScrollX, m_tRect.top - ScrollY, m_tRect.right - ScrollX, m_tRect.bottom - ScrollY);
+		int ScrollX = (int)GET(CCamera)->Get_ScrollX();
+		int ScrollY = (int)GET(CCamera)->Get_ScrollY();
+		if (g_bDebugMod)
+		{
+			Rectangle(hDC, m_tRect.left - ScrollX, m_tRect.top - ScrollY, m_tRect.right - ScrollX, m_tRect.bottom - ScrollY);
 
-		HPEN hPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255));
-		hPen = (HPEN)SelectObject(hDC, hPen);
-		MoveToEx(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.top - ScrollY, nullptr);
-		LineTo(hDC, m_tDetectRect.right - ScrollX, m_tDetectRect.top - ScrollY);
-		LineTo(hDC, m_tDetectRect.right - ScrollX, m_tDetectRect.bottom - ScrollY);
-		LineTo(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.bottom - ScrollY);
-		LineTo(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.top - ScrollY);
-		hPen = (HPEN)SelectObject(hDC, hPen);
-		DeleteObject(hPen);
-	}
+			HPEN hPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255));
+			hPen = (HPEN)SelectObject(hDC, hPen);
+			MoveToEx(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.top - ScrollY, nullptr);
+			LineTo(hDC, m_tDetectRect.right - ScrollX, m_tDetectRect.top - ScrollY);
+			LineTo(hDC, m_tDetectRect.right - ScrollX, m_tDetectRect.bottom - ScrollY);
+			LineTo(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.bottom - ScrollY);
+			LineTo(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.top - ScrollY);
+			hPen = (HPEN)SelectObject(hDC, hPen);
+			DeleteObject(hPen);
+		}
 
-	HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
-
-	GdiTransparentBlt(
-		hDC,
-		m_tRect.left - ScrollX,
-		m_tRect.top - ScrollY,
-		m_iFrameWidth,
-		m_iFrameHeight,
-		hMemDC,
-		m_iFrameWidth * m_tFrame.iStart,
-		m_iFrameHeight * m_tFrame.iMotion,
-		m_iFrameWidth,
-		m_iFrameHeight,
-		RGB(255, 0, 255)
-	);
-
-	if (m_bIsHit)
-	{
-		HDC hHitDC = GET(CResourceMgr)->Find_Bmp(L"SkellIdleHit");
+		HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
 
 		GdiTransparentBlt(
 			hDC,
@@ -143,7 +125,7 @@ void CGiantBat::Render(HDC hDC)
 			m_tRect.top - ScrollY,
 			m_iFrameWidth,
 			m_iFrameHeight,
-			hHitDC,
+			hMemDC,
 			m_iFrameWidth * m_tFrame.iStart,
 			m_iFrameHeight * m_tFrame.iMotion,
 			m_iFrameWidth,

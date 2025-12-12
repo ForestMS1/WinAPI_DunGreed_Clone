@@ -7,7 +7,7 @@ class CEnemy :
     public CUnit
 {
 protected:
-    enum STATE { SPAWN, IDLE, ATTACK, DEAD, END };
+    enum STATE { SPAWN, IDLE, ATTACK, MOVE, DEAD, END };
 public:
     CEnemy();
     virtual ~CEnemy();

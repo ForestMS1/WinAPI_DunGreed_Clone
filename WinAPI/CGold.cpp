@@ -13,8 +13,8 @@ CGold::CGold(int gold, float fX, float fY) : m_fSpeed(5.f), m_bIsGot(false)
 	m_tInfo.fY = fY;
 
 	//플레이어 감지 범위
-	m_fDetectfCX = 400.f;
-	m_fDetectfCY = 400.f;
+	m_fDetectfCX = 300.f;
+	m_fDetectfCY = 150.f;
 }
 
 CGold::~CGold()

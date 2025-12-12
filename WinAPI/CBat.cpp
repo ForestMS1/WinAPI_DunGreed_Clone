@@ -1,24 +1,21 @@
 #include "pch.h"
-#include "CBanshee.h"
-#include "CBansheeBullet.h"
-CBanshee::CBanshee()
+#include "CBat.h"
+#include "CBatBullet.h"
+CBat::CBat()
 {
 }
 
-CBanshee::~CBanshee()
+CBat::~CBat()
 {
 	Release();
 }
 
-void CBanshee::Initialize()
+void CBat::Initialize()
 {
 	CEnemy::Initialize();
 
-	m_fMaxHp = 100.f;
+	m_fMaxHp = 500.f;
 	m_fCurHp = m_fMaxHp;
-
-	//m_tInfo.fX = 700.f;
-	//m_tInfo.fY = 400.f;
 
 	//플레이어 감지 범위
 	m_fDetectfCX = 700.f;
@@ -28,8 +25,8 @@ void CBanshee::Initialize()
 	m_tFrame.iMotion = 0;
 	m_tFrame.iEnd = 5;
 	m_tFrame.dwSpeed = 100.f;
-	m_iFrameWidth = 60;
-	m_iFrameHeight = 66;
+	m_iFrameWidth = 93;
+	m_iFrameHeight = 60;
 	m_tInfo.fCX = m_iFrameWidth;
 	m_tInfo.fCY = m_iFrameHeight;
 	m_wsFrameKey = L"EnemySpawn";
@@ -37,18 +34,21 @@ void CBanshee::Initialize()
 
 	__super::Update_Rect();
 
-	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Banshee/BansheeIdle.bmp", L"BansheeIdle");
-	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Banshee/BansheeAttack.bmp", L"BansheeAttack");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Bat/BatIdle.bmp", L"BatIdle");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Bat/BatAttack.bmp", L"BatAttack");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/EnemySpawn.bmp", L"EnemySpawn");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/EnemyDie_small.bmp", L"EnemyDie_small");
 
 
 	m_dwAttackTick = GetTickCount();
 
 	m_eCurState = SPAWN;
 	m_wsFrameKey = L"EnemySpawn";
-	m_iDropGold = 25;
+	srand(time(0));
+	m_iDropGold = 25 + (rand() % 10);
 }
 
-int CBanshee::Update()
+int CBat::Update()
 {
 	CEnemy::Update();
 	if (m_eCurState == SPAWN)
@@ -70,8 +70,6 @@ int CBanshee::Update()
 	__super::Update_Rect();
 	Update_DetectRect();
 
-	Attack_CircleBullet();
-
 	Move_Frame();
 
 	if (GET(CPlayerMgr)->GetPlayer()->Get_Info()->fX < m_tInfo.fX)
@@ -80,6 +78,7 @@ int CBanshee::Update()
 		m_tFrame.iMotion = 0;
 
 
+	Attack_CircleBullet();
 
 
 	if (m_bIsHit && m_dwLastHitTime + 10 < GetTickCount())
@@ -90,13 +89,13 @@ int CBanshee::Update()
 	return OBJ_NOEVENT;
 }
 
-void CBanshee::Late_Update()
+void CBat::Late_Update()
 {
 	CEnemy::Late_Update();
 	Motion_Change();
 }
 
-void CBanshee::Render(HDC hDC)
+void CBat::Render(HDC hDC)
 {
 	CEnemy::Render(hDC);
 
@@ -137,12 +136,12 @@ void CBanshee::Render(HDC hDC)
 	}
 }
 
-void CBanshee::Release()
+void CBat::Release()
 {
 
 }
 
-void CBanshee::Motion_Change()
+void CBat::Motion_Change()
 {
 	if (m_ePreState != m_eCurState)
 	{
@@ -155,8 +154,8 @@ void CBanshee::Motion_Change()
 			m_tFrame.dwSpeed = 1000.f;
 			m_iFrameWidth = 124;
 			m_iFrameHeight = 124;
-			m_tInfo.fCX = m_iFrameWidth;
-			m_tInfo.fCY = m_iFrameHeight;
+			m_tInfo.fCX = m_iFrameWidth * 0.5;
+			m_tInfo.fCY = m_iFrameHeight * 0.5;
 			m_wsFrameKey = L"EnemySpawn";
 			m_tFrame.dwTime = GetTickCount();
 			break;
@@ -165,24 +164,25 @@ void CBanshee::Motion_Change()
 			m_tFrame.iMotion = 0;
 			m_tFrame.iEnd = 5;
 			m_tFrame.dwSpeed = 100.f;
-			m_iFrameWidth = 60;
-			m_iFrameHeight = 66;
+			m_iFrameWidth = 93;
+			m_iFrameHeight = 60;
 			m_tInfo.fCX = m_iFrameWidth;
 			m_tInfo.fCY = m_iFrameHeight;
-			m_wsFrameKey = L"BansheeIdle";
+			m_wsFrameKey = L"BatIdle";
 			m_tFrame.dwTime = GetTickCount();
+
 			break;
 
 		case ATTACK:
 			m_tFrame.iStart = 0;
 			m_tFrame.iMotion = 0;
-			m_tFrame.iEnd = 5;
+			m_tFrame.iEnd = 9;
 			m_tFrame.dwSpeed = 100.f;
-			m_iFrameWidth = 60;
-			m_iFrameHeight = 66;
+			m_iFrameWidth = 93;
+			m_iFrameHeight = 60;
 			m_tInfo.fCX = m_iFrameWidth;
 			m_tInfo.fCY = m_iFrameHeight;
-			m_wsFrameKey = L"BansheeAttack";
+			m_wsFrameKey = L"BatAttack";
 			m_tFrame.dwTime = GetTickCount();
 			break;
 		case DEAD:
@@ -192,8 +192,8 @@ void CBanshee::Motion_Change()
 			m_tFrame.dwSpeed = 100.f;
 			m_iFrameWidth = 128;
 			m_iFrameHeight = 128;
-			m_tInfo.fCX = m_iFrameWidth;
-			m_tInfo.fCY = m_iFrameHeight;
+			m_tInfo.fCX = m_iFrameWidth * 0.5;
+			m_tInfo.fCY = m_iFrameHeight * 0.5;
 			m_wsFrameKey = L"EnemyDie_small";
 			m_tFrame.dwTime = GetTickCount();
 			break;
@@ -205,28 +205,18 @@ void CBanshee::Motion_Change()
 
 }
 
-void CBanshee::Attack_CircleBullet()
+void CBat::Attack_CircleBullet()
 {
-	static float angle[8] = { 0.f, 45.f, 90.f, 135.f, 180.f, 225.f, 270.f, 315.f };
-
 	if (m_bIsInPlayer)
 	{
 		CEnemy::ToPlayerAngle();
-		
+
 		//TODO : 5초에 한번씩 플레이어에게 원 총알 발사
-		if (m_dwAttackTick + 3000 < GetTickCount())
+		if (m_dwAttackTick + 500 < GetTickCount())
 		{
-			for (size_t i = 0; i < 8; ++i)
-			{
-				GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET,
-					CAbstractFactory<CBansheeBullet>::CreateBullet(m_tInfo.fX, m_tInfo.fY, angle[i]));
-			}
-			GET(CSoundMgr)->PlaySoundW(L"Banshee_ATK.wav", SOUND_ENEMY_ATTACK, 1.f);
+			GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET,
+				CAbstractFactory<CBatBullet>::CreateBullet(m_tInfo.fX, m_tInfo.fY, m_fAngle * 180.f / PI));
 			m_dwAttackTick = GetTickCount();
 		}
-		else if (GetTickCount() < m_dwAttackTick + 2000)
-			m_eCurState = ATTACK;
-		else if (GetTickCount() > m_dwAttackTick + 2000)
-			m_eCurState = IDLE;
 	}
 }

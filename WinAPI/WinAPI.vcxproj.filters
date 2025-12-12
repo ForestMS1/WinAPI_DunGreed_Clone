@@ -289,6 +289,15 @@
     <Filter Include="Object\DashFX">
       <UniqueIdentifier>{15df5aa5-ea20-40c7-939b-8813fc1d4948}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\Bat">
+      <UniqueIdentifier>{1a48836b-e9fe-435b-8bfc-253fa851db40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy\LittleGhost">
+      <UniqueIdentifier>{29683562-cba9-47ff-8503-07e5cbe1ed4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy\BigWhiteSkel">
+      <UniqueIdentifier>{5fc4391e-a596-4679-9ca6-003912a988d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -576,6 +585,15 @@
     <ClInclude Include="CDashFX.h">
       <Filter>Object\DashFX</Filter>
     </ClInclude>
+    <ClInclude Include="CBat.h">
+      <Filter>Object\Unit\Enemy\Bat</Filter>
+    </ClInclude>
+    <ClInclude Include="CLittleGhost.h">
+      <Filter>Object\Unit\Enemy\LittleGhost</Filter>
+    </ClInclude>
+    <ClInclude Include="CBigWhiteSkel.h">
+      <Filter>Object\Unit\Enemy\BigWhiteSkel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -826,6 +844,15 @@
     </ClCompile>
     <ClCompile Include="CDashFX.cpp">
       <Filter>Object\DashFX</Filter>
+    </ClCompile>
+    <ClCompile Include="CBat.cpp">
+      <Filter>Object\Unit\Enemy\Bat</Filter>
+    </ClCompile>
+    <ClCompile Include="CLittleGhost.cpp">
+      <Filter>Object\Unit\Enemy\LittleGhost</Filter>
+    </ClCompile>
+    <ClCompile Include="CBigWhiteSkel.cpp">
+      <Filter>Object\Unit\Enemy\BigWhiteSkel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

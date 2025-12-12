@@ -9,6 +9,7 @@
 #include "CBat.h"
 #include "CLittleGhost.h"
 #include "CBigWhiteSkel.h"
+#include "CTresure.h"
 CDungeon01::CDungeon01()
 {
 }
@@ -22,11 +23,13 @@ void CDungeon01::Initialize()
 	//아직 클리어 안한 씬에서만 몹 생성
 	if (!m_bIsClearScene)
 	{
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(400.f, 500.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(700.f, 500.f));
 		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
 		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
 		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
 		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
+		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
+
 	}
 	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1300.f, 600.f));
 	GET(CPlayerMgr)->Initialize();

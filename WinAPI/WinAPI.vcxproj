@@ -153,6 +153,7 @@
     <ClInclude Include="CBat.h" />
     <ClInclude Include="CBatBullet.h" />
     <ClInclude Include="CBelial.h" />
+    <ClInclude Include="CBelialBack.h" />
     <ClInclude Include="CBelialBullet.h" />
     <ClInclude Include="CBelialLHand.h" />
     <ClInclude Include="CBelialRHand.h" />
@@ -258,6 +259,7 @@
     <ClCompile Include="CBat.cpp" />
     <ClCompile Include="CBatBullet.cpp" />
     <ClCompile Include="CBelial.cpp" />
+    <ClCompile Include="CBelialBack.cpp" />
     <ClCompile Include="CBelialBullet.cpp" />
     <ClCompile Include="CBelialLHand.cpp" />
     <ClCompile Include="CBelialRHand.cpp" />

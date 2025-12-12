@@ -14,7 +14,7 @@ void CBat::Initialize()
 {
 	CEnemy::Initialize();
 
-	m_fMaxHp = 500.f;
+	m_fMaxHp = 50.f;
 	m_fCurHp = m_fMaxHp;
 
 	//플레이어 감지 범위

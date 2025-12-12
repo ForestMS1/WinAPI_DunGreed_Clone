@@ -18,5 +18,8 @@ private:
 private:
 
     DWORD m_dwAttackTick;
+
+    DWORD m_dwBulletSpawnTime;
+    float m_fBulletSpawnAngle;
 };
 

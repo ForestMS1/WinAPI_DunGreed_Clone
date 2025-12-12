@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CGiantBat.h"
 #include "CBatBullet.h"
-CGiantBat::CGiantBat()
+CGiantBat::CGiantBat() : m_fBulletSpawnAngle(0.f)
 {
 }
 
@@ -14,7 +14,7 @@ void CGiantBat::Initialize()
 {
 	CEnemy::Initialize();
 
-	m_fMaxHp = 500.f;
+	m_fMaxHp = 200.f;
 	m_fCurHp = m_fMaxHp;
 
 	//플레이어 감지 범위
@@ -66,7 +66,15 @@ int CGiantBat::Update()
 		m_eCurState = DEAD;
 		DeadEffect();
 		if (m_tFrame.iStart >= m_tFrame.iEnd)
+		{
+			for (auto& pBullet : GET(CObjMgr)->GetObjLayer(OBJ_ENEMY_BULLET))
+			{
+				//GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET, pBullet);
+				if (dynamic_cast<CBatBullet*>(pBullet) != nullptr)
+					dynamic_cast<CBatBullet*>(pBullet)->SetMove();
+			}
 			return OBJ_DEAD;
+		}
 		else
 			return 0;
 	}
@@ -78,7 +86,7 @@ int CGiantBat::Update()
 	else
 		m_tFrame.iMotion = 0;
 
-
+	CEnemy::ToPlayerAngle();
 	Attack_CircleBullet();
 
 
@@ -209,14 +217,36 @@ void CGiantBat::Attack_CircleBullet()
 {
 	if (m_bIsInPlayer)
 	{
-		CEnemy::ToPlayerAngle();
+		static float ToPlayerAngle = m_fAngle;
 
 		//TODO : 5초에 한번씩 플레이어에게 원 총알 발사
-		if (m_dwAttackTick + 500 < GetTickCount())
-		{
-			GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET,
-				CAbstractFactory<CBatBullet>::CreateBullet(m_tInfo.fX, m_tInfo.fY, m_fAngle * 180.f/PI));
-			m_dwAttackTick = GetTickCount();
-		}
+		//if (m_dwAttackTick + 5000 < GetTickCount())
+		//{
+			//0.25초마다 총알 생성
+			if (m_dwBulletSpawnTime + 250 < GetTickCount() && m_fBulletSpawnAngle < 360.f)
+			{
+				float dist = m_tInfo.fCX * 0.5f;
+				float fX = m_tInfo.fX + dist*cosf(m_fBulletSpawnAngle * PI / 180.f);
+				float fY = m_tInfo.fY + dist*sinf(m_fBulletSpawnAngle * PI / 180.f);
+				CBullet* pBullet = CAbstractFactory<CBatBullet>::CreateBullet(fX, fY, ToPlayerAngle * 180.f / PI);
+				dynamic_cast<CBatBullet*>(pBullet)->SetNoMove();
+				GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET, pBullet);
+				m_fBulletSpawnAngle += 45.f;
+				m_dwBulletSpawnTime = GetTickCount();
+			}
+
+			if (m_fBulletSpawnAngle >= 360.f)
+			{
+				// 발사
+				for (auto& pBullet : GET(CObjMgr)->GetObjLayer(OBJ_ENEMY_BULLET))
+				{
+					//GET(CObjMgr)->AddObject(OBJ_ENEMY_BULLET, pBullet);
+					if (dynamic_cast<CBatBullet*>(pBullet) != nullptr)
+						dynamic_cast<CBatBullet*>(pBullet)->SetMove();
+				}
+				m_fBulletSpawnAngle = 0.f;
+			}
+			//m_dwAttackTick = GetTickCount();
+		//}
 	}
 }

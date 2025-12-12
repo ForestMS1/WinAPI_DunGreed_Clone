@@ -16,7 +16,7 @@ CBelial::~CBelial()
 
 void CBelial::Initialize()
 {
-	m_fMaxHp = 100.f;
+	m_fMaxHp = 1000.f;
 	m_fCurHp = m_fMaxHp;
 
 	m_iDropGold = 125 + rand() % 20;
@@ -44,6 +44,7 @@ void CBelial::Initialize()
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossBack.bmp", L"SkellBossBack");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossIdleHit.bmp", L"SkellIdleHit");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossAttackHit.bmp", L"SkellBossAttackHit");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/Belial/SkellBossDead.bmp", L"SkellBossDead");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BossIntro.bmp", L"BossIntro");
 
 
@@ -81,6 +82,24 @@ void CBelial::Initialize()
 	if (m_pHpBarUI != nullptr)
 		m_pHpBarUI->Close();
 
+	// 백
+	if (m_vecBack.empty())
+	{
+		CBelialBack* pBack = new CBelialBack(this, 0, 0);
+		m_vecBack.push_back(pBack);
+		pBack = new CBelialBack(this, 20, 100);
+		m_vecBack.push_back(pBack);
+		pBack = new CBelialBack(this, 80, 50);
+		m_vecBack.push_back(pBack);
+		pBack = new CBelialBack(this, 60, 75);
+		m_vecBack.push_back(pBack);
+	}
+	for (auto& pBack : m_vecBack)
+	{
+		if (pBack != nullptr)
+			pBack->Initialize();
+	}
+
 	AddFontResource(TEXT("Aa카시오페아"));
 	m_hFont = CreateFont(100, 0, 0, 0, 0, 0, 0, 0,
 		HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("Aa카시오페아"));
@@ -93,11 +112,19 @@ int CBelial::Update()
 		m_bIsDead = true;
 		m_eBelialCurState = BELIAL_DEAD;
 
+		m_DeadEffectTime += 0.01;
 		// 리턴하기전에 딜레이 줘야할듯?
-		
-		//return OBJ_NOEVENT;
-		GET(CSoundMgr)->StopSound(SOUND_BGM);
-		return OBJ_DEAD;
+		if (m_DeadEffectTime < 3.f)
+		{
+			DeadEffect();
+			float py(0.f);
+			GET(CLineMgr)->Collision_Line(this, &py);
+		}
+		else
+		{
+			GET(CSoundMgr)->StopSound(SOUND_BGM);
+			return OBJ_DEAD;
+		}
 	}
 	__super::Update_Rect();
 	Update_DetectRect();
@@ -114,6 +141,11 @@ int CBelial::Update()
 		m_pLHand->Update();
 	if (m_pSpearMgr != nullptr)
 		m_pSpearMgr->Update();
+	for (auto& pBack : m_vecBack)
+	{
+		if (pBack != nullptr)
+			pBack->Update();
+	}
 
 	if (m_bIsInPlayer && m_SpawnEffectStartTime < GetTickCount() && GetTickCount() < m_SpawnEffectStartTime + 7000)
 	{
@@ -176,6 +208,11 @@ void CBelial::Late_Update()
 		m_pSpearMgr->Late_Update();
 	if (m_pHpBarUI != nullptr)
 		m_pHpBarUI->Late_Update();
+	for (auto& pBack : m_vecBack)
+	{
+		if (pBack != nullptr)
+			pBack->Late_Update();
+	}
 }
 
 void CBelial::Render(HDC hDC)
@@ -195,6 +232,12 @@ void CBelial::Render(HDC hDC)
 		LineTo(hDC, m_tDetectRect.left - ScrollX, m_tDetectRect.top - ScrollY);
 		hPen = (HPEN)SelectObject(hDC, hPen);
 		DeleteObject(hPen);
+	}
+
+	for (auto& pBack : m_vecBack)
+	{
+		if (pBack != nullptr)
+			pBack->Render(hDC);
 	}
 
 	if (m_bIntro)
@@ -348,13 +391,13 @@ void CBelial::Motion_Change()
 			m_tInfo.fCY = m_iFrameHeight;
 			break;
 		case BELIAL_STATE::BELIAL_DEAD:
-			m_tFrame.iStart = 3;
-			m_tFrame.iEnd = 3;
+			m_tFrame.iStart = 0;
+			m_tFrame.iEnd = 0;
 			m_tFrame.dwSpeed = 100;
 			m_tFrame.dwTime = GetTickCount();
-			m_wsFrameKey = L"BelialAttack";
-			m_iFrameWidth = 210.f;
-			m_iFrameHeight = 384.f;
+			m_wsFrameKey = L"SkellBossDead";
+			m_iFrameWidth = 210;
+			m_iFrameHeight = 231;
 			m_tInfo.fCX = m_iFrameWidth;
 			m_tInfo.fCY = m_iFrameHeight;
 			break;
@@ -433,5 +476,17 @@ void CBelial::Attack_Hand()
 		m_pRHand->SetActive(isRightHandOn);
 		m_pLHand->SetActive(!isRightHandOn);
 		m_dwHandAttackTick = GetTickCount();
+	}
+}
+
+void CBelial::DeadEffect()
+{
+
+	m_tInfo.fY += 1.f;
+
+	if (m_bIsSpawnSound)
+	{
+		GET(CSoundMgr)->PlaySoundW(L"MonsterDie.wav", SOUND_EFFECT, 1.f);
+		m_bIsSpawnSound = false;
 	}
 }

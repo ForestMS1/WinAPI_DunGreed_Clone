@@ -14,7 +14,7 @@ CGold::CGold(int gold, float fX, float fY) : m_fSpeed(5.f), m_bIsGot(false)
 
 	m_fBurstAngle = (float)(rand() % 360);
 	m_fBurstSpeed = (float)(rand() % 3 + 10);
-	m_dwBurstEnd = GetTickCount() + 100;
+	m_dwBurstEnd = GetTickCount() + 300;
 
 }
 

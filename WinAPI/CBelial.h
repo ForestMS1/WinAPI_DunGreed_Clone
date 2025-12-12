@@ -3,6 +3,7 @@
 #include "CBelialRHand.h"
 #include "CBelialLHand.h"
 #include "SpearMgr.h"
+#include "CBelialBack.h"
 
 class CBelial :
     public CEnemy
@@ -24,6 +25,7 @@ private:
     void Motion_Change() override;
     void Attack_Rotate();
     void Attack_Hand();
+    void DeadEffect();
 private:
     BELIAL_STATE m_eBelailPreState;
     BELIAL_STATE m_eBelialCurState;
@@ -31,6 +33,7 @@ private:
     //스읍... 이게 맞나 너무 하드코딩같지만 일단 끼워
     CBelialRHand* m_pRHand;
     CBelialLHand* m_pLHand;
+    vector<CBelialBack*> m_vecBack;
 
     CUI* m_pHpBarUI;
 
@@ -51,6 +54,7 @@ private:
 
     DWORD m_SpawnEffectStartTime;
     bool m_bPlayBossBGM;
+    float m_DeadEffectTime;
 
     bool m_bIntro;
     HFONT m_hFont;

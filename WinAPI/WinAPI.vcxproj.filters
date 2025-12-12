@@ -307,6 +307,9 @@
     <Filter Include="Object\Unit\NPC\Tresure">
       <UniqueIdentifier>{f62775fa-5474-4be8-b49f-7bd1c81e7477}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\Belial\BelialBack">
+      <UniqueIdentifier>{fbe724f5-99e7-463e-b9f6-bc3ff139ca83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -612,6 +615,9 @@
     <ClInclude Include="CTresure.h">
       <Filter>Object\Unit\NPC\Tresure</Filter>
     </ClInclude>
+    <ClInclude Include="CBelialBack.h">
+      <Filter>Object\Unit\Enemy\Belial\BelialBack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -880,6 +886,9 @@
     </ClCompile>
     <ClCompile Include="CTresure.cpp">
       <Filter>Object\Unit\NPC\Tresure</Filter>
+    </ClCompile>
+    <ClCompile Include="CBelialBack.cpp">
+      <Filter>Object\Unit\Enemy\Belial\BelialBack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

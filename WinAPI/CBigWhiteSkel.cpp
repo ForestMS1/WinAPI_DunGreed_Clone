@@ -16,7 +16,7 @@ void CBigWhiteSkel::Initialize()
 {
 	CEnemy::Initialize();
 
-	m_fMaxHp = 500.f;
+	m_fMaxHp = 300.f;
 	m_fCurHp = m_fMaxHp;
 
 	m_fSpeed = 4.f;

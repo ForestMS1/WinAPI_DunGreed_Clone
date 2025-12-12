@@ -16,8 +16,13 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
     void Motion_Change();
+
+    void SetNoMove() { m_bNoMove = true; }
+    void SetMove() { m_bNoMove = false; }
 private:
     STATE m_eCurState;
     STATE m_ePreState;
+
+    bool m_bNoMove;
 };
 

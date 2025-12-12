@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CBatBullet.h"
 
-CBatBullet::CBatBullet() :m_ePreState(END), m_eCurState(IDLE)
+CBatBullet::CBatBullet() :m_ePreState(END), m_eCurState(IDLE), m_bNoMove(false)
 {
 }
 
@@ -44,6 +44,8 @@ int CBatBullet::Update()
 	else
 	{
 		CBullet::Update();
+		if (m_bNoMove)
+			return 0;
 		m_tInfo.fX += m_fSpeed * cosf(m_fAngle * PI / 180.f);
 		m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * PI / 180.f);
 	}

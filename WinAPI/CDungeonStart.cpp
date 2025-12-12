@@ -5,6 +5,7 @@
 #include "CPlayerUI.h"
 #include "CInventoryUI.h"
 #include "CDoor.h"
+#include "CTresure.h"
 CDungeonStart::CDungeonStart()
 {
 }
@@ -17,6 +18,7 @@ void CDungeonStart::Initialize()
 {
 	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(500.f, 600.f));
 	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(600.f, 600.f));
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();

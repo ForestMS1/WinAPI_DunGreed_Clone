@@ -228,6 +228,7 @@
     <ClInclude Include="CTileMgr.h" />
     <ClInclude Include="CTileOptionBtn.h" />
     <ClInclude Include="CTimeMgr.h" />
+    <ClInclude Include="CTresure.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CUIMgr.h" />
     <ClInclude Include="CUnit.h" />
@@ -332,6 +333,7 @@
     <ClCompile Include="CTileMgr.cpp" />
     <ClCompile Include="CTileOptionBtn.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
+    <ClCompile Include="CTresure.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CUIMgr.cpp" />
     <ClCompile Include="CUnit.cpp" />

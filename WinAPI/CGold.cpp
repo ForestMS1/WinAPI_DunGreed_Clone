@@ -16,9 +16,6 @@ CGold::CGold(int gold, float fX, float fY) : m_fSpeed(5.f), m_bIsGot(false)
 	m_fBurstSpeed = (float)(rand() % 3 + 10);
 	m_dwBurstEnd = GetTickCount() + 100;
 
-	//플레이어 감지 범위
-	m_fDetectfCX = 300.f;
-	m_fDetectfCY = 150.f;
 }
 
 CGold::~CGold()
@@ -31,6 +28,10 @@ void CGold::Initialize()
 	m_iFrameHeight = 21;
 	m_tInfo.fCX = m_iFrameWidth;
 	m_tInfo.fCY = m_iFrameHeight;
+
+	//플레이어 감지 범위
+	m_fDetectfCX = m_tInfo.fCX * 4;
+	m_fDetectfCY = m_tInfo.fCY * 4;
 
 	m_tFrame.iStart = 0;
 	m_tFrame.iMotion = 0;

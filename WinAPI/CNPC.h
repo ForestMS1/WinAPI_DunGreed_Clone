@@ -17,6 +17,8 @@ public:
     RECT* GetDetectRect() { return &m_tDetectRect; }
     void InPlayer() { m_bIsInPlayer = true; }
     void OutPlayer() { m_bIsInPlayer = false; }
+
+    void DropGold(int gold);
 protected:
     //플레이어를 감지 할 범위
     RECT  m_tDetectRect;

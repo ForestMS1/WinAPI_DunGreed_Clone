@@ -27,6 +27,10 @@ void CNPCKeyUI::Initialize()
 
 int CNPCKeyUI::Update()
 {
+    float offsetY = m_pOwner->Get_Info()->fCY;
+    m_tInfo.fX = m_pOwner->Get_Info()->fX;
+    m_tInfo.fY = m_pOwner->Get_Info()->fY - offsetY;
+    __super::Update_Rect();
 
     return 0;
 }

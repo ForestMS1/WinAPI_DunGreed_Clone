@@ -304,6 +304,9 @@
     <Filter Include="Object\Unit\Enemy\Skel">
       <UniqueIdentifier>{45865ec3-e762-4415-b375-193453cd96e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\NPC\Tresure">
+      <UniqueIdentifier>{f62775fa-5474-4be8-b49f-7bd1c81e7477}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -606,6 +609,9 @@
     <ClInclude Include="CSkel.h">
       <Filter>Object\Unit\Enemy\Skel</Filter>
     </ClInclude>
+    <ClInclude Include="CTresure.h">
+      <Filter>Object\Unit\NPC\Tresure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -871,6 +877,9 @@
     </ClCompile>
     <ClCompile Include="CSkel.cpp">
       <Filter>Object\Unit\Enemy\Skel</Filter>
+    </ClCompile>
+    <ClCompile Include="CTresure.cpp">
+      <Filter>Object\Unit\NPC\Tresure</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

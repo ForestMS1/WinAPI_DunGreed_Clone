@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CNPC.h"
 #include "CNPCKeyUI.h"
+#include "CGold.h"
 
 CNPC::CNPC() : m_fDetectfCX(0.f), m_fDetectfCY(0.f), m_bIsInPlayer(false)
 , m_pKeyUI(nullptr)
@@ -51,4 +52,17 @@ void CNPC::Update_DetectRect()
 	m_tDetectRect.top = m_tInfo.fY - m_fDetectfCY * 0.5f;
 	m_tDetectRect.right = m_tInfo.fX + m_fDetectfCX * 0.5f;
 	m_tDetectRect.bottom = m_tInfo.fY + m_fDetectfCY * 0.5f;
+}
+
+void CNPC::DropGold(int gold)
+{
+
+		//for (size_t i = 0; i < 5; ++i)
+		//{
+	CItem* pGold = new CGold(gold, m_tInfo.fX, m_tInfo.fY);
+	pGold->SetDrop(true);
+	pGold->Initialize();
+	GET(CObjMgr)->AddObject(OBJ_ITEM, pGold);
+		//}
+
 }

@@ -298,6 +298,9 @@
     <Filter Include="Object\Unit\Enemy\BigWhiteSkel">
       <UniqueIdentifier>{5fc4391e-a596-4679-9ca6-003912a988d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Dungeon\DungeonEat">
+      <UniqueIdentifier>{a0c67c77-c096-40d7-a9f4-41cb35144b66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -594,6 +597,9 @@
     <ClInclude Include="CBigWhiteSkel.h">
       <Filter>Object\Unit\Enemy\BigWhiteSkel</Filter>
     </ClInclude>
+    <ClInclude Include="CDungeonEat.h">
+      <Filter>Object\Dungeon\DungeonEat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -853,6 +859,9 @@
     </ClCompile>
     <ClCompile Include="CBigWhiteSkel.cpp">
       <Filter>Object\Unit\Enemy\BigWhiteSkel</Filter>
+    </ClCompile>
+    <ClCompile Include="CDungeonEat.cpp">
+      <Filter>Object\Dungeon\DungeonEat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

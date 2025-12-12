@@ -15,6 +15,7 @@
 #include "CGiantBat.h"
 #include "CBanshee.h"
 #include "CNPC_Giant.h"
+#include "CDungeonEat.h"
 CTest::CTest() : m_bIsDrawing(false)
 {
 	ZeroMemory(&m_ptMouse, sizeof(m_ptMouse));
@@ -44,6 +45,9 @@ void CTest::Initialize()
 	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(500.f, 200.f));
 	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(700.f, 200.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Giant>::Create(4934.f, 414.f));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f, 793.f));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f + 351, 793.f));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f + 351 * 2, 793.f));
 	GET(CObjMgr)->Initialize();
 	GET(CPlayerMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
@@ -75,6 +79,18 @@ void CTest::Late_Update()
 {
 	if(GET(CKeyMgr)->Key_Down('N'))
 		GET(CSceneMgr)->ChangeScene(L"DungeonStart");
+
+	for (auto pEat : GET(CObjMgr)->GetObjLayer(OBJ_NPC))
+	{
+		if (dynamic_cast<CDungeonEat*>(pEat) != nullptr)
+		{
+			if (dynamic_cast<CDungeonEat*>(pEat)->CompleteEat())
+			{
+				GET(CSceneMgr)->ChangeScene(L"DungeonStart");
+				break;
+			}
+		}
+	}
 }
 
 void CTest::Render(HDC hDC)

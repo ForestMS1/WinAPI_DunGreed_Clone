@@ -45,7 +45,7 @@ public:
 		GET(CObjMgr)->AddObject(OBJ_EFFECT, pDamage);
 	}
 	void GetDropGold(int gold);
-
+	void SetNoPlayerRender() { m_bIsNoPlayerRender = true; }
 private:
 	void Key_Input();
 	void Motion_Change();
@@ -109,6 +109,8 @@ private:
 	// 애니메이션 잘라올 사이즈
 	int m_iFrameWidth;
 	int m_iFrameHeight;
+
+	bool m_bIsNoPlayerRender;
 	
 };
 

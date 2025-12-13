@@ -25,6 +25,7 @@
 #include "CDungeon06.h"
 #include "CIceDungeon01.h"
 #include "CDungeon_NifleHeim.h"
+#include "CEndingScene.h"
 
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
@@ -99,6 +100,10 @@ void CMainGame::Initialize()
 	pScene = new CDungeon_NifleHeim;
 	pScene->SetSceneID(SCENE_NIFLEHEIM);
 	GET(CSceneMgr)->CreateScene(L"NifleHeim", pScene);
+
+	pScene = new CEndingScene;
+	pScene->SetSceneID(SCENE_ENDING);
+	GET(CSceneMgr)->CreateScene(L"Ending", pScene);
 	// 최초로 나올 씬
 	GET(CSceneMgr)->ChangeScene(L"Logo");
 

@@ -210,6 +210,7 @@
     <ClInclude Include="CPlayerHpBar.h" />
     <ClInclude Include="CPlayerMgr.h" />
     <ClInclude Include="CPlayerUI.h" />
+    <ClInclude Include="CPortal.h" />
     <ClInclude Include="CRunEffect.h" />
     <ClInclude Include="CShopItemUI.h" />
     <ClInclude Include="CShopUI.h" />
@@ -328,6 +329,7 @@
     <ClCompile Include="CPlayerHpBar.cpp" />
     <ClCompile Include="CPlayerMgr.cpp" />
     <ClCompile Include="CPlayerUI.cpp" />
+    <ClCompile Include="CPortal.cpp" />
     <ClCompile Include="CRunEffect.cpp" />
     <ClCompile Include="CShopItemUI.cpp" />
     <ClCompile Include="CShopUI.cpp" />

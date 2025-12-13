@@ -12,6 +12,7 @@
 #include "CTresure.h"
 #include "CSnow.h"
 #include "CNifleHeim.h"
+#include "CPortal.h"
 CDungeon_NifleHeim::CDungeon_NifleHeim()
 {
 }
@@ -83,6 +84,15 @@ void CDungeon_NifleHeim::Update()
 void CDungeon_NifleHeim::Late_Update()
 {
 	DoorToNextScene();
+	if (!GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty())
+	{
+		// 하드코딩...
+		CNifleHeim* NifleHeim = dynamic_cast<CNifleHeim*>(GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).front());
+		if (NifleHeim->GetPortal() != nullptr && dynamic_cast<CPortal*>(NifleHeim->GetPortal())->EnterPortal())
+		{
+			GET(CSceneMgr)->ChangeScene(L"Ending");
+		}
+	}
 }
 
 void CDungeon_NifleHeim::Render(HDC hDC)

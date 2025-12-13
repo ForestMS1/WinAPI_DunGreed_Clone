@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "CNifleHeim.h"
+#include "CPortal.h"
 
 CNifleHeim::CNifleHeim() : m_bPlayBossBGM(false)
-, m_bIntro(false), m_bAlpha(0)
+, m_bIntro(false), m_bAlpha(0), m_pPortal(nullptr), CompleteCreatePortal(false)
 {
 }
 
@@ -37,6 +38,7 @@ void CNifleHeim::Initialize()
 	m_eNifleHeimCurState = NIFLEHEIM_IDLE;
 
 	GET(CResourceMgr)->Insert_AlphaBmp(L"../Resources/Images/Unit/Enemy/NifleHeim/Idle.bmp", L"NifleHeimIdle");
+	GET(CResourceMgr)->Insert_AlphaBmp(L"../Resources/Images/Unit/Enemy/NifleHeim/die.bmp", L"NifleHeimDie");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/NifleHeim/enter.bmp", L"NifleHeimEnter");
 
 
@@ -58,20 +60,20 @@ int CNifleHeim::Update()
 		m_bIsDead = true;
 		m_eNifleHeimCurState = NIFLEHEIM_DEAD;
 
-		m_DeadEffectTime += 0.01;
+		//m_DeadEffectTime += 0.01;
 		// 리턴하기전에 딜레이 줘야할듯?
-		if (m_DeadEffectTime < 3.f)
-		{
+		//if (m_DeadEffectTime < 3.f)
+		//{
 			DeadEffect();
 			float py(0.f);
 			GET(CLineMgr)->Collision_Line(this, &py);
-		}
-		else
-		{
+		//}
+		//else
+		//{
 			GET(CSoundMgr)->StopSound(SOUND_BGM);
 			//return OBJ_DEAD;
 			return OBJ_NOEVENT;
-		}
+		//}
 	}
 	__super::Update_Rect();
 	Update_DetectRect();
@@ -250,6 +252,18 @@ void CNifleHeim::Motion_Change()
 			m_tInfo.fCX = m_iFrameWidth;
 			m_tInfo.fCY = m_iFrameHeight;
 			break;
+		case NIFLEHEIM_STATE::NIFLEHEIM_DEAD:
+			m_tFrame.iStart = 0;
+			m_tFrame.iMotion = 0;
+			m_tFrame.iEnd = 28;
+			m_wsFrameKey = L"NifleHeimDie";
+			m_tFrame.dwSpeed = 50.f;
+			m_tFrame.dwTime = GetTickCount();
+			m_iFrameWidth = 43;
+			m_iFrameHeight = 28;
+			m_tInfo.fCX = m_iFrameWidth * 3;
+			m_tInfo.fCY = m_iFrameHeight * 3;
+			break;
 		default:
 			break;
 		}
@@ -260,6 +274,15 @@ void CNifleHeim::Motion_Change()
 
 void CNifleHeim::DeadEffect()
 {
+	if(m_tFrame.iStart < m_tFrame.iEnd)
+		Move_Frame_No_Loop();
+
+	if (m_tFrame.iStart == m_tFrame.iEnd - 1 && !CompleteCreatePortal)
+	{
+		m_pPortal = CAbstractFactory<CPortal>::Create(m_tInfo.fX, m_tInfo.fY);
+		GET(CObjMgr)->AddObject(OBJ_NPC, m_pPortal);
+		CompleteCreatePortal = true;
+	}
 
 	m_tInfo.fY += 1.f;
 

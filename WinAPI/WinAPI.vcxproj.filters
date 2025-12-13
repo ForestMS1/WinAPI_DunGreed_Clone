@@ -346,6 +346,9 @@
     <Filter Include="Scene\EndingScene">
       <UniqueIdentifier>{f70334dc-8afe-4eed-af34-f62bac6333fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\NifleHeim\Portal">
+      <UniqueIdentifier>{56e06e5b-436f-4ecd-a696-23b12a9f37b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -690,6 +693,9 @@
     <ClInclude Include="CEndingScene.h">
       <Filter>Scene\EndingScene</Filter>
     </ClInclude>
+    <ClInclude Include="CPortal.h">
+      <Filter>Object\Unit\Enemy\NifleHeim\Portal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -997,6 +1003,9 @@
     </ClCompile>
     <ClCompile Include="CEndingScene.cpp">
       <Filter>Scene\EndingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CPortal.cpp">
+      <Filter>Object\Unit\Enemy\NifleHeim\Portal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

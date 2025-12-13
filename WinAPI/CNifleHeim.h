@@ -14,6 +14,7 @@ public:
     void Release() override;
 
     NIFLEHEIM_STATE GetCurState() const { return m_eNifleHeimCurState; }
+    CObj* GetPortal() const { return m_pPortal; }
 private:
     void Motion_Change() override;
     void DeadEffect();
@@ -28,5 +29,9 @@ private:
     bool m_bIntro;
     BYTE m_bAlpha;
     HFONT m_hFont;
+
+    CObj* m_pPortal;
+
+    bool CompleteCreatePortal;
 };
 

@@ -14,7 +14,7 @@ CEndingScene::~CEndingScene()
 void CEndingScene::Initialize()
 {
 
-	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(420, 890));
+	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(220, 890));
 
 	GET(CPlayerMgr)->Initialize();
 
@@ -56,8 +56,8 @@ void CEndingScene::Update()
 	DWORD dwCurrentTime = GetTickCount();
 	DWORD dwElapsedTime = dwCurrentTime - m_SpawnEffectStartTime;
 
-	if (dwElapsedTime < 2500)
-		m_bAlpha = (BYTE)(((float)dwElapsedTime / 2500) * 255.f);
+	if (dwElapsedTime < 3500)
+		m_bAlpha = (BYTE)(((float)dwElapsedTime / 3500) * 255.f);
 
 	m_fTextScrollY += m_fSpeed;
 }
@@ -195,7 +195,7 @@ void CEndingScene::Render(HDC hDC)
 
 void CEndingScene::Release()
 {
-	CObjMgr::Get_Instance()->DeleteLayerObj(OBJ_PLAYER);
+	GET(CObjMgr)->DeleteAllLayer();
 	GET(CSoundMgr)->StopAll();
 
 	if (m_hFont)

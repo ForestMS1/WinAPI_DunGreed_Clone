@@ -322,6 +322,12 @@
     <Filter Include="Scene\DungeonScene\Dungeon04">
       <UniqueIdentifier>{3e45acd9-4814-4415-ae46-014be72f3010}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\DungeonScene\DungeonFoodShop">
+      <UniqueIdentifier>{77b2e48b-d982-4aaf-963b-f559eadeb2de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\NPC\NPC_Inn">
+      <UniqueIdentifier>{e7420c5a-4193-4f30-a09e-915b489bd702}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -642,6 +648,12 @@
     <ClInclude Include="CDungeon04.h">
       <Filter>Scene\DungeonScene\Dungeon04</Filter>
     </ClInclude>
+    <ClInclude Include="CDungeonFoodShop.h">
+      <Filter>Scene\DungeonScene\DungeonFoodShop</Filter>
+    </ClInclude>
+    <ClInclude Include="CNPC_Inn.h">
+      <Filter>Object\Unit\NPC\NPC_Inn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -925,6 +937,12 @@
     </ClCompile>
     <ClCompile Include="CDungeon04.cpp">
       <Filter>Scene\DungeonScene\Dungeon04</Filter>
+    </ClCompile>
+    <ClCompile Include="CDungeonFoodShop.cpp">
+      <Filter>Scene\DungeonScene\DungeonFoodShop</Filter>
+    </ClCompile>
+    <ClCompile Include="CNPC_Inn.cpp">
+      <Filter>Object\Unit\NPC\NPC_Inn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

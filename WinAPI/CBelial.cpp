@@ -123,7 +123,8 @@ int CBelial::Update()
 		else
 		{
 			GET(CSoundMgr)->StopSound(SOUND_BGM);
-			return OBJ_DEAD;
+			//return OBJ_DEAD;
+			return OBJ_NOEVENT;
 		}
 	}
 	__super::Update_Rect();

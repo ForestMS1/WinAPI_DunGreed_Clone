@@ -47,6 +47,10 @@ public:
 	void GetDropGold(int gold);
 	void SetNoPlayerRender() { m_bIsNoPlayerRender = true; }
 	void SetNoPlayerKeyInput() { m_bIsNoKeyInput = true; }
+
+	int GetMaxDashCount() const { return m_iMaxDashCount; }
+	int GetCurDashCount() const { return m_iCurDashCount; }
+
 private:
 	void Key_Input();
 	void Motion_Change();
@@ -88,6 +92,9 @@ private:
 	bool				m_bIsGround; //플레이어가 땅에 닿아있는가
 	bool				m_IsOnLine; // 선 타일에 있는가
 	bool				m_IsOnBlock; // 뚫을 수 없는 바닥에 있는가
+	int					m_iMaxJumpCount;
+	int					m_iCurJumpCount;
+
 	// 하단점프
 	bool				m_bBottomJump;
 
@@ -100,6 +107,9 @@ private:
 	float				m_fDashRadian;
 	int					m_iDashFXCount;
 	DWORD				m_dwDashFXTick;
+	int					m_iMaxDashCount;
+	int					m_iCurDashCount;
+	DWORD				m_dwLastDashTime;
 
 	// 공격
 	bool				m_bAttack;

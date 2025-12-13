@@ -33,10 +33,11 @@ void CDungeonStart::Initialize()
 	if (!m_bIsClearScene)
 	{
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
-		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(600.f, 600.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(600.f, 600.f));
-		GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
+		//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(600.f, 600.f));
+		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(600.f, 600.f));
+		
 	}
+	GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();

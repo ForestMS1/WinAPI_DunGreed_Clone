@@ -23,11 +23,11 @@ void CDungeon02::Initialize()
 	//아직 클리어 안한 씬에서만 몹 생성
 	if (!m_bIsClearScene)
 	{
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(700.f, 500.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(250, 525.f));
+		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1280, 770));
+		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(520, 670));
 		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
 
 	}
@@ -36,6 +36,8 @@ void CDungeon02::Initialize()
 	case SCENE_DUNGEON_01:
 		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1500.f, 926.f));
 		break;
+	case SCENE_DUNGEON_FOOD_SHOP:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(170.f, 220.f));
 	default:
 		break;
 	}
@@ -58,7 +60,7 @@ void CDungeon02::Initialize()
 
 	//---------------------------------문 설치---------------------------------------
 	CObj* pDoor = CAbstractFactory<CDoor>::Create(70.f, 220.f);
-	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Belial");
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"DungeonFoodShop");
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 
 	pDoor = CAbstractFactory<CDoor>::Create(1600.f, 926.f);

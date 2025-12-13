@@ -18,8 +18,10 @@
 #include "CDungeonStart.h"
 #include "CDungeon01.h"
 #include "CDungeon02.h"
+#include "CDungeonFoodShop.h"
 #include "CDungeon03.h"
 #include "CDungeon04.h"
+
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
 	ZeroMemory(&m_szFPS, sizeof(m_szFPS));
@@ -69,6 +71,10 @@ void CMainGame::Initialize()
 	pScene = new CDungeon02;
 	pScene->SetSceneID(SCENE_DUNGEON_02);
 	GET(CSceneMgr)->CreateScene(L"Dungeon02", pScene);
+
+	pScene = new CDungeonFoodShop;
+	pScene->SetSceneID(SCENE_DUNGEON_FOOD_SHOP);
+	GET(CSceneMgr)->CreateScene(L"DungeonFoodShop", pScene);
 
 	pScene = new CDungeon03;
 	pScene->SetSceneID(SCENE_DUNGEON_03);

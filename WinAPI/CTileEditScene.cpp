@@ -197,7 +197,7 @@ void CTileEditScene::Key_Input()
 	{
 		//GET(CTileMgr)->Load_Tile(L"TestScene");
 		//GET(CTileMgr)->Load_Tile(L"BelialScene");
-		GET(CTileMgr)->Load_Tile(L"Dungeon04");
+		GET(CTileMgr)->Load_Tile(L"DungeonFoodShop");
 	}
 #pragma endregion
 

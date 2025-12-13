@@ -18,6 +18,7 @@ CPlayer::CPlayer() :
 	m_fDasht(0.f), m_fDashAcct(0.3f), m_fDashSpeed(60.f), m_bDash(false), m_IsOnLine(false), m_IsOnBlock(false),
 	m_bAttack(false), m_fAttackAcct(0.2f), m_fAttackt(0.f), m_fMaxSatiety(100.f), m_fCurSatiety(0.f)
 	, m_iDashFXCount(0), m_bIsNoPlayerRender(false), m_bIsNoKeyInput(false)
+	, m_iMaxDashCount(3), m_iCurDashCount(3), m_iMaxJumpCount(2), m_iCurJumpCount(2)
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
@@ -101,6 +102,7 @@ int CPlayer::Update()
 
 	m_bIsFlipped = ToMouse();
 
+	m_iGold = GET(CPlayerMgr)->GetGold();
 
 	Key_Input();
 
@@ -111,6 +113,16 @@ int CPlayer::Update()
 	Update_Rect();
 
 	Move_Frame();
+
+
+	//대쉬 충전
+	if (m_dwLastDashTime + 1500 < GetTickCount())
+	{
+		m_iCurDashCount++;
+		if (m_iCurDashCount > m_iMaxDashCount)
+			m_iCurDashCount = m_iMaxDashCount;
+		m_dwLastDashTime = GetTickCount();
+	}
 
 	//무기
 	if (m_pWeapon != nullptr)
@@ -139,7 +151,10 @@ void CPlayer::Late_Update()
 	m_IsOnBlock = CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
 
 	if (m_IsOnLine || m_IsOnBlock)
+	{
 		m_bIsGround = true;
+		m_iCurJumpCount = m_iMaxJumpCount;
+	}
 	else
 	{
 		m_bIsGround = false;
@@ -264,16 +279,19 @@ void CPlayer::Key_Input()
 			GET(CSoundMgr)->PlaySound(L"Jumping.wav", SOUND_PLAYER_MOVE, 1.f);
 		}
 	}
-	else
-	{
-		if (GET(CKeyMgr)->Key_Down(VK_SPACE))
+	//else
+	//{
+		if (GET(CKeyMgr)->Key_Down(VK_SPACE) && m_iCurJumpCount > 1)
 		{
 			m_v0 = 30.f;
 			m_bJump = true;
 			m_eCurState = JUMP;
 			GET(CSoundMgr)->PlaySound(L"Jumping.wav", SOUND_PLAYER_MOVE, 1.f);
+			--m_iCurJumpCount;
+			if (m_iCurJumpCount <= 0)
+				m_iCurJumpCount = 0;
 		}
-	}
+	//}
 
 	if (GET(CKeyMgr)->Key_Up(VK_SPACE))
 	{
@@ -288,7 +306,7 @@ void CPlayer::Key_Input()
 
 	if (GET(CUIMgr)->Find_UI(L"InventoryUI") != nullptr && GET(CUIMgr)->Find_UI(L"InventoryUI")->IsOpen())
 		return;
-	if (GET(CKeyMgr)->Key_Down(VK_RBUTTON))
+	if (GET(CKeyMgr)->Key_Down(VK_RBUTTON) && m_iCurDashCount > 0)
 	{
 		m_bDash = true;
 		m_vDashDir = GET(CCamera)->GetRealPos(GET(CMouse)->Get_Point());
@@ -305,6 +323,10 @@ void CPlayer::Key_Input()
 		if (m_vDashDir.fY > m_tInfo.fY)
 			m_fDashRadian = 2.f * PI - m_fDashRadian;
 		GET(CSoundMgr)->PlaySoundW(L"Dash.wav", SOUND_PLAYER_MOVE, 1.f);
+
+		--m_iCurDashCount;
+		if (m_iCurDashCount < 0)
+			m_iCurDashCount = 0;
 	}
 	if (GET(CKeyMgr)->Key_Pressing(VK_LBUTTON))
 	{

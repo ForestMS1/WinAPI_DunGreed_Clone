@@ -52,11 +52,11 @@ void CTest::Initialize()
 	
 	// ´«³»¸®±â~~
 	CSnow* pSnow = new CSnow;
-	pSnow->Initialize();
-	pSnow->SetSpeed(3.f);
 	GET(CObjMgr)->AddObject(OBJ_EFFECT, pSnow);
 
 	GET(CObjMgr)->Initialize();
+	pSnow->SetSpeed(7.f);
+
 	GET(CPlayerMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
 	GET(CTileMgr)->Load_Tile(L"TownScene");

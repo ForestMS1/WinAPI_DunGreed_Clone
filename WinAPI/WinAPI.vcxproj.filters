@@ -337,6 +337,15 @@
     <Filter Include="Scene\DungeonScene\IceDungeon01\Snow">
       <UniqueIdentifier>{9815d1b6-f089-478a-b58c-e8712dfba1be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\DungeonScene\Dungeon_NifleHeim">
+      <UniqueIdentifier>{765061e8-6222-4531-8605-ff9e6d6268e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy\NifleHeim">
+      <UniqueIdentifier>{017b704b-9553-4e69-aad0-6b72b6febba1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\EndingScene">
+      <UniqueIdentifier>{f70334dc-8afe-4eed-af34-f62bac6333fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -672,6 +681,15 @@
     <ClInclude Include="CSnow.h">
       <Filter>Scene\DungeonScene\IceDungeon01\Snow</Filter>
     </ClInclude>
+    <ClInclude Include="CDungeon_NifleHeim.h">
+      <Filter>Scene\DungeonScene\Dungeon_NifleHeim</Filter>
+    </ClInclude>
+    <ClInclude Include="CNifleHeim.h">
+      <Filter>Object\Unit\Enemy\NifleHeim</Filter>
+    </ClInclude>
+    <ClInclude Include="CEndingScene.h">
+      <Filter>Scene\EndingScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -970,6 +988,15 @@
     </ClCompile>
     <ClCompile Include="CSnow.cpp">
       <Filter>Scene\DungeonScene\IceDungeon01\Snow</Filter>
+    </ClCompile>
+    <ClCompile Include="CDungeon_NifleHeim.cpp">
+      <Filter>Scene\DungeonScene\Dungeon_NifleHeim</Filter>
+    </ClCompile>
+    <ClCompile Include="CNifleHeim.cpp">
+      <Filter>Object\Unit\Enemy\NifleHeim</Filter>
+    </ClCompile>
+    <ClCompile Include="CEndingScene.cpp">
+      <Filter>Scene\EndingScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

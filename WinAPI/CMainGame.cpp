@@ -24,6 +24,7 @@
 
 #include "CDungeon06.h"
 #include "CIceDungeon01.h"
+#include "CDungeon_NifleHeim.h"
 
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
@@ -94,6 +95,10 @@ void CMainGame::Initialize()
 	pScene = new CIceDungeon01;
 	pScene->SetSceneID(SCENE_ICE_DUNGEON_01);
 	GET(CSceneMgr)->CreateScene(L"IceDungeon01", pScene);
+
+	pScene = new CDungeon_NifleHeim;
+	pScene->SetSceneID(SCENE_NIFLEHEIM);
+	GET(CSceneMgr)->CreateScene(L"NifleHeim", pScene);
 	// 최초로 나올 씬
 	GET(CSceneMgr)->ChangeScene(L"Logo");
 

@@ -28,7 +28,7 @@ int CSnow::Update()
 	m_tInfo.fY += m_fSpeed;
 	__super::Update_Rect();
 
-	if(m_tInfo.fY >= WINCY)
+	if(m_tInfo.fY >= WINCY * 2)
 		m_tInfo.fY = WINCY >> 1;
 
 
@@ -42,6 +42,20 @@ void CSnow::Late_Update()
 void CSnow::Render(HDC hDC)
 {
 	HDC hSnowDC = GET(CResourceMgr)->Find_Bmp(L"Snow");
+
+	GdiTransparentBlt(
+		hDC,
+		m_tRect.left,
+		m_tRect.top - WINCY*2,
+		WINCX,
+		WINCY,
+		hSnowDC,
+		0,
+		0,
+		320,
+		180,
+		RGB(255, 0, 255)
+	);
 	GdiTransparentBlt(
 		hDC,
 		m_tRect.left,

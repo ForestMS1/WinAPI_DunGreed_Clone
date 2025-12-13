@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "CIceDungeon01.h"
+#include "CDungeon_NifleHeim.h"
 #include "CPlayer.h"
 #include "CGiantBat.h"
 #include "CPlayerUI.h"
@@ -11,20 +11,22 @@
 #include "CBigWhiteSkel.h"
 #include "CTresure.h"
 #include "CSnow.h"
-CIceDungeon01::CIceDungeon01()
+#include "CNifleHeim.h"
+CDungeon_NifleHeim::CDungeon_NifleHeim()
 {
 }
 
-CIceDungeon01::~CIceDungeon01()
+CDungeon_NifleHeim::~CDungeon_NifleHeim()
 {
 }
 
-void CIceDungeon01::Initialize()
+void CDungeon_NifleHeim::Initialize()
 {
 	//아직 클리어 안한 씬에서만 몹 생성
 	if (!m_bIsClearScene)
 	{
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(700.f, 500.f));
+		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(700.f, 500.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CNifleHeim>::Create(1250.f, 550.f));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
@@ -37,14 +39,11 @@ void CIceDungeon01::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_EFFECT, pSnow);
 	switch (GET(CSceneMgr)->GetPreSceneID())
 	{
-	case SCENE_DUNGEON_06:
-		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(990.f, 195.f));
-		break;
-	case SCENE_NIFLEHEIM:
-		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1915.f, 805.f));
+	case SCENE_ICE_DUNGEON_01:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(200.f, 865.f));
 		break;
 	default:
-		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(990.f, 195.f));
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(200.f, 865.f));
 		break;
 	}
 	GET(CPlayerMgr)->Initialize();
@@ -52,7 +51,7 @@ void CIceDungeon01::Initialize()
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
-	GET(CTileMgr)->Load_Tile(L"IceDungeon01");
+	GET(CTileMgr)->Load_Tile(L"NifleHeimScene");
 
 	GET(CUIMgr)->Insert_UI(L"PlayerUI", new CPlayerUI(GET(CPlayerMgr)->GetPlayer()));
 	GET(CUIMgr)->Insert_UI(L"InventoryUI", new CInventoryUI(GET(CPlayerMgr)->GetPlayer()));
@@ -66,32 +65,27 @@ void CIceDungeon01::Initialize()
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 
 	//---------------------------------문 설치---------------------------------------
-	CObj* pDoor = CAbstractFactory<CDoor>::Create(990.f, 95.f);
-	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon06");
-	dynamic_cast<CDoor*>(pDoor)->SetDoorState(CDoor::CLOSE_BOTTOM);
-	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
-
-	pDoor = CAbstractFactory<CDoor>::Create(2015.f, 805.f);
-	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"NifleHeim");
-	dynamic_cast<CDoor*>(pDoor)->SetDoorState(CDoor::CLOSE_RIGHT);
+	CObj* pDoor = CAbstractFactory<CDoor>::Create(100.f, 865.f);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"IceDungeon01");
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 	//---------------------------------문 설치---------------------------------------
 
 	//GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
+	GET(CSoundMgr)->StopSound(SOUND_BGM);
 }
 
-void CIceDungeon01::Update()
+void CDungeon_NifleHeim::Update()
 {
 	m_bIsClearScene = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
 	OpenDoor();
 }
 
-void CIceDungeon01::Late_Update()
+void CDungeon_NifleHeim::Late_Update()
 {
 	DoorToNextScene();
 }
 
-void CIceDungeon01::Render(HDC hDC)
+void CDungeon_NifleHeim::Render(HDC hDC)
 {
 	int scrollX = GET(CCamera)->Get_ScrollX();
 	int scrollY = GET(CCamera)->Get_ScrollY();
@@ -113,7 +107,7 @@ void CIceDungeon01::Render(HDC hDC)
 	);
 }
 
-void CIceDungeon01::Release()
+void CDungeon_NifleHeim::Release()
 {
 	GET(CObjMgr)->DeleteAllLayer();
 	GET(CTileMgr)->Clear_Tile();

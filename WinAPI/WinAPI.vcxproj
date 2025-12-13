@@ -177,6 +177,8 @@
     <ClInclude Include="CDungeonEat.h" />
     <ClInclude Include="CDungeonFoodShop.h" />
     <ClInclude Include="CDungeonStart.h" />
+    <ClInclude Include="CDungeon_NifleHeim.h" />
+    <ClInclude Include="CEndingScene.h" />
     <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CEnemyBullet.h" />
     <ClInclude Include="CEnemyHpBarUI.h" />
@@ -198,6 +200,7 @@
     <ClInclude Include="CLittleGhost.h" />
     <ClInclude Include="CMapTileOptionUI.h" />
     <ClInclude Include="CMouse.h" />
+    <ClInclude Include="CNifleHeim.h" />
     <ClInclude Include="CNPC.h" />
     <ClInclude Include="CNPCKeyUI.h" />
     <ClInclude Include="CNPC_Giant.h" />
@@ -292,6 +295,8 @@
     <ClCompile Include="CDungeonEat.cpp" />
     <ClCompile Include="CDungeonFoodShop.cpp" />
     <ClCompile Include="CDungeonStart.cpp" />
+    <ClCompile Include="CDungeon_NifleHeim.cpp" />
+    <ClCompile Include="CEndingScene.cpp" />
     <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CEnemyBullet.cpp" />
     <ClCompile Include="CEnemyHpBarUI.cpp" />
@@ -313,6 +318,7 @@
     <ClCompile Include="CLittleGhost.cpp" />
     <ClCompile Include="CMapTileOptionUI.cpp" />
     <ClCompile Include="CMouse.cpp" />
+    <ClCompile Include="CNifleHeim.cpp" />
     <ClCompile Include="CNPC.cpp" />
     <ClCompile Include="CNPCKeyUI.cpp" />
     <ClCompile Include="CNPC_Giant.cpp" />

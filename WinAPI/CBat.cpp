@@ -211,6 +211,11 @@ void CBat::Attack_CircleBullet()
 {
 	if (m_bIsInPlayer)
 	{
+		if (!m_bPlaySound)
+		{
+			GET(CSoundMgr)->PlaySoundW(L"Bat.wav", SOUND_ENEMY_ATTACK, 1.f);
+			m_bPlaySound = true;
+		}
 		CEnemy::ToPlayerAngle();
 
 		//TODO : 5초에 한번씩 플레이어에게 원 총알 발사
@@ -221,4 +226,6 @@ void CBat::Attack_CircleBullet()
 			m_dwAttackTick = GetTickCount();
 		}
 	}
+	else
+		m_bPlaySound = false;
 }

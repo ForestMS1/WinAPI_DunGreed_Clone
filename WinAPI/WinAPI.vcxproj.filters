@@ -328,6 +328,15 @@
     <Filter Include="Object\Unit\NPC\NPC_Inn">
       <UniqueIdentifier>{e7420c5a-4193-4f30-a09e-915b489bd702}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\DungeonScene\Dungeon06">
+      <UniqueIdentifier>{03afc280-573b-43de-b0b1-661b69ee7b09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\DungeonScene\IceDungeon01">
+      <UniqueIdentifier>{783c7cac-bcf4-451b-9d3d-e0e124a11d24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\DungeonScene\IceDungeon01\Snow">
+      <UniqueIdentifier>{9815d1b6-f089-478a-b58c-e8712dfba1be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -654,6 +663,15 @@
     <ClInclude Include="CNPC_Inn.h">
       <Filter>Object\Unit\NPC\NPC_Inn</Filter>
     </ClInclude>
+    <ClInclude Include="CDungeon06.h">
+      <Filter>Scene\DungeonScene\Dungeon06</Filter>
+    </ClInclude>
+    <ClInclude Include="CIceDungeon01.h">
+      <Filter>Scene\DungeonScene\IceDungeon01</Filter>
+    </ClInclude>
+    <ClInclude Include="CSnow.h">
+      <Filter>Scene\DungeonScene\IceDungeon01\Snow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -943,6 +961,15 @@
     </ClCompile>
     <ClCompile Include="CNPC_Inn.cpp">
       <Filter>Object\Unit\NPC\NPC_Inn</Filter>
+    </ClCompile>
+    <ClCompile Include="CDungeon06.cpp">
+      <Filter>Scene\DungeonScene\Dungeon06</Filter>
+    </ClCompile>
+    <ClCompile Include="CIceDungeon01.cpp">
+      <Filter>Scene\DungeonScene\IceDungeon01</Filter>
+    </ClCompile>
+    <ClCompile Include="CSnow.cpp">
+      <Filter>Scene\DungeonScene\IceDungeon01\Snow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

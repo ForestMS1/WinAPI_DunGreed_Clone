@@ -22,5 +22,7 @@ private:
     DWORD m_dwBulletSpawnTime;
     float m_fBulletSpawnAngle;
     float m_fBulletShootAngle;
+
+    bool m_bPlaySound;
 };
 

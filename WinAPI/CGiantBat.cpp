@@ -218,6 +218,11 @@ void CGiantBat::Attack_CircleBullet()
 {
 	if (m_bIsInPlayer)
 	{
+		if (!m_bPlaySound)
+		{
+			GET(CSoundMgr)->PlaySoundW(L"Bat_giant.wav", SOUND_ENEMY_ATTACK, 1.f);
+			m_bPlaySound = true;
+		}
 		m_eCurState = ATTACK;
 		float ToPlayerAngle = m_fBulletShootAngle;
 
@@ -251,5 +256,9 @@ void CGiantBat::Attack_CircleBullet()
 			}
 			//m_dwAttackTick = GetTickCount();
 		//}
+	}
+	else
+	{
+		m_bPlaySound = false;
 	}
 }

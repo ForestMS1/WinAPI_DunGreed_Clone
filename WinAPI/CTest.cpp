@@ -16,6 +16,7 @@
 #include "CBanshee.h"
 #include "CNPC_Giant.h"
 #include "CDungeonEat.h"
+#include "CSnow.h"
 CTest::CTest() : m_bIsDrawing(false)
 {
 	ZeroMemory(&m_ptMouse, sizeof(m_ptMouse));
@@ -48,6 +49,13 @@ void CTest::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f, 793.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f + 351, 793.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f + 351 * 2, 793.f));
+	
+	// ´«³»¸®±â~~
+	CSnow* pSnow = new CSnow;
+	pSnow->Initialize();
+	pSnow->SetSpeed(3.f);
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, pSnow);
+
 	GET(CObjMgr)->Initialize();
 	GET(CPlayerMgr)->Initialize();
 	GET(CTileMgr)->Initialize();

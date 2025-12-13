@@ -173,6 +173,7 @@
     <ClInclude Include="CDungeon02.h" />
     <ClInclude Include="CDungeon03.h" />
     <ClInclude Include="CDungeon04.h" />
+    <ClInclude Include="CDungeon06.h" />
     <ClInclude Include="CDungeonEat.h" />
     <ClInclude Include="CDungeonFoodShop.h" />
     <ClInclude Include="CDungeonStart.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="CGoldText.h" />
     <ClInclude Include="CGoldUI.h" />
     <ClInclude Include="CGoTileEditBtn.h" />
+    <ClInclude Include="CIceDungeon01.h" />
     <ClInclude Include="CInventoryUI.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CLaser.h" />
@@ -210,6 +212,7 @@
     <ClInclude Include="CShopUI.h" />
     <ClInclude Include="CSkel.h" />
     <ClInclude Include="CSkelArrow.h" />
+    <ClInclude Include="CSnow.h" />
     <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="CSwingFX.h" />
     <ClInclude Include="CTest.h" />
@@ -285,6 +288,7 @@
     <ClCompile Include="CDungeon02.cpp" />
     <ClCompile Include="CDungeon03.cpp" />
     <ClCompile Include="CDungeon04.cpp" />
+    <ClCompile Include="CDungeon06.cpp" />
     <ClCompile Include="CDungeonEat.cpp" />
     <ClCompile Include="CDungeonFoodShop.cpp" />
     <ClCompile Include="CDungeonStart.cpp" />
@@ -302,6 +306,7 @@
     <ClCompile Include="CGoldText.cpp" />
     <ClCompile Include="CGoldUI.cpp" />
     <ClCompile Include="CGoTileEditBtn.cpp" />
+    <ClCompile Include="CIceDungeon01.cpp" />
     <ClCompile Include="CInventoryUI.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CLaser.cpp" />
@@ -322,6 +327,7 @@
     <ClCompile Include="CShopUI.cpp" />
     <ClCompile Include="CSkel.cpp" />
     <ClCompile Include="CSkelArrow.cpp" />
+    <ClCompile Include="CSnow.cpp" />
     <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="CSwingFX.cpp" />
     <ClCompile Include="CTest.cpp" />

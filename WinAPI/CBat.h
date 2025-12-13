@@ -18,5 +18,7 @@ private:
 private:
 
     DWORD m_dwAttackTick;
+
+    bool m_bPlaySound;
 };
 

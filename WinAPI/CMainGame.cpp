@@ -22,6 +22,9 @@
 #include "CDungeon03.h"
 #include "CDungeon04.h"
 
+#include "CDungeon06.h"
+#include "CIceDungeon01.h"
+
 CMainGame::CMainGame() : m_iFps(0), m_dwLastTime(GetTickCount())
 {
 	ZeroMemory(&m_szFPS, sizeof(m_szFPS));
@@ -84,6 +87,13 @@ void CMainGame::Initialize()
 	pScene->SetSceneID(SCENE_DUNGEON_04);
 	GET(CSceneMgr)->CreateScene(L"Dungeon04", pScene);
 
+	pScene = new CDungeon06;
+	pScene->SetSceneID(SCENE_DUNGEON_06);
+	GET(CSceneMgr)->CreateScene(L"Dungeon06", pScene);
+
+	pScene = new CIceDungeon01;
+	pScene->SetSceneID(SCENE_ICE_DUNGEON_01);
+	GET(CSceneMgr)->CreateScene(L"IceDungeon01", pScene);
 	// 최초로 나올 씬
 	GET(CSceneMgr)->ChangeScene(L"Logo");
 

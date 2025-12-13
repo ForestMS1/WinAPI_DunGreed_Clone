@@ -34,6 +34,7 @@ void CScene::DoorToNextScene()
 			|| dynamic_cast<CDoor*>(iter)->GetDoorState() == CDoor::DOOR_STATE::OPEN_RIGHT)
 			&& CCollisionMgr::Check_Rect(GET(CPlayerMgr)->GetPlayer(), iter))
 		{
+			GET(CSceneMgr)->SetPreSceneID(GET(CSceneMgr)->GetCurSceneID());
 			GET(CSceneMgr)->ChangeScene(dynamic_cast<CDoor*>(iter)->GetNextSceneName());
 			break;
 		}

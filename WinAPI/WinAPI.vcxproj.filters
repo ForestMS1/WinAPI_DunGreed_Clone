@@ -313,6 +313,15 @@
     <Filter Include="Object\Unit\Bullet\EnemyBullet\SkelArrow">
       <UniqueIdentifier>{1ec94660-35c7-4e2c-ad8b-cfdeac9df690}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\DungeonScene\Dungeon02">
+      <UniqueIdentifier>{8cc9b677-1154-49a5-bca4-028629d40f03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\DungeonScene\Dungeon03">
+      <UniqueIdentifier>{cc7eb135-20b1-48b7-8bec-f4b2ef81c08d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\DungeonScene\Dungeon04">
+      <UniqueIdentifier>{3e45acd9-4814-4415-ae46-014be72f3010}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -624,6 +633,15 @@
     <ClInclude Include="CSkelArrow.h">
       <Filter>Object\Unit\Bullet\EnemyBullet\SkelArrow</Filter>
     </ClInclude>
+    <ClInclude Include="CDungeon02.h">
+      <Filter>Scene\DungeonScene\Dungeon02</Filter>
+    </ClInclude>
+    <ClInclude Include="CDungeon03.h">
+      <Filter>Scene\DungeonScene\Dungeon03</Filter>
+    </ClInclude>
+    <ClInclude Include="CDungeon04.h">
+      <Filter>Scene\DungeonScene\Dungeon04</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -898,6 +916,15 @@
     </ClCompile>
     <ClCompile Include="CSkelArrow.cpp">
       <Filter>Object\Unit\Bullet\EnemyBullet\SkelArrow</Filter>
+    </ClCompile>
+    <ClCompile Include="CDungeon02.cpp">
+      <Filter>Scene\DungeonScene\Dungeon02</Filter>
+    </ClCompile>
+    <ClCompile Include="CDungeon03.cpp">
+      <Filter>Scene\DungeonScene\Dungeon03</Filter>
+    </ClCompile>
+    <ClCompile Include="CDungeon04.cpp">
+      <Filter>Scene\DungeonScene\Dungeon04</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

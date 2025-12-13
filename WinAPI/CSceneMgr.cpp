@@ -4,7 +4,7 @@
 
 CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
-CSceneMgr::CSceneMgr() : m_pCurCScene(nullptr)
+CSceneMgr::CSceneMgr() : m_pCurCScene(nullptr), m_ePreSceneID(SCENEID::SCENE_END)
 {
 
 }

@@ -17,10 +17,26 @@ CDungeonStart::~CDungeonStart()
 
 void CDungeonStart::Initialize()
 {
-	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(500.f, 600.f));
-	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
-	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(600.f, 600.f));
-	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(600.f, 600.f));
+	
+	switch (GET(CSceneMgr)->GetPreSceneID())
+	{
+	case SCENE_DUNGEON_01:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(100.f, 600.f));
+		break;
+	case SCENE_DUNGEON_03:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1510.f, 600.f));
+		break;
+	default:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(500.f, 600.f));
+		break;
+	}
+	if (!m_bIsClearScene)
+	{
+		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
+		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(600.f, 600.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(600.f, 600.f));
+		GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
+	}
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
@@ -38,20 +54,22 @@ void CDungeonStart::Initialize()
 	//GET(CCamera)->SetLookAt(Vec2(WINCX >> 1, WINCY >> 1));
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 
-	GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
 
 	//---------------------------------문 설치---------------------------------------
-	//이미 클리어 한 씬이면 문 설치 안함
-	if (m_bIsClearScene)
-		return;
 	CObj* pDoor = CAbstractFactory<CDoor>::Create(80.f, 545.f);
 	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon01");
+	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
+
+	pDoor = CAbstractFactory<CDoor>::Create(1610.f, 545.f);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon03");
+	dynamic_cast<CDoor*>(pDoor)->SetDoorState(CDoor::CLOSE_RIGHT);
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 	//---------------------------------문 설치---------------------------------------
 }
 
 void CDungeonStart::Update()
 {
+	m_bIsClearScene = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
 	OpenDoor();
 }
 

@@ -170,6 +170,9 @@
     <ClInclude Include="CDashFX.h" />
     <ClInclude Include="CDoor.h" />
     <ClInclude Include="CDungeon01.h" />
+    <ClInclude Include="CDungeon02.h" />
+    <ClInclude Include="CDungeon03.h" />
+    <ClInclude Include="CDungeon04.h" />
     <ClInclude Include="CDungeonEat.h" />
     <ClInclude Include="CDungeonStart.h" />
     <ClInclude Include="CEnemy.h" />
@@ -277,6 +280,9 @@
     <ClCompile Include="CDashFX.cpp" />
     <ClCompile Include="CDoor.cpp" />
     <ClCompile Include="CDungeon01.cpp" />
+    <ClCompile Include="CDungeon02.cpp" />
+    <ClCompile Include="CDungeon03.cpp" />
+    <ClCompile Include="CDungeon04.cpp" />
     <ClCompile Include="CDungeonEat.cpp" />
     <ClCompile Include="CDungeonStart.cpp" />
     <ClCompile Include="CEnemy.cpp" />

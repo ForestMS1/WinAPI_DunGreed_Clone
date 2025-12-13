@@ -104,20 +104,22 @@ void CTileEditScene::Render(HDC hDC)
 	int SrcX = frameWidth * m_iDrawIDX;
 	int SrcY = frameHeight * m_iDrawIDY;
 
-	Image* img = GET(CResourceMgr)->Find_Png(L"Villiaged2");
-	Graphics graphics(hDC);
-	graphics.SetInterpolationMode(Gdiplus::InterpolationModeNearestNeighbor);
-	const int DEST_WIDTH = 2048 * 3;
-	const int DEST_HEIGHT = 320 * 3;
+	//Image* img = GET(CResourceMgr)->Find_Png(L"Villiaged2");
+	//Graphics graphics(hDC);
+	//graphics.SetInterpolationMode(Gdiplus::InterpolationModeNearestNeighbor);
+	//const int DEST_WIDTH = 2048 * 3;
+	//const int DEST_HEIGHT = 320 * 3;
 
-	Gdiplus::Rect rt(
-		0 - scrollX,             // X 좌표 시작점
-		8 - scrollY,             // Y 좌표 시작점
-		DEST_WIDTH,    // 출력할 너비 (2048)
-		DEST_HEIGHT    // 출력할 높이 (320)
-	);
+	//Gdiplus::Rect rt(
+	//	0 - scrollX,             // X 좌표 시작점
+	//	8 - scrollY,             // Y 좌표 시작점
+	//	DEST_WIDTH,    // 출력할 너비 (2048)
+	//	DEST_HEIGHT    // 출력할 높이 (320)
+	//);
 
-	graphics.DrawImage(img, rt);
+	//graphics.DrawImage(img, rt);
+
+
 	wstring text = L"Tile_Option : " + to_wstring(m_iOption);
 	TextOut(hDC, 10, 0, text.c_str(), text.length());
 	text = L"Camera_Move : WASD";
@@ -195,7 +197,7 @@ void CTileEditScene::Key_Input()
 	{
 		//GET(CTileMgr)->Load_Tile(L"TestScene");
 		//GET(CTileMgr)->Load_Tile(L"BelialScene");
-		GET(CTileMgr)->Load_Tile(L"Tile");
+		GET(CTileMgr)->Load_Tile(L"Dungeon04");
 	}
 #pragma endregion
 

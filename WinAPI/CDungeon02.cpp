@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "CDungeon01.h"
+#include "CDungeon02.h"
 #include "CPlayer.h"
 #include "CGiantBat.h"
 #include "CPlayerUI.h"
@@ -10,15 +10,15 @@
 #include "CLittleGhost.h"
 #include "CBigWhiteSkel.h"
 #include "CTresure.h"
-CDungeon01::CDungeon01()
+CDungeon02::CDungeon02()
 {
 }
 
-CDungeon01::~CDungeon01()
+CDungeon02::~CDungeon02()
 {
 }
 
-void CDungeon01::Initialize()
+void CDungeon02::Initialize()
 {
 	//아직 클리어 안한 씬에서만 몹 생성
 	if (!m_bIsClearScene)
@@ -33,11 +33,8 @@ void CDungeon01::Initialize()
 	}
 	switch (GET(CSceneMgr)->GetPreSceneID())
 	{
-	case SCENE_DUNGEON_START:
-		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1500.f, 600.f));
-		break;
-	case SCENE_DUNGEON_02:
-		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(200.f, 600.f));
+	case SCENE_DUNGEON_01:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1500.f, 926.f));
 		break;
 	default:
 		break;
@@ -47,7 +44,7 @@ void CDungeon01::Initialize()
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
-	GET(CTileMgr)->Load_Tile(L"Dungeon01");
+	GET(CTileMgr)->Load_Tile(L"Dungeon02");
 
 	GET(CUIMgr)->Insert_UI(L"PlayerUI", new CPlayerUI(GET(CPlayerMgr)->GetPlayer()));
 	GET(CUIMgr)->Insert_UI(L"InventoryUI", new CInventoryUI(GET(CPlayerMgr)->GetPlayer()));
@@ -60,12 +57,12 @@ void CDungeon01::Initialize()
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 
 	//---------------------------------문 설치---------------------------------------
-	CObj* pDoor = CAbstractFactory<CDoor>::Create(100.f, 610.f);
-	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon02");
+	CObj* pDoor = CAbstractFactory<CDoor>::Create(70.f, 220.f);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Belial");
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 
-	pDoor = CAbstractFactory<CDoor>::Create(1600.f, 610.f);
-	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"DungeonStart");
+	pDoor = CAbstractFactory<CDoor>::Create(1600.f, 926.f);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon01");
 	dynamic_cast<CDoor*>(pDoor)->SetDoorState(CDoor::CLOSE_RIGHT);
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 	//---------------------------------문 설치---------------------------------------
@@ -73,18 +70,18 @@ void CDungeon01::Initialize()
 	//GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
 }
 
-void CDungeon01::Update()
+void CDungeon02::Update()
 {
 	m_bIsClearScene = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
 	OpenDoor();
 }
 
-void CDungeon01::Late_Update()
+void CDungeon02::Late_Update()
 {
 	DoorToNextScene();
 }
 
-void CDungeon01::Render(HDC hDC)
+void CDungeon02::Render(HDC hDC)
 {
 	int scrollX = GET(CCamera)->Get_ScrollX();
 	int scrollY = GET(CCamera)->Get_ScrollY();
@@ -140,10 +137,10 @@ void CDungeon01::Render(HDC hDC)
 	//	RGB(255, 0, 255));
 }
 
-void CDungeon01::Release()
+void CDungeon02::Release()
 {
 	GET(CObjMgr)->DeleteAllLayer();
 	GET(CTileMgr)->Clear_Tile();
 	GET(CUIMgr)->Release();
-	GET(CSoundMgr)->StopAll();
+	//GET(CSoundMgr)->StopAll();
 }

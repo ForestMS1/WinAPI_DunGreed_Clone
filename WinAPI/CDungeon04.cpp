@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "CDungeon01.h"
+#include "CDungeon04.h"
 #include "CPlayer.h"
 #include "CGiantBat.h"
 #include "CPlayerUI.h"
@@ -10,36 +10,40 @@
 #include "CLittleGhost.h"
 #include "CBigWhiteSkel.h"
 #include "CTresure.h"
-CDungeon01::CDungeon01()
+CDungeon04::CDungeon04()
 {
 }
 
-CDungeon01::~CDungeon01()
+CDungeon04::~CDungeon04()
 {
 }
 
-void CDungeon01::Initialize()
+void CDungeon04::Initialize()
 {
 	//아직 클리어 안한 씬에서만 몹 생성
 	if (!m_bIsClearScene)
 	{
 		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(700.f, 500.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
-		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
+		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
+		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
+		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
+		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
+		//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
 
 	}
 	switch (GET(CSceneMgr)->GetPreSceneID())
 	{
-	case SCENE_DUNGEON_START:
-		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1500.f, 600.f));
+	case SCENE_DUNGEON_03:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(173.f, 732.f));
 		break;
-	case SCENE_DUNGEON_02:
-		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(200.f, 600.f));
+	case SCENE_DUNGEON_05:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1372.f, 192.f));
+		break;
+	case SCENE_DUNGEON_06:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(2940.f, 927.f));
 		break;
 	default:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(173.f, 732.f));
 		break;
 	}
 	GET(CPlayerMgr)->Initialize();
@@ -47,7 +51,7 @@ void CDungeon01::Initialize()
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
-	GET(CTileMgr)->Load_Tile(L"Dungeon01");
+	GET(CTileMgr)->Load_Tile(L"Dungeon04");
 
 	GET(CUIMgr)->Insert_UI(L"PlayerUI", new CPlayerUI(GET(CPlayerMgr)->GetPlayer()));
 	GET(CUIMgr)->Insert_UI(L"InventoryUI", new CInventoryUI(GET(CPlayerMgr)->GetPlayer()));
@@ -60,12 +64,17 @@ void CDungeon01::Initialize()
 	GET(CCamera)->SetTarget(GET(CObjMgr)->GetObjLayer(OBJ_PLAYER).front());
 
 	//---------------------------------문 설치---------------------------------------
-	CObj* pDoor = CAbstractFactory<CDoor>::Create(100.f, 610.f);
-	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon02");
+	CObj* pDoor = CAbstractFactory<CDoor>::Create(73.f, 732.f);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon03");
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 
-	pDoor = CAbstractFactory<CDoor>::Create(1600.f, 610.f);
-	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"DungeonStart");
+	pDoor = CAbstractFactory<CDoor>::Create(1372, 92);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon05");
+	dynamic_cast<CDoor*>(pDoor)->SetDoorState(CDoor::CLOSE_BOTTOM);
+	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
+
+	pDoor = CAbstractFactory<CDoor>::Create(3040, 927);
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon06");
 	dynamic_cast<CDoor*>(pDoor)->SetDoorState(CDoor::CLOSE_RIGHT);
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 	//---------------------------------문 설치---------------------------------------
@@ -73,18 +82,18 @@ void CDungeon01::Initialize()
 	//GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
 }
 
-void CDungeon01::Update()
+void CDungeon04::Update()
 {
 	m_bIsClearScene = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
 	OpenDoor();
 }
 
-void CDungeon01::Late_Update()
+void CDungeon04::Late_Update()
 {
 	DoorToNextScene();
 }
 
-void CDungeon01::Render(HDC hDC)
+void CDungeon04::Render(HDC hDC)
 {
 	int scrollX = GET(CCamera)->Get_ScrollX();
 	int scrollY = GET(CCamera)->Get_ScrollY();
@@ -140,10 +149,10 @@ void CDungeon01::Render(HDC hDC)
 	//	RGB(255, 0, 255));
 }
 
-void CDungeon01::Release()
+void CDungeon04::Release()
 {
 	GET(CObjMgr)->DeleteAllLayer();
 	GET(CTileMgr)->Clear_Tile();
 	GET(CUIMgr)->Release();
-	GET(CSoundMgr)->StopAll();
+	//GET(CSoundMgr)->StopAll();
 }

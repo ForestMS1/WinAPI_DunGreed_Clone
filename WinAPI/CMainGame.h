@@ -19,6 +19,6 @@ private:
 
 	int			m_iFps;
 	DWORD		m_dwLastTime;
-	TCHAR		m_szFPS[128];
+	TCHAR		m_szFPS[256];
 };
 

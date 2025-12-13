@@ -37,6 +37,7 @@ void CDungeon03::Initialize()
 		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(150.f, 130.f));
 		break;
 	case SCENE_DUNGEON_04:
+		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1980.f, 605.f));
 		break;
 	default:
 		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(150.f, 130.f));

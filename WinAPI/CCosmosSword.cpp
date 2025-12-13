@@ -5,7 +5,7 @@
 #include "CPlayer.h"
 #include "CSwingFX.h"
 
-CCosmosSword::CCosmosSword()
+CCosmosSword::CCosmosSword() :isAttack(false)
 {
     //m_pSwingFX = nullptr;
     m_pSwingFX = new CSwingFX;
@@ -77,6 +77,7 @@ void CCosmosSword::Late_Update()
     if (dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->Get_IsAttack())
     {
         m_fAngle += 60;
+
         if (!dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->IsFlipped())
         {
             

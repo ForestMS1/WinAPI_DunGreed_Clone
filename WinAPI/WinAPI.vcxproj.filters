@@ -310,6 +310,9 @@
     <Filter Include="Object\Unit\Enemy\Belial\BelialBack">
       <UniqueIdentifier>{fbe724f5-99e7-463e-b9f6-bc3ff139ca83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Bullet\EnemyBullet\SkelArrow">
+      <UniqueIdentifier>{1ec94660-35c7-4e2c-ad8b-cfdeac9df690}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -618,6 +621,9 @@
     <ClInclude Include="CBelialBack.h">
       <Filter>Object\Unit\Enemy\Belial\BelialBack</Filter>
     </ClInclude>
+    <ClInclude Include="CSkelArrow.h">
+      <Filter>Object\Unit\Bullet\EnemyBullet\SkelArrow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -889,6 +895,9 @@
     </ClCompile>
     <ClCompile Include="CBelialBack.cpp">
       <Filter>Object\Unit\Enemy\Belial\BelialBack</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkelArrow.cpp">
+      <Filter>Object\Unit\Bullet\EnemyBullet\SkelArrow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

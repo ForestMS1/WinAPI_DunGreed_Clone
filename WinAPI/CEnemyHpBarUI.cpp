@@ -12,7 +12,7 @@ CEnemyHpBarUI::~CEnemyHpBarUI()
 
 void CEnemyHpBarUI::Initialize()
 {
-    float offsetY = m_pOwner->Get_Info()->fCY * 0.5f;
+    float offsetY = m_pOwner->Get_Info()->fCY * 0.7f;
     m_iFrameWidth = 74;
     m_iFrameHeight = 20;
     m_tInfo.fCX = 37;
@@ -33,7 +33,7 @@ int CEnemyHpBarUI::Update()
 {
     m_fCurHp = m_pOwner->Get_CurHp();
 
-    float offsetY = m_pOwner->Get_Info()->fCY * 0.5f;
+    float offsetY = m_pOwner->Get_Info()->fCY * 0.7f;
     m_tInfo.fX = m_pOwner->Get_Info()->fX;
     m_tInfo.fY = m_pOwner->Get_Info()->fY + offsetY;
     __super::Update_Rect();

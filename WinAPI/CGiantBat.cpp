@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CGiantBat.h"
 #include "CBatBullet.h"
-CGiantBat::CGiantBat() : m_fBulletSpawnAngle(0.f)
+CGiantBat::CGiantBat() : m_fBulletSpawnAngle(0.f) , m_fBulletShootAngle(0.f)
 {
 }
 
@@ -192,6 +192,7 @@ void CGiantBat::Motion_Change()
 			m_tInfo.fCY = m_iFrameHeight;
 			m_wsFrameKey = L"GiantBatAttack";
 			m_tFrame.dwTime = GetTickCount();
+			m_fBulletShootAngle = m_fAngle;
 			break;
 		case DEAD:
 			m_tFrame.iStart = 0;
@@ -217,7 +218,8 @@ void CGiantBat::Attack_CircleBullet()
 {
 	if (m_bIsInPlayer)
 	{
-		static float ToPlayerAngle = m_fAngle;
+		m_eCurState = ATTACK;
+		float ToPlayerAngle = m_fBulletShootAngle;
 
 		//TODO : 5초에 한번씩 플레이어에게 원 총알 발사
 		//if (m_dwAttackTick + 5000 < GetTickCount())
@@ -245,6 +247,7 @@ void CGiantBat::Attack_CircleBullet()
 						dynamic_cast<CBatBullet*>(pBullet)->SetMove();
 				}
 				m_fBulletSpawnAngle = 0.f;
+				m_eCurState = IDLE;
 			}
 			//m_dwAttackTick = GetTickCount();
 		//}

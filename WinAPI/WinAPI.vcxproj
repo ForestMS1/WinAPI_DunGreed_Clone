@@ -204,6 +204,7 @@
     <ClInclude Include="CShopItemUI.h" />
     <ClInclude Include="CShopUI.h" />
     <ClInclude Include="CSkel.h" />
+    <ClInclude Include="CSkelArrow.h" />
     <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="CSwingFX.h" />
     <ClInclude Include="CTest.h" />
@@ -310,6 +311,7 @@
     <ClCompile Include="CShopItemUI.cpp" />
     <ClCompile Include="CShopUI.cpp" />
     <ClCompile Include="CSkel.cpp" />
+    <ClCompile Include="CSkelArrow.cpp" />
     <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="CSwingFX.cpp" />
     <ClCompile Include="CTest.cpp" />

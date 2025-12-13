@@ -29,7 +29,7 @@ void CEndingScene::Initialize()
 
 
 	GET(CResourceMgr)->Insert_AlphaBmp(L"../Resources/Images/UI/Logo.bmp", L"LogoAlpha");
-	GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Ending/Jusin.png", L"Jusin");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Ending/Jusin.bmp", L"Jusin");
 	GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Ending/SwingChair.png", L"SwingChair");
 	//GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Bird.bmp", L"Bird");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BackGround/Sky.bmp", L"Sky");
@@ -108,7 +108,7 @@ void CEndingScene::Render(HDC hDC)
 
 	AlphaBlend(
 		hDC, // 대상 HDC
-		(WINCX >> 1) - 234,
+		(WINCX >> 1) - 234 - 150,
 		(WINCY >> 1) - 225,
 		468,
 		225,
@@ -163,6 +163,30 @@ void CEndingScene::Render(HDC hDC)
 	SetBkMode(hDC, TRANSPARENT);
 	SetTextColor(hDC, RGB(0, 0, 0));
 	TextOut(hDC, WINCX - 200 - offsetX, WINCY - m_fTextScrollY + offsetY * 9, text.c_str(), (int)text.size());
+
+	text = L"시청해 주셔서 감사합니다.";
+	SetBkMode(hDC, TRANSPARENT);
+	SetTextColor(hDC, RGB(0, 0, 0));
+	TextOut(hDC, WINCX - 200 - offsetX, WINCY - m_fTextScrollY + offsetY * 12, text.c_str(), (int)text.size());
+
+	text = L"160기 다들 고생 많으셨습니다!!";
+	SetBkMode(hDC, TRANSPARENT);
+	SetTextColor(hDC, RGB(0, 0, 0));
+	TextOut(hDC, WINCX - 200 - offsetX, WINCY - m_fTextScrollY + offsetY * 13, text.c_str(), (int)text.size());
+
+	HDC hJusinDC = GET(CResourceMgr)->Find_Bmp(L"Jusin");
+	GdiTransparentBlt(
+		hDC,
+		WINCX - 200 - offsetX,
+		WINCY - m_fTextScrollY + offsetY * 14,
+		218,
+		174,
+		hJusinDC,
+		0,
+		0,
+		218,
+		174,
+		RGB(255, 0, 255));
 
 	//text = to_wstring(m_pItem->GetShopPrice());
 	//TextOut(hDC, m_tRect.left + 230, m_tRect.top + 35, text.c_str(), (int)text.size());

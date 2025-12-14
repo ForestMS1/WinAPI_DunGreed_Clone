@@ -77,7 +77,8 @@ void CIceDungeon01::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 	//---------------------------------¹® ¼³Ä¡---------------------------------------
 
-	GET(CSoundMgr)->StopSound(SOUND_BGM);
+	//GET(CSoundMgr)->StopSound(SOUND_BGM);
+	GET(CSoundMgr)->StopAll();
 	GET(CSoundMgr)->PlayBGM(L"2.IceField.wav", 1.f);
 }
 

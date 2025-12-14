@@ -74,6 +74,7 @@ int CTresure::Update()
 		DropGold(rand() % 130);
 		DropGold(rand() % 130);
 		m_bCompleteDropGold = true;
+		GET(CSoundMgr)->PlaySoundW(L"open_tresure.wav", SOUND_EFFECT, 1.f);
 	}
 
 

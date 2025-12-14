@@ -65,6 +65,7 @@ int CLifeTresure::Update()
 		pFairy->Initialize();
 		GET(CObjMgr)->AddObject(OBJ_ITEM, pFairy);
 		m_bCompleteDropGold = true;
+		GET(CSoundMgr)->PlaySoundW(L"open_tresure.wav", SOUND_EFFECT, 1.f);
 	}
 
 

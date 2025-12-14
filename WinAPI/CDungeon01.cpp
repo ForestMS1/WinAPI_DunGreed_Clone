@@ -149,5 +149,5 @@ void CDungeon01::Release()
 	GET(CObjMgr)->DeleteAllLayer();
 	GET(CTileMgr)->Clear_Tile();
 	GET(CUIMgr)->Release();
-	GET(CSoundMgr)->StopAll();
+	//GET(CSoundMgr)->StopAll();
 }

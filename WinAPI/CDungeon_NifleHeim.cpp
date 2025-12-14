@@ -78,6 +78,8 @@ void CDungeon_NifleHeim::Initialize()
 	GET(CRSPMgr)->Initialize();
 	GET(CUIMgr)->Find_UI(L"RSP")->Close();
 	GET(CUIMgr)->Find_UI(L"PlayerSelectUI")->Close();
+
+	GET(CSoundMgr)->StopAll();
 }
 
 void CDungeon_NifleHeim::Update()

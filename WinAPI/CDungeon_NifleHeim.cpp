@@ -13,6 +13,7 @@
 #include "CSnow.h"
 #include "CNifleHeim.h"
 #include "CPortal.h"
+#include "CRSPMgr.h"
 CDungeon_NifleHeim::CDungeon_NifleHeim()
 {
 }
@@ -73,12 +74,17 @@ void CDungeon_NifleHeim::Initialize()
 
 	//GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
 	GET(CSoundMgr)->StopSound(SOUND_BGM);
+
+	GET(CRSPMgr)->Initialize();
+	GET(CUIMgr)->Find_UI(L"RSP")->Close();
+	GET(CUIMgr)->Find_UI(L"PlayerSelectUI")->Close();
 }
 
 void CDungeon_NifleHeim::Update()
 {
 	m_bIsClearScene = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
 	OpenDoor();
+	GET(CRSPMgr)->Update();
 }
 
 void CDungeon_NifleHeim::Late_Update()
@@ -93,6 +99,8 @@ void CDungeon_NifleHeim::Late_Update()
 			GET(CSceneMgr)->ChangeScene(L"Ending");
 		}
 	}
+
+	GET(CRSPMgr)->Late_Update();
 }
 
 void CDungeon_NifleHeim::Render(HDC hDC)
@@ -122,5 +130,6 @@ void CDungeon_NifleHeim::Release()
 	GET(CObjMgr)->DeleteAllLayer();
 	GET(CTileMgr)->Clear_Tile();
 	GET(CUIMgr)->Release();
+	GET(CRSPMgr)->Release();
 	//GET(CSoundMgr)->StopAll();
 }

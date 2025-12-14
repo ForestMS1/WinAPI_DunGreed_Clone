@@ -349,6 +349,15 @@
     <Filter Include="Object\Unit\Enemy\NifleHeim\Portal">
       <UniqueIdentifier>{56e06e5b-436f-4ecd-a696-23b12a9f37b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Enemy\NifleHeim\RSP">
+      <UniqueIdentifier>{4fc7f33d-867d-4ccd-ac4c-ba9bc89dab6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect">
+      <UniqueIdentifier>{dc01b496-4da4-4773-8dd8-3423ddaa916f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy\NifleHeim\RSP\EnemyRullet">
+      <UniqueIdentifier>{7955e683-f177-4dfd-986d-b5a232c082c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -696,6 +705,24 @@
     <ClInclude Include="CPortal.h">
       <Filter>Object\Unit\Enemy\NifleHeim\Portal</Filter>
     </ClInclude>
+    <ClInclude Include="CRSPSelect.h">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CRSPMgr.h">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP</Filter>
+    </ClInclude>
+    <ClInclude Include="CRSP.h">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\EnemyRullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CPaper.h">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CRock.h">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CScissors.h">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1006,6 +1033,24 @@
     </ClCompile>
     <ClCompile Include="CPortal.cpp">
       <Filter>Object\Unit\Enemy\NifleHeim\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="CRSPSelect.cpp">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CRSPMgr.cpp">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP</Filter>
+    </ClCompile>
+    <ClCompile Include="CRSP.cpp">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\EnemyRullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CPaper.cpp">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CRock.cpp">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CScissors.cpp">
+      <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

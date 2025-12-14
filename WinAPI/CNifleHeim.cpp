@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "CNifleHeim.h"
 #include "CPortal.h"
-
+#include "CRSP.h"
+#include "CRSPSelect.h"
+#include "CRSPMgr.h"
 CNifleHeim::CNifleHeim() : m_bPlayBossBGM(false)
 , m_bIntro(false), m_bAlpha(0), m_pPortal(nullptr), CompleteCreatePortal(false)
 {
@@ -51,11 +53,18 @@ void CNifleHeim::Initialize()
 	AddFontResource(TEXT("Aa카시오페아"));
 	m_hFont = CreateFont(100, 0, 0, 0, 0, 0, 0, 0,
 		HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("Aa카시오페아"));
+
+
+	GET(CUIMgr)->Insert_UI(L"RSP", new CRSP(this));
+	GET(CUIMgr)->Find_UI(L"RSP")->Close();
+	GET(CUIMgr)->Insert_UI(L"PlayerSelectUI", new CRSPSelect);
+	GET(CUIMgr)->Find_UI(L"PlayerSelectUI")->Close();
 }
 
 int CNifleHeim::Update()
 {
-	if (m_fCurHp <= 0.f)
+	//if (m_fCurHp <= 0.f)
+	if(GET(CRSPMgr)->IsPlayerWin())
 	{
 		m_bIsDead = true;
 		m_eNifleHeimCurState = NIFLEHEIM_DEAD;
@@ -65,6 +74,8 @@ int CNifleHeim::Update()
 		//if (m_DeadEffectTime < 3.f)
 		//{
 			DeadEffect();
+			GET(CUIMgr)->Find_UI(L"RSP")->Close();
+			GET(CUIMgr)->Find_UI(L"PlayerSelectUI")->Close();
 			float py(0.f);
 			GET(CLineMgr)->Collision_Line(this, &py);
 		//}
@@ -104,11 +115,15 @@ int CNifleHeim::Update()
 		if (dwElapsedTime < 2500)
 			m_bAlpha = (BYTE)(((float)dwElapsedTime / 2500) * 255.f);
 
+		GET(CUIMgr)->Find_UI(L"RSP")->Close();
+		GET(CUIMgr)->Find_UI(L"PlayerSelectUI")->Close();
 		return 0;
 	}
-	else
+	else if(GetTickCount() > m_SpawnEffectStartTime + 7000)
 	{
-		GET(CCamera)->SetTarget(GET(CPlayerMgr)->GetPlayer());
+		//GET(CCamera)->SetTarget(GET(CPlayerMgr)->GetPlayer());
+		GET(CUIMgr)->Find_UI(L"RSP")->Open();
+		GET(CUIMgr)->Find_UI(L"PlayerSelectUI")->Open();
 		m_bIntro = false;
 	}
 
@@ -214,6 +229,7 @@ void CNifleHeim::Render(HDC hDC)
 
 void CNifleHeim::Release()
 {
+	
 	if (m_hFont)
 	{
 		DeleteObject(m_hFont);
@@ -279,16 +295,16 @@ void CNifleHeim::DeadEffect()
 
 	if (m_tFrame.iStart == m_tFrame.iEnd - 1 && !CompleteCreatePortal)
 	{
-		m_pPortal = CAbstractFactory<CPortal>::Create(m_tInfo.fX, m_tInfo.fY);
+		m_pPortal = CAbstractFactory<CPortal>::Create(m_tInfo.fX, m_tInfo.fY - 150);
 		GET(CObjMgr)->AddObject(OBJ_NPC, m_pPortal);
 		CompleteCreatePortal = true;
 	}
 
 	m_tInfo.fY += 1.f;
 
-	if (m_bIsSpawnSound)
+	if (!m_bIsSpawnSound)
 	{
-		GET(CSoundMgr)->PlaySoundW(L"MonsterDie.wav", SOUND_EFFECT, 1.f);
-		m_bIsSpawnSound = false;
+		GET(CSoundMgr)->PlaySoundW(L"clear.wav", SOUND_EFFECT, 1.f);
+		m_bIsSpawnSound = true;
 	}
 }

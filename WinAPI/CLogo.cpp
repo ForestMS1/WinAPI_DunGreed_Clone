@@ -62,6 +62,10 @@ void CLogo::Late_Update()
 	{
 		GET(CSceneMgr)->ChangeScene(L"Ending");
 	}
+	if (GET(CKeyMgr)->Key_Down('X'))
+	{
+		GET(CSceneMgr)->ChangeScene(L"NifleHeim");
+	}
 }
 
 void CLogo::Render(HDC hDC)

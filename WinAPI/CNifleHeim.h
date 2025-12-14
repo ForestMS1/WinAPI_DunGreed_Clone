@@ -33,5 +33,6 @@ private:
     CObj* m_pPortal;
 
     bool CompleteCreatePortal;
+
 };
 

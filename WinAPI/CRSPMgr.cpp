@@ -1,0 +1,77 @@
+#include "pch.h"
+#include "CRSPMgr.h"
+#include "CPlayer.h"
+#include "CRSP.h"
+
+CRSPMgr* CRSPMgr::m_pInstance = nullptr;
+
+CRSPMgr::CRSPMgr() : m_ePlayerSelect(SELECT_END), m_eEnemySelect(SELECT_END)
+, m_bIsPlayerWin(false)
+{
+
+}
+CRSPMgr::~CRSPMgr()
+{
+
+}
+
+void CRSPMgr::Initialize()
+{
+}
+
+int CRSPMgr::Update()
+{
+	switch (m_ePlayerSelect)
+	{
+	case ROCK:
+		if (m_eEnemySelect == SCISSORS)
+			m_bIsPlayerWin = true;
+		else if (m_eEnemySelect == PAPER)
+			m_bIsPlayerWin = false;
+		break;
+	case SCISSORS:
+		if (m_eEnemySelect == ROCK)
+			m_bIsPlayerWin = false;
+		else if (m_eEnemySelect == PAPER)
+			m_bIsPlayerWin = true;
+		break;
+	case PAPER:
+		if (m_eEnemySelect == ROCK)
+			m_bIsPlayerWin = true;
+		else if (m_eEnemySelect == SCISSORS)
+			m_bIsPlayerWin = false;
+		break;
+	//무승부 처리 x
+	default:
+		break;
+	}
+
+	//가위바위보 했는데 지거나 비겼음
+	if (m_eEnemySelect != SELECT_END && !m_bIsPlayerWin)
+	{
+		if (dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer()) != nullptr)
+		{
+			dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->OnDamage(20);
+		}
+		m_eEnemySelect = SELECT_END;
+		m_dwLoseTime = GetTickCount();
+	}
+
+	if (m_dwLoseTime + 2000 < GetTickCount())
+	{
+		dynamic_cast<CRSP*>(GET(CUIMgr)->Find_UI(L"RSP"))->SetPlay();
+	}
+	return 0;
+}
+
+void CRSPMgr::Late_Update()
+{
+}
+
+void CRSPMgr::Render(HDC hDC)
+{
+}
+
+void CRSPMgr::Release()
+{
+}

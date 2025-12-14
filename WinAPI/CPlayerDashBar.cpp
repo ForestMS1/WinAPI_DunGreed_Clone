@@ -17,7 +17,7 @@ void CPlayerDashBar::Initialize()
 
 
     float offset = 50.f;
-    m_tInfo.fCX = 44.f * m_iMaxDashCount;
+    m_tInfo.fCX = 44.f * 3;
     m_tInfo.fCY = 32.f;
     m_tInfo.fX = 23.f + offset;
     m_tInfo.fY = 90;

@@ -34,13 +34,13 @@ void CRSP::Initialize()
 int CRSP::Update()
 {
 
-    float offsetY = m_pOwner->Get_Info()->fCY;
-    m_tInfo.fX = m_pOwner->Get_Info()->fX;
-    m_tInfo.fY = m_pOwner->Get_Info()->fY - offsetY;
-    __super::Update_Rect();
+   // float offsetY = m_pOwner->Get_Info()->fCY;
+   // m_tInfo.fX = m_pOwner->Get_Info()->fX;
+   // m_tInfo.fY = m_pOwner->Get_Info()->fY - offsetY;
+   // __super::Update_Rect();
 
 
-    if(!m_bStop)
+    if(!m_bStop && !m_pOwner->IsDead())
         Move_Frame();
 
     return 0;

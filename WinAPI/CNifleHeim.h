@@ -32,6 +32,8 @@ private:
 
     CObj* m_pPortal;
 
+    DWORD m_dwDeadStartTime;
+
     bool CompleteCreatePortal;
 
 };

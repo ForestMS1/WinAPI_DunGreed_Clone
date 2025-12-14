@@ -66,6 +66,9 @@ int CNifleHeim::Update()
 	//if (m_fCurHp <= 0.f)
 	if(GET(CRSPMgr)->IsPlayerWin())
 	{
+		if (!m_bIsDead)
+			m_dwDeadStartTime = GetTickCount();
+
 		m_bIsDead = true;
 		m_eNifleHeimCurState = NIFLEHEIM_DEAD;
 
@@ -74,7 +77,8 @@ int CNifleHeim::Update()
 		//if (m_DeadEffectTime < 3.f)
 		//{
 			DeadEffect();
-			GET(CUIMgr)->Find_UI(L"RSP")->Close();
+			if(m_dwDeadStartTime + 2000 < GetTickCount())
+				GET(CUIMgr)->Find_UI(L"RSP")->Close();
 			GET(CUIMgr)->Find_UI(L"PlayerSelectUI")->Close();
 			float py(0.f);
 			GET(CLineMgr)->Collision_Line(this, &py);
@@ -273,7 +277,7 @@ void CNifleHeim::Motion_Change()
 			m_tFrame.iMotion = 0;
 			m_tFrame.iEnd = 28;
 			m_wsFrameKey = L"NifleHeimDie";
-			m_tFrame.dwSpeed = 50.f;
+			m_tFrame.dwSpeed = 150.f;
 			m_tFrame.dwTime = GetTickCount();
 			m_iFrameWidth = 43;
 			m_iFrameHeight = 28;
@@ -295,7 +299,7 @@ void CNifleHeim::DeadEffect()
 
 	if (m_tFrame.iStart == m_tFrame.iEnd - 1 && !CompleteCreatePortal)
 	{
-		m_pPortal = CAbstractFactory<CPortal>::Create(m_tInfo.fX, m_tInfo.fY - 150);
+		m_pPortal = CAbstractFactory<CPortal>::Create(1360, 530);
 		GET(CObjMgr)->AddObject(OBJ_NPC, m_pPortal);
 		CompleteCreatePortal = true;
 	}

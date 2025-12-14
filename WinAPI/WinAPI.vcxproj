@@ -147,6 +147,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAbilityFX.h" />
+    <ClInclude Include="CAbilityGreedBackGround.h" />
+    <ClInclude Include="CAbilityGreedBtn.h" />
+    <ClInclude Include="CAbilityPatienceBackGround.h" />
+    <ClInclude Include="CAbilityPatienceBtn.h" />
+    <ClInclude Include="CAbilityUI.h" />
+    <ClInclude Include="CAbilityWrathBackGround.h" />
+    <ClInclude Include="CAbilityWrathBtn.h" />
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CBanshee.h" />
     <ClInclude Include="CBansheeBullet.h" />
@@ -203,6 +211,7 @@
     <ClInclude Include="CNifleHeim.h" />
     <ClInclude Include="CNPC.h" />
     <ClInclude Include="CNPCKeyUI.h" />
+    <ClInclude Include="CNPC_Commander.h" />
     <ClInclude Include="CNPC_Giant.h" />
     <ClInclude Include="CNPC_Inn.h" />
     <ClInclude Include="CPaper.h" />
@@ -272,6 +281,14 @@
     <ClInclude Include="WinAPI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CAbilityFX.cpp" />
+    <ClCompile Include="CAbilityGreedBackGround.cpp" />
+    <ClCompile Include="CAbilityGreedBtn.cpp" />
+    <ClCompile Include="CAbilityPatienceBackGround.cpp" />
+    <ClCompile Include="CAbilityPatienceBtn.cpp" />
+    <ClCompile Include="CAbilityUI.cpp" />
+    <ClCompile Include="CAbilityWrathBackGround.cpp" />
+    <ClCompile Include="CAbilityWrathBtn.cpp" />
     <ClCompile Include="CAbstractFactory.cpp" />
     <ClCompile Include="CBanshee.cpp" />
     <ClCompile Include="CBansheeBullet.cpp" />
@@ -328,6 +345,7 @@
     <ClCompile Include="CNifleHeim.cpp" />
     <ClCompile Include="CNPC.cpp" />
     <ClCompile Include="CNPCKeyUI.cpp" />
+    <ClCompile Include="CNPC_Commander.cpp" />
     <ClCompile Include="CNPC_Giant.cpp" />
     <ClCompile Include="CNPC_Inn.cpp" />
     <ClCompile Include="CPaper.cpp" />

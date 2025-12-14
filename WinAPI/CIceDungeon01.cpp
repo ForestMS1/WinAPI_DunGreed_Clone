@@ -77,7 +77,8 @@ void CIceDungeon01::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 	//---------------------------------¹® ¼³Ä¡---------------------------------------
 
-	//GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
+	GET(CSoundMgr)->StopSound(SOUND_BGM);
+	GET(CSoundMgr)->PlayBGM(L"2.IceField.wav", 1.f);
 }
 
 void CIceDungeon01::Update()

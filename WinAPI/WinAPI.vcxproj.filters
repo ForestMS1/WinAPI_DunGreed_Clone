@@ -358,6 +358,24 @@
     <Filter Include="Object\Unit\Enemy\NifleHeim\RSP\EnemyRullet">
       <UniqueIdentifier>{7955e683-f177-4dfd-986d-b5a232c082c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\NPC\NPC_Commander">
+      <UniqueIdentifier>{afcc8b35-e0a1-4f1a-8cef-a39135a7bb6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\AbilityUI">
+      <UniqueIdentifier>{43d4e191-020b-48d8-8b25-28e72bbe5615}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\AbilityUI\AbilityFX">
+      <UniqueIdentifier>{344d71fb-27d9-42f7-92a7-4cbbf5bda3fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\AbilityUI\Greed">
+      <UniqueIdentifier>{d772b50a-a641-4cf8-a81f-deb737c2131f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\AbilityUI\Wrath">
+      <UniqueIdentifier>{0c50104a-fd69-476c-8659-08c1efb323ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\AbilityUI\Patience">
+      <UniqueIdentifier>{e80a2beb-03fd-4fe5-a5be-df9b7bcd17f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -723,6 +741,33 @@
     <ClInclude Include="CScissors.h">
       <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
     </ClInclude>
+    <ClInclude Include="CNPC_Commander.h">
+      <Filter>Object\Unit\NPC\NPC_Commander</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbilityUI.h">
+      <Filter>Object\UI\AbilityUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbilityFX.h">
+      <Filter>Object\UI\AbilityUI\AbilityFX</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbilityGreedBackGround.h">
+      <Filter>Object\UI\AbilityUI\Greed</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbilityGreedBtn.h">
+      <Filter>Object\UI\AbilityUI\Greed</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbilityWrathBackGround.h">
+      <Filter>Object\UI\AbilityUI\Wrath</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbilityWrathBtn.h">
+      <Filter>Object\UI\AbilityUI\Wrath</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbilityPatienceBackGround.h">
+      <Filter>Object\UI\AbilityUI\Patience</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbilityPatienceBtn.h">
+      <Filter>Object\UI\AbilityUI\Patience</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1051,6 +1096,33 @@
     </ClCompile>
     <ClCompile Include="CScissors.cpp">
       <Filter>Object\Unit\Enemy\NifleHeim\RSP\PlayerSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CNPC_Commander.cpp">
+      <Filter>Object\Unit\NPC\NPC_Commander</Filter>
+    </ClCompile>
+    <ClCompile Include="CAbilityUI.cpp">
+      <Filter>Object\UI\AbilityUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAbilityFX.cpp">
+      <Filter>Object\UI\AbilityUI\AbilityFX</Filter>
+    </ClCompile>
+    <ClCompile Include="CAbilityGreedBackGround.cpp">
+      <Filter>Object\UI\AbilityUI\Greed</Filter>
+    </ClCompile>
+    <ClCompile Include="CAbilityGreedBtn.cpp">
+      <Filter>Object\UI\AbilityUI\Greed</Filter>
+    </ClCompile>
+    <ClCompile Include="CAbilityWrathBackGround.cpp">
+      <Filter>Object\UI\AbilityUI\Wrath</Filter>
+    </ClCompile>
+    <ClCompile Include="CAbilityWrathBtn.cpp">
+      <Filter>Object\UI\AbilityUI\Wrath</Filter>
+    </ClCompile>
+    <ClCompile Include="CAbilityPatienceBackGround.cpp">
+      <Filter>Object\UI\AbilityUI\Patience</Filter>
+    </ClCompile>
+    <ClCompile Include="CAbilityPatienceBtn.cpp">
+      <Filter>Object\UI\AbilityUI\Patience</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

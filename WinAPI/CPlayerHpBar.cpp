@@ -68,35 +68,72 @@ void CPlayerHpBar::Render(HDC hDC)
         RGB(255, 0, 255)
     );
 
-    HDC hHpDC = GET(CResourceMgr)->Find_Bmp(L"LifeBar");
-    GdiTransparentBlt(
-        hDC,
-        m_tRect.left + 65,
-        m_tRect.top,
-        1.5 * m_fMaxHp * (m_fCurHp / m_fMaxHp),
-        m_tInfo.fCY,
-        hHpDC,
-        0,
-        0,
-        196,
-        40,
-        RGB(255, 0, 255)
-    );
-    HDC hHpWaveDC = GET(CResourceMgr)->Find_Bmp(L"LifeWave");
-    int SrcX = 24 * m_tFrame.iStart;
-    GdiTransparentBlt(
-        hDC,
-        m_tRect.left + 65 + 1.5 * m_fMaxHp * (m_fCurHp / m_fMaxHp),
-        m_tRect.top,
-        12,
-        m_tInfo.fCY,
-        hHpWaveDC,
-        SrcX,
-        0,
-        24,
-        40,
-        RGB(255, 0, 255)
-    );
+
+    if (m_fCurHp > 100.f)
+    {
+        HDC hHpDC = GET(CResourceMgr)->Find_Bmp(L"LifeBar");
+        GdiTransparentBlt(
+            hDC,
+            m_tRect.left + 65,
+            m_tRect.top,
+            1.5 * 100,
+            m_tInfo.fCY,
+            hHpDC,
+            0,
+            0,
+            196,
+            40,
+            RGB(255, 0, 255)
+        );
+        HDC hHpWaveDC = GET(CResourceMgr)->Find_Bmp(L"LifeWave");
+        int SrcX = 24 * m_tFrame.iStart;
+        GdiTransparentBlt(
+            hDC,
+            m_tRect.left + 65 + 1.5 * 100,
+            m_tRect.top,
+            12,
+            m_tInfo.fCY,
+            hHpWaveDC,
+            SrcX,
+            0,
+            24,
+            40,
+            RGB(255, 0, 255)
+        );
+    }
+    else
+    {
+        HDC hHpDC = GET(CResourceMgr)->Find_Bmp(L"LifeBar");
+        GdiTransparentBlt(
+            hDC,
+            m_tRect.left + 65,
+            m_tRect.top,
+            1.5 * m_fMaxHp * (m_fCurHp / m_fMaxHp),
+            m_tInfo.fCY,
+            hHpDC,
+            0,
+            0,
+            196,
+            40,
+            RGB(255, 0, 255)
+        );
+        HDC hHpWaveDC = GET(CResourceMgr)->Find_Bmp(L"LifeWave");
+        int SrcX = 24 * m_tFrame.iStart;
+        GdiTransparentBlt(
+            hDC,
+            m_tRect.left + 65 + 1.5 * m_fMaxHp * (m_fCurHp / m_fMaxHp),
+            m_tRect.top,
+            12,
+            m_tInfo.fCY,
+            hHpWaveDC,
+            SrcX,
+            0,
+            24,
+            40,
+            RGB(255, 0, 255)
+        );
+    }
+  
     HDC hMemDC = GET(CResourceMgr)->Find_Bmp(L"PlayerLifeBase");
     GdiTransparentBlt(
         hDC,

@@ -23,7 +23,7 @@ void CCosmosSword::Initialize()
         m_pSwingFX = new CSwingFX;
     }
     m_pSwingFX->Initialize();
-    GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Weapon/CosmosSwordNoAnim.png", L"CosmosSword");
+    //GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Weapon/CosmosSwordNoAnim.png", L"CosmosSword");
     GET(CResourceMgr)->Insert_Png(L"../Resources/Images/Item/Weapon/LightSaber.png", L"LightSaber");
     GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Item/Weapon/LightSaber.bmp", L"LightSaber");
     m_fOffsetX = GET(CPlayerMgr)->GetPlayer()->Get_Info()->fCX * 0.5f;

@@ -5,6 +5,7 @@
 #include "CFoodUI.h"
 #include "CGoldUI.h"
 #include "CPlayerDashBar.h"
+#include "CSkilUI.h"
 CPlayerUI::CPlayerUI()
 {
 	m_pPlayer = nullptr;
@@ -35,6 +36,7 @@ void CPlayerUI::Initialize()
 		AddChildUI(new CEquipedUI);
 		AddChildUI(new CFoodUI);
 		AddChildUI(new CGoldUI);
+		AddChildUI(new CSkilUI);
 	}
 
 	for (auto& pChildUI : m_vecChildUI)

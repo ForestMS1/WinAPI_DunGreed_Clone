@@ -394,6 +394,15 @@
     <Filter Include="Object\Unit\NPC\NPC_BlackSmith">
       <UniqueIdentifier>{745b6938-4aa3-4854-9652-60b2f8295b8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Player\Owned\Weapon\CosSword">
+      <UniqueIdentifier>{5c9bb8cb-485e-45d1-89be-805d870bbe09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Bullet\PlayerBullet\CosSwordBullet">
+      <UniqueIdentifier>{55be60d5-24d2-4c3e-b764-a236e1529a28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\PlayerUI\SkilUI">
+      <UniqueIdentifier>{321c7ed3-db03-4bb5-8593-2f08e3b48d4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -801,6 +810,18 @@
     <ClInclude Include="CStarBullet.h">
       <Filter>Object\Unit\Bullet\PlayerBullet\StarBullet</Filter>
     </ClInclude>
+    <ClInclude Include="CCosSword.h">
+      <Filter>Object\Unit\Player\Owned\Weapon\CosSword</Filter>
+    </ClInclude>
+    <ClInclude Include="CCosSwingFX.h">
+      <Filter>Object\Unit\Player\Owned\Weapon\SwingFX</Filter>
+    </ClInclude>
+    <ClInclude Include="CCosSwordBullet.h">
+      <Filter>Object\Unit\Bullet\PlayerBullet\CosSwordBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkilUI.h">
+      <Filter>Object\UI\PlayerUI\SkilUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1171,6 +1192,18 @@
     </ClCompile>
     <ClCompile Include="CStarBullet.cpp">
       <Filter>Object\Unit\Bullet\PlayerBullet\StarBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CCosSword.cpp">
+      <Filter>Object\Unit\Player\Owned\Weapon\CosSword</Filter>
+    </ClCompile>
+    <ClCompile Include="CCosSwingFX.cpp">
+      <Filter>Object\Unit\Player\Owned\Weapon\SwingFX</Filter>
+    </ClCompile>
+    <ClCompile Include="CCosSwordBullet.cpp">
+      <Filter>Object\Unit\Bullet\PlayerBullet\CosSwordBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkilUI.cpp">
+      <Filter>Object\UI\PlayerUI\SkilUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

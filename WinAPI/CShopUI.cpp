@@ -4,6 +4,7 @@
 #include "CCosmosSword.h"
 #include "CGatlingGun.h"
 #include "CLala.h"
+#include "CCosSword.h"
 CShopUI::CShopUI() : m_bMouseOn(false)
 {
 
@@ -32,7 +33,7 @@ void CShopUI::Initialize()
 	float offsetX = 90.f * 2;
 	float offsetY = 69;
 
-	for (size_t i = 0; i < 3; ++i)
+	for (size_t i = 0; i < 4; ++i)
 	{
 		CUI* pShopItemUI = new CShopItemUI;
 		pShopItemUI->Set_Pos(m_tRect.left + offsetX, m_tRect.top + offsetY * (i+1) + 70);
@@ -45,6 +46,7 @@ void CShopUI::Initialize()
 		dynamic_cast<CShopItemUI*>(m_vecChildUI[0])->SetItem(new CCosmosSword);
 		dynamic_cast<CShopItemUI*>(m_vecChildUI[1])->SetItem(new CGatlingGun);
 		dynamic_cast<CShopItemUI*>(m_vecChildUI[2])->SetItem(new CLala);
+		dynamic_cast<CShopItemUI*>(m_vecChildUI[3])->SetItem(new CCosSword);
 		//ItemVec[0] = dynamic_cast<CShopItemUI*>(m_vecChildUI[0])->GetItem()->Clone();
 		//ItemVec[1] = dynamic_cast<CShopItemUI*>(m_vecChildUI[1])->GetItem()->Clone();
 	}

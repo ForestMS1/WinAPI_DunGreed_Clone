@@ -33,14 +33,27 @@ void CBelialScene::Initialize()
 
 	//---------------------------------문 설치---------------------------------------
 	CObj* pDoor = CAbstractFactory<CDoor>::Create(200.f, 990.f);
-	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon01");
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon04");
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 	//---------------------------------문 설치---------------------------------------
+	GET(CSoundMgr)->StopAll();
 }
 
 void CBelialScene::Update()
 {
-	OpenDoor();
+	//OpenDoor();
+	if (GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).front()->IsDead())
+	{
+		for (auto& iter : GET(CObjMgr)->GetObjLayer(OBJ_DOOR))
+		{
+			if (dynamic_cast<CDoor*>(iter)->GetDoorState() == CDoor::IDLE_LEFT)
+				dynamic_cast<CDoor*>(iter)->SetDoorState(CDoor::OPEN_LEFT);
+			else if (dynamic_cast<CDoor*>(iter)->GetDoorState() == CDoor::IDLE_BOTTOM)
+				dynamic_cast<CDoor*>(iter)->SetDoorState(CDoor::OPEN_BOTTOM);
+			else if (dynamic_cast<CDoor*>(iter)->GetDoorState() == CDoor::IDLE_RIGHT)
+				dynamic_cast<CDoor*>(iter)->SetDoorState(CDoor::OPEN_RIGHT);
+		}
+	}
 }
 
 void CBelialScene::Late_Update()

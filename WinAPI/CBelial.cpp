@@ -122,7 +122,6 @@ int CBelial::Update()
 		}
 		else
 		{
-			GET(CSoundMgr)->StopSound(SOUND_BGM);
 			//return OBJ_DEAD;
 			return OBJ_NOEVENT;
 		}
@@ -485,9 +484,11 @@ void CBelial::DeadEffect()
 
 	m_tInfo.fY += 1.f;
 
-	if (m_bIsSpawnSound)
+	if (!m_bIsSpawnSound)
 	{
-		GET(CSoundMgr)->PlaySoundW(L"MonsterDie.wav", SOUND_EFFECT, 1.f);
-		m_bIsSpawnSound = false;
+		GET(CSoundMgr)->StopAll();
+		//GET(CSoundMgr)->StopSound(SOUND_BGM);
+		GET(CSoundMgr)->PlaySoundW(L"clear.wav", SOUND_EFFECT, 1.f);
+		m_bIsSpawnSound = true;
 	}
 }

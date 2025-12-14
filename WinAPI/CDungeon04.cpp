@@ -36,7 +36,9 @@ void CDungeon04::Initialize()
 	case SCENE_DUNGEON_03:
 		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(173.f, 732.f));
 		break;
-	case SCENE_DUNGEON_05:
+	//case SCENE_DUNGEON_05:
+		//GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1372.f, 192.f));
+	case SCENE_BELIAL:
 		GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(1372.f, 192.f));
 		break;
 	case SCENE_DUNGEON_06:
@@ -69,7 +71,8 @@ void CDungeon04::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 
 	pDoor = CAbstractFactory<CDoor>::Create(1372, 92);
-	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon05");
+	//dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Dungeon05");
+	dynamic_cast<CDoor*>(pDoor)->SetNextSceneName(L"Belial");
 	dynamic_cast<CDoor*>(pDoor)->SetDoorState(CDoor::CLOSE_BOTTOM);
 	GET(CObjMgr)->AddObject(OBJ_DOOR, pDoor);
 

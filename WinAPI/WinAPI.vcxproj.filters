@@ -382,6 +382,18 @@
     <Filter Include="Object\Item\Fairy">
       <UniqueIdentifier>{35b57fe0-7a3e-4aec-8d58-cb9e2bf85469}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\Player\Owned\Weapon\Lala">
+      <UniqueIdentifier>{c746a42a-a04e-4752-a305-c358e92d42f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\NPC\Tresure\LalaTresure">
+      <UniqueIdentifier>{8242a3eb-686c-4c01-a1a2-9b4f1fbce184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Bullet\PlayerBullet\StarBullet">
+      <UniqueIdentifier>{fbf6728f-3a84-4288-90b9-55ed19b640f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\NPC\NPC_BlackSmith">
+      <UniqueIdentifier>{745b6938-4aa3-4854-9652-60b2f8295b8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -780,6 +792,15 @@
     <ClInclude Include="CFairy.h">
       <Filter>Object\Item\Fairy</Filter>
     </ClInclude>
+    <ClInclude Include="CLala.h">
+      <Filter>Object\Unit\Player\Owned\Weapon\Lala</Filter>
+    </ClInclude>
+    <ClInclude Include="CLalaTresure.h">
+      <Filter>Object\Unit\NPC\Tresure\LalaTresure</Filter>
+    </ClInclude>
+    <ClInclude Include="CStarBullet.h">
+      <Filter>Object\Unit\Bullet\PlayerBullet\StarBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1141,6 +1162,15 @@
     </ClCompile>
     <ClCompile Include="CFairy.cpp">
       <Filter>Object\Item\Fairy</Filter>
+    </ClCompile>
+    <ClCompile Include="CLala.cpp">
+      <Filter>Object\Unit\Player\Owned\Weapon\Lala</Filter>
+    </ClCompile>
+    <ClCompile Include="CLalaTresure.cpp">
+      <Filter>Object\Unit\NPC\Tresure\LalaTresure</Filter>
+    </ClCompile>
+    <ClCompile Include="CStarBullet.cpp">
+      <Filter>Object\Unit\Bullet\PlayerBullet\StarBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

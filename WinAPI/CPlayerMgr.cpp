@@ -27,6 +27,7 @@ void CPlayerMgr::Initialize()
 	m_mapPlayerEquiped.insert({ L"Shiled1", nullptr });
 	m_mapPlayerEquiped.insert({ L"Weapon2", nullptr });
 	m_mapPlayerEquiped.insert({ L"Shiled2", nullptr });
+
 }
 
 void CPlayerMgr::Update()

@@ -112,19 +112,25 @@ void CDungeon_NifleHeim::Render(HDC hDC)
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
 
 	HDC hBackDC = GET(CResourceMgr)->Find_Bmp(L"BGLayer_0");
-	GdiTransparentBlt(
-		hDC,
-		0,
-		0,
-		1920,
-		1080,
-		hBackDC,
-		0,
-		0,
-		320,
-		260,
-		RGB(255, 0, 255)
-	);
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			GdiTransparentBlt(
+				hDC,
+				(320 * j),
+				(260 * i),
+				320,
+				260,
+				hBackDC,
+				0,
+				0,
+				320,
+				260,
+				RGB(255, 0, 255)
+			);
+		}
+	}
 }
 
 void CDungeon_NifleHeim::Release()

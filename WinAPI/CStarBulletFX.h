@@ -1,11 +1,11 @@
 #pragma once
 #include "CObj.h"
-class CDamageText :
+class CStarBulletFX :
     public CObj
 {
 public:
-    CDamageText(int damage, float fX, float fY);
-    ~CDamageText();
+    CStarBulletFX(float fX, float fY);
+    ~CStarBulletFX();
 public:
     // CObj을(를) 통해 상속됨
     void Initialize() override;
@@ -15,13 +15,9 @@ public:
     void Release() override;
 
 private:
-    int   m_iDamage;
     DWORD m_dwSpawnTime; // 생성된 시간
-    BYTE m_bAlpha;
     DWORD m_dwLifeTime = 1000;
-    float m_fSpeed;
-    
-
+    BYTE m_bAlpha;
     float m_ft;
 };
 

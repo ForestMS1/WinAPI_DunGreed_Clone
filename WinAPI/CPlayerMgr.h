@@ -25,7 +25,23 @@ public:
 	void SetChange();
 	bool IsFirstSet() const { return m_bIsFirstSet; }
 
-	void AddItem(CItem* pItem) { if (pItem != nullptr) { m_vecItem.push_back(pItem->Clone()); } }
+	void AddItem(CItem* pItem) 
+	{ 
+		if (pItem != nullptr) 
+		{ 
+			for (int i = 0; i < 3; ++i)
+			{
+				for (int j = 0; j < 5; ++j)
+				{
+					if (m_vecItem[5 * i + j] == nullptr)
+					{
+						m_vecItem[5 * i + j] = pItem->Clone();
+						return;
+					}
+				}
+			}
+		} 
+	}
 	vector<CItem*>& GetItemVec() { return m_vecItem; }
 	void SetMaxHp(float MaxHp) { m_fMaxHp = MaxHp; }
 	void SetCurHp(float CurHp) { m_fCurHp = CurHp; }

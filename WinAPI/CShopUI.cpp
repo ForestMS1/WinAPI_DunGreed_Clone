@@ -3,6 +3,7 @@
 #include "CShopItemUI.h"
 #include "CCosmosSword.h"
 #include "CGatlingGun.h"
+#include "CLala.h"
 CShopUI::CShopUI() : m_bMouseOn(false)
 {
 
@@ -43,6 +44,7 @@ void CShopUI::Initialize()
 	{
 		dynamic_cast<CShopItemUI*>(m_vecChildUI[0])->SetItem(new CCosmosSword);
 		dynamic_cast<CShopItemUI*>(m_vecChildUI[1])->SetItem(new CGatlingGun);
+		dynamic_cast<CShopItemUI*>(m_vecChildUI[2])->SetItem(new CLala);
 		//ItemVec[0] = dynamic_cast<CShopItemUI*>(m_vecChildUI[0])->GetItem()->Clone();
 		//ItemVec[1] = dynamic_cast<CShopItemUI*>(m_vecChildUI[1])->GetItem()->Clone();
 	}

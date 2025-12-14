@@ -205,6 +205,8 @@
     <ClInclude Include="CIceDungeon01.h" />
     <ClInclude Include="CInventoryUI.h" />
     <ClInclude Include="CItem.h" />
+    <ClInclude Include="CLala.h" />
+    <ClInclude Include="CLalaTresure.h" />
     <ClInclude Include="CLaser.h" />
     <ClInclude Include="CLifeTresure.h" />
     <ClInclude Include="CLittleGhost.h" />
@@ -235,6 +237,7 @@
     <ClInclude Include="CSkelArrow.h" />
     <ClInclude Include="CSnow.h" />
     <ClInclude Include="CSoundMgr.h" />
+    <ClInclude Include="CStarBullet.h" />
     <ClInclude Include="CSwingFX.h" />
     <ClInclude Include="CTest.h" />
     <ClInclude Include="CKeyMgr.h" />
@@ -341,6 +344,8 @@
     <ClCompile Include="CIceDungeon01.cpp" />
     <ClCompile Include="CInventoryUI.cpp" />
     <ClCompile Include="CItem.cpp" />
+    <ClCompile Include="CLala.cpp" />
+    <ClCompile Include="CLalaTresure.cpp" />
     <ClCompile Include="CLaser.cpp" />
     <ClCompile Include="CLifeTresure.cpp" />
     <ClCompile Include="CLittleGhost.cpp" />
@@ -371,6 +376,7 @@
     <ClCompile Include="CSkelArrow.cpp" />
     <ClCompile Include="CSnow.cpp" />
     <ClCompile Include="CSoundMgr.cpp" />
+    <ClCompile Include="CStarBullet.cpp" />
     <ClCompile Include="CSwingFX.cpp" />
     <ClCompile Include="CTest.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />

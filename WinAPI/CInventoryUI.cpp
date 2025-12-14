@@ -84,6 +84,22 @@ void CInventoryUI::Initialize()
 
 int CInventoryUI::Update()
 {
+	vector<CItem*>& ItemVec = GET(CPlayerMgr)->GetItemVec();
+	for (size_t i = 0; i < 3; ++i)
+	{
+		for (size_t j = 0; j < 5; ++j)
+		{
+			if (ItemVec[5 * i + j] == nullptr)
+				dynamic_cast<CCell*>(m_vecChildUI[5 * i + j])->SetItem(nullptr);
+			else if (ItemVec[5 * i + j] != nullptr)
+			{
+				CItem* pItem = ItemVec[5 * i + j]->Clone();
+				pItem->Initialize();
+				dynamic_cast<CCell*>(m_vecChildUI[5 * i + j])->SetItem(pItem);
+			}
+		}
+	}
+
 	for (auto& pChild : m_vecChildUI)
 	{
 		pChild->Update();

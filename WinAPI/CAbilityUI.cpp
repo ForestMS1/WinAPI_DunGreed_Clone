@@ -53,6 +53,8 @@ void CAbilityUI::Initialize()
 
 int CAbilityUI::Update()
 {
+	if (!m_bIsOpen)
+		return 0;
 	__super::Update_Rect();
 	for (auto& pChild : m_vecChildUI)
 	{
@@ -64,6 +66,8 @@ int CAbilityUI::Update()
 
 void CAbilityUI::Late_Update()
 {
+	if (!m_bIsOpen)
+		return;
 	for (auto& pChild : m_vecChildUI)
 	{
 		pChild->Late_Update();

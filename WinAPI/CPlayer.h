@@ -25,11 +25,16 @@ public:
 	void Set_Weapon(CItem* pWeapon) { Safe_Delete(m_pWeapon); m_pWeapon = pWeapon; }
 	void SetGold(int gold) { m_iGold = gold; }
 
+	void SetAddMaxHp(int addMaxHp) { m_fAddMaxHp = addMaxHp; }
+	void SetAddDef(int addDef) { m_fAddDef = addDef; }
+	void SetAddGreed(int addGreed) { m_fAddGreed = addGreed; }
+	void SetAddMaxDashCount(int addDashCount) { m_iAddMaxDashCount = addDashCount; }
+
 	void OnDamage(int dmg) override
 	{
 		if (m_bIsHit)
 			return;
-		int result = dmg + (rand() % 5);
+		int result = dmg + (rand() % 5) - m_fAddDef;
 		m_fCurHp -= result;
 		if (m_fCurHp <= 0.f)
 		{
@@ -126,6 +131,12 @@ private:
 	bool m_bIsNoPlayerRender;
 	// 던전 입장중에 키입력 방지
 	bool m_bIsNoKeyInput;
+
+	//추가 스탯
+	float m_fAddMaxHp;
+	float m_fAddDef;
+	float m_fAddGreed;
+	int	  m_iAddMaxDashCount;
 	
 };
 

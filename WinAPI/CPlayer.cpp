@@ -19,6 +19,7 @@ CPlayer::CPlayer() :
 	m_bAttack(false), m_fAttackAcct(0.2f), m_fAttackt(0.f), m_fMaxSatiety(100.f), m_fCurSatiety(0.f)
 	, m_iDashFXCount(0), m_bIsNoPlayerRender(false), m_bIsNoKeyInput(false)
 	, m_iMaxDashCount(3), m_iCurDashCount(3), m_iMaxJumpCount(2), m_iCurJumpCount(2)
+	, m_fAddMaxHp(0.f), m_fAddDef(0.f), m_fAddGreed(0.f)
 {
 	m_pWeapon = nullptr;
 	m_pRunEffect = nullptr;
@@ -31,7 +32,7 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	m_fSpeed = 7.f;
-	m_fMaxHp = 100.f;
+	m_fMaxHp = 100.f + m_fAddMaxHp;
 	m_fCurHp = 70.f;
 
 	//m_tInfo.fX = 400.f;
@@ -74,11 +75,20 @@ void CPlayer::Initialize()
 		}
 	}
 
+	//Ãß°¡½ºÅÈ
+	m_fAddMaxHp = GET(CPlayerMgr)->GetAddMaxHp();
+	m_fAddDef = GET(CPlayerMgr)->GetAddDef();
+	m_fAddGreed = GET(CPlayerMgr)->GetAddGreed();
+	m_iAddMaxDashCount = GET(CPlayerMgr)->GetAddMaxDashCount();
+
 	m_fMaxHp = GET(CPlayerMgr)->GetMaxHp();
 	m_fCurHp = GET(CPlayerMgr)->GetCurHp();
 	m_iGold = GET(CPlayerMgr)->GetGold();
 	m_fMaxSatiety = GET(CPlayerMgr)->GetMaxSatiety();
 	m_fCurSatiety = GET(CPlayerMgr)->GetCurSatiety();
+
+	m_iMaxDashCount = 3 + m_iAddMaxDashCount;
+	m_iCurDashCount = m_iMaxDashCount;
 
 	//ÀÌÆåÆ®
 	if (m_pRunEffect == nullptr)
@@ -102,7 +112,12 @@ int CPlayer::Update()
 
 	m_bIsFlipped = ToMouse();
 
+	//½ºÅÈÀû¿ë
 	m_iGold = GET(CPlayerMgr)->GetGold();
+	m_fAddMaxHp = GET(CPlayerMgr)->GetAddMaxHp();
+	m_fMaxHp = 100.f + m_fAddMaxHp;
+	m_iAddMaxDashCount = GET(CPlayerMgr)->GetAddMaxDashCount();
+	m_iMaxDashCount = 3 + m_iAddMaxDashCount;
 
 	Key_Input();
 

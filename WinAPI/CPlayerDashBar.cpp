@@ -62,12 +62,12 @@ void CPlayerDashBar::Render(HDC hDC)
     {
         HDC hBackEndDC = GET(CResourceMgr)->Find_Bmp(L"DashMid");
         if (i != 1)
-            offset = 35;
+            offset = 44;
         GdiTransparentBlt(
             hDC,
             m_tRect.left + offset * i,
             m_tRect.top,
-            35,
+            44,
             32,
             hBackEndDC,
             0,
@@ -81,9 +81,9 @@ void CPlayerDashBar::Render(HDC hDC)
     HDC hBackEndDC = GET(CResourceMgr)->Find_Bmp(L"DashEnd");
     GdiTransparentBlt(
         hDC,
-        m_tRect.left + 44 + 35 * (m_iMaxDashCount - 2),
+        m_tRect.left + 44 + 44 * (m_iMaxDashCount - 2),
         m_tRect.top,
-        46,
+        44,
         32,
         hBackEndDC,
         0,
@@ -95,23 +95,65 @@ void CPlayerDashBar::Render(HDC hDC)
 
     float offsetX = 8;
     float offsetY = 8;
-    for (size_t i = 0; i < m_iCurDashCount; ++i)
+
+    float sizeX = 44;
+    float off = 44;
+
+    //처음
+    HDC hCountDC = GET(CResourceMgr)->Find_Bmp(L"DashCount");
+    GdiTransparentBlt(
+        hDC,
+        m_tRect.left + 8,
+        m_tRect.top + 8,
+        36,
+        16,
+        hCountDC,
+        0,
+        0,
+        36,
+        16,
+        RGB(255, 0, 255)
+    );
+
+    //중간
+    for (size_t i = 1; i < m_iCurDashCount; ++i)
     {
-        HDC hCountDC = GET(CResourceMgr)->Find_Bmp(L"DashCount");
-        GdiTransparentBlt(
-            hDC,
-            m_tRect.left + (36 * i) + offsetX,
-            m_tRect.top + offsetY,
-            36,
-            16,
-            hCountDC,
-            0,
-            0,
-            36,
-            16,
-            RGB(255, 0, 255)
-        );
+        if (i == m_iMaxDashCount - 1)
+        {
+            HDC hCountDC = GET(CResourceMgr)->Find_Bmp(L"DashCount");
+            GdiTransparentBlt(
+                hDC,
+                m_tRect.left + 8 + 36 + (44 * (i - 1)),
+                m_tRect.top + 8,
+                40,
+                16,
+                hCountDC,
+                0,
+                0,
+                36,
+                16,
+                RGB(255, 0, 255)
+            );
+        }
+        else
+        {
+            HDC hCountDC = GET(CResourceMgr)->Find_Bmp(L"DashCount");
+            GdiTransparentBlt(
+                hDC,
+                m_tRect.left + 8 + 36 + (44 * (i - 1)),
+                m_tRect.top + 8,
+                44,
+                16,
+                hCountDC,
+                0,
+                0,
+                36,
+                16,
+                RGB(255, 0, 255)
+            );
+        }
     }
+    //끝
 }
 
 void CPlayerDashBar::Release()

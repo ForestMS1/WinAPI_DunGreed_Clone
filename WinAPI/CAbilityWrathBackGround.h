@@ -17,5 +17,8 @@ public:
 	void Render(HDC hDC) override;
 
 	void Release() override;
+
+private:
+	HFONT m_hFont;
 };
 

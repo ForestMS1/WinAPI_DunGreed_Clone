@@ -83,6 +83,7 @@ void CAbilityGreedBtn::Clicked()
 		if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 		{
 			GET(CSoundMgr)->PlaySoundW(L"Ability_Up.wav", SOUND_EFFECT, 1.f);
+			GET(CPlayerMgr)->SetAddGreed(10);
 			//GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CAbilityFX>::Create(m_tInfo.fX, m_tInfo.fY));
 		}
 	}

@@ -40,6 +40,15 @@ public:
 	int	  GetGold() const { return m_iGold; }
 	float GetMaxSatiety() const { return m_fMaxSatiety; }
 	float GetCurSatiety() const { return m_fCurSatiety; }
+
+	int GetAddMaxHp() const { return m_iAddMaxHp; }
+	int GetAddDef() const { return m_iAddDef; }
+	int GetAddGreed() const { return m_iAddGreed; }
+	int GetAddMaxDashCount() const { return m_iAddMaxDashCount; }
+	void SetAddMaxHp(int addMaxHp) { m_iAddMaxHp += addMaxHp; }
+	void SetAddDef(int addDef) { m_iAddDef += addDef; }
+	void SetAddGreed(int addGreed) { m_iAddGreed += addGreed; }
+	void SetAddMaxDashCount(int addDashCount) { m_iAddMaxDashCount += addDashCount; }
 private:
 	CObj* m_pPlayer;
 	map<wstring, CItem*> m_mapPlayerEquiped;
@@ -53,5 +62,11 @@ private:
 	float m_fMaxSatiety;
 	float m_fCurSatiety;
 	vector<CItem*> m_vecItem;
+
+	//√ﬂ∞° Ω∫≈»
+	int m_iAddMaxHp;
+	int m_iAddDef;
+	int m_iAddGreed;
+	int m_iAddMaxDashCount;
 };
 

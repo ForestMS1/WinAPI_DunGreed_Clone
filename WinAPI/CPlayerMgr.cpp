@@ -6,7 +6,7 @@
 CPlayerMgr* CPlayerMgr::m_pInstance = nullptr;
 
 CPlayerMgr::CPlayerMgr() : m_bIsFirstSet(true), m_fMaxHp(100.f), m_fCurHp(100.f), m_iGold(3000)
-,m_fMaxSatiety(100.f), m_fCurSatiety(0.f)
+, m_fMaxSatiety(100.f), m_fCurSatiety(0.f), m_iAddMaxHp(0.f), m_iAddDef(0.f), m_iAddGreed(0.f)
 {
 	m_pPlayer = nullptr;
 	m_vecItem = vector<CItem*>(15, nullptr);
@@ -32,6 +32,8 @@ void CPlayerMgr::Initialize()
 void CPlayerMgr::Update()
 {
 	if(m_pPlayer != nullptr)
+		dynamic_cast<CPlayer*>(m_pPlayer)->SetGold(m_iGold);
+	if (m_pPlayer != nullptr)
 		dynamic_cast<CPlayer*>(m_pPlayer)->SetGold(m_iGold);
 }
 

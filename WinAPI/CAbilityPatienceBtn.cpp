@@ -83,6 +83,8 @@ void CAbilityPatienceBtn::Clicked()
 		if (GET(CKeyMgr)->Key_Down(VK_LBUTTON))
 		{
 			GET(CSoundMgr)->PlaySoundW(L"Ability_Up.wav", SOUND_EFFECT, 1.f);
+			//GET(CPlayerMgr)->SetAddDef(3);
+			GET(CPlayerMgr)->SetAddMaxDashCount(1);
 			//GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CAbilityFX>::Create(m_tInfo.fX, m_tInfo.fY));
 		}
 	}

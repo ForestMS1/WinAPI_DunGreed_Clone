@@ -35,6 +35,9 @@ void CAbilityWrathBackGround::Initialize()
 	{
 		pChildUI->Initialize();
 	}
+	AddFontResource(TEXT("Aa카시오페아"));
+	m_hFont = CreateFont(30, 0, 0, 0, 0, 0, 0, 0,
+		HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("Aa카시오페아"));
 }
 
 int CAbilityWrathBackGround::Update()
@@ -77,9 +80,23 @@ void CAbilityWrathBackGround::Render(HDC hDC)
 	{
 		pChildUI->Render(hDC);
 	}
+
+	HFONT hOldFont = (HFONT)SelectObject(hDC, m_hFont);
+	wstring text = L"체력";
+	SetBkMode(hDC, TRANSPARENT);
+	SetTextColor(hDC, RGB(255, 255, 255));
+	TextOut(hDC, m_tRect.left + 75, m_tRect.top + 120, text.c_str(), (int)text.size());
+	text = to_wstring(GET(CPlayerMgr)->GetAddMaxHp()).append(L" + 최대체력");
+	TextOut(hDC, m_tRect.left + 35, m_tRect.bottom - 120, text.c_str(), (int)text.size());
+	SelectObject(hDC, hOldFont);
 }
 
 void CAbilityWrathBackGround::Release()
 {
-
+	if (m_hFont)
+	{
+		DeleteObject(m_hFont);
+		m_hFont = NULL;
+	}
+	RemoveFontResource(TEXT("Aa카시오페아"));
 }

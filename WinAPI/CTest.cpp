@@ -18,6 +18,7 @@
 #include "CNPC_Commander.h"
 #include "CDungeonEat.h"
 #include "CSnow.h"
+#include "CLifeTresure.h"
 CTest::CTest() : m_bIsDrawing(false)
 {
 	ZeroMemory(&m_ptMouse, sizeof(m_ptMouse));
@@ -48,6 +49,7 @@ void CTest::Initialize()
 	//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(700.f, 200.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Giant>::Create(4934.f, 414.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Commander>::Create(545, 885));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLifeTresure>::Create(400, 585));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f, 793.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f + 351, 793.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f + 351 * 2, 793.f));

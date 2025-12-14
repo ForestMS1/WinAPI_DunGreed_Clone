@@ -192,6 +192,7 @@
     <ClInclude Include="CEnemyHpBarUI.h" />
     <ClInclude Include="CEquipedUI.h" />
     <ClInclude Include="CEquipSlotOn.h" />
+    <ClInclude Include="CFairy.h" />
     <ClInclude Include="CFoodUI.h" />
     <ClInclude Include="CGameStartBtn.h" />
     <ClInclude Include="CGatlingGun.h" />
@@ -205,6 +206,7 @@
     <ClInclude Include="CInventoryUI.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CLaser.h" />
+    <ClInclude Include="CLifeTresure.h" />
     <ClInclude Include="CLittleGhost.h" />
     <ClInclude Include="CMapTileOptionUI.h" />
     <ClInclude Include="CMouse.h" />
@@ -326,6 +328,7 @@
     <ClCompile Include="CEnemyHpBarUI.cpp" />
     <ClCompile Include="CEquipedUI.cpp" />
     <ClCompile Include="CEquipSlotOn.cpp" />
+    <ClCompile Include="CFairy.cpp" />
     <ClCompile Include="CFoodUI.cpp" />
     <ClCompile Include="CGameStartBtn.cpp" />
     <ClCompile Include="CGatlingGun.cpp" />
@@ -339,6 +342,7 @@
     <ClCompile Include="CInventoryUI.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CLaser.cpp" />
+    <ClCompile Include="CLifeTresure.cpp" />
     <ClCompile Include="CLittleGhost.cpp" />
     <ClCompile Include="CMapTileOptionUI.cpp" />
     <ClCompile Include="CMouse.cpp" />

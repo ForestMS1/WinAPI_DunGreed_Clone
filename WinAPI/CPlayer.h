@@ -49,6 +49,16 @@ public:
 		pDamage->Initialize();
 		GET(CObjMgr)->AddObject(OBJ_EFFECT, pDamage);
 	}
+	void RestoreHp(int reHp)
+	{
+		int result = reHp + (rand() % 5);
+		m_fCurHp += result;
+		if (m_fCurHp >= m_fMaxHp)
+		{
+			m_fCurHp = m_fMaxHp;
+		}
+		GET(CSoundMgr)->PlaySoundW(L"heal.wav", SOUND_EFFECT, 1.f);
+	}
 	void GetDropGold(int gold);
 	void SetNoPlayerRender() { m_bIsNoPlayerRender = true; }
 	void SetNoPlayerKeyInput() { m_bIsNoKeyInput = true; }

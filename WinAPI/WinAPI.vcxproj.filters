@@ -376,6 +376,12 @@
     <Filter Include="Object\UI\AbilityUI\Patience">
       <UniqueIdentifier>{e80a2beb-03fd-4fe5-a5be-df9b7bcd17f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\NPC\Tresure\LifeTresure">
+      <UniqueIdentifier>{c6ed0e7a-4752-4e0e-94d9-39c36418d7b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item\Fairy">
+      <UniqueIdentifier>{35b57fe0-7a3e-4aec-8d58-cb9e2bf85469}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -768,6 +774,12 @@
     <ClInclude Include="CAbilityPatienceBtn.h">
       <Filter>Object\UI\AbilityUI\Patience</Filter>
     </ClInclude>
+    <ClInclude Include="CLifeTresure.h">
+      <Filter>Object\Unit\NPC\Tresure\LifeTresure</Filter>
+    </ClInclude>
+    <ClInclude Include="CFairy.h">
+      <Filter>Object\Item\Fairy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1123,6 +1135,12 @@
     </ClCompile>
     <ClCompile Include="CAbilityPatienceBtn.cpp">
       <Filter>Object\UI\AbilityUI\Patience</Filter>
+    </ClCompile>
+    <ClCompile Include="CLifeTresure.cpp">
+      <Filter>Object\Unit\NPC\Tresure\LifeTresure</Filter>
+    </ClCompile>
+    <ClCompile Include="CFairy.cpp">
+      <Filter>Object\Item\Fairy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

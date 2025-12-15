@@ -60,7 +60,7 @@ int CLifeTresure::Update()
 	{
 		Move_Frame_No_Loop();
 		//TODO : 아이템드랍
-		CItem* pFairy = new CFairy(20, m_tInfo.fX, m_tInfo.fY);
+		CItem* pFairy = new CFairy(100, m_tInfo.fX, m_tInfo.fY);
 		pFairy->SetDrop(true);
 		pFairy->Initialize();
 		GET(CObjMgr)->AddObject(OBJ_ITEM, pFairy);

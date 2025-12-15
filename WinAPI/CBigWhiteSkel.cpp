@@ -111,7 +111,7 @@ void CBigWhiteSkel::Late_Update()
 {
 	CEnemy::Late_Update();
 
-	if (CCollisionMgr::Check_Rect(this, GET(CPlayerMgr)->GetPlayer()))
+	if (CCollisionMgr::Check_Rect(this, GET(CPlayerMgr)->GetPlayer()) && !m_bIsDead)
 	{
 		//if (m_dwAttackDelay + 1000 < GetTickCount())
 		//{

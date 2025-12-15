@@ -5,6 +5,7 @@
 #include "CPlayerUI.h"
 #include "CInventoryUI.h"
 #include "CDoor.h"
+#include "CBelialTresure.h"
 CBelialScene::CBelialScene()
 {
 }
@@ -17,6 +18,7 @@ void CBelialScene::Initialize()
 {
 	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(300.f, 900.f));
 	GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBelial>::Create(1400.f, 500.f));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CBelialTresure>::Create(1400.f, 500.f));
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();

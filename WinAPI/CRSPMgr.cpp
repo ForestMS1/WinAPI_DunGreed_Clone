@@ -6,7 +6,7 @@
 CRSPMgr* CRSPMgr::m_pInstance = nullptr;
 
 CRSPMgr::CRSPMgr() : m_ePlayerSelect(SELECT_END), m_eEnemySelect(SELECT_END)
-, m_bIsPlayerWin(false), m_pNifleHeim(nullptr)
+, m_bIsPlayerWin(false), m_bIsEnemyWin(false), m_pNifleHeim(nullptr)
 {
 
 }
@@ -25,24 +25,43 @@ int CRSPMgr::Update()
 	{
 	case ROCK:
 		if (m_eEnemySelect == SCISSORS)
+		{
 			m_bIsPlayerWin = true;
+			m_bIsEnemyWin = false;
+		}
 		else if (m_eEnemySelect == PAPER)
+		{
 			m_bIsPlayerWin = false;
+			m_bIsEnemyWin = true;
+		}
 		break;
 	case SCISSORS:
 		if (m_eEnemySelect == ROCK)
+		{
 			m_bIsPlayerWin = false;
+			m_bIsEnemyWin = true;
+		}
 		else if (m_eEnemySelect == PAPER)
+		{
 			m_bIsPlayerWin = true;
+			m_bIsEnemyWin = false;
+		}
 		break;
 	case PAPER:
 		if (m_eEnemySelect == ROCK)
+		{
 			m_bIsPlayerWin = true;
+			m_bIsEnemyWin = false;
+		}
 		else if (m_eEnemySelect == SCISSORS)
+		{
 			m_bIsPlayerWin = false;
+			m_bIsEnemyWin = true;
+		}
 		break;
-	//公铰何 贸府 x
 	default:
+		m_bIsPlayerWin = false;
+		m_bIsEnemyWin = false;
 		break;
 	}
 
@@ -57,7 +76,7 @@ int CRSPMgr::Update()
 		m_eEnemySelect = SELECT_END;
 		m_dwLoseTime = GetTickCount();
 	}
-	else if (m_ePlayerSelect != SELECT_END && m_bIsPlayerWin)
+	else if (m_ePlayerSelect != SELECT_END && (m_bIsPlayerWin && !m_bIsEnemyWin))
 	{
 		if (dynamic_cast<CNifleHeim*>(m_pNifleHeim) != nullptr)
 		{

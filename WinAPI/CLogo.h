@@ -18,5 +18,7 @@ public:
 private:
     CUI* m_pGoTileBtn;
     CUI* m_pGameStartBtn;
+
+    DWORD m_dwBirdDelay;
 };
 

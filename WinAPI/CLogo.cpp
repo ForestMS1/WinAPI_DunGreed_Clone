@@ -5,8 +5,9 @@
 #include "CGoTileEditBtn.h"
 #include "CGameStartBtn.h"
 #include "CResourceMgr.h"
+#include "CBird.h"
 
-CLogo::CLogo() : m_pGoTileBtn(nullptr), m_pGameStartBtn(nullptr)
+CLogo::CLogo() : m_pGoTileBtn(nullptr), m_pGameStartBtn(nullptr) //m_dwBirdDelay(GetTickCount())
 {
 }
 
@@ -18,9 +19,17 @@ CLogo::~CLogo()
 void CLogo::Initialize()
 {
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Logo.bmp", L"Logo");
-	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/UI/Bird.bmp", L"Bird");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Bird.bmp", L"Bird");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BackGround/Sky.bmp", L"Sky");
-	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BackGround/Cloud2.bmp", L"Cloud2");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BackGround/Cloud1_WINCXY.bmp", L"Cloud1");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BackGround/Cloud2_WINCXY.bmp", L"Cloud2");
+
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CBird>::Create(-30, (WINCY >> 1)	-  300));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CBird>::Create(-80, (WINCY >> 1)	-  260));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CBird>::Create(-130, (WINCY >> 1)	-  220));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CBird>::Create(-180, (WINCY >> 1)	-  180));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CBird>::Create(-230, (WINCY >> 1)	-  140));
+	GET(CObjMgr)->Initialize();
 
 	if (m_pGoTileBtn == nullptr)
 	{
@@ -46,12 +55,10 @@ void CLogo::Update()
 		m_pGoTileBtn->Update();
 	if (m_pGameStartBtn != nullptr)
 		m_pGameStartBtn->Update();
-	CObjMgr::Get_Instance()->Update();
 }
 
 void CLogo::Late_Update()
 {
-	CObjMgr::Get_Instance()->Late_Update();
 	if (m_pGoTileBtn != nullptr)
 		m_pGoTileBtn->Late_Update();
 	if (m_pGameStartBtn != nullptr)
@@ -85,6 +92,35 @@ void CLogo::Render(HDC hDC)
 		RGB(0, 0, 0)
 	);
 
+	HDC hCloudDC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud1");
+	GdiTransparentBlt(
+		hDC,
+		0,
+		0,
+		WINCX,
+		WINCY,
+		hCloudDC,
+		0,
+		0,
+		WINCX,
+		WINCY,
+		RGB(255, 0, 255)
+	);
+	HDC hCloud2DC = CResourceMgr::Get_Instance()->Find_Bmp(L"Cloud2");
+	GdiTransparentBlt(
+		hDC,
+		0,
+		0,
+		WINCX,
+		WINCY,
+		hCloud2DC,
+		0,
+		0,
+		WINCX,
+		WINCY,
+		RGB(255, 0, 255)
+	);
+
 	HDC hLogoDC = GET(CResourceMgr)->Find_Bmp(L"Logo");
 	GdiTransparentBlt(
 		hDC,
@@ -108,7 +144,7 @@ void CLogo::Render(HDC hDC)
 
 void CLogo::Release()
 {
-	CObjMgr::Get_Instance()->DeleteLayerObj(OBJ_PLAYER);
+	GET(CObjMgr)->DeleteAllLayer();
 	GET(CSoundMgr)->StopAll();
 	Safe_Delete(m_pGoTileBtn);
 	Safe_Delete(m_pGameStartBtn);

@@ -23,6 +23,7 @@ public:
     bool IsPlayerWin() const { return m_bIsPlayerWin; }
 private:
     bool m_bIsPlayerWin;
+    bool m_bIsEnemyWin;
 
     DWORD m_dwLoseTime;
 

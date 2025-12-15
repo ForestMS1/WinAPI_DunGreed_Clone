@@ -415,6 +415,12 @@
     <Filter Include="Object\Unit\Enemy\SkelDog">
       <UniqueIdentifier>{59dead08-6af5-43ab-876b-23fefd047c18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Etc">
+      <UniqueIdentifier>{fc952ac0-d0c5-4bf6-a11a-d8933278d59d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\NPC\Tresure\BelialTresure">
+      <UniqueIdentifier>{c08c7df4-08f3-40a2-bf66-e3cbd5d5ab9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -858,6 +864,12 @@
     <ClInclude Include="CSkelDog.h">
       <Filter>Object\Unit\Enemy\SkelDog</Filter>
     </ClInclude>
+    <ClInclude Include="CBird.h">
+      <Filter>Object\Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="CBelialTresure.h">
+      <Filter>Object\Unit\NPC\Tresure\BelialTresure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1264,6 +1276,12 @@
     </ClCompile>
     <ClCompile Include="CSkelDog.cpp">
       <Filter>Object\Unit\Enemy\SkelDog</Filter>
+    </ClCompile>
+    <ClCompile Include="CBird.cpp">
+      <Filter>Object\Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="CBelialTresure.cpp">
+      <Filter>Object\Unit\NPC\Tresure\BelialTresure</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

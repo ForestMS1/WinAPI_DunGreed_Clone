@@ -82,6 +82,9 @@ int CNifleHeim::Update()
 		m_bIsDead = true;
 		m_eNifleHeimCurState = NIFLEHEIM_DEAD;
 
+		if (m_pHpBarUI != nullptr)
+			m_pHpBarUI->Close();
+
 		//m_DeadEffectTime += 0.01;
 		// 리턴하기전에 딜레이 줘야할듯?
 		//if (m_DeadEffectTime < 3.f)
@@ -244,7 +247,7 @@ void CNifleHeim::Render(HDC hDC)
 	else
 	{
 		GET(CUIMgr)->Find_UI(L"PlayerUI")->Open();
-		if (m_SpawnEffectStartTime + 7000 < GetTickCount())
+		if (m_SpawnEffectStartTime + 7000 < GetTickCount() && !m_bIsDead)
 			m_pHpBarUI->Open();
 		HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
 

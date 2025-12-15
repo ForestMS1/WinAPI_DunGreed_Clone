@@ -74,7 +74,7 @@ void CCosSword::Initialize()
 
 	m_dwShootDelay = GetTickCount();
 
-	GET(CUIMgr)->Insert_UI(L"CosSkillUI", new CSkilUI);
+	//GET(CUIMgr)->Insert_UI(L"CosSkillUI", new CSkilUI);
 }
 
 int CCosSword::Update()
@@ -110,7 +110,7 @@ int CCosSword::Update()
 			}
 		}
 	}
-	GET(CUIMgr)->Find_UI(L"CosSkillUI")->Open();
+	//GET(CUIMgr)->Find_UI(L"CosSkillUI")->Open();
 
 	//CWeapon::Update();
 	CItem::Update();

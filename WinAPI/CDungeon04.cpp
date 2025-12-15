@@ -9,7 +9,9 @@
 #include "CBat.h"
 #include "CLittleGhost.h"
 #include "CBigWhiteSkel.h"
-#include "CTresure.h"
+#include "CLifeTresure.h"
+#include "CSkel.h"
+#include "CSkelDog.h"
 CDungeon04::CDungeon04()
 {
 }
@@ -24,11 +26,14 @@ void CDungeon04::Initialize()
 	if (!m_bIsClearScene)
 	{
 		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(700.f, 500.f));
-		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(1210, 710));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(1670, 710));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkelDog>::Create(1544, 990));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(1420.f, 420));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
-		//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
+		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLifeTresure>::Create(1450, 420));
 
 	}
 	switch (GET(CSceneMgr)->GetPreSceneID())

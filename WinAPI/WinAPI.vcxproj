@@ -169,6 +169,7 @@
     <ClInclude Include="CBelialSpear.h" />
     <ClInclude Include="CBelialUI.h" />
     <ClInclude Include="CBigWhiteSkel.h" />
+    <ClInclude Include="CBrokenCell.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCell.h" />
@@ -242,6 +243,7 @@
     <ClInclude Include="CShopUI.h" />
     <ClInclude Include="CSkel.h" />
     <ClInclude Include="CSkelArrow.h" />
+    <ClInclude Include="CSkelDog.h" />
     <ClInclude Include="CSkilUI.h" />
     <ClInclude Include="CSnow.h" />
     <ClInclude Include="CSoundMgr.h" />
@@ -318,6 +320,7 @@
     <ClCompile Include="CBelialSpear.cpp" />
     <ClCompile Include="CBelialUI.cpp" />
     <ClCompile Include="CBigWhiteSkel.cpp" />
+    <ClCompile Include="CBrokenCell.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCell.cpp" />
@@ -391,6 +394,7 @@
     <ClCompile Include="CShopUI.cpp" />
     <ClCompile Include="CSkel.cpp" />
     <ClCompile Include="CSkelArrow.cpp" />
+    <ClCompile Include="CSkelDog.cpp" />
     <ClCompile Include="CSkilUI.cpp" />
     <ClCompile Include="CSnow.cpp" />
     <ClCompile Include="CSoundMgr.cpp" />

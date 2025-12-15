@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CPresent.h"
-#include "CFairy.h"
+#include "CFairyXL.h"
 CPresent::CPresent() : m_bIsClear(false), m_bOpen(false), m_bCompleteDropGold(false)
 {
 }
@@ -29,7 +29,7 @@ void CPresent::Initialize()
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/NPC/Present.bmp", L"Present");
 
 	//플레이어 감지 범위
-	m_fDetectfCX = m_tInfo.fCX * 1.3;
+	m_fDetectfCX = m_tInfo.fCX * 1.5;
 	m_fDetectfCY = m_tInfo.fCY;
 
 	__super::Update_Rect();
@@ -41,8 +41,8 @@ int CPresent::Update()
 {
 	m_bIsClear = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
 
-	if (!m_bIsClear)
-		return 0;
+	//if (!m_bIsClear)
+		//return 0;
 
 
 	m_tInfo.fY += GRAVITY;
@@ -60,7 +60,7 @@ int CPresent::Update()
 	{
 		Move_Frame_No_Loop();
 		//TODO : 아이템드랍
-		CItem* pFairy = new CFairy(100, m_tInfo.fX, m_tInfo.fY);
+		CItem* pFairy = new CFairyXL(100, m_tInfo.fX, m_tInfo.fY);
 		pFairy->SetDrop(true);
 		pFairy->Initialize();
 		GET(CObjMgr)->AddObject(OBJ_ITEM, pFairy);
@@ -74,8 +74,8 @@ int CPresent::Update()
 
 void CPresent::Late_Update()
 {
-	if (!m_bIsClear)
-		return;
+	//if (!m_bIsClear)
+		//return;
 	CNPC::Late_Update();
 	Motion_Change();
 	float py(0.f);
@@ -85,8 +85,8 @@ void CPresent::Late_Update()
 
 void CPresent::Render(HDC hDC)
 {
-	if (!m_bIsClear)
-		return;
+	//if (!m_bIsClear)
+		//return;
 
 	CNPC::Render(hDC);
 	int scrollX = GET(CCamera)->Get_ScrollX();

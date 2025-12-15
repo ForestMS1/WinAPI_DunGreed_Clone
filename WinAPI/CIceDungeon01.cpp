@@ -35,7 +35,7 @@ void CIceDungeon01::Initialize()
 
 	}
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Xmas>::Create(1500, 860));
-	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CPresent>::Create(1200, 422));
+	//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CPresent>::Create(1200, 422));
 
 
 	CSnow* pSnow = new CSnow;

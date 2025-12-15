@@ -17,7 +17,7 @@ CNifleHeim::~CNifleHeim()
 
 void CNifleHeim::Initialize()
 {
-	m_fMaxHp = 1000.f;
+	m_fMaxHp = 150.f;
 	m_fCurHp = m_fMaxHp;
 
 	m_iDropGold = 125 + rand() % 20;

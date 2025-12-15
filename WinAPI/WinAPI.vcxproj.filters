@@ -409,6 +409,12 @@
     <Filter Include="Object\UI\XmasTextUI">
       <UniqueIdentifier>{2d92868b-ba8f-4e52-9609-7f7b38b85027}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Dungeon\BrokenCell">
+      <UniqueIdentifier>{987b83f5-51eb-4345-89f8-74e8bc1c45fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy\SkelDog">
+      <UniqueIdentifier>{59dead08-6af5-43ab-876b-23fefd047c18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -846,6 +852,12 @@
     <ClInclude Include="CXmasTextUI.h">
       <Filter>Object\UI\XmasTextUI</Filter>
     </ClInclude>
+    <ClInclude Include="CBrokenCell.h">
+      <Filter>Object\Dungeon\BrokenCell</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkelDog.h">
+      <Filter>Object\Unit\Enemy\SkelDog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1246,6 +1258,12 @@
     </ClCompile>
     <ClCompile Include="CXmasTextUI.cpp">
       <Filter>Object\UI\XmasTextUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CBrokenCell.cpp">
+      <Filter>Object\Dungeon\BrokenCell</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkelDog.cpp">
+      <Filter>Object\Unit\Enemy\SkelDog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

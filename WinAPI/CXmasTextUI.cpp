@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CXmasTextUI.h"
-#include "CLifeTresureXL.h"
+#include "CPresent.h"
 CXmasTextUI::CXmasTextUI() : m_TextIdx(0), m_bCompleteGift(false)
 {
 
@@ -135,7 +135,7 @@ void CXmasTextUI::Key_Input()
 			//텍스트를 끝내면 선물 생성
 			if (!m_bCompleteGift)
 			{
-				CObj* pLifeTresure = CAbstractFactory<CLifeTresureXL>::Create(1650, 820);
+				CObj* pLifeTresure = CAbstractFactory<CPresent>::Create(1650, 820);
 				GET(CObjMgr)->AddObject(OBJ_NPC, pLifeTresure);
 				m_bCompleteGift = true;
 			}

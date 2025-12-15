@@ -10,6 +10,8 @@
 #include "CLittleGhost.h"
 #include "CBigWhiteSkel.h"
 #include "CTresure.h"
+#include "CBrokenCell.h"
+#include "CSkelDog.h"
 CDungeon03::CDungeon03()
 {
 }
@@ -25,12 +27,16 @@ void CDungeon03::Initialize()
 	{
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(700.f, 500.f));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
-		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
-		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
-		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
-		//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
-
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkelDog>::Create(600.f, 600.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkelDog>::Create(700.f, 600.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkelDog>::Create(800.f, 600.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkelDog>::Create(900.f, 600.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 550.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
 	}
+	//GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CBrokenCell>::Create(690, 550));
+
 	switch (GET(CSceneMgr)->GetPreSceneID())
 	{
 	case SCENE_DUNGEON_START:
@@ -55,6 +61,8 @@ void CDungeon03::Initialize()
 	GET(CUIMgr)->Initialize();
 
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Background/SubBG.bmp", L"SubBG");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Background/SubBG.bmp", L"SubBG");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Dungeon/BrokenCell0.bmp", L"BrokenCell0");
 
 	// Camera ÁöÁ¤
 	GET(CCamera)->Initialize();
@@ -90,55 +98,6 @@ void CDungeon03::Render(HDC hDC)
 	int scrollX = GET(CCamera)->Get_ScrollX();
 	int scrollY = GET(CCamera)->Get_ScrollY();
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
-	//HDC hBackDC = GET(CResourceMgr)->Find_Bmp(L"SubBG");
-	//GdiTransparentBlt(
-	//	hDC,
-	//	0 - scrollX,
-	//	0 - scrollY,
-	//	WINCX,
-	//	WINCY,
-	//	hBackDC,
-	//	0,
-	//	0,
-	//	320,
-	//	180,
-	//	RGB(255, 0, 255));
-	//GdiTransparentBlt(
-	//	hDC,
-	//	WINCX - scrollX,
-	//	0 - scrollY,
-	//	WINCX,
-	//	WINCY,
-	//	hBackDC,
-	//	0,
-	//	0,
-	//	320,
-	//	180,
-	//	RGB(255, 0, 255));
-	//GdiTransparentBlt(
-	//	hDC,
-	//	0 - scrollX,
-	//	WINCY - scrollY,
-	//	WINCX,
-	//	WINCY,
-	//	hBackDC,
-	//	0,
-	//	0,
-	//	320,
-	//	180,
-	//	RGB(255, 0, 255));
-	//GdiTransparentBlt(
-	//	hDC,
-	//	WINCX - scrollX,
-	//	WINCY - scrollY,
-	//	WINCX,
-	//	WINCY,
-	//	hBackDC,
-	//	0,
-	//	0,
-	//	320,
-	//	180,
-	//	RGB(255, 0, 255));
 }
 
 void CDungeon03::Release()

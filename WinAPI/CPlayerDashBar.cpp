@@ -12,6 +12,7 @@ CPlayerDashBar::~CPlayerDashBar()
 
 void CPlayerDashBar::Initialize()
 {
+
     m_iMaxDashCount = dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->GetMaxDashCount();
     m_iCurDashCount = dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->GetCurDashCount();
 

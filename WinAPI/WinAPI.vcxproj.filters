@@ -406,6 +406,9 @@
     <Filter Include="Object\Unit\NPC\Tresure\Present">
       <UniqueIdentifier>{d13c15de-e404-46a7-ad16-4edbe8fc94fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\UI\XmasTextUI">
+      <UniqueIdentifier>{2d92868b-ba8f-4e52-9609-7f7b38b85027}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -840,6 +843,9 @@
     <ClInclude Include="CStartDoor.h">
       <Filter>Object\Dungeon\Door</Filter>
     </ClInclude>
+    <ClInclude Include="CXmasTextUI.h">
+      <Filter>Object\UI\XmasTextUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1237,6 +1243,9 @@
     </ClCompile>
     <ClCompile Include="CStartDoor.cpp">
       <Filter>Object\Dungeon\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="CXmasTextUI.cpp">
+      <Filter>Object\UI\XmasTextUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

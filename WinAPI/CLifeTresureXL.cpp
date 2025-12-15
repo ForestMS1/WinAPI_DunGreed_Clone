@@ -41,8 +41,8 @@ int CLifeTresureXL::Update()
 {
 	m_bIsClear = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
 
-	if (!m_bIsClear)
-		return 0;
+	//if (!m_bIsClear)
+		//return 0;
 
 
 	m_tInfo.fY += GRAVITY;
@@ -74,8 +74,8 @@ int CLifeTresureXL::Update()
 
 void CLifeTresureXL::Late_Update()
 {
-	if (!m_bIsClear)
-		return;
+	//if (!m_bIsClear)
+		//return;
 	CNPC::Late_Update();
 	Motion_Change();
 	float py(0.f);
@@ -85,8 +85,8 @@ void CLifeTresureXL::Late_Update()
 
 void CLifeTresureXL::Render(HDC hDC)
 {
-	if (!m_bIsClear)
-		return;
+	//if (!m_bIsClear)
+		//return;
 
 	CNPC::Render(hDC);
 	int scrollX = GET(CCamera)->Get_ScrollX();

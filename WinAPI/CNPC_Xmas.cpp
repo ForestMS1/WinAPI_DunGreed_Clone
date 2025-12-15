@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CNPC_Xmas.h"
+#include "CXmasTextUI.h"
 CNPC_Xmas::CNPC_Xmas()
 {
 }
@@ -32,7 +33,7 @@ void CNPC_Xmas::Initialize()
 
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/NPC/NPC_Xmas.bmp", L"NPC_Xmas");
 
-	//GET(CUIMgr)->Insert_UI(L"AbilityUI", new CAbilityUI);
+	GET(CUIMgr)->Insert_UI(L"XmasTextUI", new CXmasTextUI);
 }
 
 int CNPC_Xmas::Update()
@@ -86,7 +87,23 @@ void CNPC_Xmas::KeyInput()
 	{
 		if (GET(CKeyMgr)->Key_Down('F'))
 		{
+			if (!GET(CUIMgr)->Find_UI(L"XmasTextUI")->IsOpen())
+			{
+				GET(CUIMgr)->Find_UI(L"XmasTextUI")->Open();
+				GET(CUIMgr)->Find_UI(L"PlayerUI")->Close();
 
+				GET(CSoundMgr)->StopAll();
+				GET(CSoundMgr)->PlayBGM(L"JingleBell.wav", 1.f);
+			}
+
+			else if (GET(CUIMgr)->Find_UI(L"XmasTextUI")->IsOpen())
+			{
+				GET(CUIMgr)->Find_UI(L"XmasTextUI")->Close();
+				GET(CUIMgr)->Find_UI(L"PlayerUI")->Open();
+
+				GET(CSoundMgr)->StopAll();
+				GET(CSoundMgr)->PlayBGM(L"2.IceField.wav", 1.f);
+			}
 		}
 	}
 	//else if (GET(CUIMgr)->Find_UI(L"AbilityUI")->IsOpen())

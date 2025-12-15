@@ -11,6 +11,8 @@
 #include "CBigWhiteSkel.h"
 #include "CTresure.h"
 #include "CSnow.h"
+#include "CNPC_Xmas.h"
+#include "CPresent.h"
 CIceDungeon01::CIceDungeon01()
 {
 }
@@ -32,6 +34,10 @@ void CIceDungeon01::Initialize()
 		//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
 
 	}
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Xmas>::Create(1500, 860));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CPresent>::Create(1200, 422));
+
+
 	CSnow* pSnow = new CSnow;
 	pSnow->Initialize();
 	GET(CObjMgr)->AddObject(OBJ_EFFECT, pSnow);

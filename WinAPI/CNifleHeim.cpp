@@ -42,6 +42,8 @@ void CNifleHeim::Initialize()
 	GET(CResourceMgr)->Insert_AlphaBmp(L"../Resources/Images/Unit/Enemy/NifleHeim/Idle.bmp", L"NifleHeimIdle");
 	GET(CResourceMgr)->Insert_AlphaBmp(L"../Resources/Images/Unit/Enemy/NifleHeim/die.bmp", L"NifleHeimDie");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/NifleHeim/enter.bmp", L"NifleHeimEnter");
+	GET(CResourceMgr)->Insert_AlphaBmp(L"../Resources/Images/Unit/Enemy/NifleHeim/NifleHeimText.bmp", L"NifleHeimText");
+	GET(CResourceMgr)->Insert_AlphaBmp(L"../Resources/Images/BossIntro.bmp", L"BossIntro");
 
 
 	srand(time(0));
@@ -198,6 +200,36 @@ void CNifleHeim::Render(HDC hDC)
 			m_iFrameHeight * 0,                    // 소스 Y
 			m_iFrameWidth,          // 소스 너비
 			m_iFrameHeight,         // 소스 높이
+			bf                      // BLENDFUNCTION 구조체
+		);
+
+		HDC hIntroDC = GET(CResourceMgr)->Find_Bmp(L"BossIntro");
+		AlphaBlend(
+			hDC, // 대상 HDC
+			0, // 대상 X
+			0,  // 대상 Y
+			WINCX,            // 대상 너비
+			WINCY,            // 대상 높이
+			hIntroDC,                   // 소스 HDC
+			0,
+			0,                    // 소스 Y
+			100,          // 소스 너비
+			100,         // 소스 높이
+			bf                      // BLENDFUNCTION 구조체
+		);
+
+		HDC hTextDC = GET(CResourceMgr)->Find_Bmp(L"NifleHeimText");
+		AlphaBlend(
+			hDC, // 대상 HDC
+			100, // 대상 X
+			WINCY - 300,  // 대상 Y
+			135 * 2,            // 대상 너비
+			73 * 2,            // 대상 높이
+			hTextDC,                   // 소스 HDC
+			0,
+			0,                    // 소스 Y
+			135,          // 소스 너비
+			73,         // 소스 높이
 			bf                      // BLENDFUNCTION 구조체
 		);
 	}

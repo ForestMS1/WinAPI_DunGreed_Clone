@@ -60,7 +60,7 @@ void CLogo::Late_Update()
 	//юс╫ц
 	if (GET(CKeyMgr)->Key_Down('Z'))
 	{
-		GET(CSceneMgr)->ChangeScene(L"Belial");
+		GET(CSceneMgr)->ChangeScene(L"NifleHeim");
 	}
 	if (GET(CKeyMgr)->Key_Down('X'))
 	{

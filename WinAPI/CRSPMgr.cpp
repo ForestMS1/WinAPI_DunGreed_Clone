@@ -2,11 +2,11 @@
 #include "CRSPMgr.h"
 #include "CPlayer.h"
 #include "CRSP.h"
-
+#include "CNifleHeim.h"
 CRSPMgr* CRSPMgr::m_pInstance = nullptr;
 
 CRSPMgr::CRSPMgr() : m_ePlayerSelect(SELECT_END), m_eEnemySelect(SELECT_END)
-, m_bIsPlayerWin(false)
+, m_bIsPlayerWin(false), m_pNifleHeim(nullptr)
 {
 
 }
@@ -47,12 +47,23 @@ int CRSPMgr::Update()
 	}
 
 	//가위바위보 했는데 지거나 비겼음
-	if (m_eEnemySelect != SELECT_END && !m_bIsPlayerWin)
+	if (m_ePlayerSelect != SELECT_END && !m_bIsPlayerWin)
 	{
 		if (dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer()) != nullptr)
 		{
-			dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->OnDamage(20);
+			dynamic_cast<CPlayer*>(GET(CPlayerMgr)->GetPlayer())->OnDamage(10);
 		}
+		m_ePlayerSelect = SELECT_END;
+		m_eEnemySelect = SELECT_END;
+		m_dwLoseTime = GetTickCount();
+	}
+	else if (m_ePlayerSelect != SELECT_END && m_bIsPlayerWin)
+	{
+		if (dynamic_cast<CNifleHeim*>(m_pNifleHeim) != nullptr)
+		{
+			dynamic_cast<CNifleHeim*>(m_pNifleHeim)->OnDamage(50);
+		}
+		m_ePlayerSelect = SELECT_END;
 		m_eEnemySelect = SELECT_END;
 		m_dwLoseTime = GetTickCount();
 	}

@@ -7,6 +7,7 @@
 #include "CDoor.h"
 #include "CTresure.h"
 #include "CSkel.h"
+#include "CStartDoor.h"
 CDungeonStart::CDungeonStart()
 {
 }
@@ -35,9 +36,17 @@ void CDungeonStart::Initialize()
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(1400.f, 500.f));
 		//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(600.f, 600.f));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(600.f, 600.f));
+		GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CStartDoor>::Create(545.f, 510.f));
+
 		GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
-		
 	}
+	else
+	{
+		CObj* pStartDoor = CAbstractFactory<CStartDoor>::Create(545.f, 510.f);
+		//dynamic_cast<CStartDoor*>(pStartDoor)->SetOpen();
+		GET(CObjMgr)->AddObject(OBJ_EFFECT, pStartDoor);
+	}
+
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();

@@ -196,6 +196,7 @@
     <ClInclude Include="CEquipedUI.h" />
     <ClInclude Include="CEquipSlotOn.h" />
     <ClInclude Include="CFairy.h" />
+    <ClInclude Include="CFairyXL.h" />
     <ClInclude Include="CFoodUI.h" />
     <ClInclude Include="CGameStartBtn.h" />
     <ClInclude Include="CGatlingGun.h" />
@@ -212,6 +213,7 @@
     <ClInclude Include="CLalaTresure.h" />
     <ClInclude Include="CLaser.h" />
     <ClInclude Include="CLifeTresure.h" />
+    <ClInclude Include="CLifeTresureXL.h" />
     <ClInclude Include="CLittleGhost.h" />
     <ClInclude Include="CMapTileOptionUI.h" />
     <ClInclude Include="CMouse.h" />
@@ -221,6 +223,7 @@
     <ClInclude Include="CNPC_Commander.h" />
     <ClInclude Include="CNPC_Giant.h" />
     <ClInclude Include="CNPC_Inn.h" />
+    <ClInclude Include="CNPC_Xmas.h" />
     <ClInclude Include="CPaper.h" />
     <ClInclude Include="CPlayerBullet.h" />
     <ClInclude Include="CPlayerDashBar.h" />
@@ -228,6 +231,7 @@
     <ClInclude Include="CPlayerMgr.h" />
     <ClInclude Include="CPlayerUI.h" />
     <ClInclude Include="CPortal.h" />
+    <ClInclude Include="CPresent.h" />
     <ClInclude Include="CRock.h" />
     <ClInclude Include="CRSP.h" />
     <ClInclude Include="CRSPMgr.h" />
@@ -242,6 +246,7 @@
     <ClInclude Include="CSnow.h" />
     <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="CStarBullet.h" />
+    <ClInclude Include="CStartDoor.h" />
     <ClInclude Include="CSwingFX.h" />
     <ClInclude Include="CTest.h" />
     <ClInclude Include="CKeyMgr.h" />
@@ -339,6 +344,7 @@
     <ClCompile Include="CEquipedUI.cpp" />
     <ClCompile Include="CEquipSlotOn.cpp" />
     <ClCompile Include="CFairy.cpp" />
+    <ClCompile Include="CFairyXL.cpp" />
     <ClCompile Include="CFoodUI.cpp" />
     <ClCompile Include="CGameStartBtn.cpp" />
     <ClCompile Include="CGatlingGun.cpp" />
@@ -355,6 +361,7 @@
     <ClCompile Include="CLalaTresure.cpp" />
     <ClCompile Include="CLaser.cpp" />
     <ClCompile Include="CLifeTresure.cpp" />
+    <ClCompile Include="CLifeTresureXL.cpp" />
     <ClCompile Include="CLittleGhost.cpp" />
     <ClCompile Include="CMapTileOptionUI.cpp" />
     <ClCompile Include="CMouse.cpp" />
@@ -364,6 +371,7 @@
     <ClCompile Include="CNPC_Commander.cpp" />
     <ClCompile Include="CNPC_Giant.cpp" />
     <ClCompile Include="CNPC_Inn.cpp" />
+    <ClCompile Include="CNPC_Xmas.cpp" />
     <ClCompile Include="CPaper.cpp" />
     <ClCompile Include="CPlayerBullet.cpp" />
     <ClCompile Include="CPlayerDashBar.cpp" />
@@ -371,6 +379,7 @@
     <ClCompile Include="CPlayerMgr.cpp" />
     <ClCompile Include="CPlayerUI.cpp" />
     <ClCompile Include="CPortal.cpp" />
+    <ClCompile Include="CPresent.cpp" />
     <ClCompile Include="CRock.cpp" />
     <ClCompile Include="CRSP.cpp" />
     <ClCompile Include="CRSPMgr.cpp" />
@@ -385,6 +394,7 @@
     <ClCompile Include="CSnow.cpp" />
     <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="CStarBullet.cpp" />
+    <ClCompile Include="CStartDoor.cpp" />
     <ClCompile Include="CSwingFX.cpp" />
     <ClCompile Include="CTest.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />

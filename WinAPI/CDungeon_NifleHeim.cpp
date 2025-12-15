@@ -24,11 +24,13 @@ CDungeon_NifleHeim::~CDungeon_NifleHeim()
 
 void CDungeon_NifleHeim::Initialize()
 {
+	CObj* pNifleHeim = nullptr;
 	//아직 클리어 안한 씬에서만 몹 생성
 	if (!m_bIsClearScene)
 	{
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(700.f, 500.f));
-		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CNifleHeim>::Create(1250.f, 550.f));
+		pNifleHeim = CAbstractFactory<CNifleHeim>::Create(1250.f, 550.f);
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, pNifleHeim);
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
 		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
@@ -75,6 +77,7 @@ void CDungeon_NifleHeim::Initialize()
 	//GET(CSoundMgr)->PlayBGM(L"JailField.wav", 1.f);
 	GET(CSoundMgr)->StopSound(SOUND_BGM);
 
+	GET(CRSPMgr)->SetNifleHeim(pNifleHeim);
 	GET(CRSPMgr)->Initialize();
 	GET(CUIMgr)->Find_UI(L"RSP")->Close();
 	GET(CUIMgr)->Find_UI(L"PlayerSelectUI")->Close();

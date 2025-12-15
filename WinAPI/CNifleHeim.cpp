@@ -4,6 +4,7 @@
 #include "CRSP.h"
 #include "CRSPSelect.h"
 #include "CRSPMgr.h"
+#include "CBelialUI.h"
 CNifleHeim::CNifleHeim() : m_bPlayBossBGM(false)
 , m_bIntro(false), m_bAlpha(0), m_pPortal(nullptr), CompleteCreatePortal(false)
 {
@@ -61,12 +62,19 @@ void CNifleHeim::Initialize()
 	GET(CUIMgr)->Find_UI(L"RSP")->Close();
 	GET(CUIMgr)->Insert_UI(L"PlayerSelectUI", new CRSPSelect);
 	GET(CUIMgr)->Find_UI(L"PlayerSelectUI")->Close();
+
+	//UI
+	if (m_pHpBarUI == nullptr)
+		m_pHpBarUI = new CBelialUI(this);
+	m_pHpBarUI->Initialize();
+	if (m_pHpBarUI != nullptr)
+		m_pHpBarUI->Close();
 }
 
 int CNifleHeim::Update()
 {
-	//if (m_fCurHp <= 0.f)
-	if(GET(CRSPMgr)->IsPlayerWin())
+
+	if (m_fCurHp <= 0.f)
 	{
 		if (!m_bIsDead)
 			m_dwDeadStartTime = GetTickCount();
@@ -236,6 +244,8 @@ void CNifleHeim::Render(HDC hDC)
 	else
 	{
 		GET(CUIMgr)->Find_UI(L"PlayerUI")->Open();
+		if (m_SpawnEffectStartTime + 7000 < GetTickCount())
+			m_pHpBarUI->Open();
 		HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
 
 		GdiTransparentBlt(

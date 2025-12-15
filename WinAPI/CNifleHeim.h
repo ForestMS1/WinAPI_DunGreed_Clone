@@ -35,6 +35,5 @@ private:
     DWORD m_dwDeadStartTime;
 
     bool CompleteCreatePortal;
-
 };
 

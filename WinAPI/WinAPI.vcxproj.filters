@@ -391,9 +391,6 @@
     <Filter Include="Object\Unit\Bullet\PlayerBullet\StarBullet">
       <UniqueIdentifier>{fbf6728f-3a84-4288-90b9-55ed19b640f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Unit\NPC\NPC_BlackSmith">
-      <UniqueIdentifier>{745b6938-4aa3-4854-9652-60b2f8295b8c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Unit\Player\Owned\Weapon\CosSword">
       <UniqueIdentifier>{5c9bb8cb-485e-45d1-89be-805d870bbe09}</UniqueIdentifier>
     </Filter>
@@ -402,6 +399,12 @@
     </Filter>
     <Filter Include="Object\UI\PlayerUI\SkilUI">
       <UniqueIdentifier>{321c7ed3-db03-4bb5-8593-2f08e3b48d4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\NPC\NPC_Xmas">
+      <UniqueIdentifier>{745b6938-4aa3-4854-9652-60b2f8295b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\NPC\Tresure\Present">
+      <UniqueIdentifier>{d13c15de-e404-46a7-ad16-4edbe8fc94fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -822,6 +825,21 @@
     <ClInclude Include="CSkilUI.h">
       <Filter>Object\UI\PlayerUI\SkilUI</Filter>
     </ClInclude>
+    <ClInclude Include="CNPC_Xmas.h">
+      <Filter>Object\Unit\NPC\NPC_Xmas</Filter>
+    </ClInclude>
+    <ClInclude Include="CPresent.h">
+      <Filter>Object\Unit\NPC\Tresure\Present</Filter>
+    </ClInclude>
+    <ClInclude Include="CFairyXL.h">
+      <Filter>Object\Item\Fairy</Filter>
+    </ClInclude>
+    <ClInclude Include="CLifeTresureXL.h">
+      <Filter>Object\Unit\NPC\Tresure\LifeTresure</Filter>
+    </ClInclude>
+    <ClInclude Include="CStartDoor.h">
+      <Filter>Object\Dungeon\Door</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1204,6 +1222,21 @@
     </ClCompile>
     <ClCompile Include="CSkilUI.cpp">
       <Filter>Object\UI\PlayerUI\SkilUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CNPC_Xmas.cpp">
+      <Filter>Object\Unit\NPC\NPC_Xmas</Filter>
+    </ClCompile>
+    <ClCompile Include="CPresent.cpp">
+      <Filter>Object\Unit\NPC\Tresure\Present</Filter>
+    </ClCompile>
+    <ClCompile Include="CFairyXL.cpp">
+      <Filter>Object\Item\Fairy</Filter>
+    </ClCompile>
+    <ClCompile Include="CLifeTresureXL.cpp">
+      <Filter>Object\Unit\NPC\Tresure\LifeTresure</Filter>
+    </ClCompile>
+    <ClCompile Include="CStartDoor.cpp">
+      <Filter>Object\Dungeon\Door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,9 @@
 #include "CSnow.h"
 #include "CLifeTresure.h"
 #include "CLalaTresure.h"
+#include "CNPC_Xmas.h"
+#include "CPresent.h"
+#include "CLifeTresureXL.h"
 CTest::CTest() : m_bIsDrawing(false)
 {
 	ZeroMemory(&m_ptMouse, sizeof(m_ptMouse));
@@ -54,8 +57,11 @@ void CTest::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLalaTresure>::Create(600, 585));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f, 793.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f + 351, 793.f));
-	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f + 351 * 2, 793.f));
-	
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLalaTresure>::Create(600, 585));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Xmas>::Create(1100, 422));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CPresent>::Create(1200, 422));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLifeTresureXL>::Create(1300, 422));
+
 	// ´«³»¸®±â~~
 	CSnow* pSnow = new CSnow;
 	GET(CObjMgr)->AddObject(OBJ_EFFECT, pSnow);

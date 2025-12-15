@@ -241,6 +241,11 @@ void CBelial::Render(HDC hDC)
 			pBack->Render(hDC);
 	}
 
+	if (m_pRHand != nullptr)
+		m_pRHand->Render(hDC);
+	if (m_pLHand != nullptr)
+		m_pLHand->Render(hDC);
+
 	if (m_bIntro)
 	{
 		GET(CUIMgr)->Find_UI(L"PlayerUI")->Close();
@@ -251,41 +256,12 @@ void CBelial::Render(HDC hDC)
 		//SetTextColor(hDC, RGB(255, 255, 255));
 		//TextOut(hDC, 200, WINCY - 200, text.c_str(), (int)text.size());
 		//SelectObject(hDC, hOldFont);
-		HDC hTextDC = GET(CResourceMgr)->Find_Bmp(L"BelialText");
+		
 		BLENDFUNCTION bf = {};
 		bf.BlendOp = AC_SRC_OVER;					// 일반적인 소스 오버 블렌딩
 		bf.BlendFlags = 0;							// 예약 필드 (0으로 설정)
 		bf.SourceConstantAlpha = m_bAlpha;			// 우리가 설정한 불투명도 값 (0~255)
 		bf.AlphaFormat = AC_SRC_ALPHA;				// 알파 채널이 비트맵 자체에 없을 경우 (Constant Alpha 사용)
-
-
-		AlphaBlend(
-			hDC, // 대상 HDC
-			200, // 대상 X
-			WINCY - 200,  // 대상 Y
-			114,            // 대상 너비
-			73,            // 대상 높이
-			hTextDC,                   // 소스 HDC
-			0,
-			0,                    // 소스 Y
-			114,          // 소스 너비
-			73,         // 소스 높이
-			bf                      // BLENDFUNCTION 구조체
-		);
-		HDC hIntroDC = GET(CResourceMgr)->Find_Bmp(L"BossIntro");
-		AlphaBlend(
-			hDC, // 대상 HDC
-			0, // 대상 X
-			0,  // 대상 Y
-			WINCX,            // 대상 너비
-			WINCY,            // 대상 높이
-			hIntroDC,                   // 소스 HDC
-			0,
-			0,                    // 소스 Y
-			100,          // 소스 너비
-			100,         // 소스 높이
-			bf                      // BLENDFUNCTION 구조체
-		);
 
 		HDC hMemDC = GET(CResourceMgr)->Find_Bmp(m_wsFrameKey);
 
@@ -307,6 +283,36 @@ void CBelial::Render(HDC hDC)
 			m_iFrameHeight * 0,                    // 소스 Y
 			m_iFrameWidth,          // 소스 너비
 			m_iFrameHeight,         // 소스 높이
+			bf                      // BLENDFUNCTION 구조체
+		);
+
+		HDC hIntroDC = GET(CResourceMgr)->Find_Bmp(L"BossIntro");
+		AlphaBlend(
+			hDC, // 대상 HDC
+			0, // 대상 X
+			0,  // 대상 Y
+			WINCX,            // 대상 너비
+			WINCY,            // 대상 높이
+			hIntroDC,                   // 소스 HDC
+			0,
+			0,                    // 소스 Y
+			100,          // 소스 너비
+			100,         // 소스 높이
+			bf                      // BLENDFUNCTION 구조체
+		);
+
+		HDC hTextDC = GET(CResourceMgr)->Find_Bmp(L"BelialText");
+		AlphaBlend(
+			hDC, // 대상 HDC
+			100, // 대상 X
+			WINCY - 300,  // 대상 Y
+			114 * 2,            // 대상 너비
+			73 * 2,            // 대상 높이
+			hTextDC,                   // 소스 HDC
+			0,
+			0,                    // 소스 Y
+			114,          // 소스 너비
+			73,         // 소스 높이
 			bf                      // BLENDFUNCTION 구조체
 		);
 	}
@@ -372,11 +378,6 @@ void CBelial::Render(HDC hDC)
 			);
 		}
 	}
-
-	if (m_pRHand != nullptr)
-		m_pRHand->Render(hDC);
-	if (m_pLHand != nullptr)
-		m_pLHand->Render(hDC);
 	if (m_pSpearMgr != nullptr)
 		m_pSpearMgr->Render(hDC);
 

@@ -421,6 +421,9 @@
     <Filter Include="Object\Unit\NPC\Tresure\BelialTresure">
       <UniqueIdentifier>{c08c7df4-08f3-40a2-bf66-e3cbd5d5ab9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Unit\NPC\Tresure\CosTresure">
+      <UniqueIdentifier>{f5a19028-0b49-461a-a05e-f05e2241f149}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -873,6 +876,12 @@
     <ClInclude Include="CTorch.h">
       <Filter>Object\Etc</Filter>
     </ClInclude>
+    <ClInclude Include="CGiantRedBat.h">
+      <Filter>Object\Unit\Enemy\GiantBat</Filter>
+    </ClInclude>
+    <ClInclude Include="CCosTresure.h">
+      <Filter>Object\Unit\NPC\Tresure\CosTresure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1288,6 +1297,12 @@
     </ClCompile>
     <ClCompile Include="CTorch.cpp">
       <Filter>Object\Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="CGiantRedBat.cpp">
+      <Filter>Object\Unit\Enemy\GiantBat</Filter>
+    </ClCompile>
+    <ClCompile Include="CCosTresure.cpp">
+      <Filter>Object\Unit\NPC\Tresure\CosTresure</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

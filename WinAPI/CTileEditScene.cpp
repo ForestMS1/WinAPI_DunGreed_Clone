@@ -200,6 +200,10 @@ void CTileEditScene::Key_Input()
 		//GET(CTileMgr)->Load_Tile(L"IceDungeon01");
 		GET(CTileMgr)->Load_Tile(L"IceDungeon01");
 	}
+	if (GET(CKeyMgr)->Key_Pressing('F'))
+	{
+		GET(CSceneMgr)->ChangeScene(L"Logo");
+	}
 #pragma endregion
 
 	if (GET(CKeyMgr)->Key_Down(VK_SPACE))

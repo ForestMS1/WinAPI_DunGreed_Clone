@@ -59,13 +59,13 @@ void CInventoryUI::Initialize()
 		}
 	}
 	//0~14¹øÀº ÅÛÄ­
-	if (GET(CSceneMgr)->GetCurSceneID() == SCENE_TEST)
-	{
-		dynamic_cast<CCell*>(m_vecChildUI[0])->SetItem(new CCosmosSword);
-		dynamic_cast<CCell*>(m_vecChildUI[1])->SetItem(new CGatlingGun);
-		ItemVec[0] = dynamic_cast<CCell*>(m_vecChildUI[0])->GetItem()->Clone();
-		ItemVec[1] = dynamic_cast<CCell*>(m_vecChildUI[1])->GetItem()->Clone();
-	}
+	//if (GET(CSceneMgr)->GetCurSceneID() == SCENE_TEST)
+	//{
+	//	dynamic_cast<CCell*>(m_vecChildUI[0])->SetItem(new CCosmosSword);
+	//	dynamic_cast<CCell*>(m_vecChildUI[1])->SetItem(new CGatlingGun);
+	//	ItemVec[0] = dynamic_cast<CCell*>(m_vecChildUI[0])->GetItem()->Clone();
+	//	ItemVec[1] = dynamic_cast<CCell*>(m_vecChildUI[1])->GetItem()->Clone();
+	//}
 
 	CUI* pESlot = new CEquipSlotOn;
 	pESlot->Set_Pos(m_tRect.left + 110, m_tRect.top + 127);

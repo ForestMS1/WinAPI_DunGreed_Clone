@@ -1,20 +1,16 @@
 #include "pch.h"
-#include "CBelialTresure.h"
-#include "CFairy.h"
-#include "CBelial.h"
+#include "CCosTresure.h"
 #include "CCosSword.h"
-#include "CLala.h"
-#include "CFairyXL.h"
-CBelialTresure::CBelialTresure() : m_bIsClear(false), m_bOpen(false), m_bCompleteDropGold(false)
+CCosTresure::CCosTresure() : m_bIsClear(false), m_bOpen(false), m_bCompleteDropGold(false)
 {
 }
 
-CBelialTresure::~CBelialTresure()
+CCosTresure::~CCosTresure()
 {
 	Release();
 }
 
-void CBelialTresure::Initialize()
+void CCosTresure::Initialize()
 {
 	CNPC::Initialize();
 
@@ -30,7 +26,7 @@ void CBelialTresure::Initialize()
 	m_tFrame.dwTime = GetTickCount();
 
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/Enemy/EnemySpawn.bmp", L"EnemySpawn");
-	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Dungeon/Tresure/BossTresure.bmp", L"BossTresure");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Dungeon/Tresure/BasicTresure.bmp", L"BasicTresure");
 
 	//플레이어 감지 범위
 	m_fDetectfCX = m_tInfo.fCX * 1.3;
@@ -41,16 +37,9 @@ void CBelialTresure::Initialize()
 	m_eCurState = SPAWN;
 }
 
-int CBelialTresure::Update()
+int CCosTresure::Update()
 {
-	if (!GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty())
-	{
-		if (dynamic_cast<CBelial*>(GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).front()) != nullptr)
-		{
-			m_bIsClear = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).front()->IsDead();
-		}
-	}
-	//m_bIsClear = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
+	m_bIsClear = GET(CObjMgr)->GetObjLayer(OBJ_MONSTER).empty();
 
 	if (!m_bIsClear)
 		return 0;
@@ -71,23 +60,19 @@ int CBelialTresure::Update()
 	{
 		Move_Frame_No_Loop();
 		//TODO : 아이템드랍
-		CItem* pLala = new CLala(m_tInfo.fX, m_tInfo.fY);
+		CItem* pLala = new CCosSword(m_tInfo.fX, m_tInfo.fY);
 		pLala->SetDrop(true);
 		pLala->Initialize();
 		GET(CObjMgr)->AddObject(OBJ_ITEM, pLala);
-		CItem* pFairy = new CFairyXL(100, m_tInfo.fX, m_tInfo.fY);
-		pFairy->SetDrop(true);
-		pFairy->Initialize();
-		GET(CObjMgr)->AddObject(OBJ_ITEM, pFairy);
-		m_bCompleteDropGold = true;
 		GET(CSoundMgr)->PlaySoundW(L"open_tresure.wav", SOUND_EFFECT, 1.f);
+		m_bCompleteDropGold = true;
 	}
 
 
 	return OBJ_NOEVENT;
 }
 
-void CBelialTresure::Late_Update()
+void CCosTresure::Late_Update()
 {
 	if (!m_bIsClear)
 		return;
@@ -98,7 +83,7 @@ void CBelialTresure::Late_Update()
 	CCollisionMgr::Collision_RectTile(this, GET(CTileMgr)->GetVecTile());
 }
 
-void CBelialTresure::Render(HDC hDC)
+void CCosTresure::Render(HDC hDC)
 {
 	if (!m_bIsClear)
 		return;
@@ -123,12 +108,12 @@ void CBelialTresure::Render(HDC hDC)
 	);
 }
 
-void CBelialTresure::Release()
+void CCosTresure::Release()
 {
 
 }
 
-void CBelialTresure::KeyInput()
+void CCosTresure::KeyInput()
 {
 	if (m_bIsInPlayer)
 	{
@@ -139,7 +124,7 @@ void CBelialTresure::KeyInput()
 	}
 }
 
-void CBelialTresure::Motion_Change()
+void CCosTresure::Motion_Change()
 {
 	if (m_ePreState != m_eCurState)
 	{
@@ -162,11 +147,11 @@ void CBelialTresure::Motion_Change()
 			m_tFrame.iMotion = 0;
 			m_tFrame.iEnd = 1;
 			m_tFrame.dwSpeed = 100.f;
-			m_iFrameWidth = 129;
-			m_iFrameHeight = 90;
+			m_iFrameWidth = 69;
+			m_iFrameHeight = 51;
 			m_tInfo.fCX = m_iFrameWidth;
 			m_tInfo.fCY = m_iFrameHeight;
-			m_wsFrameKey = L"BossTresure";
+			m_wsFrameKey = L"BasicTresure";
 			m_tFrame.dwTime = GetTickCount();
 			break;
 		default:
@@ -177,7 +162,7 @@ void CBelialTresure::Motion_Change()
 
 }
 
-void CBelialTresure::SpawnEffect()
+void CCosTresure::SpawnEffect()
 {
 	if (m_eCurState == SPAWN)
 		Move_Frame_No_Loop();

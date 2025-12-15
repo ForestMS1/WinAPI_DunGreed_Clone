@@ -54,13 +54,13 @@ void CTest::Initialize()
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Giant>::Create(4934.f, 414.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Commander>::Create(545, 885));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLifeTresure>::Create(400, 585));
-	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLalaTresure>::Create(600, 585));
+	//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLalaTresure>::Create(600, 585));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f, 793.f));
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CDungeonEat>::Create(2900.f + 351, 793.f));
-	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLalaTresure>::Create(600, 585));
-	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Xmas>::Create(1100, 422));
-	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CPresent>::Create(1200, 422));
-	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLifeTresureXL>::Create(1300, 422));
+	//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLalaTresure>::Create(600, 585));
+	//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Xmas>::Create(1100, 422));
+	//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CPresent>::Create(1200, 422));
+	//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLifeTresureXL>::Create(1300, 422));
 
 	// ´«³»¸®±â~~
 	CSnow* pSnow = new CSnow;

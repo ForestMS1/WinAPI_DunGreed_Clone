@@ -13,6 +13,8 @@
 #include "CSnow.h"
 #include "CNPC_Xmas.h"
 #include "CPresent.h"
+#include "CGiantRedBat.h"
+#include "CSkel.h"
 CIceDungeon01::CIceDungeon01()
 {
 }
@@ -27,11 +29,17 @@ void CIceDungeon01::Initialize()
 	if (!m_bIsClearScene)
 	{
 		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantBat>::Create(700.f, 500.f));
-		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(800.f, 500.f));
-		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
-		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
-		//GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
-		//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CGiantRedBat>::Create(1400.f, 300.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBanshee>::Create(400.f, 200.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(1200.f, 500.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(900.f, 300.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBat>::Create(732.f, 433.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(1600.f, 900.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(1400.f, 900.f));
+		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CSkel>::Create(1200.f, 900.f));
+		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
 
 	}
 	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Xmas>::Create(1500, 860));

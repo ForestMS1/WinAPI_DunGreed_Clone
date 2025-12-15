@@ -10,6 +10,7 @@
 #include "CLittleGhost.h"
 #include "CBigWhiteSkel.h"
 #include "CTresure.h"
+#include "CTorch.h"
 CDungeon02::CDungeon02()
 {
 }
@@ -31,6 +32,8 @@ void CDungeon02::Initialize()
 		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(800, 500.f));
 
 	}
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(1111, 652));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(565, 400));
 	switch (GET(CSceneMgr)->GetPreSceneID())
 	{
 	case SCENE_DUNGEON_01:

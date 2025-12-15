@@ -1,7 +1,10 @@
 #include "pch.h"
 #include "CEndingScene.h"
 #include "CPlayer.h"
-
+#include "CNPC_Xmas.h"
+#include "CFairyXL.h"
+#include "CPresent.h"
+#include "CSnow.h"
 CEndingScene::CEndingScene() : m_bAlpha(0), m_fTextScrollY(-150.f), m_fSpeed(1.f)
 {
 }
@@ -14,11 +17,21 @@ CEndingScene::~CEndingScene()
 void CEndingScene::Initialize()
 {
 
-	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(220, 890));
+	GET(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(325, 890));
+	GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CNPC_Xmas>::Create(175, 1050)); //АЃАн 150..
+	CItem* pFairy = new CFairyXL(100, 230, 1150);
+	pFairy->SetDrop(true);
+	pFairy->Initialize();
+	GET(CObjMgr)->AddObject(OBJ_ITEM, pFairy);
+	CSnow* pSnow = new CSnow;
+	pSnow->Initialize();
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, pSnow);
+	//GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CPresent>::Create(125, 1050));
 
 	GET(CPlayerMgr)->Initialize();
 
 	GET(CObjMgr)->Initialize();
+	pSnow->SetSpeed(3.f);
 	GET(CLineMgr)->Initialize();
 	GET(CTileMgr)->Initialize();
 	GET(CTileMgr)->Load_Tile(L"Ending");
@@ -35,7 +48,9 @@ void CEndingScene::Initialize()
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BackGround/Sky.bmp", L"Sky");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/BackGround/Cloud2.bmp", L"Cloud2");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/Cloud.bmp", L"Cloud");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Ending/TownSky_Xmas.bmp", L"TownSky_Xmas");
 	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Town/TownBG_Day.bmp", L"TownBG_Day");
+	GET(CResourceMgr)->Insert_Bmp(L"../Resources/Images/Unit/NPC/Present.bmp", L"Present");
 
 
 	GET(CCamera)->SetTarget(nullptr);
@@ -69,7 +84,7 @@ void CEndingScene::Late_Update()
 void CEndingScene::Render(HDC hDC)
 {
 	Rectangle(hDC, 0, 0, WINCX, WINCY);
-	HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"Cloud");
+	HDC hTownDC = GET(CResourceMgr)->Find_Bmp(L"TownSky_Xmas");
 	GdiTransparentBlt(
 		hDC,
 		0,
@@ -79,8 +94,8 @@ void CEndingScene::Render(HDC hDC)
 		hTownDC,
 		0,
 		0,
-		960,
-		540,
+		320,
+		180,
 		RGB(255, 0, 255));
 
 	HDC hTownBGDC = GET(CResourceMgr)->Find_Bmp(L"TownBG_Day");
@@ -95,6 +110,21 @@ void CEndingScene::Render(HDC hDC)
 		0,
 		320,
 		142,
+		RGB(255, 0, 255));
+	int scrollX = GET(CCamera)->Get_ScrollX();
+	int scrollY = GET(CCamera)->Get_ScrollY();
+	HDC hPresentDC = GET(CResourceMgr)->Find_Bmp(L"Present");
+	GdiTransparentBlt(
+		hDC,
+		125 - 24 - scrollX,
+		1065 - 21 - scrollY,
+		48,
+		42,
+		hPresentDC,
+		0,
+		0,
+		16,
+		14,
 		RGB(255, 0, 255));
 
 	HDC hLogoDC = GET(CResourceMgr)->Find_Bmp(L"LogoAlpha");

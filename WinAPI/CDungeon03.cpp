@@ -12,6 +12,7 @@
 #include "CTresure.h"
 #include "CBrokenCell.h"
 #include "CSkelDog.h"
+#include "CTorch.h"
 CDungeon03::CDungeon03()
 {
 }
@@ -35,6 +36,10 @@ void CDungeon03::Initialize()
 		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CLittleGhost>::Create(1200.f, 200.f));
 		GET(CObjMgr)->AddObject(OBJ_MONSTER, CAbstractFactory<CBigWhiteSkel>::Create(800.f, 200.f));
 	}
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(735.f, 225));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(345.f, 225));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(555, 615));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(955.f, 615));
 	//GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CBrokenCell>::Create(690, 550));
 
 	switch (GET(CSceneMgr)->GetPreSceneID())

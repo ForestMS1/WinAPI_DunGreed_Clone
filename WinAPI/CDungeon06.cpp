@@ -11,6 +11,7 @@
 #include "CBigWhiteSkel.h"
 #include "CTresure.h"
 #include "CSkel.h"
+#include "CTorch.h"
 CDungeon06::CDungeon06()
 {
 }
@@ -39,6 +40,9 @@ void CDungeon06::Initialize()
 		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CTresure>::Create(1000, 530.f));
 
 	}
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(1460, 390));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(1010, 570));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(540, 390));
 	switch (GET(CSceneMgr)->GetPreSceneID())
 	{
 	case SCENE_DUNGEON_04:

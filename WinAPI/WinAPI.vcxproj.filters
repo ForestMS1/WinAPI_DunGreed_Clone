@@ -870,6 +870,9 @@
     <ClInclude Include="CBelialTresure.h">
       <Filter>Object\Unit\NPC\Tresure\BelialTresure</Filter>
     </ClInclude>
+    <ClInclude Include="CTorch.h">
+      <Filter>Object\Etc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -1282,6 +1285,9 @@
     </ClCompile>
     <ClCompile Include="CBelialTresure.cpp">
       <Filter>Object\Unit\NPC\Tresure\BelialTresure</Filter>
+    </ClCompile>
+    <ClCompile Include="CTorch.cpp">
+      <Filter>Object\Etc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

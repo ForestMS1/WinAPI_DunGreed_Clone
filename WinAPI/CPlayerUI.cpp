@@ -36,7 +36,7 @@ void CPlayerUI::Initialize()
 		AddChildUI(new CEquipedUI);
 		AddChildUI(new CFoodUI);
 		AddChildUI(new CGoldUI);
-		AddChildUI(new CSkilUI);
+		//AddChildUI(new CSkilUI);
 	}
 
 	for (auto& pChildUI : m_vecChildUI)

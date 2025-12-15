@@ -67,7 +67,7 @@ void CLogo::Late_Update()
 	//юс╫ц
 	if (GET(CKeyMgr)->Key_Down('Z'))
 	{
-		GET(CSceneMgr)->ChangeScene(L"Dungeon01");
+		GET(CSceneMgr)->ChangeScene(L"Ending");
 	}
 	if (GET(CKeyMgr)->Key_Down('X'))
 	{

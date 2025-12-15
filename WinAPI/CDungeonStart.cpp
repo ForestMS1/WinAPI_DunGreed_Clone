@@ -8,6 +8,7 @@
 #include "CTresure.h"
 #include "CSkel.h"
 #include "CStartDoor.h"
+#include "CTorch.h"
 CDungeonStart::CDungeonStart()
 {
 }
@@ -46,6 +47,8 @@ void CDungeonStart::Initialize()
 		//dynamic_cast<CStartDoor*>(pStartDoor)->SetOpen();
 		GET(CObjMgr)->AddObject(OBJ_EFFECT, pStartDoor);
 	}
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(735.f, 310.f));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(345.f, 310.f));
 
 	GET(CObjMgr)->Initialize();
 	GET(CLineMgr)->Initialize();

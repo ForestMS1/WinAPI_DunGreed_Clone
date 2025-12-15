@@ -12,6 +12,7 @@
 #include "CLifeTresure.h"
 #include "CSkel.h"
 #include "CSkelDog.h"
+#include "CTorch.h"
 CDungeon04::CDungeon04()
 {
 }
@@ -36,6 +37,8 @@ void CDungeon04::Initialize()
 		GET(CObjMgr)->AddObject(OBJ_NPC, CAbstractFactory<CLifeTresure>::Create(1450, 420));
 
 	}
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(1120, 390));
+	GET(CObjMgr)->AddObject(OBJ_EFFECT, CAbstractFactory<CTorch>::Create(1760, 390));
 	switch (GET(CSceneMgr)->GetPreSceneID())
 	{
 	case SCENE_DUNGEON_03:

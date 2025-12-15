@@ -31,9 +31,9 @@ void CXmasTextUI::Initialize()
 	m_hFont = CreateFont(30, 0, 0, 0, 0, 0, 0, 0,
 		HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("Aa카시오페아"));
 
-	m_vecText.push_back(L"안녕 나는 산타야!");
-	m_vecText.push_back(L"이 앞에는 가위바위보 마녀가 있어.");
-	m_vecText.push_back(L"마녀와 가위바위보를 해서 지거나 이기면 체력이 깎이니 조심하라고!");
+	m_vecText.push_back(L"안녕 나는 산타야! 선물을 주러 가야하는데 마녀가 길을 막고있어");
+	m_vecText.push_back(L"마녀를 무찔러준다면 내가 확실히 보답해주지.");
+	m_vecText.push_back(L"마녀와 가위바위보를 해서 지거나 비기면 체력이 깎이니 조심하라고!");
 	m_vecText.push_back(L"마녀와 가위바위보를 대비한 선물을 준비했으니 챙겨가도록 해.");
 }
 

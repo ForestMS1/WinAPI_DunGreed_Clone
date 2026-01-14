@@ -39,4 +39,5 @@ WinAPI를 사용해 2D게임을 혼자 만들어 보는것을 목표로 한 프�
 ---
 
 ## 📺 실행 화면
-영상업로드되면 링크 
+![Video Label](http://img.youtube.com/vi/d2Rb5o8JxdU/maxresdefault.jpg)
+https://www.youtube.com/watch?v=d2Rb5o8JxdU
